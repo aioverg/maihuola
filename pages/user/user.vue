@@ -17,18 +17,18 @@
 					<view class="balance">
 						<image class="icon" src="/static/coin.png"></image>
 						<text class="title">余额（元）：</text>
-						<text class="num">0000.00</text>
+						<text class="num">0000000.00</text>
 						<view class="cash" @click="navTo('/pages/withdrawDeposit/withdrawDeposit')">
 							提现
 						</view>
 					</view>
 					<view class="estimate">
 						<view class="last">
-							<view class="num">0000</view>
+							<view class="num">000000.00</view>
 							<view class="title">本月预估收入（元）</view>
 						</view>
 						<view class="next">
-							<view class="num">0000</view>
+							<view class="num">000000.00</view>
 							<view class="title">上月预估收入（元）</view>
 						</view>
 					</view>
@@ -205,7 +205,9 @@
 				}
 				.num {
 					display: inline-block;
-					height: 38rpx;
+					overflow-x: hidden;
+					height: 50rpx;
+					width: 225rpx;
 					font-size:42rpx;
 					font-weight:500;
 					color:rgba(51,51,51,1);
@@ -233,6 +235,8 @@
 			.last {
 				margin: 0 0 0 50rpx;
 				.num {
+					width: 250rpx;
+					overflow-x: hidden;
 					font-size:36rpx;
 					font-weight:600;
 					color:rgba(51,51,51,1);
@@ -245,8 +249,10 @@
 				}
 			}
 			.next {
-				margin: 0 0 0 50rpx;
+				margin: 0 0 0 110rpx;
 				.num {
+					width: 250rpx;
+					overflow-x: hidden;
 					font-size:36rpx;
 					font-weight:600;
 					color:rgba(51,51,51,1);

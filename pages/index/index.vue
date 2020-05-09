@@ -73,7 +73,6 @@
 
 		onLoad() {
 			this.loadData();
-
 		},
 		methods: {
 			/**
@@ -265,6 +264,7 @@
 				.info {
 					width:378rpx;
 					height:130rpx;
+					overflow: hidden;
 					font-size:30rpx;
 					overflow: hidden;
 					color:rgba(51,51,51,1);
