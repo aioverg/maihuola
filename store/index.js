@@ -10,6 +10,9 @@ const store = new Vuex.Store({
 		userInfo: {},
 	},
 	mutations: {
+		tokenDue(state){
+			state.tokenDue = false
+		},
 		login(state, provider) {
 			state.hasLogin = false;
 			/*state.userInfo = provider;

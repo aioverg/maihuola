@@ -65,6 +65,8 @@
 
 		onLoad() {
 			this.loadData();
+		},
+		onReady(){
 			this.open()
 		},
 		methods: {
@@ -88,9 +90,15 @@
 			navTo(obj) {
 				this.$global.navTo(obj)
 			},
-			open() {
-				if(this.$store.state.tokenDue){
-					this.show = true;
+			async open() {
+					//let userInfo = uni.getStorageSync('userInfo') || '';
+				let userToken = uni.getStorageSync('token')
+				let checkToken = await this.$api.checkToken(userToken)
+				console.log("true", checkToken)
+				if(checkToken){
+					//this.$store.commit('tokenDue')
+					//console.log("false",this.$store.state.tokenDue)
+					this.show = false;
 				}
 			},
 			navToLogin(){

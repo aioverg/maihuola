@@ -37,17 +37,14 @@ api.login = function(data){//登录
 }
 api.checkToken = function(token){//检验token是否过期
     if(!token){return}
-	request(obj.login, token).then(res => {
-		console.log(res)
-		return new Promise((resolve, reject) => {
-			if(res.statusCode == 200){
-				console.log(this,"过期，重新登录")//设置弹出弹出框
-				resolve("true")
-			}else{
-				console.log("没有过期")
-				resolve("false")
-			}
-		})
+	return request(obj.login, token).then(res => {
+		if(res.statusCode == 200){
+			console.log("过期，重新登录")//设置弹出弹出框
+			return "true"
+		}else{
+			console.log("没有过期")
+			return "false"
+		}
 	})
 }
 api.getTkl = function(data){//获取淘口令

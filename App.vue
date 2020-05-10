@@ -9,10 +9,15 @@
 		methods: {
 			...mapMutations(['login'])
 		},
-		onLaunch: function() {
+		onLaunch: async function() {
 			let userInfo = uni.getStorageSync('userInfo') || '';
 			let userToken = uni.getStorageSync('token')
-			this.$api.checkToken(userToken).then(res=>{console.log(res)})
+			let checkToken = await this.$api.checkToken(userToken)
+			console.log("true", checkToken)
+			/*if(checkToken){
+				this.$store.commit('tokenDue')
+				console.log("false",this.$store.state.tokenDue)
+			}*/
 		    //this.fx()
 			/*if(userInfo.id){
 				//更新登陆状态
