@@ -11,7 +11,10 @@
 		},
 		onLaunch: function() {
 			let userInfo = uni.getStorageSync('userInfo') || '';
-			if(userInfo.id){
+			let userToken = uni.getStorageSync('token')
+			this.$api.checkToken(userToken).then(res=>{console.log(res)})
+		    //this.fx()
+			/*if(userInfo.id){
 				//更新登陆状态
 				uni.getStorage({
 					key: 'userInfo',
@@ -19,7 +22,7 @@
 						this.login(res.data);
 					}
 				});
-			}
+			}*/
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -27,6 +30,9 @@
 		onHide: function() {
 			console.log('App Hide')
 		},
+		methods: {
+			fx(){console.log("fffffff")}
+		}
 	}
 </script>
 

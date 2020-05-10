@@ -38,6 +38,7 @@
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
+		<u-modal v-model="show" show-cancel-button @confirm="navToLogin"></u-modal>
 	</view>
 </template>
 
@@ -55,6 +56,7 @@
 				swiperLength: 0,
 				carouselList: [],
 				goodsList: [],
+				show: false,
 				background: {
 				    background: 'url(/static/img/bg-01.png)',
 				}
@@ -63,6 +65,7 @@
 
 		onLoad() {
 			this.loadData();
+			this.open()
 		},
 		methods: {
 			/**
@@ -85,6 +88,15 @@
 			navTo(obj) {
 				this.$global.navTo(obj)
 			},
+			open() {
+				if(this.$store.state.tokenDue){
+					this.show = true;
+				}
+			},
+			navToLogin(){
+				console.log(6666666)
+				this.$global.navTo('/pages/login/login')
+			}
 		},
 	}
 </script>

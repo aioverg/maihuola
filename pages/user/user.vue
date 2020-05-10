@@ -7,7 +7,7 @@
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/img/ai-default-user-icon.png'"></image>
 				</view>
-				<view class="info-box">
+				<view class="info-box" @click="login()">
 					<text class="username">{{userInfo.nickname || '点击登录'}}</text>
 				</view>
 			</view>
@@ -114,6 +114,10 @@
 				uni.navigateTo({  
 					url
 				})  
+			},
+			login(){
+				this.$api.login({
+				})
 			}
         }  
     }  

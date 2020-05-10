@@ -7,7 +7,9 @@ import uView from "uview-ui"; //引入ui组件
 import Json from './Json' //测试用数据
 
 //将导航函数引入全局
-import global from './static/js/gloabl.js'
+import global from './static/js/global.js'
+//引入api
+import api from './static/js/api.js'
 
 Vue.use(uView); //使用组件
 /**
@@ -46,6 +48,7 @@ Vue.prototype.$deleteApi = {msg, json};
 
 //将全局函数绑定到Vue的原型$global上
 Vue.prototype.$global = global
+Vue.prototype.$api = api
 
 App.mpType = 'app'
 
