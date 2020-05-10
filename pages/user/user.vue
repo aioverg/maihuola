@@ -1,21 +1,21 @@
 <template>  
     <view>
 		<view class="user-section">
-			<image class="bg" src="/static/bg-06.png"></image>
+			<image class="bg" src="/static/img/bg-06.png"></image>
 			<view class="head-title">我的</view>
 			<view class="user-info-box">
 				<view class="portrait-box">
-					<image class="portrait" :src="userInfo.portrait || '/static/ai-default-user-icon.png'"></image>
+					<image class="portrait" :src="userInfo.portrait || '/static/img/ai-default-user-icon.png'"></image>
 				</view>
 				<view class="info-box">
 					<text class="username">{{userInfo.nickname || '点击登录'}}</text>
 				</view>
 			</view>
 			<view class="money-card">
-				<image class="card-bg" src="/static/bg-03.png"></image>
+				<image class="card-bg" src="/static/img/bg-03.png"></image>
 				<view class="card-info">
 					<view class="balance">
-						<image class="icon" src="/static/coin.png"></image>
+						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
 						<text class="num">0000000.00</text>
 						<view class="cash" @click="navTo('/pages/withdrawDeposit/withdrawDeposit')">

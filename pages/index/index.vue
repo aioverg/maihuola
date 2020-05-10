@@ -1,21 +1,20 @@
 <template>
 	<view>
 		<view class="head">
-			<image class="bg" src="/static/bg-06.png"></image>
+			<image class="bg" src="/static/img/bg-06.png"></image>
 			<view class="head-title">选品</view>
 			<view class="search">
-				<view class="search-one">
-					<image class="search-icon" src="../../static/ai-search04.png"></image>
-					
+				<view class="search-one" @click="navTo('/pages/search/search')">
+					<image class="search-icon" src="../../static/icon/ai-search04.png"></image>
 					<view class="search-content">搜索你需要的商品关键词</view>
 				</view>
-				<view class="search-two">搜索</view>
+				<view class="search-two" @click="navTo('/pages/search/search')">搜索</view>
 			</view>
 
 			<!-- 头部轮播 -->
 			<view class="carousel-section">
 				<swiper indicator-active-color="rgba(255,255,255,1)" autoplay="true" interval="5000" duration="1500" class="carousel" circular indicator-dots>
-					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToSwiperPage">
+					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navTo('/pages/detail/guessList')">
 						<image :src="item.src" class="bannar-image" />
 					</swiper-item>
 				</swiper>
@@ -35,7 +34,7 @@
 			</view>
 		</view>
 		<view class="guess-section">
-			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetailPage(item)">
+			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
@@ -57,7 +56,7 @@
 				carouselList: [],
 				goodsList: [],
 				background: {
-				    background: 'url(/static/bg-01.png)',
+				    background: 'url(/static/img/bg-01.png)',
 				}
 			};
 		},
@@ -71,37 +70,21 @@
 			 * 分次请求未作整合
 			 */
 			async loadData() {
-				let carouselList = await this.$api.json('carouselList');
+				let carouselList = await this.$deleteApi.json('carouselList');
 				this.titleNViewBackground = carouselList[0].background;
 				this.swiperLength = carouselList.length;
 				this.carouselList = carouselList;
-				let goodsList = await this.$api.json('goodsListOne');
+				let goodsList = await this.$deleteApi.json('goodsListOne');
 				this.goodsList = goodsList || [];
 			},
 			async sortDetails() {
-				this.goodsList = await this.$api.json('goodsListTwo');
+				this.goodsList = await this.$deleteApi.json('goodsListTwo');
 				console.log(this.goodsList)
 			},
-			//详情页
-			navToDetailPage(item) {
-				//测试数据没有写id，用title代替
-				let id = item.title;
-				uni.navigateTo({
-					url: `/pages/detail/detail`
-				})
+			//跳转
+			navTo(obj) {
+				this.$global.navTo(obj)
 			},
-			//轮播图跳转
-			navToSwiperPage() {
-				uni.navigateTo({
-					url: `/pages/detail/guessList`
-				})
-			},
-			//详情页
-			navToSearchPage() {
-				uni.navigateTo({
-					url: `/pages/search/search`
-				})
-			}
 		},
 	}
 </script>

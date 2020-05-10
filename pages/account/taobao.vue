@@ -2,17 +2,17 @@
 	<view>
 	    <ai-navbar title="绑定支付宝授权"></ai-navbar>
 	<view class="icon-card">
-		<image class="box-bg" src="/static/ai_tb_bg.png"></image>
+		<image class="box-bg" src="/static/img/ai-tb-bg.png"></image>
 		<view class="icon-box">
 			<view class="icon-box-item">
 				<view class="icon">
-					<image class="img" src="/static/ai-taobao.png"></image>
+					<image class="img" src="/static/img/ai-taobao.png"></image>
 				</view>
 				<view class="icon-title">手机淘宝</view>
 			</view>
 			<view class="icon-box-item">
 			    <view class="icon">
-					<image class="img" src="/static/ai-maihuo.png"></image>
+					<image class="img" src="/static/img/ai-maihuo.png"></image>
 				</view>
 				<view class="icon-title">卖货啦</view>
 			</view>

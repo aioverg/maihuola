@@ -2,7 +2,7 @@
 	<view>
 		<ai-navbar title="商品列表"></ai-navbar>
 		<view class="guess-list">
-			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index">
+			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
 			    <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
@@ -27,10 +27,12 @@
 		},
 		methods: {
 			async loadData() {
-				let goodsList = await this.$api.json('goodsListOne');
+				let goodsList = await this.$deleteApi.json('goodsListOne');
 				this.goodsList = goodsList;
-				console.log(666,this.goodsList)
 			},
+			navTo(obj){
+				this.$global.navTo(obj)
+			}
 		}
 	}
 

@@ -6,7 +6,8 @@ import uView from "uview-ui"; //引入ui组件
 
 import Json from './Json' //测试用数据
 
-import {navTo} from './static/js/gloabl.js'
+//将导航函数引入全局
+import global from './static/js/gloabl.js'
 
 Vue.use(uView); //使用组件
 /**
@@ -38,23 +39,13 @@ const json = type=>{
 }
 
 
-
-const prePage = ()=>{
-	let pages = getCurrentPages();
-	let prePage = pages[pages.length - 2];
-	// #ifdef H5
-	return prePage;
-	// #endif
-	return prePage.$vm;
-}
-
-
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
-Vue.prototype.$api = {msg, json, prePage};
+Vue.prototype.$deleteApi = {msg, json};
 
-Vue.prototype.$global = {navTo}
+//将全局函数绑定到Vue的原型$global上
+Vue.prototype.$global = global
 
 App.mpType = 'app'
 

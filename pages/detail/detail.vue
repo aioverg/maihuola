@@ -7,7 +7,7 @@
 		<view class="guess-title">液体坚果 荷乐士喝的每日坚果孕妇儿童零食礼盒混合干果仁饮料</view>
 		<view class="guess-price-info">
 			<view class="guess-price-info-one">
-				<image class="guess-zbprice-icon" src="../../static/ai-zbprice.png"></image>
+				<image class="guess-zbprice-icon" src="../../static/icon/ai-zbprice.png"></image>
 				<view class="guess-zbprice">
 					<text>¥</text>
 					<text>39.9</text>
@@ -31,7 +31,7 @@
 		<view class="guess-nh">
 			<view class="guess-nh-title">
 				<view>商品卖点</view>
-			    <image class="guess-nh-title-icon" src="/static/ai-praise.png"></image>
+			    <image class="guess-nh-title-icon" src="/static/icon/ai-praise.png"></image>
 			</view>
 			<view class="guess-nh-content">
 				<view>
@@ -42,7 +42,7 @@
 		<view class="zb-script">
 			<view class="zb-script-title">
 				<view>直播脚本</view>
-			    <image class="zb-script-title-icon" src="/static/ai-vidicon.png"></image>
+			    <image class="zb-script-title-icon" src="/static/icon/ai-vidicon.png"></image>
 			</view>
 			<view class="zb-script-content">这里是直播脚本相关内容</view>
 		</view>

@@ -1,19 +1,12 @@
 <template>
 	<view>
-		<ai-navbar title="搜索"></ai-navbar>
+		<ai-navbar title="搜索结果"></ai-navbar>
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
-				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo('/pages/search/searchResult?id=' + inputValue)" />
+				<input class="input-box-input" v-model="searchInput" @click="navTo('/pages/search/search')" disabled />
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
-		</view>
-		<view class="history-box">
-			<view class="history">搜索历史</view>
-			<image class="delete-icon" src="/static/icon/ai-delete.png"></image>
-		</view>
-		<view class="history-label-box">
-			<view class="history-label" v-for="(value, index) in history" :key="index">{{value}}</view>
 		</view>
 	</view>
 </template>
@@ -26,14 +19,15 @@
 		},
 		data() {
 			return {
-				inputValue: null,
-				history: ["小饼干小饼干", "方便面", "大辣条", "牛肉酱", "牛肉酱"]
+				searchInput: null
 			}
+		},
+		onLoad(res){
+			this.searchInput = res.id
 		},
 		methods: {
 			navTo(obj){
 				this.$global.navTo(obj)
-				console.log(777,this.inputValue)
 			},
 			navTabBar(obj){
 				this.$global.navTabBar(obj)
@@ -80,37 +74,6 @@
 			color:rgba(51,51,51,1);
 			text-align: center;
 			line-height: 70rpx;
-		}
-	}
-	.history-box {
-		width: 690rpx;
-		height: 45rpx;
-		margin: 0 auto;
-		.history {
-			display: inline-block;
-			font-size: 32rpx;
-			font-weight: 500;
-			color:rgba(51,51,51,1);
-			margin-right: 493rpx;
-		}
-		.delete-icon {
-			display: inline-block;
-			width: 30rpx;
-			height: 31rpx;
-		}
-	}
-	.history-label-box {
-		width: 690rpx;
-		margin: 32rpx auto 0;
-		.history-label {
-			display: inline-block;
-			height: 64rpx;
-			margin: 0 20rpx 20rpx 0;
-			line-height: 64rpx;
-			font-size: 28rpx;
-			padding: 0 24rpx;
-			background: rgba(242,242,242,1);
-			border-radius: 32rpx;
 		}
 	}
 </style>

@@ -2,7 +2,7 @@
 	<view class="ai-list-cell">
 		<view class="ai-list-cell-title">{{title}}</view>
 		<view class="ai-list-cell-icon-box">
-			<image class="ai-list-cell-icon" src="/static/ai-right-arrow.png"></image>
+			<image class="ai-list-cell-icon" src="/static/icon/ai-right-arrow.png"></image>
 		</view>
 	</view>
 </template>

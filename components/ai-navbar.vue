@@ -1,6 +1,6 @@
 <template>
 	<view class="ai-navbar">
-		<image class="ai-navbar-img" src="/static/bg-01.png"></image>
+		<image class="ai-navbar-img" src="/static/img/bg-01.png"></image>
 		<view class="ai-navbar-title" v-if="title">{{title}}</view>
 	</view>
 </template>

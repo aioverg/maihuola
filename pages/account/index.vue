@@ -7,7 +7,7 @@
 			    <view class="item-title">手机号码</view>
 			    <view class="item-status">未授权</view>
 			    <view @click="navTo('/pages/account/oldPhone')">
-				    <image class="item-img" src="../../static/icon_arrow.png"></image>
+				    <image class="item-img" src="../../static/icon/ai-icon_arrow.png"></image>
 			    </view>
 		    </view>
 		</view>
@@ -16,21 +16,21 @@
 				<view class="item-title">微信绑定</view>
 				<view class="item-status">未授权</view>
 				<view @click="navTo('/pages/account/wx')">
-					<image class="item-img" src="../../static/icon_arrow.png"></image>
+					<image class="item-img" src="../../static/icon/ai-icon_arrow.png"></image>
 				</view>
 			</view>
 			<view class="box-item box-item-tb">
 				<view class="item-title">淘宝授权</view>
 				<view class="item-status">未授权</view>
 				<view @click="navTo('/pages/account/taobao')">
-					<image class="item-img" src="../../static/icon_arrow.png"></image>
+					<image class="item-img" src="../../static/icon/ai-icon_arrow.png"></image>
 				</view>
 			</view>
 			<view class="box-item">
 				<view class="item-title">支付宝绑定</view>
 				<view class="item-status">未授权</view>
 				<view @click="navTo('/pages/account/oldAlipay')">
-					<image class="item-img" src="../../static/icon_arrow.png"></image>
+					<image class="item-img" src="../../static/icon/ai-icon_arrow.png"></image>
 				</view>
 			</view>
 		</view>
