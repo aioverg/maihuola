@@ -23,15 +23,11 @@
 	export default {
 		data() {
 			return {
-				datas: null
 			};
 		},
 		props: {
 			data: Object,
 			default: {}
-		},
-		mounted(){
-			console.log(this.$props)
 		}
 	}
 </script>

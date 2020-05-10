@@ -103,18 +103,6 @@
 			}
         }
         ,{
-            "path" : "pages/help/whatTKL",
-            "style" : {
-				"navigationBarTitleText": "帮助"
-			}
-        }
-        ,{
-            "path" : "pages/help/acquireTKL",
-            "style" : {
-				"navigationBarTitleText": "帮助"
-			}
-        }
-        ,{
             "path" : "pages/account/alertPhone",
             "style" : {
 				"navigationBarTitleText": "修改手机号码"
@@ -141,6 +129,10 @@
             "style" : {
 				"navigationBarTitleText": "卖货啦"
 			}
+        }
+        ,{
+            "path" : "pages/help/help",
+            "style" : {}
         }
     ],
 	"globalStyle": {

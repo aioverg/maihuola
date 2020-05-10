@@ -36,27 +36,18 @@
 		</view>
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetailPage(item)">
-				<view class="guess-image-box">
-					<image class="guess-image" :src="item.image" mode="aspectFill"></image>
-				</view>
-				<view class="guess-info-fox">
-					<view class="info">{{item.title}}</view>
-					<view class="price">
-						<view class="zb-price">￥直播价：{{item.zbprice}}</view>
-						<view class="sc-price">￥市场价：{{item.scprice}}</view>
-					</view>
-					<view class="rate">
-						<view class="ck-earn">参考收益{{item.earnings}}</view>
-						<view class="yj-rate">佣金比例{{item.ratio}}</view>
-					</view>
-				</view>
+				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	export default {
+		components: {
+			aiGuseeCard
+		},
 		data() {
 			return {
 				sortList: ["推荐", "食品", "美妆", "母婴", "女装", "男装"],
@@ -243,67 +234,7 @@
 		width: 690rpx;
 		margin: 20rpx auto 0;
 		.guess-item {
-			display: flex;
 			margin: 26rpx 0 0 0;
-			width: 690rpx;
-			height: 280rpx;
-			background: rgba(255, 255, 255, 1);
-			border-radius: 16rpx;
-			.guess-image-box {
-				width: 240rpx;
-				height: 240rpx;
-				margin: 20rpx;
-				.guess-image {
-					width: 240rpx;
-					height: 240rpx;
-					border-radius: 16rpx;
-				}
-			}
-			.guess-info-fox {
-				margin: 20rpx 32rpx 40rpx 0;
-				.info {
-					width:378rpx;
-					height:130rpx;
-					overflow: hidden;
-					font-size:30rpx;
-					overflow: hidden;
-					color:rgba(51,51,51,1);
-					
-				}
-				.price {
-					width:200rpx;
-					height: 210rpx;
-					display: inline-block;
-					.zb-price {
-						display: inline-block;
-						margin: 0 18rpx 0 0;
-						font-size:26rpx;
-						color:rgba(255,51,51,1);
-					}
-					.sc-price {
-						display: inline-block;
-						font-size:22rpx;
-						color:rgba(153,153,153,1);
-						
-					}
-				}
-				.rate {
-					width:170rpx;
-					height: 210rpx;
-					margin: 0 0 40rpx 0;
-					display: inline-block;
-					.ck-earn {
-						display: inline-block;
-						font-size:26rpx;
-						color:rgba(255,51,51,1);
-					}
-					.yj-rate {
-						display: inline-block;
-						font-size:22rpx;
-						color:rgba(153,153,153,1);
-					}
-				}
-			}
 		}
 	}
 

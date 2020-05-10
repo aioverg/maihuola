@@ -6,6 +6,8 @@ import uView from "uview-ui"; //引入ui组件
 
 import Json from './Json' //测试用数据
 
+import {navTo} from './static/js/gloabl.js'
+
 Vue.use(uView); //使用组件
 /**
  *  因工具函数属于公司资产, 所以直接在Vue实例挂载几个常用的函数
@@ -35,6 +37,8 @@ const json = type=>{
 	})
 }
 
+
+
 const prePage = ()=>{
 	let pages = getCurrentPages();
 	let prePage = pages[pages.length - 2];
@@ -49,6 +53,8 @@ Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
 Vue.prototype.$api = {msg, json, prePage};
+
+Vue.prototype.$global = {navTo}
 
 App.mpType = 'app'
 
