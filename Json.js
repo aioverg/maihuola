@@ -55,7 +55,7 @@ const goodsListOne = [{
 const goodsListTwo = [
     {
 		image: "/static/temp/guess04.jpg",
-		title: "亚麻衬衫女夏季2019新款民国风复古女装盘扣绣花文艺棉麻中袖上衣",
+		title: "亚麻衬衫女夏季2019新款民国风复古女装盘扣绣花文艺棉麻中袖上衣民国风复古女装盘扣绣花文艺棉麻中袖上衣",
 		zbprice: 129,
 		scprice: 139,
 		ratio: "30%",

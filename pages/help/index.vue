@@ -55,7 +55,11 @@
 	}
 	.help-list {
 		width: 690rpx;
+		height: 90rpx;
 		margin: 20rpx auto 0;
+		background: rgba(255,255,255,1);
+		padding: 0 30rpx;
+		border-radius: 16rpx;
 	}
 	
 </style>

@@ -453,10 +453,10 @@
 
 	/* input 样式 */
 	.input-placeholder {
-		color: #999999;
+		color: rgba(204,204,204,1);
 	}
 
 	.placeholder {
-		color: #999999;
+		color: rgba(204,204,204,1);
 	}
 </style>

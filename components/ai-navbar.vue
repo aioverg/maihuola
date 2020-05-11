@@ -2,7 +2,7 @@
 	<view class="ai-navbar">
 		<image class="ai-navbar-img" src="/static/img/bg-01.png"></image>
 		<view class="ai-navbar-title" v-if="title">
-			<image class="img" mode="widthFix" src="../static/icon/ai-icon_arrow.png"></image>
+			<image class="img" mode="widthFix" src="../static/icon/ai-left-arrow.png" @click="getBack()"></image>
 		    <view class="title">{{title}}</view>
 		</view>
 	</view>
@@ -19,6 +19,13 @@
 			title: {
 				type: String,
 				default: null
+			}
+		},
+		methods: {
+			getBack(){
+				uni.navigateBack({
+					delta: 1
+				})
 			}
 		}
 	}
@@ -45,7 +52,7 @@
 			//align-items: center;text-align: center;
 			padding: 26px 0 0 0;
 			.img {
-				width: 22rpx;
+				width: 45rpx;
 				position: absolute;
 				display: inline-block;
 				margin: 0 0 0 30rpx;

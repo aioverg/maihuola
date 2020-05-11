@@ -146,6 +146,10 @@
             "path" : "pages/login/loginPhone",
             "style" : {}
         }
+        ,{
+            "path" : "pages/document/index",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

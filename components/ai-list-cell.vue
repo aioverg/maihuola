@@ -1,9 +1,8 @@
 <template>
-	<view class="ai-list-cell">
+	<view class="ai-list-cell" :class="dashed">
 		<view class="ai-list-cell-title">{{title}}</view>
-		<view class="ai-list-cell-icon-box">
-			<image class="ai-list-cell-icon" src="/static/icon/ai-right-arrow.png"></image>
-		</view>
+		<view class="ai-list-cell-message" v-if="message">{{message}}</view>
+		<image class="ai-list-cell-icon" src="/static/icon/ai-right-arrow.png"></image>
 	</view>
 </template>
 
@@ -18,30 +17,44 @@
 			title: {
 				type: String,
 				default: null
+			},
+			message: {
+				type: String,
+				default: null
+			},
+			dashed: {
+				type: String,
+				default: null
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.dashed {
+		border-bottom: 1px dashed rgba(229,229,229,1);
+	}
 	.ai-list-cell {
-		width: 690rpx;
-		height: 90rpx;
-		line-height: 90rpx;
-		background: rgba(255,255,255,1);
-		padding: 0 30rpx;
-		border-radius: 16rpx;
+		width: 100%;
+		height: 100%;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		.ai-list-cell-title {
 			display: inline-block;
+			flex-grow: 1;
 		}
-		.ai-list-cell-icon-box {
+		.ai-list-cell-icon {
 			display: inline-block;
-			.ai-list-cell-icon {
-				width: 12rpx;
-				height: 21rpx;
-			}
+			width: 12rpx;
+			height: 21rpx;
+			flex-grow: 0;
+		}
+		.ai-list-cell-message {
+			flex-grow: 0;
+			margin: 0 20rpx 0 0;
+			color:rgba(153,153,153,1);
+			font-size: 28rpx;
 		}
 	}
 </style>

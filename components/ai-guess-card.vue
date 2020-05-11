@@ -55,7 +55,7 @@
 			margin: 20rpx 32rpx 40rpx 0;
 			.ai-guess-info {
 				width: 378rpx;
-				height: 112rpx;
+				height: 120rpx;
 				overflow: hidden;
 				font-size: 30rpx;
 				color:rgba(51,51,51,1);
@@ -65,7 +65,7 @@
 			display: flex;
 			justify-content: space-between;
 			height: 55rpx;
-			margin: 32rpx 0 0 0;
+			margin: 28rpx 0 0 0;
 			.zb-price {
 				font-size:26rpx;
 				color:rgba(255,51,51,1);

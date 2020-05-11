@@ -1,31 +1,34 @@
 <template>
 	<view>
-		<ai-navbar title="帮助"></ai-navbar>
+		<ai-navbar title="关于我们"></ai-navbar>
 		<view class="docunemt">
-			<view class="title">{{question}}</view>
-			<view class="content">{{answer}}</view>
+			<view class="title">{{title}}</view>
+			<view class="content">{{content}}</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
-	import helpData from './helpData.js'
+	import aiNavbar from '@/components/ai-navbar.vue'
+	import documentData from './data.js'
 	export default {
 		components: {
 			aiNavbar
 		},
 		data() {
 			return {
-				question: null,
-				answer: null
+				title: null,
+				content: null
 			}
 		},
 		onLoad: function(option){
-			this.question = helpData[option.id].title
-			this.answer = helpData[option.id].content
+			console.log(documentData[option.id].title)
+			console.log(option.id)
+			this.title = documentData[option.id].title
+			this.content = documentData[option.id].content
 		},
 		methods: {
+			
 		}
 	}
 </script>
@@ -53,5 +56,4 @@
 			color: rgba(153,153,153,1);
 		}
 	}
-
 </style>

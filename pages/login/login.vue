@@ -7,7 +7,7 @@
 		<view>
 			<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
-		<view class="to-phone">
+		<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
 			或手机快速登录
 		</view>
 		<view class="note">
@@ -33,7 +33,9 @@
 			}
 		},
 		methods: {
-			
+			navTo(obj){
+				this.$global.navTo(obj)
+			}
 		}
 	}
 </script>

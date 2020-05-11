@@ -17,18 +17,18 @@
 					<view class="balance">
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
-						<text class="num">0000000.00</text>
+						<text class="num">0000000000000000.00</text>
 						<view class="cash" @click="navTo('/pages/withdrawDeposit/withdrawDeposit')">
 							提现
 						</view>
 					</view>
 					<view class="estimate">
 						<view class="last">
-							<view class="num">000000.00</view>
+							<view class="num">000000000000.00</view>
 							<view class="title">本月预估收入（元）</view>
 						</view>
 						<view class="next">
-							<view class="num">000000.00</view>
+							<view class="num">000000000000000.00</view>
 							<view class="title">上月预估收入（元）</view>
 						</view>
 					</view>
@@ -38,39 +38,39 @@
 		
 		<view class="list-card">
 			<!--账户安全-->
-			<view class="account-safe" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
-				<list-cells title="账户安全" tips="手机 | 微信号 | 淘宝授权"></list-cells>
+			<view class="account-safe list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
+				<ai-list-cell title="手机 | 微信号 | 淘宝授权"></ai-list-cell>
 			</view>
 
-			<!-- 浏览历史 -->
+			<!-- 其它 -->
 			<view class="message">
-				<view class="message-item" @click="navTo('/pages/help/index')">
-				    <list-cells title="我要帮助"></list-cells>
+				<view class="list-box" @click="navTo('/pages/help/index')">
+					<ai-list-cell title="我要帮助" dashed="dashed"></ai-list-cell>
 				</view>
-				<view class="message-item" @click="navTo('/pages/feedback/feedback')">
-				    <list-cells title="意见反馈"></list-cells>
+				<view class="list-box" @click="navTo('/pages/feedback/feedback')">
+					<ai-list-cell title="意见反馈" dashed="dashed"></ai-list-cell>
 				</view>
-				<view @click="navTo('/pages/about/index')">
-				    <list-cells title="关于我们"></list-cells>
+				<view class="list-box" @click="navTo('/pages/about/index')">
+					<ai-list-cell title="关于我们"></ai-list-cell>
 				</view>
 			</view>
 			
 			<!--退出账号-->
-			<view class="logout" @click="navTo('/pages/feedback/feedback')">
-				<list-cells title="退出账号"></list-cells>
+			<view class="logout list-box" @click="navTo('/pages/feedback/feedback')">
+				<ai-list-cell title="退出账号"></ai-list-cell>
 			</view>
 		</view>
     </view>  
 </template>  
 <script>
-	import listCells from '@/components/list-cell';
+	import aiListCell from '@/components/ai-list-cell'
     import {  
         mapState 
     } from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
-			listCells
+			aiListCell
 		},
 		data(){
 			return {
@@ -210,6 +210,7 @@
 				.num {
 					display: inline-block;
 					overflow-x: hidden;
+					text-overflow: ellipsis;
 					height: 50rpx;
 					width: 225rpx;
 					font-size:42rpx;
@@ -241,6 +242,7 @@
 				.num {
 					width: 250rpx;
 					overflow-x: hidden;
+					text-overflow: ellipsis;
 					font-size:36rpx;
 					font-weight:600;
 					color:rgba(51,51,51,1);
@@ -257,6 +259,7 @@
 				.num {
 					width: 250rpx;
 					overflow-x: hidden;
+					text-overflow: ellipsis;
 					font-size:36rpx;
 					font-weight:600;
 					color:rgba(51,51,51,1);
@@ -274,26 +277,25 @@
 		height: 700rpx;
 		width: 690rpx;
 		margin: 0 auto;
+		.list-box {
+			font-size: 30rpx;
+			height: 90rpx;
+			padding: 0 30rpx;
+		}
 		.account-safe {
 			margin: 20rpx 0 0 0;
-			background:rgba(255,255,255,1);
 			border-radius:16rpx;
+			background:rgba(255,255,255,1);
 		}
 		.message {
 			margin: 20rpx 0 0 0;
-			padding: 0 30rpx;
+			border-radius: 16rpx;
 			background:rgba(255,255,255,1);
-			border-radius:16rpx;
-			.message-item {
-				border-bottom: 1px dashed rgba(229,229,229,1);
-				
-			}
 		}
 		.logout {
 			margin: 20rpx 0 0 0;
-			padding: 0 30rpx;
-			background:rgba(255,255,255,1);
 			border-radius:16rpx;
+			background:rgba(255,255,255,1);
 		}
 	}
 
