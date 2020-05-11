@@ -38,7 +38,7 @@
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
-		<u-modal v-model="show" show-cancel-button @confirm="navToLogin"></u-modal>
+		<u-modal v-model="show" title="用户登录信息过期" content="请重新登录" show-cancel-button @confirm="navTo('/pages/login/login')"></u-modal>
 	</view>
 </template>
 
@@ -65,15 +65,18 @@
 
 		onLoad() {
 			this.loadData();
+			this.$global.navTo()
 		},
 		onReady(){
-			this.open()
+			this.reLogin()
 		},
 		methods: {
 			/**
 			 * 请求静态数据只是为了代码不那么乱
 			 * 分次请求未作整合
 			 */
+			
+			//推荐栏请求，用于模拟数据，可以删除
 			async loadData() {
 				let carouselList = await this.$deleteApi.json('carouselList');
 				this.titleNViewBackground = carouselList[0].background;
@@ -82,15 +85,20 @@
 				let goodsList = await this.$deleteApi.json('goodsListOne');
 				this.goodsList = goodsList || [];
 			},
+			
+			//其他栏请求，用于模拟数据，可以删除
 			async sortDetails() {
 				this.goodsList = await this.$deleteApi.json('goodsListTwo');
 				console.log(this.goodsList)
 			},
+			
 			//跳转
 			navTo(obj) {
 				this.$global.navTo(obj)
 			},
-			async open() {
+			
+			//进入页面检查token，token过期弹出重新登录
+			async reLogin() {
 					//let userInfo = uni.getStorageSync('userInfo') || '';
 				let userToken = uni.getStorageSync('token')
 				let checkToken = await this.$api.checkToken(userToken)
@@ -98,12 +106,8 @@
 				if(checkToken){
 					//this.$store.commit('tokenDue')
 					//console.log("false",this.$store.state.tokenDue)
-					this.show = false;
+					this.show = true;
 				}
-			},
-			navToLogin(){
-				console.log(6666666)
-				this.$global.navTo('/pages/login/login')
 			}
 		},
 	}

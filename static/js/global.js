@@ -1,8 +1,8 @@
 const path = ""
-const navTo = function (obj) {
+
+global.navTo = function (obj) {
 	uni.getNetworkType({ //判断网络状态，进行跳转
 	    success: function (res) { 
-	        console.log(333,res.networkType);
 			if(res.networkType !== "none") {
 				uni.navigateTo({
 					url: path + obj
@@ -16,10 +16,9 @@ const navTo = function (obj) {
 	})
 }
 
-const navTabBar = function (obj) {
+global.navTabBar = function (obj) {
 	uni.getNetworkType({ //判断网络状态，进行跳转
 	    success: function (res) { 
-	        console.log(333,res.networkType);
 			if(res.networkType !== "none") {
 				uni.switchTab({
 					url: path + obj
@@ -33,7 +32,4 @@ const navTabBar = function (obj) {
 	})
 }
 
-export default {
-	navTo,
-	navTabBar
-}
+export default global

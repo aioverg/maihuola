@@ -9,16 +9,15 @@
 		methods: {
 			...mapMutations(['login'])
 		},
-		onLaunch: async function() {
+		onLaunch: function() {
 			let userInfo = uni.getStorageSync('userInfo') || '';
 			let userToken = uni.getStorageSync('token')
-			let checkToken = await this.$api.checkToken(userToken)
-			console.log("true", checkToken)
+			//let checkToken = await this.$api.checkToken(userToken)
+
 			/*if(checkToken){
 				this.$store.commit('tokenDue')
 				console.log("false",this.$store.state.tokenDue)
 			}*/
-		    //this.fx()
 			/*if(userInfo.id){
 				//更新登陆状态
 				uni.getStorage({
@@ -36,7 +35,6 @@
 			console.log('App Hide')
 		},
 		methods: {
-			fx(){console.log("fffffff")}
 		}
 	}
 </script>
@@ -46,6 +44,7 @@
 	/*
 		全局公共样式和字体图标
 	*/
+    
 	@font-face {
 		font-family: yticon;
 		font-weight: normal;
@@ -60,6 +59,7 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
+	
 
 	.icon-yiguoqi1:before {
 		content: "\e700";

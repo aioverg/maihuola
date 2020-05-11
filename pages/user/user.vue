@@ -39,7 +39,7 @@
 		<view class="list-card">
 			<!--账户安全-->
 			<view class="account-safe" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
-				<list-cells title="账户安全" tips="手机|微信号|淘宝授权"></list-cells>
+				<list-cells title="账户安全" tips="手机 | 微信号 | 淘宝授权"></list-cells>
 			</view>
 
 			<!-- 浏览历史 -->
