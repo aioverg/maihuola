@@ -148,4 +148,7 @@
 			margin: 0 0 0 10rpx;
 		}
 	}
+	.note {
+		margin: 100rpx 0 0 0;
+	}
 </style>

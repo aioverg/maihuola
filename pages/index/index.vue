@@ -29,8 +29,6 @@
 						{{item}}
 					</view>
 				</scroll-view>
-				<view class="sort-item" v-for="(item, index) in sortList" :key="index" @click="sortDetails">
-				</view>
 			</view>
 		</view>
 		<view class="guess-section">

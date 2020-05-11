@@ -1,7 +1,19 @@
 const path = ""
 
-global.navTo = function (obj) {
-	uni.getNetworkType({ //判断网络状态，进行跳转
+//防抖函数
+const throttle = function (fn, obj){
+	let run = true
+	if(!run){return}
+	run = false
+	setTimeout(() => {
+		fn(obj)
+		run = true
+	}, 300)
+}
+
+//判断网络状态，进行跳转非tabBar页面
+const navTo4 = function (obj) {
+	uni.getNetworkType({
 	    success: function (res) { 
 			if(res.networkType !== "none") {
 				uni.navigateTo({
@@ -16,8 +28,13 @@ global.navTo = function (obj) {
 	})
 }
 
+global.navTo = function(obj){
+	throttle(navTo4,obj)
+}
+
+//判断网络状态，进行跳转到tabBar页面
 global.navTabBar = function (obj) {
-	uni.getNetworkType({ //判断网络状态，进行跳转
+	uni.getNetworkType({
 	    success: function (res) { 
 			if(res.networkType !== "none") {
 				uni.switchTab({
@@ -31,5 +48,6 @@ global.navTabBar = function (obj) {
 	    }
 	})
 }
+
 
 export default global

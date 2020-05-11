@@ -12,6 +12,15 @@ import global from './static/js/global.js'
 import api from './static/js/api.js'
 
 Vue.use(uView); //使用组件
+
+
+/*
+Vue.directive('clickoutside', {
+bind (el, binding, vnode) {
+console.log("binding")
+}
+});
+*/
 /**
  *  因工具函数属于公司资产, 所以直接在Vue实例挂载几个常用的函数
  *  所有测试用数据均存放于根目录json.js

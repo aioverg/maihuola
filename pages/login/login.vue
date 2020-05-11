@@ -11,10 +11,7 @@
 			或手机快速登录
 		</view>
 		<view class="note">
-			<text class="note-text">登录即代表同意卖货啦账号</text>
-			<text class="note-link">《用户协议》</text>
-			<text class="note-text">和</text>
-			<text class="note-link">《隐私政策》</text>
+			<ai-login-hint></ai-login-hint>
 		</view>
 	</view>
 </template>
@@ -22,10 +19,12 @@
 <script>
 	import aiNavbar from '@/components/ai-navbar'
 	import aiButton from '@/components/ai-button'
+	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
 			aiNavbar,
-			aiButton
+			aiButton,
+			aiLoginHint
 		},
 		data() {
 			return {
@@ -64,15 +63,6 @@
 		text-decoration-line: underline;
 	}
 	.note {
-		text-align: center;
 		margin: 0 0 100rpx 0;
-		.note-text {
-			font-size: 24rpx;
-			color: #999999;
-		}
-		.note-link {
-			color: #287EDA;
-			text-decoration-line: underline;
-		}
 	}
 </style>
