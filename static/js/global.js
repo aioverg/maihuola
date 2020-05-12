@@ -11,42 +11,49 @@ const throttle = function (fn, obj){
 	}, 300)
 }
 
-//判断网络状态，进行跳转非tabBar页面
-const navTo4 = function (obj) {
+//判断网络状态跳转非tabBar页面，navigatorFlag用于解决手机端点击多次多次跳转的问题
+global.navTo = function(url){
+	if(this.navigatorFlag){ return }
+	this.navigatorFlag = true
 	uni.getNetworkType({
-	    success: function (res) { 
-			if(res.networkType !== "none") {
-				uni.navigateTo({
-					url: path + obj
-				})
-			}else{
+		success: function(res){
+			if(res.networkType == "none"/* || res.networkType == "unknown"*/){
 				uni.navigateTo({
 					url: path + '/pages/error/408'
 				})
+			}else{
+				uni.navigateTo({
+					url: path + url
+				})
 			}
-	    }
+		}
 	})
+	setTimeout(() => {
+		this.navigatorFlag = false
+	}, 200)
 }
 
-global.navTo = function(obj){
-	throttle(navTo4,obj)
-}
-
-//判断网络状态，进行跳转到tabBar页面
-global.navTabBar = function (obj) {
+//判断网络状态跳转到tabBar页面，navigatorFlag用于解决手机端点击多次多次跳转的问题
+global.navTabBar = function(url){
+	if(this.navigatorFlag){ return }
+	this.navigatorFlag = true
+	
 	uni.getNetworkType({
-	    success: function (res) { 
-			if(res.networkType !== "none") {
+		success: function(res){
+			if(res.networkType == "none" /*|| res.networkType == "unknown"*/){
+				uni.navigateTo({
+					url: path + '/pages/error/408'
+				})
+			}else{
 				uni.switchTab({
-					url: path + obj
-				})
-			}else{
-				uni.navigateTo({
-					url: path + '/pages/error/408'
+					url: path + url
 				})
 			}
-	    }
+		}
 	})
+	setTimeout(() => {
+		this.navigatorFlag = false
+	}, 200)
 }
 
 

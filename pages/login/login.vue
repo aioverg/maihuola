@@ -45,7 +45,6 @@
 	}
 	.img-box {
 		width: 750rpx;
-		height: 690rpx;
 		text-align: center;
 		.img {
 			display: inline-block;

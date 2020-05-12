@@ -57,13 +57,13 @@
 				show: false,
 				background: {
 				    background: 'url(/static/img/bg-01.png)',
-				}
+				},
+				navigateFlag: false
 			};
 		},
 
 		onLoad() {
 			this.loadData();
-			this.$global.navTo()
 		},
 		onReady(){
 			this.reLogin()
@@ -91,8 +91,8 @@
 			},
 			
 			//跳转
-			navTo(obj) {
-				this.$global.navTo(obj)
+			navTo(url) {
+				this.$global.navTo(url)
 			},
 			
 			//进入页面检查token，token过期弹出重新登录

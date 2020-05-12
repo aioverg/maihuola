@@ -59,13 +59,12 @@
 	}
 	.img-box {
 		width: 750rpx;
-		height: 440rpx;
 		text-align: center;
 		.img {
 			display: inline-block;
 			width: 286rpx;
 			height: 286rpx;
-			margin: 77rpx auto 0;
+			margin: 77rpx auto 81rpx;
 		}
 	}
 	.phone-box {
