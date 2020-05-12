@@ -42,19 +42,14 @@
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
-		<uni-popup ref="popup" type="message">
-		    666666
-		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
-	import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 	export default {
 		components: {
-			aiGuseeCard,
-			uniPopup
+			aiGuseeCard
 		},
 		data() {
 			return {
@@ -115,7 +110,7 @@
 					//this.$store.commit('tokenDue')
 					//console.log("false",this.$store.state.tokenDue)
 					//this.$refs.popup.open()this.show = true;
-					this.$refs.popup.open()
+					//this.$refs.popup.open()
 				}
 			}
 		},

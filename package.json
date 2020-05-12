@@ -9,7 +9,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@dcloudio/uni-ui": "^1.1.9"
-  }
+  "dependencies": {}
 }

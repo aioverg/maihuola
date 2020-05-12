@@ -84,7 +84,7 @@
 </template>
 
 <script>
-	import uniIcons from '@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue'
+	import uniIcons from '@/components/uni-icons/uni-icons.vue'
 	//获取系统状态栏高度
 	var statusBarHeight = uni.getSystemInfoSync().statusBarHeight + 'px';
 	export default {
