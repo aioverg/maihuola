@@ -11,7 +11,6 @@ import api from './static/js/api.js'
 import aiNavbar from "@/components/ai-navbar"
 Vue.component('ai-navbar', aiNavbar)
 
-Vue.use(uView); //使用组件
 
 
 /*

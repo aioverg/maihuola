@@ -111,8 +111,8 @@
 		props:{
 			//返回箭头
 			leftArrow: {
-				type: Boolean,
-				default: false
+				type: String,
+				default: null
 			},
 			height:{
 				type: String,

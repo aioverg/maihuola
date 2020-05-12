@@ -2,7 +2,7 @@
 	<view>
 		<ai-navbar
 		    title="选品"
-			:fixed="true"
+			:fixed=true
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"
 			color="#FFFFFF"
@@ -170,6 +170,7 @@
 				display: inline-block;
 				width: 120rpx;
 				height: 70rpx;
+				font-size: 30rpx;
 				margin: 0 0 0 20rpx;
 				line-height: 70rpx;
 				text-align: center;
