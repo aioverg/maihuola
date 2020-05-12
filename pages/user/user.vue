@@ -62,7 +62,7 @@
 			</view>
 			
 			<!--退出账号-->
-			<view class="logout list-box" @click="navTo('/pages/feedback/feedback')">
+			<view class="logout list-box">
 				<ai-list-cell title="退出账号"></ai-list-cell>
 			</view>
 		</view>
@@ -164,8 +164,7 @@
 			border-radius: 50%;
 		}
 		.username{
-			font-size: 34rpx;
-			font-weight: 400;
+			font-size: 17px;
 			color: rgba(255,255,255,1);
 			margin-left: 30rpx;
 		}
@@ -200,8 +199,7 @@
 					width: 190rpx;
 					height: 38rpx;
 					margin: 46rpx 0;
-					font-size:30rpx;
-					font-weight: 400;
+					font-size:15px;
 					color:rgba(51,51,51,1);
 				}
 				.num {
@@ -210,7 +208,7 @@
 					text-overflow: ellipsis;
 					height: 50rpx;
 					width: 225rpx;
-					font-size:42rpx;
+					font-size:21px;
 					font-weight:500;
 					color:rgba(51,51,51,1);
 					margin: 40rpx 0;
@@ -224,8 +222,7 @@
 					background:rgba(244,122,115,1);
 					line-height:54rpx;
 					text-align: center;
-					font-size:30rpx;
-					font-weight:400;
+					font-size:15px;
 					color:rgba(255,255,255,1);
 				}
 			}
@@ -240,14 +237,13 @@
 					width: 250rpx;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
-					font-size:36rpx;
+					font-size:18px;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
 				.title {
 					margin: 12rpx 0 0 0;
-					font-size:26rpx;
-					font-weight:400;
+					font-size:13px;
 					color:rgba(102,102,102,1);
 				}
 			}
@@ -257,14 +253,13 @@
 					width: 250rpx;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
-					font-size:36rpx;
+					font-size:18px;
 					font-weight:600;
 					color:rgba(51,51,51,1);
 				}
 				.title {
 					margin: 12rpx 0 0 0;
-					font-size:26rpx;
-					font-weight:400;
+					font-size:13px;
 					color:rgba(102,102,102,1);
 				}
 			}
@@ -275,7 +270,7 @@
 		width: 690rpx;
 		margin: 0 auto;
 		.list-box {
-			font-size: 30rpx;
+			font-size: 15px;
 			height: 90rpx;
 			padding: 0 30rpx;
 		}

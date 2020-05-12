@@ -97,7 +97,7 @@
 		height: 106rpx;
 		padding: 14rpx 30rpx 16rpx;
 		background: rgba(255,255,255,1);
-		font-size: 32rpx;
+		font-size: 16px;
 		color: rgba(51,51,51,1);
 	}
 	.guess-price-info {
@@ -118,13 +118,13 @@
 				display: inline-block;
 				line-height: 55rpx;
 				flex-grow: 1;
-				font-size: 60rpx;
+				font-size: 30px;
 				color: rgba(255,255,255,1);
 			}
 			.guess-ckprice {
 				display: inline-block;
 				flex-grow: 1;
-				font-size: 30rpx;
+				font-size: 15px;
 				color:rgba(255,255,255,1);
 			}
 		}
@@ -134,12 +134,12 @@
 			.guess-scprice {
 				display: inline-block;
 				margin: 0 28rpx 0 0;
-				font-size:26rpx;
+				font-size:13px;
 				color: rgba(255,255,255,1);
 			}
 			.guess-rate {
 				display: inline-block;
-				font-size: 26rpx;
+				font-size: 13px;
 				color: rgba(255,255,255,1);
 			}
 		}
@@ -155,7 +155,7 @@
 			display: flex;
 			align-items: center;
 			margin: 0 0 10rpx;
-			font-size: 30rpx;
+			font-size: 15px;
 			font-weight: 500;
 			color: rgba(51,51,51,1);
 			.guess-nh-title-icon {
@@ -164,9 +164,8 @@
 			}
 		}
 		.guess-nh-content {
-			font-size:26rpx;
+			font-size:13px;
 			color:rgba(102,102,102,1);
-			font-weight:400;
 		}
 	}
 	.zb-script {
@@ -180,7 +179,7 @@
 			display: flex;
 			align-items: center;
 			margin: 0 0 10rpx;
-			font-size: 30rpx;
+			font-size: 15px;
 			font-weight: 500;
 			color: rgba(51,51,51,1);
 			.zb-script-title-icon {
@@ -189,9 +188,8 @@
 			}
 		}
 		.zb-script-content {
-			font-size: 26rpx;
+			font-size: 13px;
 			color: rgba(102,102,102,1);
-			font-weight:400;
 		}
 	}
 	.tkl-bt {

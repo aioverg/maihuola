@@ -46,13 +46,13 @@
 		}
 	}
 	.error-title-one {
-		font-size: 36rpx;
+		font-size: 18px;
 		color: rgba(51,51,51,1);
 		text-align: center;
 	}
 	.error-title-two {
 		margin: 10rpx 0 90rpx;
-		font-size: 30rpx;
+		font-size: 15px;
 		color:rgba(102,102,102,1);
 		text-align: center;
 	}
@@ -62,7 +62,7 @@
 		margin: 0 auto;
 		line-height: 80rpx;
 		text-align: center;
-		font-size: 30rpx;
+		font-size: 15px;
 		color: rgba(255,255,255,1);
 		background: rgba(244,122,115,1);
 		border-radius:45px;

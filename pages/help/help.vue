@@ -48,14 +48,14 @@
 			line-height: 78rpx;
 			margin: 10rpx 0 0 0;
 			border-bottom: 1px solid rgba(229,229,229,1);;
-			font-size: 32rpx;
+			font-size: 16px;
 			font-weight: 500;
 			color: rgba(51,51,51,1);
 		}
 		.content {
 			line-height: 38rpx;
 			margin: 20rpx 0 0 0;
-			font-size: 26rpx;
+			font-size: 13px;
 			color: rgba(153,153,153,1);
 		}
 	}

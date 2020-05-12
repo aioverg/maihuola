@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<ai-navbar
-		    title="商品列表"
+		    title="鍟嗗搧鍒楄〃"
 			:fixed="true"
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"

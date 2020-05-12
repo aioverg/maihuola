@@ -54,6 +54,9 @@
 			}
 			.btname {
 				display: inline-block;
+				font-weight: 500;
+				font-size: 16px;
+				color:rgba(255,255,255,1);
 			}
 		}
 	}

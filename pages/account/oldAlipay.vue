@@ -61,7 +61,7 @@
 	.bt {
 		position: relative;
 		top: 734rpx;
-		font-size:32rpx;
+		font-size:16px;
 		font-weight:500;
 		color:rgba(255,255,255,1);
 	}

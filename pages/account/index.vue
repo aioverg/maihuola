@@ -28,11 +28,9 @@
 </template>
 
 <script>
-	import listCells from '@/components/list-cell';
 	import aiListCell from '@/components/ai-list-cell'
 	export default {
 		components: {
-			listCells,
 			aiListCell
 		},
 		data() {

@@ -30,12 +30,13 @@
 	.ai-login-hint {
 		text-align: center;
 		.note-text {
-			font-size: 24rpx;
+			font-size: 12px;
 			color: #999999;
 		}
 		.note-link {
 			color: #287EDA;
 			text-decoration-line: underline;
+			font-size: 12px;
 		}
 	}
 </style>

@@ -67,83 +67,72 @@
 			padding: 30rpx 0 30rpx 0;
 			border-bottom: 1px dashed rgba(229,229,229,1);
 			.title {
-				font-size: 32rpx;
-				font-weight: 400;
+				font-size: 16px;
 				color: rgba(51,51,51,1);
 			}
 			.name {
 				display: inline-block;
-				font-size:28rpx;
-				font-weight:400;
+				font-size:14px;
 				color:rgba(102,102,102,1);
 				margin: 0 30rpx 0 50rpx;
 			}
 			.phone {
-				font-size:28rpx;
-				font-weight:400;
+				font-size:14px;
 				color:rgba(102,102,102,1);
 			}
 		}
 		.tx-input {
 			margin: 20rpx 0 0 30rpx;
 			.title {
-				font-size:32rpx;
-				font-weight:400;
+				font-size:16px;
 				color:rgba(51,51,51,1);
 			}
 			.input-box {
 				height: 144rpx;
 				display: flex;
+				align-items: baseline;
+				padding: 30rpx 0 0 0;
 				border-bottom: 1px dashed rgba(229,229,229,1);
 				.icon {
 					display: inline-block;
 					height: 84rpx;
 					width: 37rpx;
-					margin: 30rpx 0;
 					font-weight:500;
 					color:rgba(51,51,51,1);
-					font-size:60rpx;
+					font-size:30px;
 				}
 				.input {
 					display: inline-block;
-					margin: 48rpx 0 40rpx 20rpx;
+					margin: 0 0 0 20rpx;
 					height: 56rpx;
 					width: 285rpx;
-					font-weight:400;
-					font-size:40rpx;
-					color:rgba(204,204,204,1);
-
+					font-size:20px;
 				}
 				.note {
 					display: inline-block;
-					margin: 62rpx 0 45rpx 0;
-					font-size:26rpx;
-					font-weight:400;
+					font-size:13px;
 					color:rgba(204,204,204,1);
 				}
 			}
 			.tx-upper {
 				display: inline-block;
 				margin: 30rpx 0;
-				font-weight:400;
-				font-size:28rpx;
+				font-size:14px;
 				color:rgba(51,51,51,1);
 			}
 			.tx-upperbt {
 				display: inline-block;
 				margin: 30rpx 0 30rpx 50rpx;
 				width: 114rpx;
-				font-weight:400;
-				height: 40rpx;
-				font-size:28rpx;
+				height: 20px;
+				font-size: 14px;
 				color:rgba(252,170,122,1);
 			}
 		}
 	}
 	.tx-history {
 		margin: 30rpx 32rpx 0 606rpx;
-		font-size:28rpx;
-		font-weight:400;
+		font-size:14px;
 		text-decoration: underline;
 		color:rgba(153,153,153,1);
 	}
@@ -155,7 +144,7 @@
 		text-align: center;
 		background:rgba(204,204,204,1);
 		border-radius:45rpx;
-		font-size:32rpx;
+		font-size:16px;
 		font-weight:500;
 		color:rgba(255,255,255,1);
 	}

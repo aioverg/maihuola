@@ -57,7 +57,7 @@
 				width: 378rpx;
 				height: 120rpx;
 				overflow: hidden;
-				font-size: 30rpx;
+				font-size: 15px;
 				color:rgba(51,51,51,1);
 			}
 		}
@@ -67,19 +67,19 @@
 			height: 55rpx;
 			margin: 28rpx 0 0 0;
 			.zb-price {
-				font-size:26rpx;
+				font-size:13px;
 				color:rgba(255,51,51,1);
 			}
 			.sc-price {
-				font-size:22rpx;
+				font-size:11px;
 				color:rgba(153,153,153,1);
 			}
 			.ck-earn {
-				font-size:26rpx;
+				font-size:13px;
 				color:rgba(255,51,51,1);
 			}
 			.yj-rate {
-				font-size:22rpx;
+				font-size:11px;
 				color:rgba(153,153,153,1);
 			}
 		}

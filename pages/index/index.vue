@@ -42,14 +42,21 @@
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
+		<uni-popup ref="popup" type="dialog">
+		    <uni-popup-dialog type="input" title="登录过期" content="请重新登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
+	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	export default {
 		components: {
-			aiGuseeCard
+			aiGuseeCard,
+			uniPopUp,
+			uniPopupDialog
 		},
 		data() {
 			return {
@@ -59,7 +66,6 @@
 				swiperLength: 0,
 				carouselList: [],
 				goodsList: [],
-				show: false,
 				background: {
 				    background: 'url(/static/img/bg-01.png)',
 				},
@@ -78,7 +84,14 @@
 			 * 请求静态数据只是为了代码不那么乱
 			 * 分次请求未作整合
 			 */
-			
+			close(done){
+			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+			    done()
+				
+			},
+			confirm(done,value){
+			    this.$global.navTo('/pages/login/login')
+			},
 			//推荐栏请求，用于模拟数据，可以删除
 			async loadData() {
 				let carouselList = await this.$deleteApi.json('carouselList');
@@ -105,12 +118,8 @@
 					//let userInfo = uni.getStorageSync('userInfo') || '';
 				let userToken = uni.getStorageSync('token')
 				let checkToken = await this.$api.checkToken(userToken)
-				console.log("true", checkToken)
 				if(checkToken){
-					//this.$store.commit('tokenDue')
-					//console.log("false",this.$store.state.tokenDue)
-					//this.$refs.popup.open()this.show = true;
-					//this.$refs.popup.open()
+					this.$refs.popup.open()
 				}
 			}
 		},
@@ -158,14 +167,14 @@
 					height: 70rpx;
 					line-height: 70rpx;
 					display: inline-block;
-					font-size: 30rpx;
+					font-size: 15px;
 				}
 			}
 			.search-two {
 				display: inline-block;
 				width: 120rpx;
 				height: 70rpx;
-				font-size: 30rpx;
+				font-size: 15px;
 				margin: 0 0 0 20rpx;
 				line-height: 70rpx;
 				text-align: center;
@@ -223,7 +232,7 @@
 					height: 90rpx;
 					line-height: 90rpx;
 					text-align: center;
-					font-size: 36rpx;
+					font-size: 16px;
 				}
 			}
 		}

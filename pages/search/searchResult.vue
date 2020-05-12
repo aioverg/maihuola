@@ -74,8 +74,7 @@
 			background:rgba(255,255,255,1);
 			box-shadow:0 0 26rpx 0 rgba(153,153,153,0.24);
 			border-radius:35rpx;
-			font-size: 30rpx;
-			font-weight:400;
+			font-size: 15px;
 			color:rgba(51,51,51,1);
 			text-align: center;
 			line-height: 70rpx;

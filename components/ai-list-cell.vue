@@ -43,6 +43,7 @@
 		.ai-list-cell-title {
 			display: inline-block;
 			flex-grow: 1;
+			font-size: 15px;
 		}
 		.ai-list-cell-icon {
 			display: inline-block;
@@ -54,7 +55,7 @@
 			flex-grow: 0;
 			margin: 0 20rpx 0 0;
 			color:rgba(153,153,153,1);
-			font-size: 28rpx;
+			font-size: 14px;
 		}
 	}
 </style>

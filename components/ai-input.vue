@@ -60,28 +60,24 @@
 		.title {
 			margin: 0 30rpx;
 			width: 160rpx;
-			font-size:30rpx;
-			font-weight:400;
+			font-size:15px;
 			color:rgba(51,51,51,1);
 		}
 		.content {
-			font-size:28rpx;
-			font-weight:400;
+			font-size: 14px;
 			color:rgba(153,153,153,1);
 		}
 		.input {
 			display: inline-block;
-			font-size: 28rpx;
+			font-size: 14px;
 		}
 		.bt {
-			font-size:28rpx;
-			font-weight:400;
+			font-size:14px;
 			color:rgba(244,122,115,1);
 			text-decoration: underline;
 		}
 		.time-title {
-			font-size:28rpx;
-			font-weight:400;
+			font-size:14px;
 			color:rgba(153,153,153,1);
 		}
 		

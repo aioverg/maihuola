@@ -22,12 +22,6 @@
 			"style": {
 				"navigationBarTitleText": "商品详情"
 			}
-		},
-		{
-			"path": "pages/detail/TKL",
-			"style": {
-				"navigationBarTitleText": "商品淘口令"
-			}
 		},{
 			"path": "pages/detail/guessList",
 			"style": {
@@ -150,6 +144,7 @@
             "path" : "pages/document/index",
             "style" : {}
         }
+
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

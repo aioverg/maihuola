@@ -99,7 +99,7 @@
 					}
 				}
 				.icon-title {
-					font-size: 26rpx;
+					font-size: 13px;
 					width: 152rpx;
 					margin: 12rpx 0 0;
 					text-align: center;
@@ -110,12 +110,12 @@
 		.icon-box-describe {
 			margin: 30rpx 0 0 50rpx;
 			.icon-box-describe-one {
-				font-size:32rpx;
+				font-size:16px;
 				color:rgba(51,51,51,1);
 			}
 			.icon-box-describe-two {
 				margin: 30rpx 0 0;
-				font-size:28rpx;
+				font-size:14px;
 				color:rgba(153,153,153,1);
 				.dot {
 					width: 6rpx;

@@ -80,8 +80,7 @@
 			background:rgba(255,255,255,1);
 			box-shadow:0 0 26rpx 0 rgba(153,153,153,0.24);
 			border-radius:35rpx;
-			font-size: 30rpx;
-			font-weight:400;
+			font-size: 15px;
 			color:rgba(51,51,51,1);
 			text-align: center;
 			line-height: 70rpx;
@@ -93,7 +92,7 @@
 		margin: 0 auto;
 		.history {
 			display: inline-block;
-			font-size: 32rpx;
+			font-size: 16px;
 			font-weight: 500;
 			color:rgba(51,51,51,1);
 			margin-right: 493rpx;
@@ -112,7 +111,7 @@
 			height: 64rpx;
 			margin: 0 20rpx 20rpx 0;
 			line-height: 64rpx;
-			font-size: 28rpx;
+			font-size: 14px;
 			padding: 0 24rpx;
 			background: rgba(242,242,242,1);
 			border-radius: 32rpx;

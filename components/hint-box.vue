@@ -36,8 +36,7 @@
 		.note {
 			margin: 18rpx 0 18rpx 10rpx;
 			color:rgba(234,58,106,1);
-			font-weight:400;
-			font-size: 24rpx;
+			font-size: 12px;
 		}
 	}
 </style>

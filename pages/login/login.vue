@@ -61,7 +61,7 @@
 	.to-phone {
 		margin: 52rpx 0 203rpx 0;
 		text-align: center;
-		font-size: 26rpx;
+		font-size: 13px;
 		color:rgba(204,204,204,1);
 		height:37px;
 		text-decoration-line: underline;

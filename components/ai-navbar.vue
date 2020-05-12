@@ -572,7 +572,7 @@
 			width: 100%;
 			height:  $nav-height;
 			line-height: $nav-height;
-			font-size: 36upx;
+			font-size: 18px;
 			transition: color 0.5s ease 0s;
 			&-btns {
 				display: inline-flex;
@@ -604,7 +604,7 @@
 					width: 100%;
 					display: inline-block;
 					justify-content: center;
-					font-size: 36upx;
+					font-size: 18px;
 					
 					text-overflow: ellipsis;
 					white-space: nowrap;

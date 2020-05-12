@@ -90,7 +90,7 @@
 		.phone-input {
 			display: inline-block;
 			margin: 0 0 0 26rpx;
-			font-size: 34rpx;
+			font-size: 17px;
 		}
 	}
 	.code-box {
@@ -111,7 +111,7 @@
 			.code-input {
 				display: inline-block;
 				margin: 0 0 0 70rpx;
-				font-size: 34rpx;
+				font-size: 17px;
 			}
 		}
 		.code-button {
@@ -122,7 +122,7 @@
 			background:rgba(244,122,115,1);
 			border-radius: 45rpx;
 			line-height: 80rpx;
-			font-size: 28rpx;
+			font-size: 14px;
 			color: rgba(255,255,255,1);
 		}
 	}
@@ -132,7 +132,7 @@
 	.huo {
 		width: 100%;
 		text-align: center;
-		font-size: 26rpx;
+		font-size: 13px;
 		color: rgba(204,204,204,1);
 		height: 37rpx;
 		margin: 52rpx 0 30rpx 0;
@@ -147,7 +147,7 @@
 		}
 		.wx-bt {
 			display: inline-block;
-			font-size: 26rpx;
+			font-size: 13px;
 			color: rgba(244,122,115,1);
 			margin: 0 0 0 10rpx;
 		}
