@@ -1,8 +1,14 @@
 <template>  
     <view>
+		<ai-navbar
+		    title="我的"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+		/>
 		<view class="user-section">
-			<image class="bg" src="/static/img/bg-06.png"></image>
-			<view class="head-title">我的</view>
+			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/img/ai-default-user-icon.png'"></image>
@@ -134,23 +140,14 @@
 		background:rgba(249,249,249,1);
 	}
 	.user-section{
-		height: 560rpx;
-		padding: 30px 0 0 0;
+		height: 410rpx;
+		
 		position:relative;
 		.bg{
 			position:absolute;
 			left: 0;
 			top: 0;
 			width: 100%;
-		}
-		.head-title {
-			position: relative;
-			margin: 0 0 20px 0;
-			z-index: 2;
-			font-size: 36rpx;
-			text-align: center;
-			font-weight: 500;
-			color: rgba(255,255,255,1);
 		}
 	}
 	.user-info-box{

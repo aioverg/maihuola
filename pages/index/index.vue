@@ -1,8 +1,14 @@
 <template>
 	<view>
+		<ai-navbar
+		    title="选品"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+		/>
 		<view class="head">
-			<image class="bg" src="/static/img/bg-06.png"></image>
-			<view class="head-title">选品</view>
+			<image class="bg" src="/static/img/bg-02.png"></image>
 			<view class="search">
 				<view class="search-one" @click="navTo('/pages/search/search')">
 					<image class="search-icon" src="../../static/icon/ai-search04.png"></image>
@@ -36,15 +42,19 @@
 				 <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
-		<u-modal v-model="show" title="用户登录信息过期" content="请重新登录" show-cancel-button @confirm="navTo('/pages/login/login')"></u-modal>
+		<uni-popup ref="popup" type="message">
+		    666666
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
+	import uniPopup from '@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue'
 	export default {
 		components: {
-			aiGuseeCard
+			aiGuseeCard,
+			uniPopup
 		},
 		data() {
 			return {
@@ -104,7 +114,8 @@
 				if(checkToken){
 					//this.$store.commit('tokenDue')
 					//console.log("false",this.$store.state.tokenDue)
-					this.show = true;
+					//this.$refs.popup.open()this.show = true;
+					this.$refs.popup.open()
 				}
 			}
 		},
@@ -116,8 +127,8 @@
 		background: rgba(249, 249, 249, 1);
 	}
 	.head{
-		height: 500rpx;
-		padding: 30px 0 0 0;
+		height: 430rpx;
+		padding: 20px 0 0 0;
 		position: relative;
 		.bg{
 			position:absolute;
@@ -125,15 +136,6 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
-		}
-		.head-title {
-			position: relative;
-			margin: 0 0 20px 0;
-			z-index: 2;
-			font-size: 36rpx;
-			text-align: center;
-			font-weight: 500;
-			color: rgba(255,255,255,1);
 		}
 		.search {
 			position: relative;
@@ -153,9 +155,7 @@
 				opacity:0.19;
 				.search-icon {
 					display: inline-block;
-					position: relative;
 					margin: 0 20rpx 0 30rpx;
-					z-index: 4;
 					width: 24rpx;
 					height: 24rpx;
 				}
@@ -210,14 +210,12 @@
 	}
 
 	.sort-section {
-		margin-top: 90rpx;
+		margin-top: 40rpx;
 		width: 100%;
-
 		.sort-items {
 			width: 100%;
 			height: 90rpx;
 			background: rgba(255, 255, 255, 1);
-
 			.typetitleTab {
 				width: 680rpx;
 				white-space: nowrap;

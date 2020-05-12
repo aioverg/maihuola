@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="鍟嗗搧鍒楄〃"></ai-navbar>
+		<ai-navbar
+		    title="商品列表"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="guess-list">
 			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
 			    <ai-gusee-card :data="item"></ai-gusee-card>
@@ -10,11 +17,9 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
 	import aiGuseeCard from '@/components/ai-guess-card'
 	export default {
 		components: {
-			aiNavbar,
 			aiGuseeCard
 		},
 		data() {

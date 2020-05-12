@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="修改支付宝绑定"></ai-navbar>
+		<ai-navbar
+		    title="修改支付宝绑定"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="phone-num">
 			<ai-input title="真实姓名" content="17823456789" ></ai-input>
 		</view>
@@ -16,12 +23,10 @@
 <script>
 	import aiInput from '@/components/ai-input';
 	import aiButton from '@/components/ai-button';
-	import aiNavbar from '@/components/ai-navbar.vue'
 	export default {
 		components: {
 			aiInput,
-			aiButton,
-			aiNavbar
+			aiButton
 		},
 		data() {
 			return {

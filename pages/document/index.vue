@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="关于我们"></ai-navbar>
+		<ai-navbar
+		    title="关于我们"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="docunemt">
 			<view class="title">{{title}}</view>
 			<view class="content">{{content}}</view>
@@ -9,11 +16,9 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar.vue'
 	import documentData from './data.js'
 	export default {
 		components: {
-			aiNavbar
 		},
 		data() {
 			return {

@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="手机登录"></ai-navbar>
+		<ai-navbar
+		    title="手机登录"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="img-box">
 			<image class="img" src="/static/img/ai-maihuola1.png"></image>
 		</view>
@@ -33,12 +40,10 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
-			aiNavbar,
 			aiButton,
 			aiLoginHint
 		},

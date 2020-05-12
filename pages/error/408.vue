@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="卖货啦"></ai-navbar>
+		<ai-navbar
+		    title="卖货啦"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="img-box">
 			<image class="img" src="/static/error/ai-error01.png"></image>
 		</view>
@@ -11,10 +18,8 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
 	export default {
 		components: {
-			aiNavbar
 		},
 		data() {
 			return {

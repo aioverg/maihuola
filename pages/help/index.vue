@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="帮助"></ai-navbar>
+		<ai-navbar
+		    title="帮助"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="help-list" v-for="(item, index) in helpList" :key="item.id" @click="navTo(item.url+item.id)">
 			<ai-list-cell :title="item.title"></ai-list-cell>
 		</view>
@@ -8,11 +15,9 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar';
 	import aiListCell from '@/components/ai-list-cell'
 	export default {
 		components: {
-			aiNavbar,
 			aiListCell
 		},
 		data() {

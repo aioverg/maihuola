@@ -1,6 +1,13 @@
 <template>
 	<view>
-	    <ai-navbar title="绑定支付宝授权"></ai-navbar>
+		<ai-navbar
+		    title="绑定支付宝授权"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 	<view class="icon-card">
 		<image class="box-bg" src="/static/img/ai-tb-bg.png"></image>
 		<view class="icon-box">
@@ -30,12 +37,10 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button.vue';
-	import aiNavbar from '@/components/ai-navbar'
+	import aiButton from '@/components/ai-button.vue'
 	export default {
 		components: {
-			aiButton,
-			aiNavbar
+			aiButton
 		},
 		data() {
 			return {

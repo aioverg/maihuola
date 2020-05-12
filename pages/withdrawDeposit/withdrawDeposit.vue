@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="商品详情"></ai-navbar>
+		<ai-navbar
+		    title="提现"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<hint-box content="每月25号可提现上个月内确认收货的订单收益"></hint-box>
 		<view class="tx-box">
 			<view class="tx-account">
@@ -29,12 +36,10 @@
 </template>
 
 <script>
-	import hintBox from '@/components/hint-box';
-	import aiNavbar from '@/components/ai-navbar'
+	import hintBox from '@/components/hint-box'
 	export default {
 		components: {
-			hintBox,
-			aiNavbar
+			hintBox
 		},
 		data() {
 			return {

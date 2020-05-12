@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "uview-ui": "^1.2.3"
+    "@dcloudio/uni-ui": "^1.1.9"
   }
 }

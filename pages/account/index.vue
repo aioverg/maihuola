@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="账户安全"></ai-navbar>
+		<ai-navbar
+		    title="账户安全"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 	<view class="account-box">
 		<view class="box-item-phone" @click="navTo('/pages/account/oldPhone')">
 			<ai-list-cell title="手机号码" message="178****6789"></ai-list-cell>
@@ -22,12 +29,10 @@
 
 <script>
 	import listCells from '@/components/list-cell';
-	import aiNavbar from '@/components/ai-navbar.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	export default {
 		components: {
 			listCells,
-			aiNavbar,
 			aiListCell
 		},
 		data() {

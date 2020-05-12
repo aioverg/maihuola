@@ -40,7 +40,6 @@
 </script>
 
 <style lang='scss'>
-	@import "uview-ui/index.scss";
 	/*
 		全局公共样式和字体图标
 	*/

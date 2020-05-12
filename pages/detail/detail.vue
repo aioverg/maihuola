@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="商品详情"></ai-navbar>
+		<ai-navbar
+		    title="商品详情"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="guess-img-box">
 			<image mode="heightFix" class="guess-img" src="/static/temp/guess04.jpg"></image>
 		</view>
@@ -54,12 +61,10 @@
 
 <script>
 	import aiButton from '@/components/ai-button.vue'
-	import aiNavbar from '@/components/ai-navbar.vue'
 	//详情页
 	export default {
 		components: {
-			aiButton,
-			aiNavbar
+			aiButton
 		},
 		methods: {
 			navTo(url) {

@@ -1,6 +1,14 @@
 <template>
 	<view>
-		<ai-navbar title="帮助"></ai-navbar>
+		<ai-navbar
+		    title="帮助"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
+		
 		<view class="docunemt">
 			<view class="title">{{question}}</view>
 			<view class="content">{{answer}}</view>
@@ -9,11 +17,9 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
 	import helpData from './helpData.js'
 	export default {
 		components: {
-			aiNavbar
 		},
 		data() {
 			return {

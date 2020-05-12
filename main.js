@@ -2,14 +2,14 @@ import Vue from 'vue'
 import store from './store'
 import App from './App'
 
-import uView from "uview-ui"; //引入ui组件
-
 import Json from './Json' //测试用数据
 
 //将导航函数引入全局
 import global from './static/js/global.js'
 //引入api
 import api from './static/js/api.js'
+import aiNavbar from "@/components/ai-navbar"
+Vue.component('ai-navbar', aiNavbar)
 
 Vue.use(uView); //使用组件
 

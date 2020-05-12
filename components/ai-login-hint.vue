@@ -1,3 +1,4 @@
+<!--用户协议与隐私正提示组件-->
 <template>
 	<view class="ai-login-hint">
 		<text class="note-text">登录即代表同意卖货啦账号</text>

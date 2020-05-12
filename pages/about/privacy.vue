@@ -1,14 +1,19 @@
 <template>
 	<view>
-		<ai-navbar title="隐私政策"></ai-navbar>
+		<ai-navbar
+		    title="隐私政策"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 	</view>
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar.vue'
 	export default {
 		components: {
-			aiNavbar
 		},
 		data() {
 			return {

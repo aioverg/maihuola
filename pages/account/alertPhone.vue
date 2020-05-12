@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="修改手机号码"></ai-navbar>
+		<ai-navbar
+		    title="修改手机号码"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<hint-box content="请填写新的手机号并验证完成绑定"></hint-box>
 		<view class="phone-num">
 			<ai-input title="手机号码" content="17823456789" ></ai-input>
@@ -18,13 +25,11 @@
 	import hintBox from '@/components/hint-box';
 	import aiInput from '@/components/ai-input';
 	import aiButton from '@/components/ai-button';
-	import aiNavbar from '@/components/ai-navbar.vue'
 	export default {
 		components: {
 			hintBox,
 			aiInput,
-			aiButton,
-			aiNavbar
+			aiButton
 		},
 		data() {
 			return {

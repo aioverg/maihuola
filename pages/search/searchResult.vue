@@ -1,6 +1,13 @@
 <template>
 	<view>
-		<ai-navbar title="搜索结果"></ai-navbar>
+		<ai-navbar
+		    title="搜索结果"
+			:fixed="true"
+			backgroundImg="/static/img/bg-01.png"
+			height="88rpx"
+			color="#FFFFFF"
+			leftArrow="true"
+		/>
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
@@ -12,10 +19,8 @@
 </template>
 
 <script>
-	import aiNavbar from '@/components/ai-navbar'
 	export default {
 		components: {
-			aiNavbar
 		},
 		data() {
 			return {
