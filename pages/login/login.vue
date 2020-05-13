@@ -11,7 +11,7 @@
 		<view class="img-box">
 			<image class="img" src="/static/img/ai-maihuola1.png"></image>
 		</view>
-		<view>
+		<view @click="login()">
 			<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
 		<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
@@ -39,6 +39,21 @@
 		methods: {
 			navTo(obj){
 				this.$global.navTo(obj)
+			},
+			login(){
+				uni.login({
+				  provider: 'weixin',
+				  success: function (loginRes) {
+				    console.log(loginRes.authResult);
+				    // 获取用户信息
+				    uni.getUserInfo({
+				      provider: 'weixin',
+				      success: function (infoRes) {
+				        console.log('用户昵称为：' + infoRes.userInfo.nickName);
+				      }
+				    });
+				  }
+				});
 			}
 		}
 	}

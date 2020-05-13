@@ -15,6 +15,13 @@
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
+		<view class="search-result">
+			<view v-if="searchResult" class="no-result">
+				<image class="no-result-img" src="/static/error/ai-error02.png" mode="widthFix"></image>
+				<view class="no-describe">哎呀！竟然没有匹配的宝贝</view>
+			</view>
+			
+		</view>
 	</view>
 </template>
 
@@ -24,7 +31,8 @@
 		},
 		data() {
 			return {
-				searchInput: null
+				searchInput: null,
+				searchResult: null
 			}
 		},
 		onLoad(res){
@@ -79,5 +87,21 @@
 			text-align: center;
 			line-height: 70rpx;
 		}
+	}
+	.search-result {
+		.no-result {
+			width: 100%;
+			margin: 200rpx 0 0 0;
+			text-align: center;
+			.no-result-img {
+				width: 494rpx;
+			}
+			.no-describe {
+				margin: 100rpx 0 0 0;
+				font-size: 30rpx;
+				color: rgba(204,204,204,1);
+			}
+		}
+		
 	}
 </style>

@@ -19,7 +19,7 @@ const store = new Vuex.Store({
 			uni.setStorage({//缓存用户登陆状态
 			    key: 'userInfo',  
 			    data: provider  
-			})*/ 
+			})*/
 			console.log(state.userInfo);
 		},
 		logout(state) {

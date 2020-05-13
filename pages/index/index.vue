@@ -86,8 +86,7 @@
 			 */
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
-			    done()
-				
+			    done() 
 			},
 			confirm(done,value){
 			    this.$global.navTo('/pages/login/login')

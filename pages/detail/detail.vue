@@ -53,18 +53,31 @@
 			</view>
 			<view class="zb-script-content">这里是直播脚本相关内容</view>
 		</view>
-		<view class="tkl-bt">
-			<ai-button btname="复制淘口令"></ai-button>
+		<view class="tkl-bt" @click="copyTKL">
+			<ai-button btname="复制淘口令" ></ai-button>
 		</view>
+		<uni-popup ref="popup" type="dialog">
+		    <uni-popup-dialog v-if="hasLogin" type="input" title="没有登录" content="现在去登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+			<uni-popup-dialog type="input" title="需要淘宝授权" content="是否授权" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiButton from '@/components/ai-button.vue'
+	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	//详情页
 	export default {
 		components: {
-			aiButton
+			aiButton,
+			uniPopUp,
+			uniPopupDialog
+		},
+		computed: {
+			hasLogin(){
+				return this.$store.hasLogin
+			}
 		},
 		methods: {
 			navTo(url) {
@@ -72,6 +85,17 @@
 					url: url
 				})
 			},
+			copyTKL(){
+				this.$refs.popup.open()
+			},
+			close(done){
+			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+			    done()
+				
+			},
+			confirm(done,value){
+			    this.$global.navTo('/pages/login/login')
+			}
 		}
 	}
 
