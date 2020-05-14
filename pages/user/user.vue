@@ -62,14 +62,16 @@
 			</view>
 			
 			<!--退出账号-->
-			<view class="logout list-box">
+			<view class="logout list-box" @click="logino()">
 				<ai-list-cell title="退出账号"></ai-list-cell>
+				<ai-list-cell title="初始化"></ai-list-cell>
 			</view>
 		</view>
     </view>  
 </template>  
 <script>
 	import aiListCell from '@/components/ai-list-cell'
+	const plug= uni.requireNativePlugin('UZK-Alibcsdk');
     import {  
         mapState 
     } from 'vuex';  
@@ -124,6 +126,16 @@
 			login(){
 				this.$api.login({
 				})
+			},
+			logino(){
+				plug.init(result=>{
+				console.log(result)
+				    });
+			},
+			init(){
+				plug.login(result=>{
+					console.log(result)
+				    });  
 			}
         }  
     }  

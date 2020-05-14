@@ -41,6 +41,7 @@
 				this.$global.navTo(obj)
 			},
 			login(){
+				console.log(3333333)
 				uni.login({
 				  provider: 'weixin',
 				  success: function (loginRes) {
