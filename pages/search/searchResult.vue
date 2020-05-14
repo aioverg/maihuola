@@ -16,18 +16,23 @@
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="search-result">
-			<view v-if="searchResult" class="no-result">
+			<view v-if="!searchResult" class="no-result">
 				<image class="no-result-img" src="/static/error/ai-error02.png" mode="widthFix"></image>
 				<view class="no-describe">哎呀！竟然没有匹配的宝贝</view>
 			</view>
-			
+			<view v-if="searchResult" class="search-result">
+				<view>商品栏</view>
+				<ai-gusee-card></ai-gusee-card>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import aiGuseeCard from "@/components/ai-guess-card"
 	export default {
 		components: {
+			aiGuseeCard
 		},
 		data() {
 			return {

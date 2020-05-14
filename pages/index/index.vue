@@ -31,10 +31,24 @@
 		<view class="sort-section">
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
-					<view class="sort-item" v-for="(item, index) in sortList" :key="index" @click="sortDetails">
-						{{item}}
+					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index">
+					    <view class="sort-item" @click="sortDetails">
+						    {{item}}
+					    </view>
+					    <view class="sort-item-line">|</view>
 					</view>
 				</scroll-view>
+			</view>
+			<view class="sort-rank">
+				<view class="sort-rank-img-box" @click="hides()">
+				    <image class="sort-rank-img" src="/static/icon/icon-rank.png"></image>
+				</view>
+				<view class="sort-rank-item" :class="hide">
+					<image class="sort-rank-item-bg" mode="widthFix" src="/static/icon/sort-rank-bg.png"></image>
+					<view class="sort-rank-item-box">
+						<view class="sort-rank-list-item" v-for="(item, index) in rankData" :key="index">{{item.title}}</view>
+					</view>
+				</view>
 			</view>
 		</view>
 		<view class="guess-section">
@@ -61,6 +75,24 @@
 		data() {
 			return {
 				sortList: ["推荐", "食品", "美妆", "母婴", "女装", "男装"],
+				rankData: [
+					{
+						id: "update",
+						title: "上新排序",
+					},
+					{
+						id: "brokerage",
+						title: "佣金排序"
+					},
+					{
+						id: "priceUp",
+						title: "价格升序"
+					},
+					{
+						id: "priceDown",
+						title: "价格降序"
+					}
+				],
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
@@ -69,7 +101,8 @@
 				background: {
 				    background: 'url(/static/img/bg-01.png)',
 				},
-				navigateFlag: false
+				navigateFlag: false,
+				hide: null,
 			};
 		},
 
@@ -120,6 +153,16 @@
 				if(checkToken){
 					this.$refs.popup.open()
 				}
+			},
+			hides(){
+				if(this.hide == "show"){
+					this.hide = "null"
+					console.log(1, this.hide)
+				}else {
+					this.hide = "show"
+					console.log(2, this.hide)
+				}
+				console.log(this.hide)
 			}
 		},
 	}
@@ -216,23 +259,81 @@
 	.sort-section {
 		margin-top: 40rpx;
 		width: 100%;
+		display: flex;
+		align-items: center;
+		background: rgba(255, 255, 255, 1);
 		.sort-items {
-			width: 100%;
 			height: 90rpx;
-			background: rgba(255, 255, 255, 1);
+			flex-grow: 1;
+			display: inline-block;
 			.typetitleTab {
-				width: 680rpx;
+				width: 670rpx;
+				padding: 0 10rpx 0 50rpx;
 				white-space: nowrap;
 				margin: 0 auto;
 				text-align: center;
-				.sort-item {
+				.sort-item-box {
 					display: inline-block;
-					width: 124rpx;
-					height: 90rpx;
-					line-height: 90rpx;
-					text-align: center;
-					font-size: 16px;
+					.sort-item {
+						display: inline-block;
+						width: 120rpx;
+						height: 90rpx;
+						line-height: 90rpx;
+						text-align: center;
+						font-size: 16px;
+					}
+					.sort-item-line {
+						display: inline-block;
+						color: rgba(229,229,229,1);
+						font-size: 14px;
+					}
 				}
+				.sort-item-box:last-child .sort-item-line {
+					display: none;
+				}
+				
+			}
+		}
+		.sort-rank {
+			display: inline-block;
+			position: relative;
+			.sort-rank-img-box {
+				width: 80rpx;
+				padding: 0 30rpx 0 0;
+				text-align: center;
+				.sort-rank-img {
+					width: 19rpx;
+					height: 28rpx;
+				}
+			}
+			.sort-rank-item {
+				position: absolute;
+				width: 240rpx;
+				height: 350rpx;
+				display: none;
+				right: -5rpx;
+				top: 25rpx;
+				.sort-rank-item-bg {
+					width: 240rpx;
+					position: absolute !important;
+				}
+				.sort-rank-item-box {
+					position: relative;
+					z-index: 10;
+					width: 120rpx;
+					margin: 80rpx auto 0;
+					.sort-rank-list-item {
+						width: 104rpx;
+						text-align: center;
+						font-size: 12px;
+						color:rgba(51,51,51,1);
+						padding: 0rpx 0 9rpx 0;
+						margin: 18rpx 0 0 0;
+					}
+				}
+			}
+			.show {
+				display: inline-block;
 			}
 		}
 	}

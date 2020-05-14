@@ -7,7 +7,7 @@ const store = new Vuex.Store({
 	state: {
 		tokenDue: true,
 		hasLogin: false,
-		userInfo: {},
+		userInfo: {}
 	},
 	mutations: {
 		tokenDue(state){

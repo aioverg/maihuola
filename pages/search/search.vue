@@ -11,16 +11,16 @@
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
-				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo('/pages/search/searchResult?id=' + inputValue)" />
+				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo(inputValue)" />
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="history-box">
 			<view class="history">搜索历史</view>
-			<image class="delete-icon" src="/static/icon/ai-delete.png"></image>
+			<image class="delete-icon" src="/static/icon/ai-delete.png" @click="delHistory"></image>
 		</view>
 		<view class="history-label-box">
-			<view class="history-label" v-for="(value, index) in history" :key="index">{{value}}</view>
+			<view class="history-label" v-for="(value, index) in history" :key="index" @click="navTo('/pages/search/searchResult?id=' + value)">{{value}}</view>
 		</view>
 	</view>
 </template>
@@ -32,16 +32,42 @@
 		data() {
 			return {
 				inputValue: null,
-				history: ["小饼干小饼干", "方便面", "大辣条", "牛肉酱", "牛肉酱"]
+				history: []
 			}
+		},
+		onLoad(){
+			const _this = this
+			//获取历史搜索的本地缓存
+			uni.getStorage({
+				key: "searchHistory",
+				success: function(res){
+					_this.history = res.data
+				}
+			})
 		},
 		methods: {
 			navTo(obj){
-				this.$global.navTo(obj)
-				console.log(777,this.inputValue)
+				this.inputValue = obj.replace(/(^\s*)|(\s*$)/g, "")
+				if(this.inputValue.length == 0){return}
+				this.history.push(this.inputValue)
+				//将搜索缓存入本地
+				uni.setStorage({
+				    key: 'searchHistory',
+				    data: this.history,
+				})
+				this.$global.navTo('/pages/search/searchResult?id=' + this.inputValue)
 			},
 			navTabBar(obj){
 				this.$global.navTabBar(obj)
+			},
+			delHistory(){
+				const _this = this
+				uni.removeStorage({
+				    key: 'searchHistory',
+					success: function(){
+						_this.history = []
+					}
+				})
 			}
 		}
 	}
