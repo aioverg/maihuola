@@ -62,16 +62,18 @@
 			</view>
 			
 			<!--退出账号-->
-			<view class="logout list-box" @click="logino()">
+			<view class="logout list-box">
 				<ai-list-cell title="退出账号"></ai-list-cell>
-				<ai-list-cell title="初始化"></ai-list-cell>
+				<button @click="init" class="btu">初始化</button>
+				<button @click="logins" class="btu">淘宝授权登录</button>
+				<button @click="getuserinfo" class="btu">获取用户授权信息</button>
 			</view>
 		</view>
     </view>  
 </template>  
 <script>
 	import aiListCell from '@/components/ai-list-cell'
-	const plug= uni.requireNativePlugin('UZK-Alibcsdk');
+	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
     import {  
         mapState 
     } from 'vuex';  
@@ -127,16 +129,50 @@
 				this.$api.login({
 				})
 			},
-			logino(){
-				plug.init(result=>{
-				console.log(result)
-				    });
-			},
-			init(){
-				plug.login(result=>{
-					console.log(result)
-				    });  
-			}
+			logins() { //授权登录
+							Alibcsdk.login(
+								result => {
+									if(result.status){
+										uni.showToast({
+											title: "授权登陆成功"
+										});
+									}
+									console.log(JSON.stringify(result))
+								}
+							)
+						},
+			init() {
+							Alibcsdk.init(
+								result => {
+									if(result.status){
+										uni.showToast({
+											title: "初始化成功"
+										});
+									}else{
+										uni.showToast({
+											title: "初始化失败"
+										});
+									}
+									console.log(JSON.stringify(result))
+								}
+							)
+						},
+						getuserinfo(){
+										Alibcsdk.getuserinfo(
+										result => {
+											if(result.status){
+												uni.showToast({
+													title: "获取数据成功"
+												});
+											}else{
+												uni.showToast({
+													title: "未登陆"
+												});
+											}
+											console.log(JSON.stringify(result))
+										}
+										)								
+									}
         }  
     }  
 </script>  
