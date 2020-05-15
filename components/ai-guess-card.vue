@@ -1,5 +1,6 @@
 <template>
 	<view class="ai-guess-card">
+		<image class="zhutui" v-if="recommend" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
 		<view class="ai-guess-image-box">
 			<image class="ai-guess-image" :src="data.image" mode="aspectFill"></image>
 		</view>
@@ -27,7 +28,7 @@
 		},
 		props: {
 			data: Object,
-			default: {}
+			recommend: null
 		}
 	}
 </script>
@@ -39,6 +40,12 @@
 		background:rgba(255,255,255,1);
 		border-radius:16px;
 		display: flex;
+		position: relative;
+		.zhutui {
+			position: absolute;
+			z-index: 10;
+			width: 90rpx;
+		}
 		.ai-guess-image-box {
 			width: 240rpx;
 			height: 240rpx;

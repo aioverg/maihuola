@@ -3,10 +3,9 @@
 		<view class="title">{{title}}</view>
 		<view v-if="content" class="content">{{content}}</view>
 		<view>
-			<input class="input" :placeholder="placeholder"/>
+			<input v-if="placeholder" class="input" :placeholder="placeholder"/>
 		</view>
-		<view class="bt" v-if="btname">{{btname}}</view>
-		<view class="time-title" v-if="tiemTitle">{{time}}{{tiemTitle}}</view>
+		<view class="bt" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
 	</view>
 </template>
 
@@ -14,7 +13,10 @@
 	export default {
 		data() {
 			return {
-				
+				btName: "获取验证码",
+				await: "重新发送",
+				times: null,
+				timeRun: false
 			};
 		},
 		props: {
@@ -30,7 +32,7 @@
 				type: String,
 				default: null
 			},
-			btname: {
+			bt: {
 				type: String,
 				default: null
 			},
@@ -42,8 +44,26 @@
 				type: String,
 				default: null
 			},
-			
-			
+		},
+		methods: {
+			aiCode(){
+				if(this.timeRun){return}
+				this.$emit('postCode');
+				this.timeRun = true
+				this.times = 5
+				this.btName = "s重新发送"
+				let timer = setInterval(()=>{
+					if(this.times == 1){
+						clearInterval(timer)
+						this.timeRun = false
+						this.times = null
+						this.btName = "获取验证码"
+						return
+					}
+					this.times -= 1
+				},1000)
+				
+			}
 		}
 	}
 </script>
@@ -75,10 +95,6 @@
 			font-size:14px;
 			color:rgba(244,122,115,1);
 			text-decoration: underline;
-		}
-		.time-title {
-			font-size:14px;
-			color:rgba(153,153,153,1);
 		}
 		
 	}

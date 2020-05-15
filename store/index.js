@@ -5,22 +5,21 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		tokenDue: true,
+		usertoken: null,
 		hasLogin: false,
-		userInfo: {}
+		userInfo: {
+			taobao: false
+		},
 	},
 	mutations: {
-		tokenDue(state){
-			state.tokenDue = false
-		},
 		login(state, provider) {
-			state.hasLogin = false;
-			/*state.userInfo = provider;
+			state.hasLogin = provider;
+			/*state.userInfo = provider
 			uni.setStorage({//缓存用户登陆状态
 			    key: 'userInfo',  
 			    data: provider  
 			})*/
-			console.log(state.userInfo);
+			console.log(state);
 		},
 		logout(state) {
 			state.hasLogin = false;

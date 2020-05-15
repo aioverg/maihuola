@@ -12,7 +12,7 @@
 			<ai-input title="真实姓名" content="17823456789" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="支付宝账户" placeholder="请输入验证码"></ai-input>
+			<ai-input title="支付宝账户" placeholder="请输入支付宝账户"></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="navAlertPhone"></ai-button>

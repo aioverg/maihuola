@@ -10,10 +10,10 @@
 		/>
 		<hint-box content="请填写新的手机号并验证完成绑定"></hint-box>
 		<view class="phone-num">
-			<ai-input title="手机号码" content="17823456789" ></ai-input>
+			<ai-input title="手机号码" placeholder="请输入新手机号码" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="验证码" placeholder="请输入验证码" tiemTitle="重新发送" time="60s"></ai-input>
+			<ai-input title="验证码" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="navAlertPhone"></ai-button>

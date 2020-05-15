@@ -46,19 +46,24 @@
 				<view class="sort-rank-item" :class="hide">
 					<image class="sort-rank-item-bg" mode="widthFix" src="/static/icon/sort-rank-bg.png"></image>
 					<view class="sort-rank-item-box">
-						<view class="sort-rank-list-item" v-for="(item, index) in rankData" :key="index">{{item.title}}</view>
+						<view class="sort-rank-list-item" :class="rankId==index?'blue':''" v-for="(item, index) in rankData" @click="selectRank(index)" :key="index">{{item.title}}</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
-				 <ai-gusee-card :data="item"></ai-gusee-card>
+				<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
 			</view>
 		</view>
+		<!--登录过期提示，需要时再加
 		<uni-popup ref="popup" type="dialog">
 		    <uni-popup-dialog type="input" title="登录过期" content="请重新登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
+		-->
+		<view class="login-box" v-if="loginBox">
+			<ai-login></ai-login>
+		</view>
 	</view>
 </template>
 
@@ -66,11 +71,13 @@
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	import aiLogin from '@/components/ai-login.vue'
 	export default {
 		components: {
 			aiGuseeCard,
 			uniPopUp,
-			uniPopupDialog
+			uniPopupDialog,
+			aiLogin
 		},
 		data() {
 			return {
@@ -93,37 +100,33 @@
 						title: "价格降序"
 					}
 				],
+				rankId: 0,
 				titleNViewBackground: '',
 				swiperCurrent: 0,
 				swiperLength: 0,
 				carouselList: [],
 				goodsList: [],
-				background: {
-				    background: 'url(/static/img/bg-01.png)',
-				},
-				navigateFlag: false,
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
+				blue: null,
+				loginBox: false
 			};
 		},
 
 		onLoad() {
 			this.loadData();
+			
 		},
 		onReady(){
-			this.reLogin()
+		},
+		onShow(){
+			this.login()
 		},
 		methods: {
 			/**
 			 * 请求静态数据只是为了代码不那么乱
 			 * 分次请求未作整合
 			 */
-			close(done){
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
-			    done() 
-			},
-			confirm(done,value){
-			    this.$global.navTo('/pages/login/login')
-			},
 			//推荐栏请求，用于模拟数据，可以删除
 			async loadData() {
 				let carouselList = await this.$deleteApi.json('carouselList');
@@ -144,26 +147,44 @@
 			navTo(url) {
 				this.$global.navTo(url)
 			},
-			
-			//进入页面检查token，token过期弹出重新登录
-			async reLogin() {
-					//let userInfo = uni.getStorageSync('userInfo') || '';
-				let userToken = uni.getStorageSync('token')
-				let checkToken = await this.$api.checkToken(userToken)
-				if(checkToken){
-					this.$refs.popup.open()
-				}
-			},
 			hides(){
 				if(this.hide == "show"){
 					this.hide = "null"
-					console.log(1, this.hide)
 				}else {
 					this.hide = "show"
-					console.log(2, this.hide)
 				}
-				console.log(this.hide)
+			},
+			selectRank(index) {
+			    this.rankId = index;
+			},
+			login(){
+				if(!this.$store.state.hasLogin){
+					this.loginBox = true
+				}
 			}
+			/*登录过期提示框的选择函数，需要时再加
+			async reLogin() { //进入页面检查token，token过期弹出重新登录
+				//let userInfo = uni.getStorageSync('userInfo') || '';
+				//this.$store.commit()
+				if(!this.$store.state.usertoken){
+					this.loginBox = true
+					return
+				}
+			},
+			confirm(done,value){
+			    this.$global.navTo('/pages/login/login')
+			},
+			close(done){
+			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+			    uni.removeStorage({
+					key: 'token',
+					success: function () {
+					    this.loginBox = true
+					}
+				})
+			    done() 
+			},
+			*/
 		},
 	}
 </script>
@@ -172,6 +193,16 @@
 	page {
 		background: rgba(249, 249, 249, 1);
 	}
+	.login-box {
+		width: 750rpx;
+		position: fixed;
+		bottom: 100rpx;
+	}
+	/* #ifdef APP-PLUS */
+	.login-box {
+		bottom: 0;
+	}
+	/* #endif */
 	.head{
 		height: 430rpx;
 		padding: 20px 0 0 0;
@@ -329,6 +360,9 @@
 						color:rgba(51,51,51,1);
 						padding: 0rpx 0 9rpx 0;
 						margin: 18rpx 0 0 0;
+					}
+					.blue {
+						color:rgba(244,122,115,1);
 					}
 				}
 			}

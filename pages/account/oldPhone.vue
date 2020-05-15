@@ -13,7 +13,7 @@
 			<ai-input title="手机号码" content="178****6789" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="验证码" placeholder="请输入验证码" btname="获取验证码"></ai-input>
+			<ai-input title="验证码" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="下一步" @eventClick="navAlertPhone"></ai-button>
@@ -44,6 +44,9 @@
 				uni.navigateTo({
 					url: '/pages/account/alertPhone'
 				})
+			},
+			postCode(){
+				console.log("发送获取验证码地址")
 			}
 		}
 	}

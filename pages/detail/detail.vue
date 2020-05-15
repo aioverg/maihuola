@@ -58,7 +58,8 @@
 		</view>
 		<uni-popup ref="popup" type="dialog">
 		    <uni-popup-dialog v-if="hasLogin" type="input" title="没有登录" content="现在去登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
-			<uni-popup-dialog type="input" title="需要淘宝授权" content="是否授权" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+			<uni-popup-dialog v-if="taobao" type="input" title="需要淘宝授权" content="是否授权" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
 		</uni-popup>
 	</view>
 </template>
@@ -67,17 +68,34 @@
 	import aiButton from '@/components/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
 	//详情页
 	export default {
 		components: {
 			aiButton,
 			uniPopUp,
-			uniPopupDialog
+			uniPopupDialog,
+			uniPopupMessage
+		},
+		data(){
+			return {
+				TKLBox: true,
+				TKLMessage: null
+			}
 		},
 		computed: {
 			hasLogin(){
-				return this.$store.hasLogin
+				return this.$store.state.hasLogin
+			},
+			taobao(){
+				if(!this.$store.state.hasLogin){
+					return false
+				}
+				if(!this.$store.state.userInfo.taobao){
+					return false
+				}
 			}
+			
 		},
 		methods: {
 			navTo(url) {
@@ -87,6 +105,9 @@
 			},
 			copyTKL(){
 				this.$refs.popup.open()
+				if(this.$store.state.hasLogin && this.$store.state.userInfo.taobao){
+					console.log("发起获取淘口令请求")
+				}
 			},
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框

@@ -20,6 +20,7 @@
 		<view class="note">
 			<ai-login-hint></ai-login-hint>
 		</view>
+		
 	</view>
 </template>
 

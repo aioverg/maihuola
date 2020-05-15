@@ -36,14 +36,13 @@ api.login = function(data){//登录
 	})
 }
 api.checkToken = function(token){//检验token是否过期
-    if(!token){return}
 	return request(obj.login, token).then(res => {
 		if(res.statusCode == 200){
-			console.log("过期，重新登录")//设置弹出弹出框
-			return "true"
+			console.log("过期，重新登录111")//设置弹出弹出框
+			return true
 		}else{
 			console.log("没有过期")
-			return "false"
+			return false
 		}
 	})
 }

@@ -10,23 +10,20 @@
 			...mapMutations(['login'])
 		},
 		onLaunch: function() {
-			let userInfo = uni.getStorageSync('userInfo') || '';
+			let userInfo = uni.getStorageSync('userInfo');
 			let userToken = uni.getStorageSync('token')
-			//let checkToken = await this.$api.checkToken(userToken)
-
-			/*if(checkToken){
-				this.$store.commit('tokenDue')
-				console.log("false",this.$store.state.tokenDue)
-			}*/
-			/*if(userInfo.id){
-				//更新登陆状态
-				uni.getStorage({
-					key: 'userInfo',
-					success: (res) => {
-						this.login(res.data);
-					}
-				});
-			}*/
+			if(userToken.length == 0){
+				return
+			}
+			if(this.$api.checkToken(userToken)){
+				
+			}else{
+				this.$store.commit("login", {
+					usertoken: userToken,
+					userInfo: userInfo,
+					hasLogin: true
+				})
+			}
 		},
 		onShow: function() {
 			console.log('App Show')
