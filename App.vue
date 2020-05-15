@@ -15,7 +15,7 @@
 			if(userToken.length == 0){
 				return
 			}
-			if(this.$api.checkToken(userToken)){
+			if(false/*this.$api.checkToken(userToken)*/){
 				
 			}else{
 				this.$store.commit("login", {

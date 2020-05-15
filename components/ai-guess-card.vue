@@ -2,18 +2,18 @@
 	<view class="ai-guess-card">
 		<image class="zhutui" v-if="recommend" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
 		<view class="ai-guess-image-box">
-			<image class="ai-guess-image" :src="data.image" mode="aspectFill"></image>
+			<image class="ai-guess-image" :src="data.pic" mode="aspectFill"></image>
 		</view>
 		<view class="ai-guess-info-fox">
 			<view class="ai-guess-info">{{data.title}}</view>
 			<view class="ai-guess-price-box">
 				<view class="price">
-					<view class="zb-price">￥直播价：{{data.zbprice}}</view>
-					<view class="sc-price">￥市场价：{{data.scprice}}</view>
+					<view class="zb-price">￥直播价：{{data.price}}</view>
+					<view class="sc-price">￥市场价：{{data.promotion_price}}</view>
 				</view>
 				<view class="rate">
-					<view class="ck-earn">参考收益：{{data.earnings}}</view>
-					<view class="yj-rate">佣金比例：{{data.ratio}}</view>
+					<view class="ck-earn">参考收益：{{data.commission}}</view>
+					<view class="yj-rate">佣金比例：{{data.commission_rate}}%</view>
 				</view>
 			</view>
 		</view>

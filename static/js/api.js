@@ -10,8 +10,8 @@ const obj = {
 	}
 }
 
-const request = function(obj, data){
-	const baseUrl = "https://api-hmugo-web.itheima.net"
+const request = function(obj){
+	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"
 	return new Promise((resolve, reject) => {
 		uni.request({
 			...obj,
@@ -46,6 +46,23 @@ api.checkToken = function(token){//检验token是否过期
 		}
 	})
 }
+
+//获取首页商品分类
+api.getGuessSort = () => { 
+	return request({
+	    url: "/api/v1.itemcategory/treelist",
+	    method: "GET",
+	})
+}
+
+//获取商品分类数据
+api.getGuess = () => { 
+	return request({
+	    url: "/api/v1.item/searchlist",
+	    method: "GET",
+	})
+}
+
 api.getTkl = function(data){//获取淘口令
 	request(obj.getTkl, data).then(res => {
 		console.log(9999,res)

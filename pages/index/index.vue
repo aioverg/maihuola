@@ -33,7 +33,7 @@
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index">
 					    <view class="sort-item" @click="sortDetails">
-						    {{item}}
+						    {{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
 					</view>
@@ -101,46 +101,52 @@
 					}
 				],
 				rankId: 0,
-				titleNViewBackground: '',
-				swiperCurrent: 0,
-				swiperLength: 0,
 				carouselList: [],
 				goodsList: [],
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
 				blue: null,
 				loginBox: false
+				
+				
 			};
 		},
 
 		onLoad() {
-			this.loadData();
+			this.getCarousel()
+			this.getGuessSort()
+			this.getGuess()
 			
 		},
 		onReady(){
+			
 		},
 		onShow(){
 			this.login()
 		},
+		onReachBottom(){
+			this.getGuess()
+		},
 		methods: {
-			/**
-			 * 请求静态数据只是为了代码不那么乱
-			 * 分次请求未作整合
-			 */
-			//推荐栏请求，用于模拟数据，可以删除
-			async loadData() {
-				let carouselList = await this.$deleteApi.json('carouselList');
-				this.titleNViewBackground = carouselList[0].background;
-				this.swiperLength = carouselList.length;
-				this.carouselList = carouselList;
-				let goodsList = await this.$deleteApi.json('goodsListOne');
-				this.goodsList = goodsList || [];
+			//获取商品分类列表
+			getGuessSort(){
+				this.$api.getGuessSort().then( res =>
+				    this.sortList = res.data.data
+				)
 			},
-			
-			//其他栏请求，用于模拟数据，可以删除
-			async sortDetails() {
-				this.goodsList = await this.$deleteApi.json('goodsListTwo');
-				console.log(this.goodsList)
+			//获取商品
+			getGuess(){
+				this.$api.getGuess().then( res => {
+					for(let i of res.data.data.data){
+						this.goodsList.push(i)
+					}
+				})
+			},
+			//获取轮播图数据
+			getCarousel() {
+				this.$deleteApi.json('carouselList').then(
+				    res=> this.carouselList = res
+				)
 			},
 			
 			//跳转
@@ -197,6 +203,7 @@
 		width: 750rpx;
 		position: fixed;
 		bottom: 100rpx;
+		z-index: 30;
 	}
 	/* #ifdef APP-PLUS */
 	.login-box {

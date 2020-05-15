@@ -61,6 +61,9 @@
 	.phone-num {
 		margin: 30rpx 0;
 	}
+	.code-num {
+		width: 750rpx;
+	}
 	.bt {
 		position: relative;
 		top: 734rpx;
