@@ -9,13 +9,13 @@
 			leftArrow="true"
 		/>
 		<view class="phone-num">
-			<ai-input title="真实姓名" content="17823456789" ></ai-input>
+			<ai-input title="真实姓名" placeholder="请输入真实姓名" @getInput="getUserName" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="支付宝账户" placeholder="请输入支付宝账户"></ai-input>
+			<ai-input title="支付宝账户" placeholder="请输入支付宝账户" @getInput="getAlipayAccount"></ai-input>
 		</view>
 		<view class="bt">
-		    <ai-button btname="确定" @eventClick="navAlertPhone"></ai-button>
+		    <ai-button btname="确定" @eventClick="alertAlipay"></ai-button>
 		</view>
 	</view>
 </template>
@@ -34,7 +34,30 @@
 			}
 		},
 		methods: {
-			
+			getAlipayAccount(value){
+				this.alipayAccount = value.replace(/\s*/g,"")
+				console.log("支付宝账户：",this.alipayAccount)
+			},
+			getUserName(value){
+				this.userName = value.replace(/\s*/g,"")
+				console.log("真是姓名：",this.userName)
+			},
+			alertAlipay(){
+				//发送给数据库的接口
+				if(this.alipayAccount.length == 0){
+					uni.showToast({
+						title: "请输入正确的支付宝账户",
+					});
+					return
+				}
+				if(this.userName.length == 0){
+					uni.showToast({
+						title: "请输入正确的用户名",
+					});
+					return
+				}
+				console.log("接收：",this.alipayAccount,this.userName)
+			}
 		}
 	}
 </script>

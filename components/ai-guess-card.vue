@@ -2,7 +2,7 @@
 	<view class="ai-guess-card">
 		<image class="zhutui" v-if="recommend" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
 		<view class="ai-guess-image-box">
-			<image class="ai-guess-image" :src="data.pic" mode="aspectFill"></image>
+			<image class="ai-guess-image" mode="widthFix" :src="data.pic"></image>
 		</view>
 		<view class="ai-guess-info-fox">
 			<view class="ai-guess-info">{{data.title}}</view>
@@ -47,21 +47,21 @@
 			width: 90rpx;
 		}
 		.ai-guess-image-box {
-			width: 240rpx;
-			height: 240rpx;
+			width: 220rpx;
+			height: 220rpx;
 			margin: 20rpx;
 			.ai-guess-image {
-				width: 240rpx;
-				height: 240rpx;
+				width: 220rpx;
+
 				border-radius: 16rpx;
 			}
 		}
 		.ai-guess-info-fox {
-			width: 378rpx;
-			height: 260rpx;
-			margin: 20rpx 32rpx 40rpx 0;
+			width: 430rpx;
+			height: 220rpx;
+			margin: 20rpx 0;
+			padding: 0 20rpx 0 0;
 			.ai-guess-info {
-				width: 378rpx;
 				height: 120rpx;
 				overflow: hidden;
 				font-size: 15px;

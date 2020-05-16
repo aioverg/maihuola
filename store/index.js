@@ -8,7 +8,12 @@ const store = new Vuex.Store({
 		usertoken: null,
 		hasLogin: false,
 		userInfo: {
-			taobao: false
+			tel: null,
+			taobao: null,
+			weixin: null,
+			alipay: null,
+			WXAvatarUrl: null,
+			userUrl: null
 		},
 	},
 	mutations: {
@@ -25,8 +30,17 @@ const store = new Vuex.Store({
 			state.hasLogin = false;
 			state.userInfo = {};
 			uni.removeStorage({  
-                key: 'userInfo'  
+                key: 'userInfo'
             })
+		},
+		setWXAvatarUrl(state, url){
+			state.WXAvatarUrl = url
+		},
+		setWeiXin(state, openId){
+			state.userInfo.weixin = openId
+		},
+		setTaoBao(state, userId){
+			state.userInfo.taobao = userId
 		}
 	},
 	actions: {

@@ -32,7 +32,7 @@
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index">
-					    <view class="sort-item" @click="sortDetails">
+					    <view class="sort-item">
 						    {{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
