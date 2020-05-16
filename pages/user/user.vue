@@ -13,7 +13,7 @@
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.portrait || '/static/img/ai-default-user-icon.png'"></image>
 				</view>
-				<view class="info-box" @click="login()">
+				<view class="info-box" @click="navTo('/pages/login/login')">
 					<text class="username">{{userInfo.nickname || '点击登录'}}</text>
 				</view>
 			</view>
@@ -24,7 +24,7 @@
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
 						<text class="num">0000000000000000.00</text>
-						<view class="cash" @click="navTo('/pages/withdrawDeposit/withdrawDeposit')">
+						<view class="cash" @click="navTo('/pages/withdraw/withdraw')">
 							提现
 						</view>
 					</view>
@@ -90,16 +90,9 @@
 			 * navigator标签现在默认没有转场动画，所以用view
 			 */
 			navTo(url){
-				/*if(!this.hasLogin){
-					url = '/pages/public/login';
-				}*/
 				uni.navigateTo({  
 					url
 				})  
-			},
-			login(){
-				this.$api.login({
-				})
 			}
         }  
     }  

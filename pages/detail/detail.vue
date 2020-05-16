@@ -56,9 +56,13 @@
 		<view class="tkl-bt" @click="copyTKL">
 			<ai-button btname="复制淘口令" ></ai-button>
 		</view>
-		<uni-popup ref="popup" type="dialog">
-		    <uni-popup-dialog v-if="hasLogin" type="input" title="没有登录" content="现在去登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
-			<uni-popup-dialog v-if="taobao" type="input" title="需要淘宝授权" content="是否授权" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		<uni-popup ref="popupDialog" type="dialog">
+		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="popupAiDialog" type="dialog">
+		    <ai-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="popupMessage">
 			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
 		</uni-popup>
 	</view>
@@ -69,18 +73,24 @@
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
+	import aiPopupDialog from '@/components/uni-popup/ai-popup-dialog.vue'
 	//详情页
 	export default {
 		components: {
 			aiButton,
 			uniPopUp,
 			uniPopupDialog,
-			uniPopupMessage
+			uniPopupMessage,
+			aiPopupDialog
 		},
 		data(){
 			return {
 				TKLBox: true,
-				TKLMessage: null
+				TKLMessage: null,
+				popupDialogTitle: null,
+				popupDialogContent: null,
+				popupMessages: null,
+				confirmValue: null
 			}
 		},
 		computed: {
@@ -88,12 +98,7 @@
 				return this.$store.state.hasLogin
 			},
 			taobao(){
-				if(!this.$store.state.hasLogin){
-					return false
-				}
-				if(!this.$store.state.userInfo.taobao){
-					return false
-				}
+				return this.$store.state.userInfo.taobao
 			}
 			
 		},
@@ -104,18 +109,44 @@
 				})
 			},
 			copyTKL(){
-				this.$refs.popup.open()
+				if(!this.hasLogin){
+					console.log("loginm")
+					this.popupDialogTitle = "没有登录"
+					this.popupDialogContent = "现在去登录"
+					this.confirmValue = "login"
+					this.$refs.popupAiDialog.open()
+					return
+				}
+				if(!this.taobao){
+					console.log("taobao")
+					this.popupDialogTitle = "需要淘宝授权"
+					this.popupDialogContent = "是否授权"
+					this.confirmValue = "taobao"
+					this.$refs.popupDialog.open()
+					return
+				}
+				
+				/*this.$refs.popup.open()
 				if(this.$store.state.hasLogin && this.$store.state.userInfo.taobao){
 					console.log("发起获取淘口令请求")
-				}
+				}*/
 			},
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
 			    done()
 				
 			},
-			confirm(done,value){
-			    this.$global.navTo('/pages/login/login')
+			confirm(done){
+				if(this.confirmValue == "login"){
+					this.$global.navTo('/pages/login/login')
+					done()
+					return
+				}
+				if(this.confirmValue == "taobao"){
+					this.$global.navTo('/pages/account/taobao')
+					done()
+					return
+				}
 			}
 		}
 	}

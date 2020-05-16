@@ -29,7 +29,7 @@
 			</view>
 		</view>
 		<view class="huo">或</view>
-		<view class="wx-box">
+		<view class="wx-box" @click="navTo('/pages/login/login')">
 			<image class="wx-icon" mode="widthFix" src="/static/img/img-wx.png"></image>
 			<view class="wx-bt">微信登录</view>
 		</view>
@@ -53,7 +53,9 @@
 			}
 		},
 		methods: {
-			
+			navTo(obj){
+				this.$global.navTo(obj)
+			},
 		}
 	}
 </script>

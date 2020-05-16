@@ -79,7 +79,7 @@
 			}
         }
         ,{
-            "path" : "pages/withdrawDeposit/withdrawDeposit",
+            "path" : "pages/withdraw/withdraw",
             "style" : {
 				"navigationBarTitleText": "提现"
 			}
@@ -139,6 +139,10 @@
             "style" : {}
         }
 
+        ,{
+            "path" : "pages/withdraw/record",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

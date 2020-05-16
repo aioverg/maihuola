@@ -12,24 +12,24 @@
 		<view class="tx-box">
 			<view class="tx-account">
 				<text class="title">到账支付宝</text>
-				<text class="name">张**</text>
-				<text class="phone">17823456789</text>
+				<text class="name">{{name}}</text>
+				<text class="phone">{{tel}}</text>
 			</view>
 			<view class="tx-input">
 				<view class="title">提现金额</view>
 				<view class="input-box">
 					<text class="icon">¥</text>
-					<input placeholder="请输入提现金额" class="input" />
+					<input placeholder="请输入提现金额" v-model="sum" class="input" />
 					<text class="note">（不小于1元）</text>
 				</view>
-				<view class="tx-upper">可提现金额¥560.92</view>
-				<view class="tx-upperbt">全部提现</view>
+				<view class="tx-upper">可提现金额¥{{total}}</view>
+				<view class="tx-upperbt" @click="allWithdraw">全部提现</view>
 			</view>
 		</view>
-		<view class="tx-history">
+		<view class="tx-history" @click="navTo('/pages/withdraw/record')">
 			提现记录
 		</view>
-		<view class="tx-bt">
+		<view class="tx-bt" @click="withdraw">
 			提交
 		</view>
 	</view>
@@ -43,11 +43,23 @@
 		},
 		data() {
 			return {
+				name: "张**",
+				tel: "17823456789",
+				sum: null,
+				total: "560.92"
 				
 			}
 		},
 		methods: {
-			
+			allWithdraw(){
+				this.sum = this.total
+			},
+			withdraw(){
+				console.log(666666666)
+			},
+			navTo(obj){
+				this.$global.navTo(obj)
+			}
 		}
 	}
 </script>

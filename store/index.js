@@ -9,7 +9,7 @@ const store = new Vuex.Store({
 		hasLogin: false,
 		userInfo: {
 			tel: null,
-			taobao: null,
+			taobao: false,
 			weixin: null,
 			alipay: null,
 			WXAvatarUrl: null,
