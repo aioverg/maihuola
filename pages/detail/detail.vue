@@ -9,29 +9,32 @@
 			leftArrow="true"
 		/>
 		<view class="guess-img-box">
-			<image mode="heightFix" class="guess-img" src="/static/temp/guess04.jpg"></image>
+			<image mode="heightFix" class="guess-img" :src="guessDetailData.pic"></image>
 		</view>
-		<view class="guess-title">液体坚果 荷乐士喝的每日坚果孕妇儿童零食礼盒混合干果仁饮料</view>
+		<view class="guess-title">{{guessDetailData.title}}</view>
 		<view class="guess-price-info">
 			<view class="guess-price-info-one">
 				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/ai-zbprice.png"></image>
 				<view class="guess-zbprice">
 					<text>¥</text>
-					<text>39.9</text>
+					<text>{{guessDetailData.promotion_price}}</text>
 				</view>
 				<view class="guess-ckprice">
 					<text>参考收益：</text>
-					<text>¥7.98</text>
+					<text>¥</text>
+					<text>{{guessDetailData.commission}}</text>
 				</view>
 			</view>
 			<view class="guess-price-info-two">
 				<view class="guess-scprice">
-					<text>市场价：¥</text>
-					<text>0000000.00</text>
+					<text>市场价：</text>
+					<text>¥</text>
+					<text>{{guessDetailData.price}}</text>
 				</view>
 				<view class="guess-rate">
 					<text>佣金比例：</text>
-					<text>20%</text>
+					<text>{{guessDetailData.commission_rate}}</text>
+					<text>%</text>
 				</view>
 			</view>
 		</view>
@@ -42,7 +45,7 @@
 			</view>
 			<view class="guess-nh-content">
 				<view>
-					1.好喝到直言再来一瓶，直播间立减20元！
+					{{guessDetailData.sell_point}}
 				</view>
 			</view>
 		</view>
@@ -85,6 +88,7 @@
 		},
 		data(){
 			return {
+				guessDetailData: null,
 				TKLBox: true,
 				TKLMessage: null,
 				popupDialogTitle: null,
@@ -102,6 +106,13 @@
 			}
 			
 		},
+		onLoad: function(obj){
+			console.log(obj.goods_id)
+			this.$api.getGuessDetail(obj.goods_id).then( res => {
+				this.guessDetailData = res.data.data
+				console.log("商品详情",this.guessDetailData)
+			})
+		},
 		methods: {
 			navTo(url) {
 				uni.navigateTo({
@@ -114,7 +125,7 @@
 					this.popupDialogTitle = "没有登录"
 					this.popupDialogContent = "现在去登录"
 					this.confirmValue = "login"
-					this.$refs.popupAiDialog.open()
+					this.$refs.popupDialog.open()
 					return
 				}
 				if(!this.taobao){
@@ -122,7 +133,7 @@
 					this.popupDialogTitle = "需要淘宝授权"
 					this.popupDialogContent = "是否授权"
 					this.confirmValue = "taobao"
-					this.$refs.popupDialog.open()
+					this.$refs.popupAiDialog.open()
 					return
 				}
 				

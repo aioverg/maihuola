@@ -52,7 +52,7 @@
 			</view>
 		</view>
 		<view class="guess-section">
-			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
+			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
 				<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
 			</view>
 		</view>

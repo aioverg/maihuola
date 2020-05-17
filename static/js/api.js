@@ -19,6 +19,7 @@ const request = function(obj){
 			method: obj.method,
 			header: {token: "none"}, //用户token
 			success: (res) => {
+				console.log(res)
 				resolve(res)
 			},
 			fail: (res) => {
@@ -62,11 +63,22 @@ api.getGuess = () => {
 	    method: "GET",
 	})
 }
-
-api.getTkl = function(data){//获取淘口令
+//获取商品详情
+api.getGuessDetail = (goods_id) => {
+	return request({
+		url: "/api/v1.item/goodsinfo",
+		method: "GET",
+		data: {
+			goods_id: goods_id
+		}
+	})
+}
+//获取淘口令
+api.getTkl = function(data){
 	request(obj.getTkl, data).then(res => {
 		console.log(9999,res)
 	})
 }
+
 
 export default api

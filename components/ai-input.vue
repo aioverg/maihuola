@@ -12,7 +12,6 @@
 		data() {
 			return {
 				btName: "获取验证码",
-				await: "重新发送",
 				times: null,
 				timeRun: false,
 				inputValue: null

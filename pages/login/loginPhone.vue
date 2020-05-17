@@ -22,7 +22,7 @@
 					<image class="code-icon" mode="widthFix" src="/static/icon/icon-dialog.png"></image>
 					<input class="code-input" placeholder="请输入验证码" />
 				</view>
-				<view class="code-button">获取验证码</view>
+				<view class="code-button" @click="getCode">{{times}}{{btName}}</view>
 			</view>
 			<view class="login-button">
 				<ai-button btname="登录"></ai-button>
@@ -49,10 +49,29 @@
 		},
 		data() {
 			return {
-				
+				btName: "获取验证码",
+				times: null,
+				timeRun: false,
 			}
 		},
 		methods: {
+			getCode(){
+				if(this.timeRun){return}
+				/*发送获取验证码的请求*/
+				this.timeRun = true
+				this.times = 5
+				this.btName = "s重新发送"
+				let timer = setInterval(()=>{
+				    if(this.times == 1){
+					    clearInterval(timer)
+					    this.timeRun = false
+					    this.times = null
+					    this.btName = "获取验证码"
+					    return
+				    }
+				    this.times -= 1
+				},1000)
+			},
 			navTo(obj){
 				this.$global.navTo(obj)
 			},
