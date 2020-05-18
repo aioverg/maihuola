@@ -9,7 +9,7 @@
 			leftArrow="true"
 		/>
 		<view class="guess-list">
-			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail')">
+			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
 			    <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
@@ -27,13 +27,16 @@
 				goodsList: null
 			}
 		},
-		onLoad() {
-			this.loadData();
+		onLoad(res) {
+			this.carouselList(res.goods_id);
 		},
 		methods: {
-			async loadData() {
-				let goodsList = await this.$deleteApi.json('goodsListOne');
-				this.goodsList = goodsList;
+			carouselList(id){
+				this.$api.getCarouselList({
+					special_id: id
+				}).then( res => {
+					this.goodsList = res.data.data.goods
+				})
 			},
 			navTo(obj){
 				this.$global.navTo(obj)

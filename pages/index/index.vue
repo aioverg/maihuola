@@ -20,8 +20,8 @@
 			<!-- 头部轮播 -->
 			<view class="carousel-section">
 				<swiper indicator-active-color="rgba(255,255,255,1)" autoplay="true" interval="5000" duration="1500" class="carousel" circular indicator-dots>
-					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navTo('/pages/detail/guessList')">
-						<image :src="item.src" class="bannar-image" />
+					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToCarousel(item.link_goods_id, item.id)">
+						<image :src="item.pic" class="bannar-image" />
 					</swiper-item>
 				</swiper>
 			</view>
@@ -31,8 +31,8 @@
 		<view class="sort-section">
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
-					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index">
-					    <view class="sort-item">
+					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id)">
+					    <view class="sort-item" :class="sortId-1 ==index?'red':''">
 						    {{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
@@ -53,7 +53,7 @@
 		</view>
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
-				<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
+				<ai-gusee-card :recommend="item.is_recommend" :data="item"></ai-gusee-card>
 			</view>
 		</view>
 		<!--登录过期提示，需要时再加
@@ -82,6 +82,7 @@
 		data() {
 			return {
 				sortList: ["推荐", "食品", "美妆", "母婴", "女装", "男装"],
+				sortId: 1,
 				rankData: [
 					{
 						id: "update",
@@ -103,20 +104,19 @@
 				rankId: 0,
 				carouselList: [],
 				goodsList: [],
+				goodsListPage: 1,
+				goodsListLastPage: 1,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
 				blue: null,
-				loginBox: false
-				
-				
+				loginBox: false,
+				id: 1
 			};
 		},
-
 		onLoad() {
 			this.getCarousel()
 			this.getGuessSort()
-			this.getGuess()
-			
+			this.getGuess(this.sortId)
 		},
 		onReady(){
 			
@@ -125,9 +125,27 @@
 			this.login()
 		},
 		onReachBottom(){
-			this.getGuess()
+			this.getGuess(this.sortId)
 		},
 		methods: {
+			//获取轮播图数据
+			getCarousel(){
+				console.log("轮播图")
+				this.$api.getCarousel({
+					code: "Index.Banner"
+				}).then( res => {
+					this.carouselList = res.data.data
+				})
+			},
+			//轮播图跳转
+			navToCarousel(typeId, id){
+				if(typeId.indexOf(",") == -1){
+					this.$global.navTo('/pages/detail/detail?goods_id=' + id)
+				}else{
+					this.$global.navTo('/pages/detail/guessList?goods_id=' + id)
+				}
+			},
+			
 			//获取商品分类列表
 			getGuessSort(){
 				this.$api.getGuessSort().then( res =>
@@ -135,19 +153,37 @@
 				)
 			},
 			//获取商品
-			getGuess(){
-				this.$api.getGuess().then( res => {
+			getGuess(id){
+				if(this.sortId != id){
+					this.goodsList = []
+					this.sortId = id
+					this.goodsListPage = 1
+				}
+				if(this.goodsListLastPage == 0){
+					this.goodsListLastPage = 1
+				}
+				if(this.goodsListPage > this.goodsListLastPage){
+					console.log("没有更多数据")
+					return
+				}
+				this.$api.getSearchGuess({
+					category_id: id,
+					limit: 5,
+					page: this.goodsListPage
+				}).then( res => {
+					this.goodsListLastPage = res.data.data.last_page
+					this.goodsListPage += 1
 					for(let i of res.data.data.data){
 						this.goodsList.push(i)
 					}
 				})
 			},
 			//获取轮播图数据
-			getCarousel() {
+			/*getCarousel() {
 				this.$deleteApi.json('carouselList').then(
 				    res=> this.carouselList = res
 				)
-			},
+			},*/
 			
 			//跳转
 			navTo(url) {
@@ -162,6 +198,7 @@
 			},
 			selectRank(index) {
 			    this.rankId = index;
+				this.hide = "null"
 			},
 			login(){
 				if(!this.$store.state.hasLogin){
@@ -320,6 +357,9 @@
 						text-align: center;
 						font-size: 16px;
 					}
+					.red {
+						color:rgba(244,122,115,1);
+					}
 					.sort-item-line {
 						display: inline-block;
 						color: rgba(229,229,229,1);
@@ -357,7 +397,7 @@
 				}
 				.sort-rank-item-box {
 					position: relative;
-					z-index: 10;
+					z-index: 0;
 					width: 120rpx;
 					margin: 80rpx auto 0;
 					.sort-rank-list-item {
@@ -375,6 +415,7 @@
 			}
 			.show {
 				display: inline-block;
+				z-index: 25;
 			}
 		}
 	}

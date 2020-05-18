@@ -16,7 +16,7 @@
 			<ai-input title="验证码" @getInput="getIput" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
-		    <ai-button btname="下一步" @eventClick="navAlertPhone"></ai-button>
+		    <ai-button btname="下一步" @eventClick="checkPhoneCode"></ai-button>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :message="popupMessage" type="success"></ai-popup-message>
 	</view>
@@ -36,7 +36,8 @@
 		},
 		data() {
 			return {
-				phone: 13446556,
+				phone: "13750892614",
+				phoneCode: null,
 				popupMessage: null
 			}
 		},
@@ -44,19 +45,40 @@
 			
 		},
 		methods: {
-			navAlertPhone(){
-				uni.navigateTo({
-					url: '/pages/account/alertPhone'
-				})
+			getIput(res){
+				this.phoneCode = res
+				console.log("获取验证码",res)
 			},
 			postCode(){
-				this.popupMessage = "验证码已发送"
-				this.$refs.aiPopupMessage.open()
+				this.$api.getPhoneCode({
+					phone: this.phone
+				}).then( res => {
+					if(res.statusCode !== 200){
+						this.popupMessage = "验证码发送失败"
+						this.$refs.aiPopupMessage.open()
+					}else{
+						this.popupMessage = "验证码已发送"
+						this.$refs.aiPopupMessage.open()
+					}
+				})
 				console.log("发送获取验证码地址", this.phone)
 			},
-			getIput(res){
-				console.log("获取验证码",res)
+			checkPhoneCode(){
+				this.$api.getChecktPhoneCode({
+					phone: this.phone,
+					code: this.phoneCode
+				}).then( res => {
+					if(res.statusCode !== 200){
+						this.popupMessage = "验证码错误"
+						this.$refs.aiPopupMessage.open()
+					}else{
+						uni.navigateTo({
+							url: '/pages/account/alertPhone'
+						})
+					}
+				})
 			}
+			
 		}
 	}
 </script>

@@ -55,16 +55,24 @@ api.getGuessSort = () => {
 	    method: "GET",
 	})
 }
-
-//获取商品分类数据
-api.getGuess = () => { 
+//获取轮播图
+api.getCarousel = (data) => {
 	return request({
-	    url: "/api/v1.item/searchlist",
-	    method: "GET",
+		url: "/api/v1.special/listbycode",
+		method: "GET",
+		data: data
+	})
+}
+//获取轮播图中商品集合列表
+api.getCarouselList = (data) => {
+	return request({
+		url: "/api/v1.item/specialgoods",
+		method: "GET",
+		data: data
 	})
 }
 
-//搜索
+//搜索 + 获取分类商品
 api.getSearchGuess = (data) => {
 	return request({
 		url: "/api/v1.item/searchlist",
@@ -83,15 +91,25 @@ api.getGuessDetail = (goods_id) => {
 		}
 	})
 }
-//获取淘口令
-api.getTkl = function(data){
-	request(obj.getTkl, data).then(res => {
-		console.log(9999,res)
+//发送手机验证码
+api.getPhoneCode = (data) => {
+	return request({
+		url: "/api/v1.service/sendsms",
+		method: "POST",
+		data: data
+	})
+}
+//验证手机验证码
+api.getChecktPhoneCode = (data) => {
+	return request({
+		url: "/api/v1.user/loginbymobile",
+		method: "POST",
+		data: data
 	})
 }
 
 //意见反馈
-api.postFeedBack = function(data){
+api.postFeedBack = (data) => {
 	return request({
 		url: "/api/v1.feedback/addfeedback",
 		method: "POST",
