@@ -178,13 +178,6 @@
 					}
 				})
 			},
-			//获取轮播图数据
-			/*getCarousel() {
-				this.$deleteApi.json('carouselList').then(
-				    res=> this.carouselList = res
-				)
-			},*/
-			
 			//跳转
 			navTo(url) {
 				this.$global.navTo(url)
