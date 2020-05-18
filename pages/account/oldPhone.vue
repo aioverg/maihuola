@@ -10,14 +10,15 @@
 		/>
 		<hint-box content="为了您的账户安全需要对原手机号码进行验证"></hint-box>
 		<view class="phone-num">
-			<ai-input title="手机号码" content="178****6789" ></ai-input>
+			<ai-input title="手机号码" :content="phone" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="验证码" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
+			<ai-input title="验证码" @getInput="getIput" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="下一步" @eventClick="navAlertPhone"></ai-button>
 		</view>
+		<ai-popup-message ref="aiPopupMessage" :message="popupMessage" type="success"></ai-popup-message>
 	</view>
 </template>
 
@@ -25,15 +26,18 @@
 	import hintBox from '@/components/hint-box'
 	import aiInput from '@/components/ai-input'
 	import aiButton from '@/components/ai-button'
+	import aiPopupMessage from '@/components/uni-popup/ai-popup-message.vue'
 	export default {
 		components: {
 			hintBox,
 			aiInput,
-			aiButton
+			aiButton,
+			aiPopupMessage
 		},
 		data() {
 			return {
-				
+				phone: 13446556,
+				popupMessage: null
 			}
 		},
 		methods: {
@@ -46,7 +50,12 @@
 				})
 			},
 			postCode(){
-				console.log("发送获取验证码地址")
+				this.popupMessage = "验证码已发送"
+				this.$refs.aiPopupMessage.open()
+				console.log("发送获取验证码地址", this.phone)
+			},
+			getIput(res){
+				console.log("获取验证码",res)
 			}
 		}
 	}

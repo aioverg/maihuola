@@ -23,7 +23,7 @@
 				default: ''
 			},
 			content: {
-				type: String,
+				//type: String,
 				default: null
 			},
 			placeholder: {

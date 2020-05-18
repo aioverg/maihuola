@@ -16,14 +16,16 @@
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="search-result">
-			<view v-if="!searchResult" class="no-result">
+			<view v-if="searchResult.length == 0" class="no-result">
 				<image class="no-result-img" src="/static/error/ai-error02.png" mode="widthFix"></image>
 				<view class="no-describe">哎呀！竟然没有匹配的宝贝</view>
 			</view>
-			<view v-if="searchResult" class="search-result">
-				<view>商品栏</view>
-				<ai-gusee-card></ai-gusee-card>
+			<view v-if="searchResult.length !== 0" class="yes-result">
+				<view class="guess-item" v-for="(item, index) in searchResult" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
+					<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
+				</view>
 			</view>
+			<view v-if="over">到底啦</view>
 		</view>
 	</view>
 </template>
@@ -37,11 +39,20 @@
 		data() {
 			return {
 				searchInput: null,
-				searchResult: null
+				over: false,
+				page: 1,
+				lastPage: 1,
+				limit: 5,
+				searchResult: [],
 			}
 		},
 		onLoad(res){
 			this.searchInput = res.id
+			console.log(this.searchInput)
+			this.getSearch()
+		},
+		onReachBottom(){
+			this.getSearch()
 		},
 		methods: {
 			navTo(obj){
@@ -49,6 +60,24 @@
 			},
 			navTabBar(obj){
 				this.$global.navTabBar(obj)
+			},
+			getSearch(){
+				if(this.page > this.lastPage){
+					this.over = true
+					return
+				}
+				this.$api.getSearchGuess({
+					keywords: this.searchInput,
+					limit: this.limit,
+					page: this.page
+				}).then(res => {
+					this.lastPage = res.data.data.last_page
+					for(let i of res.data.data.data){
+						this.searchResult.push(i)
+					}
+					this.page += 1
+					console.log(this.searchResult)
+				})
 			}
 		}
 	}
@@ -94,6 +123,8 @@
 		}
 	}
 	.search-result {
+		width: 690rpx;
+		margin: 20rpx auto 0;
 		.no-result {
 			width: 100%;
 			margin: 200rpx 0 0 0;
@@ -103,8 +134,13 @@
 			}
 			.no-describe {
 				margin: 100rpx 0 0 0;
-				font-size: 30rpx;
+				font-size: 15px;
 				color: rgba(204,204,204,1);
+			}
+		}
+		.yes-result {
+			.guess-item {
+				margin: 0 auto 26rpx;
 			}
 		}
 		

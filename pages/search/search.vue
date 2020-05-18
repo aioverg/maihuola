@@ -20,7 +20,7 @@
 			<image class="delete-icon" src="/static/icon/ai-delete.png" @click="delHistory"></image>
 		</view>
 		<view class="history-label-box">
-			<view class="history-label" v-for="(value, index) in history" :key="index" @click="navTo('/pages/search/searchResult?id=' + value)">{{value}}</view>
+			<view class="history-label" v-for="(value, index) in history" :key="index" @click="historyNavTo(value)">{{value}}</view>
 		</view>
 	</view>
 </template>
@@ -55,7 +55,10 @@
 				    key: 'searchHistory',
 				    data: this.history,
 				})
-				this.$global.navTo('/pages/search/searchResult?id=' + this.inputValue)
+				this.$global.navTo('/pages/search/searchResult?id=' + obj)
+			},
+			historyNavTo(obj){
+				this.$global.navTo('/pages/search/searchResult?id=' + obj)
 			},
 			navTabBar(obj){
 				this.$global.navTabBar(obj)

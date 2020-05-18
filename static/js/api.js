@@ -63,6 +63,16 @@ api.getGuess = () => {
 	    method: "GET",
 	})
 }
+
+//搜索
+api.getSearchGuess = (data) => {
+	return request({
+		url: "/api/v1.item/searchlist",
+		method: "GET",
+		data: data
+	})
+}
+
 //获取商品详情
 api.getGuessDetail = (goods_id) => {
 	return request({
@@ -77,6 +87,15 @@ api.getGuessDetail = (goods_id) => {
 api.getTkl = function(data){
 	request(obj.getTkl, data).then(res => {
 		console.log(9999,res)
+	})
+}
+
+//意见反馈
+api.postFeedBack = function(data){
+	return request({
+		url: "/api/v1.feedback/addfeedback",
+		method: "POST",
+		data: data
 	})
 }
 
