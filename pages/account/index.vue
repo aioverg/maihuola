@@ -157,12 +157,12 @@
 				done()
 			},
 			confirm(done){
-			    if(this.clearBind = "weixin"){
+			    if(this.clearBind == "weixin"){
 					this.$store.commit('setWeiXin', null)
 					done()
 					return
 				}
-				if(this.clearBind = "taobao"){
+				if(this.clearBind == "taobao"){
 					this.$store.commit('setTaoBao', null)
 					done()
 					return

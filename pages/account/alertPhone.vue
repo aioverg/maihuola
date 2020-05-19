@@ -18,7 +18,7 @@
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="navAlertPhone"></ai-button>
 		</view>
-		<ai-popup-message ref="aiPopupMessage" :message="popupMessage" type="success"></ai-popup-message>
+		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
@@ -26,25 +26,26 @@
 	import hintBox from '@/components/hint-box';
 	import aiInput from '@/components/ai-input';
 	import aiButton from '@/components/ai-button';
-	import aiPopupMessage from '@/components/uni-popup/ai-popup-message.vue'
 	export default {
 		components: {
 			hintBox,
 			aiInput,
-			aiButton,
-			aiPopupMessage
+			aiButton
 		},
 		data() {
 			return {
 				phone: null,
-				code: null,
-				popupMessage: null
+				code: null
 			}
 		},
 		methods: {
 			postCode(){
-				this.popupMessage = "验证码已发送"
-				this.$refs.aiPopupMessage.open()
+				this.$refs.aiPopupMessage.open({
+					type:'success',
+					content:'验证码已发送',
+					timeout: 2000,
+					isClick: false
+				})
 				console.log("发送获取验证码地址")
 				console.log("验证码手机", this.phone)
 			},

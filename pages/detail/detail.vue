@@ -63,7 +63,7 @@
 		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupAiDialog" type="dialog">
-		    <ai-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
+		    <ai-popup-dialog type="dialog" :src="aiDialogSrc" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupMessage">
 			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
@@ -88,13 +88,16 @@
 		},
 		data(){
 			return {
-				guessDetailData: null,
+				goodsId: null,
+				guessDetailData: Object,
 				TKLBox: true,
 				TKLMessage: null,
 				popupDialogTitle: null,
 				popupDialogContent: null,
 				popupMessages: null,
-				confirmValue: null
+				confirmValue: null,
+				aiDialogSrc: '/static/img/ai-taobao.png',
+				taobaoAuth: "aa"
 			}
 		},
 		computed: {
@@ -107,11 +110,26 @@
 			
 		},
 		onLoad: function(obj){
-			console.log(obj.goods_id)
+			this.taobaoAuth = obj.auth
+			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
 				this.guessDetailData = res.data.data
 				console.log("商品详情",this.guessDetailData)
 			})
+		},
+		onReady(){
+			if(this.taobaoAuth == "true"){
+				console.log("11111111111111授权成功")
+			}
+			if(this.taobaoAuth == "false"){
+				console.log("111111111111授权失败")
+				this.aiDialogSrc = '/static/img/taobao-err.png'
+				this.popupDialogTitle = "授权失败"
+				this.popupDialogContent = "授权失败将无法通过分享商品获得收益"
+				this.confirmValue = "taobao"
+				console.log(this.aiDialogSrc)
+				this.$refs.popupAiDialog.open()
+			}
 		},
 		methods: {
 			navTo(url) {
@@ -136,11 +154,6 @@
 					this.$refs.popupAiDialog.open()
 					return
 				}
-				
-				/*this.$refs.popup.open()
-				if(this.$store.state.hasLogin && this.$store.state.userInfo.taobao){
-					console.log("发起获取淘口令请求")
-				}*/
 			},
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
@@ -154,7 +167,7 @@
 					return
 				}
 				if(this.confirmValue == "taobao"){
-					this.$global.navTo('/pages/account/taobao')
+					this.$global.navTo('/pages/account/taobao?goods_id=' + this.goodsId)
 					done()
 					return
 				}
@@ -181,29 +194,29 @@
 	}
 	.guess-title {
 		width: 750rpx;
-		height: 106rpx;
-		padding: 14rpx 30rpx 16rpx;
+		height: 53px;
+		padding: 7px 15px 8px;
 		background: rgba(255,255,255,1);
 		font-size: 16px;
 		color: rgba(51,51,51,1);
 	}
 	.guess-price-info {
 		width: 750rpx;
-		height: 154rpx;
-		padding: 0 30rpx 0;
+		height: 77px;
+		padding: 0 15px 0;
 		background: rgba(244,122,115,1);
 		.guess-price-info-one {
-			height: 80rpx;
+			height: 40px;
 			display: flex;
 			align-items: flex-end;
 			.guess-zbprice-icon {
 				display: inline-block;
-				width: 120rpx;
-				margin: 0 40rpx 0 0;
+				width: 60px;
+				margin: 0 20px 0 0;
 			}
 			.guess-zbprice {
 				display: inline-block;
-				line-height: 55rpx;
+				line-height: 27.5px;
 				flex-grow: 1;
 				font-size: 30px;
 				color: rgba(255,255,255,1);
@@ -216,11 +229,11 @@
 			}
 		}
 		.guess-price-info-two {
-			height: 74rpx;
-			line-height: 74rpx;
+			height: 37px;
+			line-height: 37px;
 			.guess-scprice {
 				display: inline-block;
-				margin: 0 28rpx 0 0;
+				margin: 0 14px 0 0;
 				font-size:13px;
 				color: rgba(255,255,255,1);
 			}

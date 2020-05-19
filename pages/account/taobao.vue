@@ -31,24 +31,47 @@
 		</view>
 	</view>
 	<view class="bt">
-		<ai-button btname="确认授权"></ai-button>
+		<ai-button btname="确认授权" @eventClick="bindTB"></ai-button>
 	</view>
 	</view>
 </template>
 
 <script>
 	import aiButton from '@/components/ai-button.vue'
+	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
 	export default {
 		components: {
 			aiButton
 		},
 		data() {
 			return {
-				
+				goodsId: null
 			}
 		},
+		onLoad(obj){
+			this.goodsId = obj.goods_id
+		},
 		methods: {
-			
+			bindTB(){
+				const _this = this
+				Alibcsdk.init( result => {
+					if(result.status){
+						console.log("初始化成功")
+					}else{
+						console.log("初始化失败")
+					}
+					console.log(JSON.stringify(result))
+				})
+				Alibcsdk.login( result => {
+					if(result.status){
+						console.log("淘宝授权")
+						_this.$store.commit('setTaoBao', result.status)
+						_this.$global.navTo('/pages/detail/detail?goods_id=' + _this.goodsId + "&auth=true")
+					}else{
+						_this.$global.navTo('/pages/detail/detail?goods_id=' + _this.goodsId + "&auth=false")
+					}
+				})
+			}
 		}
 	}
 </script>

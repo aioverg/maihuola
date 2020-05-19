@@ -6,10 +6,18 @@ import Json from './Json' //测试用数据
 
 //将导航函数引入全局
 import global from './static/js/global.js'
+
+//引入弹窗组件
+import aiPopupMessage from './components/uni-popup/ai-popup-message.vue'
+
+//引入navBar
+import aiNavbar from "@/components/ai-navbar"
+
 //引入api
 import api from './static/js/api.js'
-import aiNavbar from "@/components/ai-navbar"
+
 Vue.component('ai-navbar', aiNavbar)
+Vue.component('ai-popup-message', aiPopupMessage)
 
 
 

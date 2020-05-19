@@ -27,7 +27,7 @@
 			};
 		},
 		props: {
-			data: Object,
+			data: null,
 			recommend: null
 		}
 	}

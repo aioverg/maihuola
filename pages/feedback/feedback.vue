@@ -14,31 +14,32 @@
 		<view class="feedback-bt">
 			<ai-button @eventClick="feedBack" btname="提交"></ai-button>
 		</view>
-		<ai-popup-message ref="aiPopupMessage" :message="popupMessage" type="success"></ai-popup-message>
+		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
 <script>
 	import aiButton from '@/components/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	import aiPopupMessage from '@/components/uni-popup/ai-popup-message.vue'
 	export default {
 		components: {
 			aiButton,
-			uniPopUp,
-			aiPopupMessage
+			uniPopUp
 		},
 		data() {
 			return {
-				content: null,
-				popupMessage: null
+				content: null
 			}
 		},
 		methods: {
 			feedBack(){
 				if(!this.content){
-					this.popupMessage = "内容不能为空"
-					this.$refs.aiPopupMessage.open()
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'内容不能为空',
+						timeout:2000,
+						isClick:false
+					})
 					return
 				}
 				this.$api.postFeedBack({
@@ -47,8 +48,12 @@
 					uid: 5555
 				}).then( res => {
 					if(res.data.code == 0){
-						this.popupMessage = "提交成功"
-						this.$refs.aiPopupMessage.open()
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'提交成功',
+							timeout:2000,
+							isClick:false
+						})
 					}
 				})
 			}

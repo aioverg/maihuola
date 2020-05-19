@@ -18,7 +18,7 @@
 		<view class="bt">
 		    <ai-button btname="下一步" @eventClick="checkPhoneCode"></ai-button>
 		</view>
-		<ai-popup-message ref="aiPopupMessage" :message="popupMessage" type="success"></ai-popup-message>
+		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
@@ -26,19 +26,16 @@
 	import hintBox from '@/components/hint-box'
 	import aiInput from '@/components/ai-input'
 	import aiButton from '@/components/ai-button'
-	import aiPopupMessage from '@/components/uni-popup/ai-popup-message.vue'
 	export default {
 		components: {
 			hintBox,
 			aiInput,
-			aiButton,
-			aiPopupMessage
+			aiButton
 		},
 		data() {
 			return {
 				phone: "13750892614",
-				phoneCode: null,
-				popupMessage: null
+				phoneCode: null
 			}
 		},
 		methods: {
@@ -54,11 +51,19 @@
 					phone: this.phone
 				}).then( res => {
 					if(res.statusCode !== 200){
-						this.popupMessage = "验证码发送失败"
-						this.$refs.aiPopupMessage.open()
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'验证码发送失败',
+							timeout: 2000,
+							isClick: false
+						})
 					}else{
-						this.popupMessage = "验证码已发送"
-						this.$refs.aiPopupMessage.open()
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'验证码已发送',
+							timeout: 2000,
+							isClick: false
+						})
 					}
 				})
 				console.log("发送获取验证码地址", this.phone)
@@ -69,8 +74,12 @@
 					code: this.phoneCode
 				}).then( res => {
 					if(res.statusCode !== 200){
-						this.popupMessage = "验证码错误"
-						this.$refs.aiPopupMessage.open()
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'验证码错误',
+							timeout: 2000,
+							isClick: false
+						})
 					}else{
 						uni.navigateTo({
 							url: '/pages/account/alertPhone'

@@ -6,7 +6,7 @@
 				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
 			</view>
 			<view class="ai-popup-logo">
-				<image class="ai-popup-logo-icon" mode="widthFix" src="/static/img/ai-taobao.png"></image>
+				<image class="ai-popup-logo-icon" mode="widthFix" :src="src"></image>
 			</view>
 			<view class="ai-popup-title">
 				<text class="ai-popup-title-text" :class="['ai-popup__'+dialogType]">{{title}}</text>
@@ -63,6 +63,10 @@
 			placeholder: {
 				type: [String, Number],
 				default: '请输入内容'
+			},
+			src: {
+				type: String,
+				default: '/static/img/ai-taobao.png'
 			},
 			/**
 			 * 对话框主题 success/warning/info/error	  默认 success

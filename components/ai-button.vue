@@ -35,22 +35,23 @@
 <style lang="scss">
 	.ai-button {
 		width: 690rpx;
-		height: 90rpx;
-		line-height: 90rpx;
+		height: 45px;
+		line-height: 45px;
 		//text-align: center;
 		margin: 0 auto;
 		background: linear-gradient(135deg,rgba(252,170,122,1) 0%,rgba(234,58,106,1) 100%);
 		color:rgba(255,255,255,1);
-		border-radius: 45rpx;
+		border-radius: 22px;
 		.img-box {
+			width: 690rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			margin: 0 6rpx 0 0;
+			margin: 0 3px 0 0;
 			.img {
 				display: inline-block;
-				width: 40rpx;
-				margin: 0 8rpx 0 0;
+				width: 20px;
+				margin: 0 4px 0 0;
 			}
 			.btname {
 				display: inline-block;

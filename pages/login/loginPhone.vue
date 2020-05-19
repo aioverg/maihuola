@@ -15,17 +15,17 @@
 			<view class="phone-box">
 				<image class="phone-icon" mode="widthFix" src="/static/icon/icon-phone.png"></image>
 				<view class="phone-area">+86</view>
-				<input class="phone-input" placeholder="请输入手机号码" />
+				<input class="phone-input" v-model="phone" placeholder="请输入手机号码" />
 			</view>
 			<view class="code-box">
 				<view class="code-input-box">
 					<image class="code-icon" mode="widthFix" src="/static/icon/icon-dialog.png"></image>
-					<input class="code-input" placeholder="请输入验证码" />
+					<input class="code-input" v-model="code" placeholder="请输入验证码" />
 				</view>
 				<view class="code-button" @click="getCode">{{times}}{{btName}}</view>
 			</view>
 			<view class="login-button">
-				<ai-button btname="登录"></ai-button>
+				<ai-button btname="登录" @eventClick="login"></ai-button>
 			</view>
 		</view>
 		<view class="huo">或</view>
@@ -36,6 +36,7 @@
 		<view class="note">
 			<ai-login-hint></ai-login-hint>
 		</view>
+		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
@@ -45,33 +46,71 @@
 	export default {
 		components: {
 			aiButton,
-			aiLoginHint
+			aiLoginHint,
 		},
 		data() {
 			return {
+				phone: 13750892614,
+				code: 123456,
 				btName: "获取验证码",
 				times: null,
-				timeRun: false,
+				timeRun: false
 			}
 		},
 		methods: {
 			getCode(){
-				if(this.timeRun){return}
-				/*发送获取验证码的请求*/
-				this.timeRun = true
-				this.times = 5
-				this.btName = "s重新发送"
-				let timer = setInterval(()=>{
-				    if(this.times == 1){
-					    clearInterval(timer)
-					    this.timeRun = false
-					    this.times = null
-					    this.btName = "获取验证码"
-					    return
-				    }
-				    this.times -= 1
-				},1000)
+				this.$api.getPhoneCode({
+					phone: this.phone
+				}).then( res => {
+					if(res.data.code !== 200){
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'获取验证码失败',
+							timeout:2000,
+							isClick:false
+						})
+						return
+					}
+					if(this.timeRun){return}
+					this.$refs.aiPopupMessage.open({
+						type:'success',
+						content:'验证码正在发送',
+						timeout:2000,
+						isClick:false
+					})
+					this.timeRun = true
+					this.times = 5
+					this.btName = "s重新发送"
+					let timer = setInterval(()=>{
+					    if(this.times == 1){
+						    clearInterval(timer)
+						    this.timeRun = false
+						    this.times = null
+						    this.btName = "获取验证码"
+						    return
+					    }
+					    this.times -= 1
+					},1000)
+				})
 			},
+			login(){
+				this.$api.getChecktPhoneCode({
+					phone: this.phone,
+					code: this.code
+				}).then( res => {
+					if(res.data.code == 200){
+						console.log("登录成功")
+					}else{
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'登录失败',
+							timeout:2000,
+							isClick:false
+						})
+					}
+				})
+			}
+			,
 			navTo(obj){
 				this.$global.navTo(obj)
 			},
