@@ -13,6 +13,7 @@
 			    <ai-gusee-card :data="item"></ai-gusee-card>
 			</view>
 		</view>
+		<uni-load-more status="noMore"></uni-load-more>
 	</view>
 </template>
 

@@ -9,16 +9,17 @@ import global from './static/js/global.js'
 
 //引入弹窗组件
 import aiPopupMessage from './components/uni-popup/ai-popup-message.vue'
-
-//引入navBar
+//引入navBar组件
 import aiNavbar from "@/components/ai-navbar"
+//引入下拉加载提示组件
+import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 
 //引入api
 import api from './static/js/api.js'
 
 Vue.component('ai-navbar', aiNavbar)
 Vue.component('ai-popup-message', aiPopupMessage)
-
+Vue.component('uni-load-more', uniLoadMore)
 
 
 /*

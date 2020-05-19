@@ -64,19 +64,20 @@
 		<view class="login-box" v-if="loginBox">
 			<ai-login></ai-login>
 		</view>
+		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 	</view>
 </template>
 
 <script>
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
-	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	//import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	//import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import aiLogin from '@/components/ai-login.vue'
 	export default {
 		components: {
 			aiGuseeCard,
-			uniPopUp,
-			uniPopupDialog,
+			//uniPopUp,
+			//uniPopupDialog,
 			aiLogin
 		},
 		data() {
@@ -110,7 +111,8 @@
 				hide: null,
 				blue: null,
 				loginBox: false,
-				id: 1
+				id: 1,
+				uniLoadMoreStatus: "more"
 			};
 		},
 		onLoad() {
@@ -154,28 +156,32 @@
 			},
 			//获取商品
 			getGuess(id){
+				console.log(8888)
 				if(this.sortId != id){
 					this.goodsList = []
 					this.sortId = id
 					this.goodsListPage = 1
 				}
-				if(this.goodsListLastPage == 0){
-					this.goodsListLastPage = 1
-				}
 				if(this.goodsListPage > this.goodsListLastPage){
-					console.log("没有更多数据")
+					this.uniLoadMoreStatus = "noMore"
 					return
 				}
+				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
 					category_id: id,
 					limit: 5,
 					page: this.goodsListPage
 				}).then( res => {
+					if(res.data.data.last_page <= 0){
+						this.uniLoadMoreStatus = "noMore"
+						return
+					}
 					this.goodsListLastPage = res.data.data.last_page
 					this.goodsListPage += 1
 					for(let i of res.data.data.data){
 						this.goodsList.push(i)
 					}
+					this.uniLoadMoreStatus = "more"
 				})
 			},
 			//跳转

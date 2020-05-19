@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		usertoken: null,
-		hasLogin: true,
+		hasLogin: false,
 		userInfo: {
 			tel: null,
 			taobao: null,
