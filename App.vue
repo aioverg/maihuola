@@ -2,6 +2,9 @@
 	/**
 	 * vuex管理登陆状态，具体可以参考官方登陆模板示例
 	 */
+	// #ifdef APP-PLUS
+	import APPUpdate from "@/js_sdk/zhouWei-APPUpdate/APPUpdate.js";
+	// #endif
 	import {
 		mapMutations
 	} from 'vuex';
@@ -10,12 +13,17 @@
 			...mapMutations(['login'])
 		},
 		onLaunch: function() {
+			// #ifdef APP-PLUS
+			console.log(777777777)
+			APPUpdate();
+			// #endif
+			/*
 			let userInfo = uni.getStorageSync('userInfo');
 			let userToken = uni.getStorageSync('token')
 			if(userToken.length == 0){
 				return
 			}
-			if(false/*this.$api.checkToken(userToken)*/){
+			if(falsethis.$api.checkToken(userToken)){
 				
 			}else{
 				this.$store.commit("login", {
@@ -23,7 +31,7 @@
 					userInfo: userInfo,
 					hasLogin: true
 				})
-			}
+			}*/
 		},
 		onShow: function() {
 			console.log('App Show')

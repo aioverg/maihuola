@@ -11,7 +11,7 @@
 		<view class="img-box">
 			<image class="img" src="/static/img/ai-maihuola1.png"></image>
 		</view>
-		<view @click="login()">
+		<view @click="login">
 			<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
 		<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
