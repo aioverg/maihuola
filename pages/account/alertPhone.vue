@@ -62,16 +62,16 @@
 
 <style lang="scss">
 	page {
-		height:1334rpx;
+		height:667px;
 		width:750rpx;
 		background:rgba(249,249,249,1);
 	}
 	.phone-num {
-		margin: 30rpx 0;
+		margin: 15px 0;
 	}
 	.bt {
 		position: relative;
-		top: 734rpx;
+		top: 367px;
 	}
 
 </style>

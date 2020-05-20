@@ -46,7 +46,8 @@
 				name: "张**",
 				tel: "17823456789",
 				sum: null,
-				total: "560.92"
+				total: "560.92",
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 				
 			}
 		},
@@ -70,13 +71,13 @@
 	}
 	.tx-box {
 		width: 690rpx;
-		height:416rpx;
+		height:208px;
 		background:rgba(255,255,255,1);
-		margin: 15rpx auto 0;
+		margin: 7px auto 0;
 		border-radius:16px;
 		.tx-account {
-			margin: 0 0 0 30rpx;
-			padding: 30rpx 0 30rpx 0;
+			margin: 0 0 0 15px;
+			padding: 15px 0 15px 0;
 			border-bottom: 1px dashed rgba(229,229,229,1);
 			.title {
 				font-size: 16px;
@@ -86,7 +87,7 @@
 				display: inline-block;
 				font-size:14px;
 				color:rgba(102,102,102,1);
-				margin: 0 30rpx 0 50rpx;
+				margin: 0 15px 0 25px;
 			}
 			.phone {
 				font-size:14px;
@@ -94,20 +95,20 @@
 			}
 		}
 		.tx-input {
-			margin: 20rpx 0 0 30rpx;
+			margin: 10px 0 0 15px;
 			.title {
 				font-size:16px;
 				color:rgba(51,51,51,1);
 			}
 			.input-box {
-				height: 144rpx;
+				height: 72px;
 				display: flex;
 				align-items: baseline;
-				padding: 30rpx 0 0 0;
+				padding: 15px 0 0 0;
 				border-bottom: 1px dashed rgba(229,229,229,1);
 				.icon {
 					display: inline-block;
-					height: 84rpx;
+					height: 42px;
 					width: 37rpx;
 					font-weight:500;
 					color:rgba(51,51,51,1);
@@ -115,8 +116,8 @@
 				}
 				.input {
 					display: inline-block;
-					margin: 0 0 0 20rpx;
-					height: 56rpx;
+					margin: 0 0 0 10px;
+					height: 28px;
 					width: 285rpx;
 					font-size:20px;
 				}
@@ -128,13 +129,13 @@
 			}
 			.tx-upper {
 				display: inline-block;
-				margin: 30rpx 0;
+				margin: 15px 0;
 				font-size:14px;
 				color:rgba(51,51,51,1);
 			}
 			.tx-upperbt {
 				display: inline-block;
-				margin: 30rpx 0 30rpx 50rpx;
+				margin: 15px 0 15px 25px;
 				width: 114rpx;
 				height: 20px;
 				font-size: 14px;
@@ -143,22 +144,22 @@
 		}
 	}
 	.tx-history {
-		margin: 30rpx 32rpx 0 606rpx;
+		margin: 15px 16px 0 303px;
 		font-size:14px;
 		text-decoration: underline;
 		color:rgba(153,153,153,1);
 	}
 	.tx-bt {
-		margin: 453rpx auto;
+		margin: 226px auto;
 		width: 690rpx;
-		height: 90rpx;
-		line-height:  90rpx;
+		height: 45px;
+		line-height: 45px;
 		text-align: center;
 		background:rgba(204,204,204,1);
-		border-radius:45rpx;
-		font-size:16px;
-		font-weight:500;
-		color:rgba(255,255,255,1);
+		border-radius: 22px;
+		font-size: 16px;
+		font-weight: 500;
+		color: rgba(255,255,255,1);
 	}
 
 </style>

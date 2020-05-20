@@ -94,19 +94,19 @@
 
 <style lang="scss">
 	page {
-		height:1334rpx;
+		height:667px;
 		width:750rpx;
 		background:rgba(249,249,249,1);
 	}
 	.phone-num {
-		margin: 30rpx 0;
+		margin: 15px 0;
 	}
 	.code-num {
 		width: 750rpx;
 	}
 	.bt {
 		position: relative;
-		top: 734rpx;
+		top: 367px;
 		font-size:16px;
 		font-weight:500;
 		color:rgba(255,255,255,1);

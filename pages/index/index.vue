@@ -238,7 +238,7 @@
 	.login-box {
 		width: 750rpx;
 		position: fixed;
-		bottom: 100rpx;
+		bottom: 50px;
 		z-index: 30;
 	}
 	/* #ifdef APP-PLUS */
@@ -247,7 +247,7 @@
 	}
 	/* #endif */
 	.head{
-		height: 430rpx;
+		height: 215px;
 		padding: 20px 0 0 0;
 		position: relative;
 		.bg{
@@ -260,7 +260,7 @@
 		.search {
 			position: relative;
 			z-index: 3;
-			height: 90rpx;
+			height: 45px;
 			width: 690rpx;
 			margin: 0 auto;
 			.search-one {
@@ -268,31 +268,31 @@
 				position: relative;
 				z-index: 4;
 				width: 550rpx;
-				height: 70rpx;
+				height: 35px;
 				background:rgba(255,255,255,1);
 				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
 				border-radius:35px;
 				opacity:0.19;
 				.search-icon {
 					display: inline-block;
-					margin: 0 20rpx 0 30rpx;
-					width: 24rpx;
-					height: 24rpx;
+					margin: 0 10px 0 15px;
+					width: 12px;
+					height: 12px;
 				}
 				.search-content {
-					height: 70rpx;
-					line-height: 70rpx;
+					height: 35px;
+					line-height: 35px;
 					display: inline-block;
 					font-size: 15px;
 				}
 			}
 			.search-two {
 				display: inline-block;
-				width: 120rpx;
-				height: 70rpx;
+				width: 60px;
+				height: 35px;
 				font-size: 15px;
-				margin: 0 0 0 20rpx;
-				line-height: 70rpx;
+				margin: 0 0 0 10px;
+				line-height: 35px;
 				text-align: center;
 				border-radius:35px;
 				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
@@ -305,25 +305,25 @@
 	.carousel-section {
 		clear: both;
 		width: 100%;
-		margin-top: 20rpx;
-		height: 300rpx;
+		margin-top: 10px;
+		height: 150px;
 
 		.carousel {
 			width: 100% !important;
-			height: 300rpx !important;
+			height: 150px !important;
 
 			.swiper-item {
 				width: 100% !important;
-				height: 300rpx !important;
-				border-radius: 16rpx;
+				height: 150px !important;
+				border-radius: 8px;
 
 			}
 		}
 
 		/deep/ .bannar-image {
 			width: 92% !important;
-			height: 300rpx !important;
-			border-radius: 16rpx;
+			height: 150px !important;
+			border-radius: 8px;
 			margin: 0 auto;
 			display: block;
 		}
@@ -331,18 +331,18 @@
 	}
 
 	.sort-section {
-		margin-top: 40rpx;
+		margin-top: 20px;
 		width: 100%;
 		display: flex;
 		align-items: center;
 		background: rgba(255, 255, 255, 1);
 		.sort-items {
-			height: 90rpx;
+			height: 45px;
 			flex-grow: 1;
 			display: inline-block;
 			.typetitleTab {
 				width: 670rpx;
-				padding: 0 10rpx 0 50rpx;
+				padding: 0 5px 0 25px;
 				white-space: nowrap;
 				margin: 0 auto;
 				text-align: center;
@@ -351,8 +351,8 @@
 					.sort-item {
 						display: inline-block;
 						width: 120rpx;
-						height: 90rpx;
-						line-height: 90rpx;
+						height: 45px;
+						line-height: 45px;
 						text-align: center;
 						font-size: 16px;
 					}
@@ -375,37 +375,37 @@
 			display: inline-block;
 			position: relative;
 			.sort-rank-img-box {
-				width: 80rpx;
-				padding: 0 30rpx 0 0;
+				width: 40px;
+				padding: 0 15px 0 0;
 				text-align: center;
 				.sort-rank-img {
-					width: 19rpx;
-					height: 28rpx;
+					width: 9px;
+					height: 14px;
 				}
 			}
 			.sort-rank-item {
 				position: absolute;
-				width: 240rpx;
-				height: 350rpx;
+				width: 120px;
+				height: 175px;
 				display: none;
-				right: -5rpx;
-				top: 25rpx;
+				right: -2px;
+				top: 12px;
 				.sort-rank-item-bg {
-					width: 240rpx;
+					width: 120px;
 					position: absolute !important;
 				}
 				.sort-rank-item-box {
 					position: relative;
 					z-index: 0;
 					width: 120rpx;
-					margin: 80rpx auto 0;
+					margin: 40px auto 0;
 					.sort-rank-list-item {
-						width: 104rpx;
+						width: 54px;
 						text-align: center;
 						font-size: 12px;
 						color:rgba(51,51,51,1);
-						padding: 0rpx 0 9rpx 0;
-						margin: 18rpx 0 0 0;
+						padding: 0px 0 4px 0;
+						margin: 9px 0 0 0;
 					}
 					.blue {
 						color:rgba(244,122,115,1);
@@ -421,9 +421,9 @@
 	
 	.guess-section {
 		width: 690rpx;
-		margin: 20rpx auto 0;
+		margin: 10px auto 0;
 		.guess-item {
-			margin: 26rpx 0 0 0;
+			margin: 13px 0 0 0;
 		}
 	}
 

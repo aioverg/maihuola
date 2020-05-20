@@ -44,6 +44,7 @@
 				lastPage: 1,
 				limit: 5,
 				searchResult: [],
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(res){
@@ -88,59 +89,59 @@
 		background:rgba(249,249,249,1);
 	}
 	.head {
-		margin: 20rpx 30rpx 50rpx;
+		margin: 10px 15px 25px;
 		display: flex;
 		.input-box {
 			display: inline-block;
 			width:550rpx;
-			height: 70rpx;
+			height: 35px;
 			background:rgba(255,255,255,1);
-			border-radius:35rpx;
-			margin: 0 20rpx 0 0;
-			box-shadow:0rpx 0rpx 26rpx 0rpx rgba(153,153,153,0.24);
+			border-radius:17px;
+			margin: 0 10px 0 0;
+			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
 			.input-box-icon {
 				display: inline-block;
-				width: 45rpx;
-				height: 45rpx;
-				margin: 15rpx 15rpx 15rpx 30rpx;
+				width: 22px;
+				height: 22px;
+				margin: 7px 7px 7px 15px;
 			}
 			.input-box-input {
 				display: inline-block;
-				height: 70rpx;
+				height: 35px;
 			}
 		}
 		.input-bt {
 			display: inline-block;
 			width: 120rpx;
-			height: 70rpx;
+			height: 35px;
 			background:rgba(255,255,255,1);
-			box-shadow:0 0 26rpx 0 rgba(153,153,153,0.24);
-			border-radius:35rpx;
+			box-shadow:0 0 13px 0 rgba(153,153,153,0.24);
+			border-radius:17px;
 			font-size: 15px;
 			color:rgba(51,51,51,1);
 			text-align: center;
-			line-height: 70rpx;
+			line-height: 35px;
 		}
 	}
 	.search-result {
 		width: 690rpx;
-		margin: 20rpx auto 0;
+		margin: 10px auto 0;
 		.no-result {
 			width: 100%;
-			margin: 200rpx 0 0 0;
+			margin: 100px 0 0 0;
 			text-align: center;
 			.no-result-img {
 				width: 494rpx;
 			}
 			.no-describe {
-				margin: 100rpx 0 0 0;
+				margin: 50px 0 0 0;
 				font-size: 15px;
 				color: rgba(204,204,204,1);
 			}
 		}
 		.yes-result {
 			.guess-item {
-				margin: 0 auto 26rpx;
+				margin: 0 auto 13px;
 			}
 		}
 		

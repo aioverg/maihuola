@@ -66,26 +66,26 @@
 		background:rgba(249,249,249,1);
 	}
 	.withdraw-box {
-		border-radius: 16rpx;
+		border-radius: 8px;
 		width: 686rpx;
 		background: rgba(255,255,255,1);
-		margin: 20rpx auto 0;
+		margin: 10px auto 0;
 		.withdraw-list-head {
-			height: 95rpx;
-			line-height: 95rpx;
-			margin: 0 28rpx;
-			padding: 0 34rpx;
+			height: 47px;
+			line-height: 47px;
+			margin: 0 14px;
+			padding: 0 17px;
 			font-size: 16px;
 			display: flex;
 			justify-content: space-between;
 			border-bottom:1px solid rgba(229,229,229,1);
 		}
 		.withdraw-list-item {
-			height: 85rpx;
-			line-height: 85rpx;
+			height: 42px;
+			line-height: 42px;
 			font-size: 13px;
 			color:rgba(153,153,153,1);
-			margin: 0 30rpx;
+			margin: 0 15px;
 			.withdraw-list-item-time {
 				display: inline-block;
 				width: 270rpx;

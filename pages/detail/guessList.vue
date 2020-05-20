@@ -25,7 +25,8 @@
 		},
 		data() {
 			return {
-				goodsList: null
+				goodsList: null,
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(res) {
@@ -55,7 +56,7 @@
 		width: 750rpx;
 		.guess-list-item {
 			width: 690rpx;
-			margin: 26rpx auto 0;
+			margin: 13px auto 0;
 		}
 	}
 </style>

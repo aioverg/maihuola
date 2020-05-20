@@ -23,18 +23,18 @@
 					<view class="balance">
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
-						<text class="num">0000000000000000.00</text>
+						<text class="num">000000.00</text>
 						<view class="cash" @click="navTo('/pages/withdraw/withdraw')">
 							提现
 						</view>
 					</view>
 					<view class="estimate">
 						<view class="last">
-							<view class="num">000000000000.00</view>
+							<view class="num">0000000.00</view>
 							<view class="title">本月预估收入（元）</view>
 						</view>
 						<view class="next">
-							<view class="num">000000000000000.00</view>
+							<view class="num">000000.00</view>
 							<view class="title">上月预估收入（元）</view>
 						</view>
 					</view>
@@ -76,6 +76,7 @@
 		},
 		data(){
 			return {
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(){
@@ -109,7 +110,7 @@
 		background:rgba(249,249,249,1);
 	}
 	.user-section{
-		height: 410rpx;
+		height: 205px;
 		
 		position:relative;
 		.bg{
@@ -120,28 +121,28 @@
 		}
 	}
 	.user-info-box{
-		height: 140rpx;
+		height: 70px;
 		display:flex;
 		align-items:center;
 		position:relative;
 		z-index: 1;
 		.portrait{
 			width: 120rpx;
-			height: 120rpx;
-			margin: 0 0 0 50rpx;
+			height: 60px;
+			margin: 0 0 0 25px;
 			border:1px solid #fff;
 			border-radius: 50%;
 		}
 		.username{
 			font-size: 17px;
 			color: rgba(255,255,255,1);
-			margin-left: 30rpx;
+			margin-left: 15px;
 		}
 	}
 	.money-card {
 		width: 690rpx;
-		height: 260rpx;
-		margin: 10rpx auto 0;
+		height: 130px;
+		margin: 5px auto 0;
 		position: relative;
 		.card-bg {
 			position:absolute;
@@ -154,20 +155,20 @@
 			position:relative;
 			z-index: 1;
 			.balance {
-				height: 130rpx;
+				height: 65px;
 				width: 690rpx;
 				display: flex;
 				.icon {
-					width: 34rpx;
-					height: 33rpx;
-					margin: 48rpx 10rpx 49rpx 30rpx;
+					width: 17px;
+					height: 16px;
+					margin: 24px 5px 24px 15px;
 					display: inline-block;
 				}
 				.title {
 					display: inline-block;
-					width: 190rpx;
-					height: 38rpx;
-					margin: 46rpx 0;
+					width: 95px;
+					height: 19px;
+					margin: 23px 0;
 					font-size:15px;
 					color:rgba(51,51,51,1);
 				}
@@ -175,21 +176,21 @@
 					display: inline-block;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
-					height: 50rpx;
+					height: 25px;
 					width: 225rpx;
 					font-size:21px;
 					font-weight:500;
 					color:rgba(51,51,51,1);
-					margin: 40rpx 0;
+					margin: 20px 0;
 				}
 				.cash {
 					display: inline-block;
 					width: 142rpx;
-					height: 54rpx;
-					margin: 38rpx;
-					border-radius:27rpx;
+					height: 27px;
+					margin: 19px;
+					border-radius:13px;
 					background:rgba(244,122,115,1);
-					line-height:54rpx;
+					line-height:27px;
 					text-align: center;
 					font-size:15px;
 					color:rgba(255,255,255,1);
@@ -197,13 +198,13 @@
 			}
 		}
 		.estimate {
-			height: 130rpx;
+			height: 65px;
 			width: 690rpx;
 			display: flex;
 			.last {
-				margin: 0 0 0 50rpx;
+				margin: 0 0 0 25px;
 				.num {
-					width: 250rpx;
+					width: 125px;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
 					font-size:18px;
@@ -211,15 +212,15 @@
 					color:rgba(51,51,51,1);
 				}
 				.title {
-					margin: 12rpx 0 0 0;
+					margin: 6px 0 0 0;
 					font-size:13px;
 					color:rgba(102,102,102,1);
 				}
 			}
 			.next {
-				margin: 0 0 0 110rpx;
+				margin: 0 0 0 55px;
 				.num {
-					width: 250rpx;
+					width: 125px;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
 					font-size:18px;
@@ -227,7 +228,7 @@
 					color:rgba(51,51,51,1);
 				}
 				.title {
-					margin: 12rpx 0 0 0;
+					margin: 6px 0 0 0;
 					font-size:13px;
 					color:rgba(102,102,102,1);
 				}
@@ -235,27 +236,27 @@
 		}
 	}
 	.list-card {
-		height: 700rpx;
+		height: 350px;
 		width: 690rpx;
 		margin: 0 auto;
 		.list-box {
 			font-size: 15px;
-			height: 90rpx;
-			padding: 0 30rpx;
+			height: 45px;
+			padding: 0 15px;
 		}
 		.account-safe {
-			margin: 20rpx 0 0 0;
-			border-radius:16rpx;
+			margin: 10px 0 0 0;
+			border-radius:8px;
 			background:rgba(255,255,255,1);
 		}
 		.message {
-			margin: 20rpx 0 0 0;
-			border-radius: 16rpx;
+			margin: 10px 0 0 0;
+			border-radius: 8px;
 			background:rgba(255,255,255,1);
 		}
 		.logout {
-			margin: 20rpx 0 0 0;
-			border-radius:16rpx;
+			margin: 10px 0 0 0;
+			border-radius:8px;
 			background:rgba(255,255,255,1);
 		}
 	}

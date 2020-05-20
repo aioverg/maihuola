@@ -51,7 +51,8 @@
 				popupDialogTitle: null,
 				popupDialogContent: null,
 				popupMessages: null,
-				clearBind: null
+				clearBind: null,
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 				
 			}
 		},
@@ -187,19 +188,19 @@
 	}
 	.box-item-phone {
 		width: 690rpx;
-		height: 90rpx;
+		height: 45px;
 		background: rgba(255,255,255,1);
-		border-radius:16rpx;
-		margin: 20rpx 0;
-		padding: 0 30rpx;
+		border-radius: 8px;
+		margin: 10px 0;
+		padding: 0 15px;
 	}
 	.box-sofeitem {
 		width: 690rpx;
-		padding: 0 30rpx;
+		padding: 0 15px;
 		background: rgba(255,255,255,1);
-		border-radius: 16rpx;
+		border-radius: 8px;
 		.box-item {
-		    height: 90rpx;
+		    height: 45px;
 		}
 	}
 	

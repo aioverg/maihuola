@@ -97,7 +97,8 @@
 				popupMessages: null,
 				confirmValue: null,
 				aiDialogSrc: '/static/img/ai-taobao.png',
-				taobaoAuth: "aa"
+				taobaoAuth: "aa",
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		computed: {
@@ -246,21 +247,21 @@
 	}
 	.guess-nh {
 		width: 690rpx;
-		min-height: 210rpx;
-		margin: 20rpx auto;
-		padding: 20rpx 30rpx 26rpx;
+		min-height: 105px;
+		margin: 10px auto;
+		padding: 10px 15px 13px;
 		background: rgba(255,255,255,1);
-		border-radius: 16rpx;
+		border-radius: 8px;
 		.guess-nh-title {
 			display: flex;
 			align-items: center;
-			margin: 0 0 10rpx;
+			margin: 0 0 5px;
 			font-size: 15px;
 			font-weight: 500;
 			color: rgba(51,51,51,1);
 			.guess-nh-title-icon {
-				margin: 0 0 0 8rpx;
-				width: 36rpx;
+				margin: 0 0 0 4px;
+				width: 18px;
 			}
 		}
 		.guess-nh-content {
@@ -270,21 +271,21 @@
 	}
 	.zb-script {
 		width: 690rpx;
-		min-height: 210rpx;
-		margin: 0 auto 50rpx;
-		padding: 20rpx 30rpx 26rpx;
+		min-height: 105px;
+		margin: 0 auto 25px;
+		padding: 10px 15px 13px;
 		background: rgba(255,255,255,1);
-		border-radius: 16rpx;
+		border-radius: 8px;
 		.zb-script-title {
 			display: flex;
 			align-items: center;
-			margin: 0 0 10rpx;
+			margin: 0 0 5px;
 			font-size: 15px;
 			font-weight: 500;
 			color: rgba(51,51,51,1);
 			.zb-script-title-icon {
-				margin: 0 0 0 8rpx;
-				width: 36rpx;
+				margin: 0 0 0 4px;
+				width: 18px;
 			}
 		}
 		.zb-script-content {
@@ -293,6 +294,6 @@
 		}
 	}
 	.tkl-bt {
-		margin: 0 0 92rpx;
+		margin: 0 0 46px;
 	}
 </style>

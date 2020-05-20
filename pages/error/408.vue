@@ -37,7 +37,7 @@
 		background:rgba(255,255,255,1);
 	}
 	.img-box {
-		margin: 200rpx 0 120rpx 0;
+		margin: 100px 0 60px 0;
 		.img {
 			display: block;
 			width: 456rpx;
@@ -51,16 +51,16 @@
 		text-align: center;
 	}
 	.error-title-two {
-		margin: 10rpx 0 90rpx;
+		margin: 5px 0 45px;
 		font-size: 15px;
 		color:rgba(102,102,102,1);
 		text-align: center;
 	}
 	.error-bt {
 		width: 330rpx;
-		height: 80rpx;
+		height: 40px;
 		margin: 0 auto;
-		line-height: 80rpx;
+		line-height: 40px;
 		text-align: center;
 		font-size: 15px;
 		color: rgba(255,255,255,1);

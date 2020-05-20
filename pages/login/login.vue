@@ -34,7 +34,7 @@
 		},
 		data() {
 			return {
-				
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		methods: {
@@ -42,6 +42,7 @@
 				this.$global.navTo(obj)
 			},
 			login(){
+				console.log("微信登录")
 				uni.login({
 				  provider: 'weixin',
 				  success: function (loginRes) {
@@ -71,11 +72,11 @@
 			display: inline-block;
 			width: 286rpx;
 			height: 286rpx;
-			margin: 177rpx auto;
+			margin: 88px auto;
 		}
 	}
 	.to-phone {
-		margin: 52rpx 0 203rpx 0;
+		margin: 26px 0 101rpx 0;
 		text-align: center;
 		font-size: 13px;
 		color:rgba(204,204,204,1);
@@ -83,6 +84,6 @@
 		text-decoration-line: underline;
 	}
 	.note {
-		margin: 0 0 100rpx 0;
+		margin: 0 0 50px 0;
 	}
 </style>

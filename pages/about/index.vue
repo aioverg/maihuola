@@ -28,7 +28,7 @@
 		},
 		data() {
 			return {
-				
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		methods: {
@@ -48,14 +48,14 @@
 	}
 	.help-box {
 		width: 750rpx;
-		padding: 0 30rpx;
+		padding: 0 15px;
 		.help-list {
-			height: 90rpx;
-			padding:  0 30rpx;
+			height: 45px;
+			padding:  0 15px;
 			margin: 0 auto;
-			margin: 20rpx 0 0 0;
+			margin: 10px 0 0 0;
 			background: rgba(255,255,255,1);
-			border-radius: 16rpx;
+			border-radius: 8px;
 			color: rgba(51,51,51,1);
 			font-size: 15px;
 		}

@@ -45,7 +45,8 @@
 		},
 		data() {
 			return {
-				goodsId: null
+				goodsId: null,
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(obj){
@@ -82,19 +83,19 @@
 	}
 	.icon-card {
 		width: 690rpx;
-		height: 924rpx;
-		margin: 20rpx auto 0;
+		height: 462px;
+		margin: 10px auto 0;
 		background:rgba(255,255,255,1);
 		position: relative;
 		.box-bg {
 			width: 100%;
-			height: 396rpx;
+			height: 198px;
 			position: absolute;
 		}
 		.icon-box {
 			width: 490rpx;
 			margin: 0 auto;
-			height: 396rpx;
+			height: 198px;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -115,43 +116,43 @@
 					border-radius: 152rpx;
 					.img {
 						position: relative;
-						width: 140rpx;
-						height: 140rpx;
-						top: 6rpx;
-						left: 6rpx;
+						width: 70px;
+						height: 70px;
+						top: 3px;
+						left: 3px;
 					}
 				}
 				.icon-title {
 					font-size: 13px;
 					width: 152rpx;
-					margin: 12rpx 0 0;
+					margin: 6px 0 0;
 					text-align: center;
 					color:rgba(255,255,255,1);
 				}
 			}
 		}
 		.icon-box-describe {
-			margin: 30rpx 0 0 50rpx;
+			margin: 15px 0 0 25px;
 			.icon-box-describe-one {
 				font-size:16px;
 				color:rgba(51,51,51,1);
 			}
 			.icon-box-describe-two {
-				margin: 30rpx 0 0;
+				margin: 15px 0 0;
 				font-size:14px;
 				color:rgba(153,153,153,1);
 				.dot {
-					width: 6rpx;
-					height: 6rpx;
+					width: 3px;
+					height: 3px;
 					background:rgba(153,153,153,1);
 					display: inline-block;
-					margin: 8rpx 20rpx 8rpx 0;
+					margin: 4px 10px 4px 0;
 				}
 			}
 		}
 	}
 	.bt {
 		position: relative;
-		top: 80rpx;
+		top: 40px;
 	}
 </style>

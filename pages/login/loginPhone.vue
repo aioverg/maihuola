@@ -54,7 +54,8 @@
 				code: 123456,
 				btName: "获取验证码",
 				times: null,
-				timeRun: false
+				timeRun: false,
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		methods: {
@@ -127,75 +128,75 @@
 		text-align: center;
 		.img {
 			display: inline-block;
-			width: 286rpx;
-			height: 286rpx;
-			margin: 77rpx auto 81rpx;
+			width: 143px;
+			height: 143px;
+			margin: 38px auto 40px;
 		}
 	}
 	.phone-box {
 		display: flex;
 		align-items: center;
-		height: 64rpx;
+		height: 32px;
 		width: 650rpx;
 		margin: 0 auto;
 		border-bottom: 1px solid rgba(204,204,204,1);
 		.phone-icon {
-			width: 40rpx;
+			width: 20px;
 			display: inline-block;
 		}
 		.phone-area {
 			display: inline-block;
-			margin: 0 0 0 70rpx;
+			margin: 0 0 0 35px;
 		}
 		.phone-input {
 			display: inline-block;
-			margin: 0 0 0 26rpx;
+			margin: 0 0 0 13px;
 			font-size: 17px;
 		}
 	}
 	.code-box {
 		display: flex;
 		align-items: center;
-		height: 80rpx;
+		height: 40px;
 		width: 650rpx;
-		margin: 33rpx auto 0;
+		margin: 16px auto 0;
 		.code-input-box {
 			display: flex;
-			height: 80rpx;
+			height: 40px;
 			align-items: center;
 			border-bottom: 1px solid rgba(204,204,204,1);
 			.code-icon {
-				width: 40rpx;
+				width: 20px;
 				display: inline-block;
 			}
 			.code-input {
 				display: inline-block;
-				margin: 0 0 0 70rpx;
+				margin: 0 0 0 35px;
 				font-size: 17px;
 			}
 		}
 		.code-button {
 			display: inline-block;
-			width: 200rpx;
-			height: 80rpx;
+			width: 100px;
+			height: 40px;
 			text-align: center;
 			background:rgba(244,122,115,1);
-			border-radius: 45rpx;
-			line-height: 80rpx;
+			border-radius: 22px;
+			line-height: 40px;
 			font-size: 14px;
 			color: rgba(255,255,255,1);
 		}
 	}
 	.login-button {
-		margin: 80rpx 0 0 0;
+		margin: 40px 0 0 0;
 	}
 	.huo {
 		width: 100%;
 		text-align: center;
 		font-size: 13px;
 		color: rgba(204,204,204,1);
-		height: 37rpx;
-		margin: 52rpx 0 30rpx 0;
+		height: 28px;
+		margin: 26px 0 15px 0;
 	}
 	.wx-box {
 		display: flex;
@@ -203,16 +204,16 @@
 		justify-content: center;
 		.wx-icon {
 			display: inline-block;
-			width: 70rpx;
+			width: 35px;
 		}
 		.wx-bt {
 			display: inline-block;
 			font-size: 13px;
 			color: rgba(244,122,115,1);
-			margin: 0 0 0 10rpx;
+			margin: 0 0 0 5px;
 		}
 	}
 	.note {
-		margin: 100rpx 0 0 0;
+		margin: 50px 0 0 0;
 	}
 </style>

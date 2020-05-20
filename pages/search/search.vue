@@ -32,7 +32,8 @@
 		data() {
 			return {
 				inputValue: null,
-				history: []
+				history: [],
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(){
@@ -81,69 +82,69 @@
 		background:rgba(249,249,249,1);
 	}
 	.head {
-		margin: 20rpx 30rpx 50rpx;
+		margin: 10px 15px 25px;
 		display: flex;
 		.input-box {
 			display: inline-block;
 			width:550rpx;
-			height: 70rpx;
+			height: 35px;
 			background:rgba(255,255,255,1);
-			border-radius:35rpx;
-			margin: 0 20rpx 0 0;
-			box-shadow:0rpx 0rpx 26rpx 0rpx rgba(153,153,153,0.24);
+			border-radius:12px;
+			margin: 0 10px 0 0;
+			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
 			.input-box-icon {
 				display: inline-block;
-				width: 45rpx;
-				height: 45rpx;
-				margin: 15rpx 15rpx 15rpx 30rpx;
+				width: 22px;
+				height: 22px;
+				margin: 7px 7px 7px 15px;
 			}
 			.input-box-input {
 				display: inline-block;
-				height: 70rpx;
+				height: 35px;
 			}
 		}
 		.input-bt {
 			display: inline-block;
-			width: 120rpx;
-			height: 70rpx;
+			width: 60px;
+			height: 35px;
 			background:rgba(255,255,255,1);
-			box-shadow:0 0 26rpx 0 rgba(153,153,153,0.24);
-			border-radius:35rpx;
+			box-shadow:0 0 13px 0 rgba(153,153,153,0.24);
+			border-radius:17px;
 			font-size: 15px;
 			color:rgba(51,51,51,1);
 			text-align: center;
-			line-height: 70rpx;
+			line-height: 35px;
 		}
 	}
 	.history-box {
 		width: 690rpx;
-		height: 45rpx;
+		height: 22px;
 		margin: 0 auto;
 		.history {
 			display: inline-block;
 			font-size: 16px;
 			font-weight: 500;
 			color:rgba(51,51,51,1);
-			margin-right: 493rpx;
+			margin-right: 246px;
 		}
 		.delete-icon {
 			display: inline-block;
-			width: 30rpx;
-			height: 31rpx;
+			width: 15px;
+			height: 15px;
 		}
 	}
 	.history-label-box {
 		width: 690rpx;
-		margin: 32rpx auto 0;
+		margin: 16px auto 0;
 		.history-label {
 			display: inline-block;
-			height: 64rpx;
-			margin: 0 20rpx 20rpx 0;
-			line-height: 64rpx;
+			height: 32px;
+			margin: 0 10px 10px 0;
+			line-height: 32px;
 			font-size: 14px;
-			padding: 0 24rpx;
+			padding: 0 12px;
 			background: rgba(242,242,242,1);
-			border-radius: 32rpx;
+			border-radius: 16px;
 		}
 	}
 </style>

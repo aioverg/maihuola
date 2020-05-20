@@ -8,8 +8,8 @@
 			<view class="ai-guess-info">{{data.title}}</view>
 			<view class="ai-guess-price-box">
 				<view class="price">
-					<view class="zb-price">￥直播价：{{data.price}}</view>
-					<view class="sc-price">￥市场价：{{data.promotion_price}}</view>
+					<view class="zb-price">直播价：￥{{data.price}}</view>
+					<view class="sc-price">市场价：￥{{data.promotion_price}}</view>
 				</view>
 				<view class="rate">
 					<view class="ck-earn">参考收益：{{data.commission}}</view>
@@ -52,7 +52,6 @@
 			margin: 20rpx;
 			.ai-guess-image {
 				width: 220rpx;
-
 				border-radius: 16rpx;
 			}
 		}
@@ -62,8 +61,10 @@
 			margin: 20rpx 0;
 			padding: 0 20rpx 0 0;
 			.ai-guess-info {
-				height: 120rpx;
+				height: 60px;
 				overflow: hidden;
+				text-overflow: ellipsis;
+				line-height: 20px;
 				font-size: 15px;
 				color:rgba(51,51,51,1);
 			}

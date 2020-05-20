@@ -43,7 +43,8 @@
 						title: "如果上个月不提现，下个月可以一起提现吗",
 						url: "/pages/help/help?id="
 					}
-				]
+				],
+				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		methods: {
@@ -60,11 +61,11 @@
 	}
 	.help-list {
 		width: 690rpx;
-		height: 90rpx;
-		margin: 20rpx auto 0;
+		height: 45px;
+		margin: 10px auto 0;
 		background: rgba(255,255,255,1);
-		padding: 0 30rpx;
-		border-radius: 16rpx;
+		padding: 0 15px;
+		border-radius: 8px;
 	}
 	
 </style>

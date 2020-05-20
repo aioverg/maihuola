@@ -67,13 +67,13 @@
 	}
 	.feedback-box {
 		width: 750rpx;
-		padding: 30rpx 50rpx;
+		padding: 15px 25px;
 		.feedback-area {
 			width: 650rpx;
 			height: 910rpx;
 		}
 	}
 	.feedback-bt {
-		margin: 84rpx 0 0 0;
+		margin: 42px 0 0 0;
 	}
 </style>
