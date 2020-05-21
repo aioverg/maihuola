@@ -2,9 +2,7 @@
 	<view class="ai-popup-dialog">
 		<image mode="widthFix" class="ai-popup-bg" src="/static/img/bg-popup01.png"></image>
 		<view class="ai-popup-dialog-content-box">
-			<view class="ai-popup-cancel" @click="close">
-				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
-			</view>
+
 			<view class="ai-popup-logo">
 				<image class="ai-popup-logo-icon" mode="widthFix" :src="src"></image>
 			</view>
@@ -18,16 +16,9 @@
 			<view class="ai-popup-ok-button-fox ai-border-left" @click="onOk">
 				<text class="ai-popup-ok">确定</text>
 			</view>
-			<!--
-			<view class="ai-popup-button-group">
-				<view class="ai-popup-button" @click="close">
-					<text class="ai-popup-button-text">取消</text>
-				</view>
-				<view class="ai-popup-button ai-border-left" @click="onOk">
-					<text class="ai-popup-button-text ai-button-color">确定</text>
-				</view>
+			<view class="ai-popup-cancel" @click="close">
+				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
 			</view>
-			-->
 		</view>
 	</view>
 </template>
@@ -166,31 +157,25 @@
 
 <style lang="scss" scoped>
 	.ai-popup-dialog {
-		width: 550rpx;
-		height: 628rpx;
+		width: 275px;
+		height: 314px;
 		border-radius: 15px;
 		position: relative;
 	}
 	.ai-popup-bg {
-		width: 550rpx;
+		width: 275px;
 		position: absolute;
 	}
 	.ai-popup-dialog-content-box {
 		position: relative;
 		z-index: 10;
 	}
-	.ai-popup-cancel {
-		text-align: right;
-	}
-	.ai-popup-cancel-icon {
-		width: 50rpx;
-		margin: 10rpx 10rpx 0 0;
-	}
 	.ai-popup-logo {
 		text-align: center;
+		padding: 35px 0 0 0;
 	}
 	.ai-popup-logo-icon {
-		width: 188rpx;
+		width: 94px;
 	}
 	.ai-popup-title {
 		/* #ifndef APP-NVUE */
@@ -198,7 +183,7 @@
 		/* #endif */
 		flex-direction: row;
 		justify-content: center;
-		padding-top: 30rpx;
+		padding-top: 15px;
 		padding-bottom: 5px;
 	}
 	.ai-popup-title-text {
@@ -212,84 +197,30 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		padding: 0 0 60rpx 0;
+		padding: 0 0 30px 0;
 	}
 	.ai-popup-content-text {
 		font-size: 14px;
 		color: #6e6e6e;
 	}
 	.ai-popup-ok-button-fox {
-		width: 330rpx;
-		height: 80rpx;
+		width: 165px;
+		height: 40px;
 		margin: 0 auto;
 		background: rgba(244,122,115,1);
-		border-radius: 45rpx;
+		border-radius: 22px;
 		text-align: center;
-		line-height: 80rpx;
+		line-height: 40px;
 		font-size: 15px;
 		color: rgba(255,255,255,1);
 	}
-	
-	
-
-
-	
-
-	
-
-	
-
-	.ai-popup-button-group {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		border-top-color: #f5f5f5;
-		border-top-style: solid;
-		border-top-width: 1px;
+	.ai-popup-cancel {
+		text-align: center;
+		position: relative;
+		top: 55px;
 	}
-
-	.ai-popup-button {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-
-		flex: 1;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		height: 45px;
-	}
-
-	.ai-border-left {
-		border-left-color: #f0f0f0;
-		border-left-style: solid;
-		border-left-width: 1px;
-	}
-
-	.ai-popup-button-text {
-		font-size: 14px;
-	}
-
-	.ai-popup-input {
-		flex: 1;
-		font-size: 14px;
-	}
-
-	.ai-popup__success {
-		color: $uni-color-success;
-	}
-
-	.ai-popup__warn {
-		color: $uni-color-warning;
-	}
-
-	.ai-popup__error {
-		color: $uni-color-error;
-	}
-
-	.ai-popup__info {
-		color: #909399;
+	.ai-popup-cancel-icon {
+		width: 25px;
 	}
 </style>
 

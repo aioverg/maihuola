@@ -98,22 +98,22 @@
 			height: 198px;
 			display: flex;
 			justify-content: space-between;
-			align-items: center;
 			.icon-box-item {
 				position: relative;
+				margin: 50px 0 0 0;
 				z-index: 1;
-				width: 152rpx;
-				height: 152rpx;
+				width: 76px;
+				height: 76px;
 				display: inline-block;
 				.icon {
 					position: relative;
-					width: 152rpx;
-					height: 152rpx;
+					width: 76px;
+					height: 76px;
 					background:rgba(255,255,255,1);
 					box-shadow:0px 0px 30px 0px rgba(205,59,51,0.5);
 					opacity:0.9;
 					filter:blur(0px);
-					border-radius: 152rpx;
+					border-radius: 76px;
 					.img {
 						position: relative;
 						width: 70px;
@@ -124,7 +124,7 @@
 				}
 				.icon-title {
 					font-size: 13px;
-					width: 152rpx;
+					width: 76px;
 					margin: 6px 0 0;
 					text-align: center;
 					color:rgba(255,255,255,1);

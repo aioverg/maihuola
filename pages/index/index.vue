@@ -33,7 +33,8 @@
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id)">
 					    <view class="sort-item" :class="sortId-1 ==index?'red':''">
-						    {{item.title}}
+						    <view class="sort-item-bottom" :class="sortId-1 ==index?'sort-bottom':''"></view>
+							{{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
 					</view>
@@ -112,7 +113,8 @@
 				blue: null,
 				loginBox: false,
 				id: 1,
-				uniLoadMoreStatus: "more"
+				uniLoadMoreStatus: "more",
+				current: 0,
 			};
 		},
 		onLoad() {
@@ -130,6 +132,9 @@
 			this.getGuess(this.sortId)
 		},
 		methods: {
+			change(e) {
+			            this.current = e.detail.current;
+			        },
 			//获取轮播图数据
 			getCarousel(){
 				console.log("轮播图")
@@ -349,15 +354,27 @@
 				.sort-item-box {
 					display: inline-block;
 					.sort-item {
+						position: relative;
 						display: inline-block;
 						width: 120rpx;
 						height: 45px;
 						line-height: 45px;
 						text-align: center;
 						font-size: 16px;
+						.sort-item-bottom {
+							position: absolute;
+							
+							width: 20px;
+							left: 12px;
+							height: 36px;
+						}
+					}
+					.sort-bottom {
+						border-bottom: 2px solid rgba(244,122,115,1);
 					}
 					.red {
 						color:rgba(244,122,115,1);
+						font-weight: 500;
 					}
 					.sort-item-line {
 						display: inline-block;
@@ -368,7 +385,6 @@
 				.sort-item-box:last-child .sort-item-line {
 					display: none;
 				}
-				
 			}
 		}
 		.sort-rank {
