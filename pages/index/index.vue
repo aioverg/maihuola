@@ -33,7 +33,6 @@
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id)">
 					    <view class="sort-item" :class="sortId-1 ==index?'red':''">
-						    <view class="sort-item-bottom" :class="sortId-1 ==index?'sort-bottom':''"></view>
 							{{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
@@ -137,7 +136,6 @@
 			        },
 			//获取轮播图数据
 			getCarousel(){
-				console.log("轮播图")
 				this.$api.getCarousel({
 					code: "Index.Banner"
 				}).then( res => {
@@ -161,7 +159,6 @@
 			},
 			//获取商品
 			getGuess(id){
-				console.log(8888)
 				if(this.sortId != id){
 					this.goodsList = []
 					this.sortId = id
@@ -293,7 +290,7 @@
 			}
 			.search-two {
 				display: inline-block;
-				width: 60px;
+				width: 120rpx;
 				height: 35px;
 				font-size: 15px;
 				margin: 0 0 0 10px;
@@ -361,16 +358,6 @@
 						line-height: 45px;
 						text-align: center;
 						font-size: 16px;
-						.sort-item-bottom {
-							position: absolute;
-							
-							width: 20px;
-							left: 12px;
-							height: 36px;
-						}
-					}
-					.sort-bottom {
-						border-bottom: 2px solid rgba(244,122,115,1);
 					}
 					.red {
 						color:rgba(244,122,115,1);

@@ -17,8 +17,8 @@
 			console.log(777777777)
 			APPUpdate();
 			// #endif
-			/*
-			let userInfo = uni.getStorageSync('userInfo');
+			
+			/*let userInfo = uni.getStorageSync('userInfo');
 			let userToken = uni.getStorageSync('token')
 			if(userToken.length == 0){
 				return

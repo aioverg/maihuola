@@ -1,12 +1,30 @@
 <template>  
     <view>
 		<ai-navbar
-		    title="我的"
+		    :title="navTitle"
 			:fixed="true"
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"
 			color="#FFFFFF"
 		/>
+		
+		<view v-if="noLogin">
+			<view class="img-box">
+				<image class="img" src="/static/img/ai-maihuola1.png"></image>
+			</view>
+			<view @click="login">
+				<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
+			</view>
+			<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
+				或手机快速登录
+			</view>
+			<view class="note">
+				<ai-login-hint></ai-login-hint>
+			</view>
+		</view>
+		
+		
+		<view v-if="yesLogin">
 		<view class="user-section">
 			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>
 			<view class="user-info-box">
@@ -61,10 +79,13 @@
 				</view>
 			</view>
 		</view>
+		</view>
     </view>  
 </template>  
 <script>
 	import aiListCell from '@/components/ai-list-cell'
+	import aiButton from '@/components/ai-button'
+	import aiLoginHint from '@/components/ai-login-hint.vue'
 	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
     import {  
         mapState 
@@ -72,18 +93,26 @@
 	let startY = 0, moveY = 0, pageAtTop = true;
     export default {
 		components: {
-			aiListCell
+			aiListCell,
+			aiButton,
+			aiLoginHint
 		},
 		data(){
 			return {
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
+				navTitle: null,
+				noLogin: false,
+				yesLogin: false
 			}
 		},
 		onLoad(){
 			if(!this.$store.state.hasLogin){
-				uni.redirectTo({
-				    url: '/pages/login/login'
-				});
+				
+				this.navTitle = "微信登录"
+				this.noLogin = true
+			}else{
+				this.navTitle = "我的"
+				this.yesLogin = true
 			}
 		},
         computed: {
@@ -94,7 +123,8 @@
 				uni.navigateTo({  
 					url
 				})  
-			}
+			},
+			login(){console.log(66666)}
         }  
     }  
 </script>  
@@ -109,6 +139,29 @@
 	page {
 		background:rgba(249,249,249,1);
 	}
+		.img-box {
+			width: 750rpx;
+			text-align: center;
+			.img {
+				display: inline-block;
+				width: 286rpx;
+				height: 286rpx;
+				margin: 88px auto;
+			}
+		}
+		.to-phone {
+			margin: 26px 0 101rpx 0;
+			text-align: center;
+			font-size: 13px;
+			color:rgba(204,204,204,1);
+			height:37px;
+			text-decoration-line: underline;
+		}
+		.note {
+			margin: 0 0 50px 0;
+		}
+		
+	
 	.user-section{
 		height: 205px;
 		
