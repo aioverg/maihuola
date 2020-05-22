@@ -57,7 +57,7 @@
 			<view class="zb-script-content">这里是直播脚本相关内容</view>
 		</view>
 		<view class="tkl-bt" @click="copyTKL">
-			<ai-button btname="复制淘口令" ></ai-button>
+			<ai-button btname="复制推广码" ></ai-button>
 		</view>
 		<uni-popup ref="popupDialog" type="dialog">
 		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>

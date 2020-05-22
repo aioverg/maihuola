@@ -99,7 +99,7 @@ api.getPhoneCode = (data) => {
 		data: data
 	})
 }
-//验证手机验证码
+//验证手机验证码，并登录
 api.getChecktPhoneCode = (data) => {
 	return request({
 		url: "/api/v1.user/loginbymobile",

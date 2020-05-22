@@ -1,37 +1,58 @@
 // #ifdef APP-PLUS 
 // 请求配置说明：https://ext.dcloud.net.cn/plugin?id=822
-import $http from '@/js_sdk/zhouWei-request/requestConfig.js';
+//import $http from '@/config/requestConfig';
 const platform = uni.getSystemInfoSync().platform;
 // 主颜色
 const $mainColor = "FF5B78";
 // 弹窗图标url
-const $iconUrl = "/static/ic_ar.png";
+const $iconUrl = "/static/img/ic_ar.png";
+const $bg = "/static/img/"
 
 // 获取当前应用的版本号
 export const getCurrentNo = function(callback) {
 	// 获取本地应用资源版本号
 	plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 		callback && callback({
-			versionCode: inf.version.replace(/\./g, ""),
+			versionCode: inf.versionCode/*.replace(/\./g, ""),*/,
 			version: inf.version
 		});
 	});
 } 
 // 发起ajax请求获取服务端版本号
+
 export const getServerNo = function(version,isPrompt = false, callback) {
 	let httpData = {
-		version:version
+		version: version
 	};
 	if (platform == "android") {
 		httpData.type = 1101;
 	} else {
 		httpData.type = 1102;
 	}
+	return uni.request({
+		url: "http://api.taobaoke.test.aixiaotu.com.cn/api/v1.version/info",
+		method: "GET",
+		data: {
+			client_type: 1,
+			app_type: 1,
+		}
+	}).then(res => {
+		if (res && res[1].data.app_link) {
+			callback && callback(res);
+		} else if (isPrompt) {
+			uni.showToast({
+				title: "暂无新版本",
+				icon: "none"
+			});
+		}
+	})
+	
+	
 	/* 接口入参说明
 	 * version: 应用当前版本号（已自动获取）
 	 * type：平台（1101是安卓，1102是IOS）
 	 */
-	$http.get("api/kemean/aid/v2/app_version", httpData,{
+	/*$http.get("api/common/v1/app_version", httpData,{
 		isPrompt: isPrompt
 	}).then(res => {
 		/* res的数据说明
@@ -43,7 +64,7 @@ export const getServerNo = function(version,isPrompt = false, callback) {
 		 * | forceUpdate	 | y	    | boolean	| 是否强制更新  |
 		 * | downloadUrl	 | y	    | String	| 版本下载链接（IOS安装包更新请放跳转store应用商店链接,安卓apk和wgt文件放文件下载链接）  |
 		 */
-		if (res && res.downloadUrl) {
+		/*if (res && res.downloadUrl) {
 			callback && callback(res);
 		} else if (isPrompt) {
 			uni.showToast({
@@ -51,7 +72,7 @@ export const getServerNo = function(version,isPrompt = false, callback) {
 				icon: "none"
 			});
 		}
-	});
+	});*/
 }
 // 从服务器下载应用资源包（wgt文件）
 export const getDownload = function(data) {
@@ -142,27 +163,93 @@ function drawtext(text, maxWidth) {
 	let textArr = text.split("");
 	let len = textArr.length;
 	// 上个节点
-	let previousNode = 1;
+	let previousNode = 0;
 	// 记录节点宽度
 	let nodeWidth = 0;
 	// 文本换行数组
 	let rowText = [];
+	// 如果是字母，侧保存长度
+	let letterWidth = 0;
+	// 汉字宽度
+	let chineseWidth = 14;
+	// otherFont宽度
+	let otherWidth = 7;
 	for (let i = 0; i < len; i++) {
-		if (/[\u4e00-\u9fa5]/g.test(textArr[i])) {
-			nodeWidth += 24;
+		if (/[\u4e00-\u9fa5]|[\uFE30-\uFFA0]/g.test(textArr[i])) {
+			if(letterWidth > 0){
+				if(nodeWidth + chineseWidth + letterWidth * otherWidth > maxWidth){
+					rowText.push({
+						type: "text",
+						content: text.substring(previousNode, i)
+					});
+					previousNode = i;
+					nodeWidth = chineseWidth;
+					letterWidth = 0;
+				} else {
+					nodeWidth += chineseWidth + letterWidth * otherWidth;
+					letterWidth = 0;
+				}
+			} else {
+				if(nodeWidth + chineseWidth > maxWidth){
+					rowText.push({
+						type: "text",
+						content: text.substring(previousNode, i)
+					});
+					previousNode = i;
+					nodeWidth = chineseWidth;
+				}else{
+					nodeWidth += chineseWidth;
+				}
+			}
 		} else {
-			nodeWidth += 12;
-		}
-		if (nodeWidth >= maxWidth) {
-			rowText.push(text.substring(previousNode, i));
-			previousNode = i;
-			nodeWidth = 0;
+			if(/\n/g.test(textArr[i])){
+				rowText.push({
+					type: "break",
+					content: text.substring(previousNode, i)
+				});
+				previousNode = i + 1;
+				nodeWidth = 0;
+				letterWidth = 0;
+			}else if(textArr[i] == "\\" && textArr[i + 1] == "n"){
+				rowText.push({
+					type: "break",
+					content: text.substring(previousNode, i)
+				});
+				previousNode = i + 2;
+				nodeWidth = 0;
+				letterWidth = 0;
+			}else if(/[a-zA-Z0-9]/g.test(textArr[i])){
+				letterWidth += 1;
+				if(nodeWidth + letterWidth * otherWidth > maxWidth){
+					rowText.push({
+						type: "text",
+						content: text.substring(previousNode, i + 1 - letterWidth)
+					});
+					previousNode = i + 1 - letterWidth;
+					nodeWidth = letterWidth * otherWidth;
+					letterWidth = 0;
+				}
+			} else{
+				if(nodeWidth + otherWidth > maxWidth){
+					rowText.push({
+						type: "text",
+						content: text.substring(previousNode, i)
+					});
+					previousNode = i;
+					nodeWidth = otherWidth;
+				}else{
+					nodeWidth += otherWidth;
+				}
+			}
 		}
 	}
-	if (previousNode < text.length) {
-		rowText.push(text.substring(previousNode, text.length));
+	if (previousNode < len) {
+		rowText.push({
+			type: "text",
+			content: text.substring(previousNode, len)
+		});
 	}
-	return rowText.length;
+	return rowText;
 }
 // 是否更新弹窗
 function updatePopup(data, callback) {
@@ -184,10 +271,67 @@ function updatePopup(data, callback) {
 	const viewContentPadding = 20;
 	// 弹窗容器的宽度
 	const viewContentWidth = parseInt(popupViewWidth - (viewContentPadding * 2));
-	// 文本高度
-	let viewContentHeight = parseInt(drawtext(data.versionInfo, viewContentWidth) * 16) + 10;
+	// 描述的列表
+	const descriptionList = drawtext(data.update_note, viewContentWidth);
 	// 弹窗容器高度
-	const popupViewHeight = viewContentHeight + 80 + 20 + 20 + 90;
+	let popupViewHeight = 80 + 20 + 20 + 90  + 10;
+	let popupViewContentList = [{
+			src: $iconUrl,
+			id: "logo", 
+			tag: "img",
+			position: {
+				top: "0px",
+				left: (popupViewWidth - 124) / 2 + "px",
+				width: "124px",
+				height: "80px",
+			}
+		},
+		{
+			tag: 'font',
+			id: 'title',
+			text: "发现新版本" + data.server_version,
+			textStyles: {
+				size: '18px',
+				color: "#333",
+				weight: "bold",
+				whiteSpace: "normal"
+			},
+			position: {
+				top: '90px',
+				left: viewContentPadding + "px",
+				width: viewContentWidth + "px",
+				height: "30px",
+			}
+		}];
+	const textHeight = 18;
+	let contentTop = 130;
+	descriptionList.forEach((item,index) => {
+		if(index > 0){
+			popupViewHeight += textHeight;
+			contentTop += textHeight;
+		}
+		popupViewContentList.push({
+			tag: 'font',
+			id: 'content' + index + 1,
+			text: item.content,
+			textStyles: {
+				size: '14px',
+				color: "#666",
+				lineSpacing: "50%",
+				align: "left"
+			},
+			position: {
+				top: contentTop + "px",
+				left: viewContentPadding + "px",
+				width: viewContentWidth + "px",
+				height: textHeight + "px",
+			}
+		});
+		if(item.type == "break"){
+			contentTop += 10;
+			popupViewHeight += 10;
+		}
+	});
 	// 弹窗内容
 	let popupView = new plus.nativeObj.View("popupView", { //创建底部图标菜单
 		tag: "rect",
@@ -225,69 +369,24 @@ function updatePopup(data, callback) {
 		width: (viewContentWidth - viewContentPadding) / 2 + "px",
 		height: "30px",
 	});
-	popupView.draw([{
-			src: $iconUrl,
-			id: "logo",
-			tag: "img",
-			position: {
-				top: "0px",
-				left: (popupViewWidth - 124) / 2 + "px",
-				width: "124px",
-				height: "80px",
-			}
+	popupViewContentList.push({
+		tag: 'font',
+		id: 'cancelText',
+		text: "暂不升级",
+		textStyles: {
+			size: '14px',
+			color: "#666",
+			lineSpacing: "0%",
+			whiteSpace: "normal"
 		},
-		{
-			tag: 'font',
-			id: 'title',
-			text: "发现新版本" + data.versionName,
-			textStyles: {
-				size: '18px',
-				color: "#333",
-				weight: "bold",
-				whiteSpace: "normal"
-			},
-			position: {
-				top: '90px',
-				left: viewContentPadding + "px",
-				width: viewContentWidth + "px",
-				height: "30px",
-			}
-		},
-		{
-			tag: 'font',
-			id: 'content23',
-			text: data.versionInfo,
-			textStyles: {
-				size: '14px',
-				color: "#666",
-				lineSpacing: "50%",
-				whiteSpace: "normal"
-			},
-			position: {
-				top: '130px',
-				left: viewContentPadding + "px",
-				width: viewContentWidth + "px",
-				height: viewContentHeight + "px",
-			}
-		},
-		{
-			tag: 'font',
-			id: 'cancelText',
-			text: "暂不升级",
-			textStyles: {
-				size: '14px',
-				color: "#666",
-				lineSpacing: "0%",
-				whiteSpace: "normal"
-			},
-			position: {
-				bottom: viewContentPadding + 'px',
-				left: viewContentPadding + "px",
-				width: (viewContentWidth - viewContentPadding) / 2 + "px",
-				height: "30px",
-			}
-		},
-		{
+		position: {
+			bottom: viewContentPadding + 'px',
+			left: viewContentPadding + "px",
+			width: (viewContentWidth - viewContentPadding) / 2 + "px",
+			height: "30px",
+		}
+	});
+	popupViewContentList.push({
 			tag: 'font',
 			id: 'confirmText',
 			text: "立即升级",
@@ -303,8 +402,8 @@ function updatePopup(data, callback) {
 				width: (viewContentWidth - viewContentPadding) / 2 + "px",
 				height: "30px",
 			}
-		},
-	]);
+		});
+	popupView.draw(popupViewContentList);
 	popupView.addEventListener("click", function(e) {
 		let maxTop = popupViewHeight - viewContentPadding;
 		let maxLeft = popupViewWidth - viewContentPadding;
@@ -323,10 +422,10 @@ function updatePopup(data, callback) {
 		}
 	});
 	// 点击遮罩层
-	maskLayer.addEventListener("click", function() { //处理遮罩层点击
+	/*maskLayer.addEventListener("click", function() { //处理遮罩层点击
 		maskLayer.hide();
 		popupView.hide();
-	});
+	});*/
 	// 显示弹窗
 	maskLayer.show();
 	popupView.show();
@@ -681,10 +780,9 @@ function downloadPopup(data, callback, cancelCallback,rebootCallback) {
 	});
 }
 export default function(isPrompt = false) {
-	console.log(1116666)
 	getCurrentNo(version => {
 		getServerNo(version.versionCode,isPrompt, res => {
-			if (res.forceUpdate) {
+			if (res[1].data.is_required) {//强制更新
 				if (/\.wgt$/i.test(res.downloadUrl)) {
 					getDownload(res);
 				} else {
@@ -694,9 +792,9 @@ export default function(isPrompt = false) {
 						plus.runtime.openURL(res.downloadUrl);
 					}
 				}
-			} else {
-				updatePopup(res, function() {
-					if (/\.wgt$/i.test(res.downloadUrl)) {
+			} else {//非强制更新
+				updatePopup(res[1].data, function() {
+					if (/\.wgt$/i.test(res[1].data.app_link)) {
 						getDownload(res);
 					} else {
 						if (platform == "android") {
@@ -708,6 +806,6 @@ export default function(isPrompt = false) {
 				});
 			}
 		});
-	})
+	});
 }
 // #endif

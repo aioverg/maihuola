@@ -23,7 +23,6 @@
 			</view>
 		</view>
 		
-		
 		<view v-if="yesLogin">
 		<view class="user-section">
 			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>

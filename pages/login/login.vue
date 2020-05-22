@@ -45,12 +45,14 @@
 				console.log("微信登录")
 				uni.login({
 				  provider: 'weixin',
+				  fail: function(res){console.log("微信登录失败", res)},
 				  success: function (loginRes) {
-				    console.log(loginRes.authResult);
+				    console.log("返回信息1",loginRes);
 				    // 获取用户信息
 				    uni.getUserInfo({
 				      provider: 'weixin',
 				      success: function (infoRes) {
+						console.log("返回信息2",infoRes)
 				        console.log('用户昵称为：' + infoRes.userInfo.nickName);
 				      }
 				    });

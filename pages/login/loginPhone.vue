@@ -50,8 +50,8 @@
 		},
 		data() {
 			return {
-				phone: 13750892614,
-				code: 123456,
+				phone: null,
+				code: null,
 				btName: "获取验证码",
 				times: null,
 				timeRun: false,
@@ -63,7 +63,7 @@
 				this.$api.getPhoneCode({
 					phone: this.phone
 				}).then( res => {
-					if(res.data.code !== 200){
+					if(res.data.code !== 0){
 						this.$refs.aiPopupMessage.open({
 							type:'err',
 							content:'获取验证码失败',
@@ -72,26 +72,28 @@
 						})
 						return
 					}
-					if(this.timeRun){return}
-					this.$refs.aiPopupMessage.open({
-						type:'success',
-						content:'验证码正在发送',
-						timeout:2000,
-						isClick:false
-					})
-					this.timeRun = true
-					this.times = 5
-					this.btName = "s重新发送"
-					let timer = setInterval(()=>{
-					    if(this.times == 1){
-						    clearInterval(timer)
-						    this.timeRun = false
-						    this.times = null
-						    this.btName = "获取验证码"
-						    return
-					    }
-					    this.times -= 1
-					},1000)
+					if(res.data.code == 0){
+						if(this.timeRun){return}
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'验证码正在发送',
+							timeout:2000,
+							isClick:false
+						})
+						this.timeRun = true
+						this.times = 60
+						this.btName = "s重新发送"
+						let timer = setInterval(()=>{
+						    if(this.times == 1){
+							    clearInterval(timer)
+							    this.timeRun = false
+							    this.times = null
+							    this.btName = "获取验证码"
+							    return
+						    }
+						    this.times -= 1
+						},1000)
+					}
 				})
 			},
 			login(){

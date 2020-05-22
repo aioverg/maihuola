@@ -66,6 +66,7 @@
 				Alibcsdk.login( result => {
 					if(result.status){
 						console.log("淘宝授权")
+						console.log(result)
 						_this.$store.commit('setTaoBao', result.status)
 						_this.$global.navTo('/pages/detail/detail?goods_id=' + _this.goodsId + "&auth=true")
 					}else{

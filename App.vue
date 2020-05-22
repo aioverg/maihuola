@@ -3,7 +3,7 @@
 	 * vuex管理登陆状态，具体可以参考官方登陆模板示例
 	 */
 	// #ifdef APP-PLUS
-	import APPUpdate from "@/js_sdk/zhouWei-APPUpdate/APPUpdate.js";
+	import APPUpdate from "@/static/js/APPUpdate.js";
 	// #endif
 	import {
 		mapMutations
@@ -14,8 +14,7 @@
 		},
 		onLaunch: function() {
 			// #ifdef APP-PLUS
-			console.log(777777777)
-			APPUpdate();
+			//APPUpdate();
 			// #endif
 			
 			/*let userInfo = uni.getStorageSync('userInfo');
