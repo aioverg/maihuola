@@ -63,7 +63,7 @@
 		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupAiDialog" type="dialog">
-		    <ai-popup-dialog type="dialog" :src="aiDialogSrc" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
+		    <ai-popup-dialog type="dialog" :cancel-show="false" :src="aiDialogSrc" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupMessage">
 			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
@@ -115,7 +115,6 @@
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
 				this.guessDetailData = res.data.data
-				console.log("商品详情",this.guessDetailData)
 			})
 		},
 		onReady(){
@@ -163,7 +162,7 @@
 			},
 			confirm(done){
 				if(this.confirmValue == "login"){
-					this.$global.navTo('/pages/login/login')
+					this.$global.navTo('/pages/login/login?goods_id=' + this.goodsId)
 					done()
 					return
 				}

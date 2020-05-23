@@ -56,28 +56,26 @@
 				<ai-gusee-card :recommend="item.is_recommend" :data="item"></ai-gusee-card>
 			</view>
 		</view>
-		<!--登录过期提示，需要时再加
-		<uni-popup ref="popup" type="dialog">
-		    <uni-popup-dialog type="input" title="登录过期" content="请重新登录" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
-		</uni-popup>
-		-->
 		<view class="login-box" v-if="loginBox">
 			<ai-login></ai-login>
 		</view>
+		<uni-popup ref="popupAiDia" type="dialog">
+		    <ai-popup-update :progress="downloadPtogress" popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="updateQequire" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+		</uni-popup>
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 	</view>
 </template>
 
 <script>
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
-	//import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	//import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
+	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login.vue'
 	export default {
 		components: {
 			aiGuseeCard,
-			//uniPopUp,
-			//uniPopupDialog,
+			uniPopUp,
+			aiPopupUpdate,
 			aiLogin
 		},
 		data() {
@@ -110,10 +108,13 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
 				blue: null,
-				loginBox: false,
+				loginBox: true,
 				id: 1,
 				uniLoadMoreStatus: "more",
 				current: 0,
+				updateQequire: true,
+				downloadPtogress: false
+				
 			};
 		},
 		onLoad() {
@@ -122,7 +123,11 @@
 			this.getGuess(this.sortId)
 		},
 		onReady(){
-			
+			// #ifdef APP-PLUS
+			this.appUpdate()
+			// #endif
+			this.appUpdate()
+			this.getUserInfo()
 		},
 		onShow(){
 			this.login()
@@ -202,33 +207,34 @@
 				this.hide = "null"
 			},
 			login(){
-				if(!this.$store.state.hasLogin){
-					this.loginBox = true
-				}
-			}
-			/*登录过期提示框的选择函数，需要时再加
-			async reLogin() { //进入页面检查token，token过期弹出重新登录
-				//let userInfo = uni.getStorageSync('userInfo') || '';
-				//this.$store.commit()
-				if(!this.$store.state.usertoken){
-					this.loginBox = true
-					return
+				if(this.$store.state.hasLogin){
+					this.loginBox = false
 				}
 			},
-			confirm(done,value){
-			    this.$global.navTo('/pages/login/login')
+			
+			appUpdate(){
+				if(!this.$store.state.appInfo.update){
+					this.$refs.popupAiDia.open()
+					
+				}
 			},
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
-			    uni.removeStorage({
-					key: 'token',
-					success: function () {
-					    this.loginBox = true
-					}
-				})
-			    done() 
+				done()
 			},
-			*/
+			confirm(done){
+				
+				this.downloadPtogress = true
+				//done()
+			},
+			getUserInfo(){
+				uni.getStorage({
+				    key: 'userInfo',
+				    success: function (res) {
+				        console.log(res);
+				    }
+				});
+			}
 		},
 	}
 </script>

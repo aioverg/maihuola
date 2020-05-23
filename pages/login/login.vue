@@ -30,12 +30,15 @@
 	export default {
 		components: {
 			aiButton,
-			aiLoginHint
+			aiLoginHint,
 		},
 		data() {
 			return {
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
+		},
+		onLoad(res) {
+			console.log(res)
 		},
 		methods: {
 			navTo(obj){

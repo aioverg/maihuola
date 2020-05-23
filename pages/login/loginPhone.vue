@@ -58,6 +58,9 @@
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
+		onLoad(res) {
+			console.log(11,res)
+		},
 		methods: {
 			getCode(){
 				this.$api.getPhoneCode({
@@ -98,11 +101,15 @@
 			},
 			login(){
 				this.$api.getChecktPhoneCode({
+					terminal: this.$store.state.systemType,
 					phone: this.phone,
 					code: this.code
 				}).then( res => {
-					if(res.data.code == 200){
-						console.log("登录成功")
+					if(res.data.code == 0){
+						this.$store.commit("login", res.data.data)
+						uni.navigateBack({
+						    delta: 2
+						});
 					}else{
 						this.$refs.aiPopupMessage.open({
 							type:'err',

@@ -28,10 +28,11 @@
 			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>
 			<view class="user-info-box">
 				<view class="portrait-box">
-					<image class="portrait" :src="userInfo.portrait || '/static/img/ai-default-user-icon.png'"></image>
+					<image class="portrait" :src="portrait"></image>
 				</view>
-				<view class="info-box" @click="navTo('/pages/login/login')">
-					<text class="username">{{userInfo.nickname || '点击登录'}}</text>
+				<view class="info-box">
+					<view class="info-box-user-name">{{userName}}</view>
+					<view class="info-box-user-id">{{userId}}</view>
 				</view>
 			</view>
 			<view class="money-card">
@@ -62,7 +63,7 @@
 		<view class="list-card">
 			<!--账户安全-->
 			<view class="account-safe list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
-				<ai-list-cell title="手机 | 微信号 | 淘宝授权"></ai-list-cell>
+				<ai-list-cell title="账户安全" message="手机号、微信号、淘宝授权"></ai-list-cell>
 			</view>
 
 			<!-- 其它 -->
@@ -100,18 +101,27 @@
 			return {
 				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
 				navTitle: null,
+				userName: null,
+				userId: null,
 				noLogin: false,
-				yesLogin: false
+				yesLogin: false,
+				portrait: '/static/img/ai-default-user-icon.png'
+				
 			}
 		},
 		onLoad(){
 			if(!this.$store.state.hasLogin){
-				
 				this.navTitle = "微信登录"
 				this.noLogin = true
 			}else{
 				this.navTitle = "我的"
+				this.userId = "账户ID:" + this.$store.state.userInfo.userId
 				this.yesLogin = true
+				if(this.$store.state.userInfo.weixin){
+					this.userName = "微信昵称"
+				}else{
+					this.userName = "MH" + this.$store.state.userInfo.tel
+				}
 			}
 		},
         computed: {
@@ -122,8 +132,7 @@
 				uni.navigateTo({  
 					url
 				})  
-			},
-			login(){console.log(66666)}
+			}
         }  
     }  
 </script>  
@@ -185,10 +194,17 @@
 			border:1px solid #fff;
 			border-radius: 50%;
 		}
-		.username{
+		.info-box {
+			margin: 0 0 0 15px;
+		}
+		.info-box-user-name{
 			font-size: 17px;
-			color: rgba(255,255,255,1);
-			margin-left: 15px;
+			color:rgba(255,255,255,1);
+			margin: 0 0 5px 0;
+		}
+		.info-box-user-id {
+			font-size: 14px;
+			color:rgba(255,255,255,1);
 		}
 	}
 	.money-card {

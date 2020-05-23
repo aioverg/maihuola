@@ -3,7 +3,8 @@
 	 * vuex管理登陆状态，具体可以参考官方登陆模板示例
 	 */
 	// #ifdef APP-PLUS
-	import APPUpdate from "@/static/js/APPUpdate.js";
+	import {getServerNo} from "@/static/js/apUpdate.js";
+	//import APPUpdate from "@/static/js/APPUpdate.js";
 	// #endif
 	import {
 		mapMutations
@@ -13,9 +14,19 @@
 			...mapMutations(['login'])
 		},
 		onLaunch: function() {
+			const _this = this
 			// #ifdef APP-PLUS
 			//APPUpdate();
+			//getServerNo(this)
 			// #endif
+			uni.getStorage({
+			    key: 'userInfo',
+			    success: function (res) {
+			        _this.$store.commit("login", res.data)
+					console.log(1111111,_this.$store.state)
+			    }
+			});
+			//console.log("hahaah",this.$store.state)
 			
 			/*let userInfo = uni.getStorageSync('userInfo');
 			let userToken = uni.getStorageSync('token')
@@ -37,8 +48,6 @@
 		},
 		onHide: function() {
 			console.log('App Hide')
-		},
-		methods: {
 		}
 	}
 </script>

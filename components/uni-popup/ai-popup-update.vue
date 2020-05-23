@@ -2,18 +2,24 @@
 	<view class="ai-popup-dialog">
 		<image mode="widthFix" class="ai-popup-bg" :src="popupbg"></image>
 		<view class="ai-popup-dialog-content-box">
-
-			<view class="ai-popup-logo">
-				<image class="ai-popup-logo-icon" mode="widthFix" :src="src"></image>
-			</view>
 			<view class="ai-popup-title">
-				<text class="ai-popup-title-text" :class="['ai-popup__'+dialogType]">{{title}}</text>
+				<view class="ai-popup-title-one">发现新版本</view>
+				<view class="ai-popup-title-two">v1.3.2</view>
 			</view>
 			<view class="ai-popup-content">
-				<text class="ai-popup-content-text" v-if="mode === 'base'">{{content}}</text>
-				<input v-else class="ai-popup-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" >
+				<view class="ai-popup-content-item">777777777777</view>
+				<view class="ai-popup-content-item">777777777777</view>
+				<view class="ai-popup-content-item">777777777777</view>
+				<view class="ai-popup-content-item">777777777777</view>
+				<view class="ai-popup-content-item">777777777777</view>
 			</view>
-			<view class="ai-popup-ok-button-fox ai-border-left" @click="onOk">
+			<view class="ai-popup-progress">
+				<view v-if="progress">
+					下载进度：
+					<text>444</text>
+				</view>
+			</view>
+			<view class="ai-popup-ok-button-fox" @click="onOk">
 				<text class="ai-popup-ok">确定</text>
 			</view>
 			<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
@@ -24,26 +30,6 @@
 </template>
 
 <script>
-	/**
-	 * PopUp 弹出层-对话框样式
-	 * @description 弹出层-对话框样式
-	 * @tutorial https://ext.dcloud.net.cn/plugin?id=329
-	 * @property {String} value input 模式下的默认值
-	 * @property {String} placeholder input 模式下输入提示
-	 * @property {String} type = [success|warning|info|error] 主题样式
-	 *  @value success 成功
-	 * 	@value warning 提示
-	 * 	@value info 消息
-	 * 	@value error 错误
-	 * @property {String} mode = [base|input] 模式、
-	 * 	@value base 基础对话框
-	 * 	@value input 可输入对话框
-	 * @property {String} content 对话框内容
-	 * @property {Boolean} beforeClose 是否拦截取消事件
-	 * @event {Function} confirm 点击确认按钮触发
-	 * @event {Function} close 点击取消按钮触发
-	 */
-
 	export default {
 		name: "uniPopupDialog",
 		props: {
@@ -59,9 +45,9 @@
 				type: [String, Number],
 				default: '请输入内容'
 			},
-			src: {
-				type: String,
-				default: '/static/img/ai-taobao.png'
+			progress: {
+				type: Boolean,
+				default: false
 			},
 			/**
 			 * 对话框主题 success/warning/info/error	  默认 success
@@ -76,13 +62,6 @@
 			mode: {
 				type: String,
 				default: 'base'
-			},
-			/**
-			 * 对话框标题
-			 */
-			title: {
-				type: String,
-				default: '提示'
 			},
 			/**
 			 * 对话框内容
@@ -177,45 +156,43 @@
 	}
 	.ai-popup-dialog-content-box {
 		position: relative;
+		padding: 20px 25px 0;
 		z-index: 10;
 	}
-	.ai-popup-logo {
-		text-align: center;
-		padding: 35px 0 0 0;
-	}
-	.ai-popup-logo-icon {
-		width: 94px;
-	}
 	.ai-popup-title {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: center;
-		padding-top: 15px;
-		padding-bottom: 5px;
+		height: 100px;
 	}
-	.ai-popup-title-text {
-		font-size: 17px;
-		font-weight: 500;
+	.ai-popup-title-one {
+		font-size: 20px;
+		font-weight: 600;
+		color:rgba(255,255,255,1);
+	}
+	.ai-popup-title-two {
+		font-size: 13px;
+		color: rgba(255,255,255,1);
 	}
 	.ai-popup-content {
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		padding: 0 0 30px 0;
+		height: 60px;
+		overflow-y: hidden;
 	}
-	.ai-popup-content-text {
-		font-size: 14px;
-		color: #6e6e6e;
+	.ai-popup-content-item {
+		font-size: 12px;
+		height: 15px;
+		line-height: 15px;
+		color: rgba(102,102,102,1);
+		margin: 0 0 5px 0;
+	}
+	.ai-popup-progress {
+		margin: 10px 0 0 0;
+		height: 15px;
+		font-size: 12px;
+		text-align: center;
+		color: rgba(102,102,102,1);
 	}
 	.ai-popup-ok-button-fox {
 		width: 165px;
 		height: 40px;
-		margin: 0 auto;
+		margin: 20px auto 0;
 		background: rgba(244,122,115,1);
 		border-radius: 22px;
 		text-align: center;

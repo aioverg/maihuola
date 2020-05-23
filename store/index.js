@@ -5,9 +5,11 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
+		systemType: 0, //0-PC;1-Android;3-IOS
 		usertoken: null,
-		hasLogin: true,
+		hasLogin: false,
 		userInfo: {
+			userId: null,
 			tel: null,
 			taobao: null,
 			weixin: null,
@@ -15,21 +17,33 @@ const store = new Vuex.Store({
 			WXAvatarUrl: null,
 			userUrl: null
 		},
+		appInfo: {
+			appType: null,
+			update: false,
+			require: false,
+			appUrl: null,
+			appVersion: null
+		}
 	},
 	mutations: {
-		login(state, provider) {
-			state.hasLogin = provider;
-			/*state.userInfo = provider
+		login(state, data) {
+			state.hasLogin = true;
+			state.usertoken = data.access_token
+			state.userInfo.userId = data.client.id
+			state.userInfo.tel = data.client.mobile
+			state.userInfo.taobao = data.client.taobao
+			state.userInfo.weixin = data.client.wechat
+			state.userInfo.alipay = data.client.alipay
 			uni.setStorage({//缓存用户登陆状态
-			    key: 'userInfo',  
-			    data: provider  
-			})*/
-			console.log(state);
+			    key: 'userInfo',
+			    data: data
+			})
+			console.log("store",state)
 		},
 		logout(state) {
 			state.hasLogin = false;
 			state.userInfo = {};
-			uni.removeStorage({  
+			uni.removeStorage({
                 key: 'userInfo'
             })
 		},
@@ -41,6 +55,21 @@ const store = new Vuex.Store({
 		},
 		setTaoBao(state, userId){
 			state.userInfo.taobao = userId
+		},
+		setAppInfo(state, data){
+			if(data.appType == "android"){
+				state.systemType = 1
+			}
+			if(data.appType == "ios"){
+				state.systemType = 2
+			}
+			if(data.update){
+				state.appInfo.appType = data.appType
+				state.appInfo.update = data.update
+				state.appInfo.appUrl = data.appUrl
+				state.appInfo.appVersion = data.appVersion
+			}
+			console.log(state.appInfo)
 		}
 	},
 	actions: {

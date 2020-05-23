@@ -18,8 +18,8 @@ export const getCurrentNo = function(callback) {
 		});
 	});
 } 
-// 发起ajax请求获取服务端版本号
 
+// 发起ajax请求获取服务端版本号
 export const getServerNo = function(version,isPrompt = false, callback) {
 	let httpData = {
 		version: version
