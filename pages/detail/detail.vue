@@ -111,25 +111,20 @@
 			
 		},
 		onLoad: function(obj){
-			console.log(333333,this.hasLogin)
-			//this.taobaoAuth = obj.auth
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
 				this.guessDetailData = res.data.data
 			})
-			
-		},
-		onReady(){
-			if(this.taobao){
-				console.log("11111111111111授权成功")
-			}
-			if(this.taobaoAuth == "authFalse"){
+			if(obj.tb_auth == "fail"){
 				this.aiDialogSrc = '/static/img/taobao-err.png'
 				this.popupDialogTitle = "授权失败"
 				this.popupDialogContent = "将无法通过分享商品获得收益"
 				this.confirmValue = "taobao"
 				this.$refs.popupAiDialog.open()
 			}
+			
+		},
+		onReady(){
 		},
 		methods: {
 			navTo(url) {

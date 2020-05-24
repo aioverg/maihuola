@@ -54,24 +54,23 @@
 			this.pageId = res.page_id
 			this.pageParams = res.page_params || null
 		},
+		onReady() {
+		},
 		methods: {
 			bindTB(){
 				const _this = this
+				//#ifdef APP-PLUS
 				Alibcsdk.init( result => {
 					if(result.status){
 						console.log("初始化成功")
 					}else{
 						console.log("初始化失败")
 					}
-					console.log(JSON.stringify(result))
 				})
 				Alibcsdk.login( result => {
 					if(result.status){
-						console.log(result)
 						_this.$store.commit('setTaoBao', true)
-						console.log(_this.pageId)
 						if(_this.pageId == 2){
-							console.log(222)
 							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 							return
 						}
@@ -81,11 +80,9 @@
 						}
 						_this.$global.navTo('/pages/index/index')
 					}else{
-						console.log(3333333)
-						_this.$store.commit('setTaoBao', "authFalse")
 						_this.$global.navTo('/pages/index/index')
 						if(_this.pageId == 2){
-							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+							_this.$global.navTo('/pages/detail/detail?tb_auth=fali&goods_id=' + this.pageParams)
 							return
 						}
 						if(_this.pageId == 3){
@@ -95,6 +92,7 @@
 						_this.$global.navTo('/pages/index/index')
 					}
 				})
+			    //#endif
 			}
 		}
 	}

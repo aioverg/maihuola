@@ -62,8 +62,8 @@
 		},
 		onLoad(res) {
 			console.log(res)
-			this.pageId = res.page_id
-			this.pageParams = res.page_params
+			this.pageId = res.page_id || null
+			this.pageParams = res.page_params || null
 		},
 		methods: {
 			getCode(){
@@ -113,11 +113,9 @@
 					if(res.data.code == 0){
 						this.$store.commit("login", res.data.data)
 						if(this.pageId == 2){
-							console.log("跳转")
 							this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 						}else{
-							this.$global.navTo('/pages/index/index')
-							console.log("跳转")
+							this.$global.navTabBar('/pages/index/index')
 						}
 					}else{
 						this.$refs.aiPopupMessage.open({
