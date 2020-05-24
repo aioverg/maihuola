@@ -111,23 +111,23 @@
 			
 		},
 		onLoad: function(obj){
-			this.taobaoAuth = obj.auth
+			console.log(333333,this.hasLogin)
+			//this.taobaoAuth = obj.auth
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
 				this.guessDetailData = res.data.data
 			})
+			
 		},
 		onReady(){
-			if(this.taobaoAuth == "true"){
+			if(this.taobao){
 				console.log("11111111111111授权成功")
 			}
-			if(this.taobaoAuth == "false"){
-				console.log("111111111111授权失败")
+			if(this.taobaoAuth == "authFalse"){
 				this.aiDialogSrc = '/static/img/taobao-err.png'
 				this.popupDialogTitle = "授权失败"
-				this.popupDialogContent = "授权失败将无法通过分享商品获得收益"
+				this.popupDialogContent = "将无法通过分享商品获得收益"
 				this.confirmValue = "taobao"
-				console.log(this.aiDialogSrc)
 				this.$refs.popupAiDialog.open()
 			}
 		},
@@ -139,7 +139,6 @@
 			},
 			copyTKL(){
 				if(!this.hasLogin){
-					console.log("loginm")
 					this.popupDialogTitle = "没有登录"
 					this.popupDialogContent = "现在去登录"
 					this.confirmValue = "login"
@@ -147,7 +146,6 @@
 					return
 				}
 				if(!this.taobao){
-					console.log("taobao")
 					this.popupDialogTitle = "需要淘宝授权"
 					this.popupDialogContent = "是否授权"
 					this.confirmValue = "taobao"
@@ -162,12 +160,12 @@
 			},
 			confirm(done){
 				if(this.confirmValue == "login"){
-					this.$global.navTo('/pages/login/login?goods_id=' + this.goodsId)
+					this.$global.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
 					done()
 					return
 				}
 				if(this.confirmValue == "taobao"){
-					this.$global.navTo('/pages/account/taobao?goods_id=' + this.goodsId)
+					this.$global.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
 					done()
 					return
 				}

@@ -14,7 +14,7 @@
 		<view @click="login">
 			<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
-		<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
+		<view class="to-phone" @click="navTo('/pages/login/loginPhone?'+'page_id='+pageId+'&'+'page_prams='+pageParms)">
 			或手机快速登录
 		</view>
 		<view class="note">
@@ -34,29 +34,40 @@
 		},
 		data() {
 			return {
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
+				pageId: null,
+				pageParms: null,
 			}
 		},
 		onLoad(res) {
-			console.log(res)
+			this.pageId = res.page_id
+			this.pageParms = res.page_prams
 		},
 		methods: {
 			navTo(obj){
 				this.$global.navTo(obj)
 			},
 			login(){
-				console.log("微信登录")
+				const _this = this
 				uni.login({
 				  provider: 'weixin',
 				  fail: function(res){console.log("微信登录失败", res)},
 				  success: function (loginRes) {
-				    console.log("返回信息1",loginRes);
+				    //console.log("返回信息1",loginRes);
 				    // 获取用户信息
 				    uni.getUserInfo({
 				      provider: 'weixin',
 				      success: function (infoRes) {
-						console.log("返回信息2",infoRes)
-				        console.log('用户昵称为：' + infoRes.userInfo.nickName);
+						uni.setStorage({
+							key: "WXAvatarUrl",
+							data: infoRes.userInfo.avatarUrl,
+							success: function(){
+								_this.$store.commit('setWeChat',infoRes.userInfo.avatarUrl)
+							}
+						})
+						_this.$global.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
+						//console.log("返回信息2",infoRes)
+				        //console.log('用户昵称为：' + infoRes.userInfo.nickName);
 				      }
 				    });
 				  }

@@ -65,7 +65,7 @@
 				}
 			},
 			weixin(){
-				if(this.$store.state.userInfo.weixin){
+				if(this.$store.state.userInfo.wechat){
 					return "已绑定"
 				}else{
 					return "未绑定"
@@ -89,21 +89,23 @@
 		methods: {
 			bindWx(){
 				const _this = this
-				if(!_this.$store.state.userInfo.weixin){
+				if(!_this.$store.state.userInfo.wechat){
 					uni.login({
 					    provider: 'weixin',
 					    success: function (loginRes) {
-							//发送openid
-					        console.log(11111, loginRes.authResult.openid);
-							_this.$store.commit('setWeiXin', loginRes.authResult.openid)
-							console.log(_this.$store.state)
 							_this.popupMessages = "绑定成功"
 							_this.$refs.popupMessage.open()
 					        // 获取用户信息
 					        uni.getUserInfo({
 					            provider: 'weixin',
 					            success: function (infoRes) {//保存用户头像
-									_this.$store.commit('WXAvatarUrl', infoRes.userInfo.avatarUrl)
+									uni.setStorage({
+										key: "WXAvatarUrl",
+										data: infoRes.userInfo.avatarUrl,
+										success: function(){
+											_this.$store.commit('setWeChat',infoRes.userInfo.avatarUrl)
+										}
+									})
 					            }
 					        });
 					    },
@@ -124,27 +126,14 @@
 			},
 			bindTB(){
 				const _this = this
-				if(!_this.$store.state.userInfo.taobao){
-					Alibcsdk.init( result => {
-						if(result.status){
-							console.log("初始化成功")
-						}else{
-							console.log("初始化失败")
-						}
-						console.log(JSON.stringify(result))
-					})
-					Alibcsdk.login( result => {
-						if(result.status){
-							console.log("淘宝授权")
-							_this.$store.commit('setTaoBao', result.status)
-						}
-					})
-				}else{
+				if(_this.$store.state.userInfo.taobao){
 					_this.popupDialogTitle = "解除绑定"
 					_this.popupDialogContent = "确定要解除淘宝吗？"
 					_this.clearBind = "taobao"
 					_this.$refs.popupDialog.open()
 					//点击是向后台发送接触绑定，否什么也不做
+				}else{
+					this.$global.navTo('/pages/account/taobao?page_id=3')
 				}
 			},
 			bindAlipay(){
@@ -159,7 +148,7 @@
 			},
 			confirm(done){
 			    if(this.clearBind == "weixin"){
-					this.$store.commit('setWeiXin', null)
+					this.$store.commit('clearWeChat')
 					done()
 					return
 				}

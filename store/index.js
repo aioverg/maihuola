@@ -5,14 +5,14 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		systemType: 0, //0-PC;1-Android;3-IOS
+		systemType: 1, //0-PC;1-Android;3-IOS
 		usertoken: null,
-		hasLogin: false,
+		hasLogin: true,
 		userInfo: {
 			userId: null,
 			tel: null,
 			taobao: null,
-			weixin: null,
+			wechat: null,
 			alipay: null,
 			WXAvatarUrl: null,
 			userUrl: null
@@ -31,9 +31,9 @@ const store = new Vuex.Store({
 			state.usertoken = data.access_token
 			state.userInfo.userId = data.client.id
 			state.userInfo.tel = data.client.mobile
-			state.userInfo.taobao = data.client.taobao
-			state.userInfo.weixin = data.client.wechat
-			state.userInfo.alipay = data.client.alipay
+			state.userInfo.taobao = data.client.taobao || null
+			state.userInfo.wechat = data.client.wechat || null
+			state.userInfo.alipay = data.client.alipay || null
 			uni.setStorage({//缓存用户登陆状态
 			    key: 'userInfo',
 			    data: data
@@ -47,14 +47,8 @@ const store = new Vuex.Store({
                 key: 'userInfo'
             })
 		},
-		setWXAvatarUrl(state, url){
-			state.WXAvatarUrl = url
-		},
-		setWeiXin(state, openId){
-			state.userInfo.weixin = openId
-		},
-		setTaoBao(state, userId){
-			state.userInfo.taobao = userId
+		setTaoBao(state, status){
+			state.userInfo.taobao = status
 		},
 		setAppInfo(state, data){
 			if(data.appType == "android"){
@@ -70,6 +64,14 @@ const store = new Vuex.Store({
 				state.appInfo.appVersion = data.appVersion
 			}
 			console.log(state.appInfo)
+		},
+		setWeChat(state, data){
+			state.userInfo.wechat = true
+			state.userInfo.WXAvatarUrl = data
+		},
+		clearWeChat(state){
+			state.userInfo.wechat = null
+			state.userInfo.WXAvatarUrl = null
 		}
 	},
 	actions: {

@@ -55,11 +55,15 @@
 				btName: "获取验证码",
 				times: null,
 				timeRun: false,
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
+				pageId: null,
+				pageParams: null
 			}
 		},
 		onLoad(res) {
-			console.log(11,res)
+			console.log(res)
+			this.pageId = res.page_id
+			this.pageParams = res.page_params
 		},
 		methods: {
 			getCode(){
@@ -105,11 +109,16 @@
 					phone: this.phone,
 					code: this.code
 				}).then( res => {
+					console.log(res)
 					if(res.data.code == 0){
 						this.$store.commit("login", res.data.data)
-						uni.navigateBack({
-						    delta: 2
-						});
+						if(this.pageId == 2){
+							console.log("跳转")
+							this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+						}else{
+							this.$global.navTo('/pages/index/index')
+							console.log("跳转")
+						}
 					}else{
 						this.$refs.aiPopupMessage.open({
 							type:'err',

@@ -8,7 +8,7 @@
 			color="#FFFFFF"
 		/>
 		
-		<view v-if="noLogin">
+		<view v-if="!loginState">
 			<view class="img-box">
 				<image class="img" src="/static/img/ai-maihuola1.png"></image>
 			</view>
@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		
-		<view v-if="yesLogin">
+		<view v-if="loginState">
 		<view class="user-section">
 			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>
 			<view class="user-info-box">
@@ -104,28 +104,32 @@
 				userName: null,
 				userId: null,
 				noLogin: false,
-				yesLogin: false,
-				portrait: '/static/img/ai-default-user-icon.png'
+				yesLogin: false
+				//portrait: '/static/img/ai-default-user-icon.png'
 				
 			}
 		},
-		onLoad(){
-			if(!this.$store.state.hasLogin){
-				this.navTitle = "微信登录"
-				this.noLogin = true
-			}else{
-				this.navTitle = "我的"
-				this.userId = "账户ID:" + this.$store.state.userInfo.userId
-				this.yesLogin = true
-				if(this.$store.state.userInfo.weixin){
-					this.userName = "微信昵称"
+		computed: {
+			portrait(){
+				if(this.$store.state.userInfo.WXAvatarUrl){
+					this.navTitle = "微信登录"
+					return this.$store.state.userInfo.WXAvatarUrl
 				}else{
-					this.userName = "MH" + this.$store.state.userInfo.tel
+					this.navTitle = "我的"
+					this.userId = "账户ID:" + this.$store.state.userInfo.userId
+					if(this.$store.state.userInfo.wechat){
+						this.userName = "微信昵称"
+					}else{
+						this.userName = "MH" + this.$store.state.userInfo.tel
+					}
+					return '/static/img/ai-default-user-icon.png'
 				}
+			},
+			loginState(){
+				return this.$store.state.hasLogin
 			}
 		},
-        computed: {
-			...mapState(['hasLogin','userInfo'])
+		onLoad(){
 		},
         methods: {
 			navTo(url){

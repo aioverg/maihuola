@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<ai-navbar
-		    title="绑定支付宝授权"
+		    title="绑定淘宝授权"
 			:fixed="true"
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"
@@ -45,12 +45,14 @@
 		},
 		data() {
 			return {
-				goodsId: null,
+				pageId: null,
+				pageParams: null,
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
-		onLoad(obj){
-			this.goodsId = obj.goods_id
+		onLoad(res){
+			this.pageId = res.page_id
+			this.pageParams = res.page_params || null
 		},
 		methods: {
 			bindTB(){
@@ -65,12 +67,32 @@
 				})
 				Alibcsdk.login( result => {
 					if(result.status){
-						console.log("淘宝授权")
 						console.log(result)
-						_this.$store.commit('setTaoBao', result.status)
-						_this.$global.navTo('/pages/detail/detail?goods_id=' + _this.goodsId + "&auth=true")
+						_this.$store.commit('setTaoBao', true)
+						console.log(_this.pageId)
+						if(_this.pageId == 2){
+							console.log(222)
+							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+							return
+						}
+						if(_this.pageId == 3){
+							_this.$global.navTo('/pages/account/index')
+							return
+						}
+						_this.$global.navTo('/pages/index/index')
 					}else{
-						_this.$global.navTo('/pages/detail/detail?goods_id=' + _this.goodsId + "&auth=false")
+						console.log(3333333)
+						_this.$store.commit('setTaoBao', "authFalse")
+						_this.$global.navTo('/pages/index/index')
+						if(_this.pageId == 2){
+							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+							return
+						}
+						if(_this.pageId == 3){
+							_this.$global.navTo('/pages/account/index')
+							return
+						}
+						_this.$global.navTo('/pages/index/index')
 					}
 				})
 			}
