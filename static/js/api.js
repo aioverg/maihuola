@@ -1,23 +1,25 @@
 const api = {}
-const obj = {
-	login: {
-		url: "/api/public/v1/categories",
-		method: "GET",
-	},
-	getTkl: {
-		url: "/api/public/v1/categories",
-		method: "GET"
+const token = uni.getStorage({
+    key: 'token',
+    success: function (res) {
+        console.log("tokenscuess",res);
+    },
+	fai: function (res) {
+		console.log("tokenfail", res)
 	}
-}
-
+});
 const request = function(obj){
 	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"
+	let token = uni.getStorageSync("userInfo").access_token
+	let userId = uni.getStorageSync("userInfo").client.id
+	let authen = new Buffer(userId + ':' + token);
+	let authentication = authen.toString('base64');
 	return new Promise((resolve, reject) => {
 		uni.request({
 			...obj,
 			url: baseUrl + obj.url,
 			method: obj.method,
-			header: {token: "none"}, //用户token
+			header: {authentication: authentication}, //用户token
 			success: (res) => {
 				console.log(res)
 				resolve(res)
@@ -26,25 +28,6 @@ const request = function(obj){
 				reject(res)
 			}
 		})
-	})
-}
-
-
-api.login = function(data){//登录
-	request(obj.login, data).then(res => {
-		console.log("login",res)
-		uni.setStorageSync("token", "aixiaotu")
-	})
-}
-api.checkToken = function(token){//检验token是否过期
-	return request(obj.login, token).then(res => {
-		if(res.statusCode == 200){
-			console.log("过期，重新登录111")//设置弹出弹出框
-			return true
-		}else{
-			console.log("没有过期")
-			return false
-		}
 	})
 }
 
@@ -103,6 +86,14 @@ api.getPhoneCode = (data) => {
 api.getChecktPhoneCode = (data) => {
 	return request({
 		url: "/api/v1.user/loginbymobile",
+		method: "POST",
+		data: data
+	})
+}
+//绑定淘宝
+api.getTaoBaoSessionKey = (data) => {
+	return request({
+		url: "/api/v1.user/taobaobind",
 		method: "POST",
 		data: data
 	})

@@ -38,7 +38,7 @@ const store = new Vuex.Store({
 			    key: 'userInfo',
 			    data: data
 			})
-			console.log("store",state)
+			console.log("登录信息",data)
 		},
 		logout(state) {
 			state.hasLogin = false;
@@ -68,10 +68,18 @@ const store = new Vuex.Store({
 		setWeChat(state, data){
 			state.userInfo.wechat = true
 			state.userInfo.WXAvatarUrl = data
+			uni.setStorage({//缓存用户登陆状态
+			    key: 'WXAvatarUrl',
+			    data: data
+			})
+			
 		},
 		clearWeChat(state){
 			state.userInfo.wechat = null
 			state.userInfo.WXAvatarUrl = null
+			uni.removeStorage({
+			    key: 'WXAvatarUrl'
+			})
 		}
 	},
 	actions: {

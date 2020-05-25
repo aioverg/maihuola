@@ -60,15 +60,19 @@
 			bindTB(){
 				const _this = this
 				//#ifdef APP-PLUS
-				Alibcsdk.init( result => {
-					if(result.status){
+				Alibcsdk.init( res => {
+					if(res.status){
 						console.log("初始化成功")
 					}else{
 						console.log("初始化失败")
 					}
 				})
-				Alibcsdk.login( result => {
-					if(result.status){
+				Alibcsdk.login( res => {
+					if(res.status){
+						console.log("淘宝授权", res)
+						_this.$api.getTaoBaoSessionKey({
+							sessionKey: res.data.topAccessToken
+						}).then( res => console.log("淘宝登录返回", res))
 						_this.$store.commit('setTaoBao', true)
 						if(_this.pageId == 2){
 							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)

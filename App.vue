@@ -23,7 +23,6 @@
 			    key: 'userInfo',
 			    success: function (res) {
 			        _this.$store.commit("login", res.data)
-					console.log(1111111,_this.$store.state)
 			    }
 			});
 			//console.log("hahaah",this.$store.state)
