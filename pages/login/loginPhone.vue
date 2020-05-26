@@ -111,7 +111,7 @@
 				}).then( res => {
 					console.log(res)
 					if(res.data.code == 0){
-						this.$store.commit("login", res.data.data)
+						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){
 							this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 						}else{

@@ -102,12 +102,6 @@
 			}
         }
         ,{
-            "path" : "pages/account/alertAlipay",
-            "style" : {
-				"navigationBarTitleText": "修改支付宝绑定"
-			}
-        }
-        ,{
             "path" : "pages/error/error",
             "style" : {}
         }

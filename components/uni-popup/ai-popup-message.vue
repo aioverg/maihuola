@@ -45,9 +45,7 @@
 		methods:{
 			
 			init:function(list){	
-				//console.log(6666666666)
 				if (list.type == 'success') {
-					console.log(111111111)
 					list.icon = '/static/icon/ai-popup-success.png';
 					list.typeClass='mpopup-success';
 					return list;
@@ -58,15 +56,12 @@
 					return list;
 				}
 				if (list.type == 'info') {
-					console.log(6666666666)
 					list.icon = '/static/icon/ai-popup-info.png';
 					list.typeClass='mpopup-info';
 					return list;
 				}
 				if (list.type == 'err') {
-					console.log(6666666666)
 					list.icon = '/static/icon/ai-popup-err.png';
-					console.log(list.icon)
 					list.typeClass='mpopup-err';
 					return list;
 				}

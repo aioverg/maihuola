@@ -41,18 +41,18 @@
 					<view class="balance">
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
-						<text class="num">000000.00</text>
+						<text class="num">00000.00</text>
 						<view class="cash" @click="navTo('/pages/withdraw/withdraw')">
 							提现
 						</view>
 					</view>
 					<view class="estimate">
 						<view class="last">
-							<view class="num">0000000.00</view>
+							<view class="num">00000.00</view>
 							<view class="title">本月预估收入（元）</view>
 						</view>
 						<view class="next">
-							<view class="num">000000.00</view>
+							<view class="num">00000.00</view>
 							<view class="title">上月预估收入（元）</view>
 						</view>
 					</view>
@@ -78,6 +78,9 @@
 					<ai-list-cell title="关于我们"></ai-list-cell>
 				</view>
 			</view>
+			<view class="account-safe list-box" @click="logout" style="padding: 0 30rpx;">
+				<ai-list-cell title="退出账户"></ai-list-cell>
+			</view>
 		</view>
 		</view>
     </view>  
@@ -86,11 +89,7 @@
 	import aiListCell from '@/components/ai-list-cell'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
-	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
-    import {  
-        mapState 
-    } from 'vuex';  
-	let startY = 0, moveY = 0, pageAtTop = true;
+    import { mapState } from 'vuex';
     export default {
 		components: {
 			aiListCell,
@@ -117,7 +116,7 @@
 				}else{
 					this.navTitle = "我的"
 					this.userId = "账户ID:" + this.$store.state.userInfo.userId
-					if(this.$store.state.userInfo.wechat){
+					if(this.$store.state.authInfo.wechat){
 						this.userName = "微信昵称"
 					}else{
 						this.userName = "MH" + this.$store.state.userInfo.tel
@@ -136,6 +135,10 @@
 				uni.navigateTo({  
 					url
 				})  
+			},
+			logout(){
+				this.$store.commit("logout")
+				this.$global.navTo("/pages/index/index")
 			}
         }  
     }  

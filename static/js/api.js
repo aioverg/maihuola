@@ -10,10 +10,13 @@ const token = uni.getStorage({
 });
 const request = function(obj){
 	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"
-	let token = uni.getStorageSync("userInfo").access_token
-	let userId = uni.getStorageSync("userInfo").client.id
-	let authen = new Buffer(userId + ':' + token);
-	let authentication = authen.toString('base64');
+	let authentication = null
+	if(uni.getStorageSync("userInfo")){
+		let token = uni.getStorageSync("userInfo").access_token
+		let userId = uni.getStorageSync("userInfo").client.id
+		let authen = new Buffer(userId + ':' + token);
+		authentication = authen.toString('base64');
+	}
 	return new Promise((resolve, reject) => {
 		uni.request({
 			...obj,
@@ -21,7 +24,6 @@ const request = function(obj){
 			method: obj.method,
 			header: {authentication: authentication}, //用户token
 			success: (res) => {
-				console.log(res)
 				resolve(res)
 			},
 			fail: (res) => {
@@ -74,6 +76,24 @@ api.getGuessDetail = (goods_id) => {
 		}
 	})
 }
+//获取淘口
+api.getTKL = (data) => {
+	return request({
+		url: "/api/v1.item/gettpwd",
+		method: "GET",
+		data: {
+			goods_id: data
+		}
+	})
+}
+//获取用户授权信息
+api.getAuthInfo = () => {
+	return request({
+		url: "/api/v1.user/bindinfo",
+		method: "GET"
+		
+	})
+}
 //发送手机验证码
 api.getPhoneCode = (data) => {
 	return request({
@@ -95,6 +115,22 @@ api.getTaoBaoSessionKey = (data) => {
 	return request({
 		url: "/api/v1.user/taobaobind",
 		method: "POST",
+		data: data
+	})
+}
+//绑定支付宝
+api.getAlipay = (data) => {
+	return request({
+		url: "/api/v1.user/alipaybind",
+		method: "POST",
+		data: data
+	})
+}
+//提现记录
+api.getWithdrawRecord = (data) => {
+	return request({
+		url: '/api/v1.cash/list',
+		method: 'GET',
 		data: data
 	})
 }

@@ -18,6 +18,7 @@ export function getServerNo(_this) {
 					appInfo.appUrl = res[1].data.app_link
 					appInfo.appVersion = res[1].data.server_version
 					_this.$store.commit('setAppInfo', appInfo)
+					console.log(_this.$store.state)
 				}
 			})
 		});

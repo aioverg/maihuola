@@ -17,14 +17,15 @@
 			const _this = this
 			// #ifdef APP-PLUS
 			//APPUpdate();
-			//getServerNo(this)
+			getServerNo(this)
 			// #endif
 			uni.getStorage({
 			    key: 'userInfo',
 			    success: function (res) {
-			        _this.$store.commit("login", res.data)
+					_this.$store.commit("setUserInfo", res.data)
+					_this.$store.commit("setAuthInfo", res.data)
 			    }
-			});
+			})
 			//console.log("hahaah",this.$store.state)
 			
 			/*let userInfo = uni.getStorageSync('userInfo');

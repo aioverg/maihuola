@@ -51,6 +51,7 @@
 			}
 		},
 		onLoad(res){
+			console.log("参数，666666", res)
 			this.pageId = res.page_id
 			this.pageParams = res.page_params || null
 		},
@@ -58,7 +59,10 @@
 		},
 		methods: {
 			bindTB(){
+				
+				console.log(666666)
 				const _this = this
+				
 				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {
 					if(res.status){
@@ -70,10 +74,15 @@
 				Alibcsdk.login( res => {
 					if(res.status){
 						console.log("淘宝授权", res)
-						_this.$api.getTaoBaoSessionKey({
-							sessionKey: res.data.topAccessToken
-						}).then( res => console.log("淘宝登录返回", res))
-						_this.$store.commit('setTaoBao', true)
+						Alibcsdk.openwebviewurl({
+							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=1"
+						    //url:"https://oauth.taobao.com/authorize?client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=1"
+						},result=> {
+							if (result.status) {
+								//用户关闭页面后的回调
+								console.log(666,result)
+							} 
+						});
 						if(_this.pageId == 2){
 							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 							return

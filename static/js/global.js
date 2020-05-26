@@ -37,7 +37,6 @@ global.navTo = function(url){
 global.navTabBar = function(url){
 	if(this.navigatorFlag){ return }
 	this.navigatorFlag = true
-	
 	uni.getNetworkType({
 		success: function(res){
 			if(res.networkType == "none" /*|| res.networkType == "unknown"*/){

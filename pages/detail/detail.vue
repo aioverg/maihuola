@@ -44,9 +44,7 @@
 			    <image class="guess-nh-title-icon" mode="widthFix" src="/static/icon/ai-praise.png"></image>
 			</view>
 			<view class="guess-nh-content">
-				<view>
-					{{guessDetailData.sell_point}}
-				</view>
+				{{guessDetailData.sell_point}}
 			</view>
 		</view>
 		<view class="zb-script">
@@ -54,10 +52,10 @@
 				<view>直播脚本</view>
 			    <image class="zb-script-title-icon" mode="widthFix" src="/static/icon/ai-vidicon.png"></image>
 			</view>
-			<view class="zb-script-content">这里是直播脚本相关内容</view>
+			<view class="zb-script-content">{{guessDetailData.live_script}}</view>
 		</view>
-		<view class="tkl-bt" @click="copyTKL">
-			<ai-button btname="复制推广码" ></ai-button>
+		<view class="tkl-bt">
+			<ai-button btname="复制推广码" @eventClick="copyTKL" ></ai-button>
 		</view>
 		<uni-popup ref="popupDialog" type="dialog">
 		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
@@ -106,7 +104,7 @@
 				return this.$store.state.hasLogin
 			},
 			taobao(){
-				return this.$store.state.userInfo.taobao
+				return this.$store.state.authInfo.taobao
 			}
 			
 		},
@@ -147,6 +145,9 @@
 					this.$refs.popupAiDialog.open()
 					return
 				}
+				this.$api.getTKL(this.goodsId).then(res => {
+					console.log(res)
+				})
 			},
 			close(done){
 			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框

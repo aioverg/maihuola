@@ -56,7 +56,7 @@
 				<ai-gusee-card :recommend="item.is_recommend" :data="item"></ai-gusee-card>
 			</view>
 		</view>
-		<view class="login-box" v-if="loginBox">
+		<view class="login-box" v-if="!loginBox">
 			<ai-login></ai-login>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
@@ -86,21 +86,26 @@
 					{
 						id: "update",
 						title: "上新排序",
+						key: "new"
 					},
 					{
 						id: "brokerage",
-						title: "佣金排序"
+						title: "佣金排序",
+						key: "new"
 					},
 					{
 						id: "priceUp",
-						title: "价格升序"
+						title: "价格升序",
+						key: "+price"
 					},
 					{
 						id: "priceDown",
-						title: "价格降序"
+						title: "价格降序",
+						key: "-price"
 					}
 				],
 				rankId: 0,
+				rankValue: "new",
 				carouselList: [],
 				goodsList: [],
 				goodsListPage: 1,
@@ -108,7 +113,6 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
 				blue: null,
-				loginBox: true,
 				id: 1,
 				uniLoadMoreStatus: "more",
 				current: 0,
@@ -116,6 +120,11 @@
 				downloadPtogress: false
 				
 			};
+		},
+		computed: {
+			loginBox(){
+				return this.$store.state.hasLogin
+			}
 		},
 		onLoad() {
 			this.getCarousel()
@@ -127,18 +136,15 @@
 			this.appUpdate()
 			// #endif
 			this.appUpdate()
-			this.getUserInfo()
-		},
-		onShow(){
-			this.login()
+			
 		},
 		onReachBottom(){
 			this.getGuess(this.sortId)
 		},
 		methods: {
 			change(e) {
-			            this.current = e.detail.current;
-			        },
+			    this.current = e.detail.current;
+			},
 			//获取轮播图数据
 			getCarousel(){
 				this.$api.getCarousel({
@@ -168,6 +174,8 @@
 					this.goodsList = []
 					this.sortId = id
 					this.goodsListPage = 1
+					this.rankValue = "new"
+					this.rankId = 0
 				}
 				if(this.goodsListPage > this.goodsListLastPage){
 					this.uniLoadMoreStatus = "noMore"
@@ -175,8 +183,9 @@
 				}
 				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
-					category_id: id,
+					category_id: this.sortId,
 					limit: 5,
+					sort: this.rankValue,
 					page: this.goodsListPage
 				}).then( res => {
 					if(res.data.data.last_page <= 0){
@@ -204,14 +213,12 @@
 			},
 			selectRank(index) {
 			    this.rankId = index;
+				this.rankValue = this.rankData[index].key
+				this.goodsList = []
+				this.goodsListPage = 1
+				this.getGuess(this.sortId)
 				this.hide = "null"
 			},
-			login(){
-				if(this.$store.state.hasLogin){
-					this.loginBox = false
-				}
-			},
-			
 			appUpdate(){
 				if(!this.$store.state.appInfo.update){
 					this.$refs.popupAiDia.open()

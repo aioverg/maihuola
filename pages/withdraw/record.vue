@@ -17,10 +17,10 @@
 			    </view>
 			</view>
 			<view>
-				<view class="withdraw-list-item" :class="item.status ? null : 'withdraw-list-item-color'" v-for="(item, index) in recordData" :key="index">
-					<text class="withdraw-list-item-time">{{item.time}}</text>
-					<text class="withdraw-list-item-num">{{item.moeny}}</text>
-					<text class="withdraw-list-item-staus">{{item.status ? "已到账" : "处理中"}}</text>
+				<view class="withdraw-list-item" :class="item.status == '处理中' ? 'withdraw-list-item-color' : null" v-for="(item, index) in recordData" :key="index">
+					<text class="withdraw-list-item-time">{{item.create_time}}</text>
+					<text class="withdraw-list-item-num">￥{{item.cash}}</text>
+					<text class="withdraw-list-item-staus">{{item.status}}</text>
 				</view>
 			</view>
 		</view>
@@ -31,32 +31,47 @@
 	export default {
 		data() {
 			return {
-				recordData: [
-					{
-						time: "2019-10-10 21:21",
-						moeny: "100.00",
-						status: true
-					},
-					{
-						time: "2019-10-10 21:21",
-						moeny: "100.00",
-						status: true
-					},
-					{
-						time: "2019-10-10 21:21",
-						moeny: "100.00",
-						status: false
-					},
-					{
-						time: "2019-10-10 21:21",
-						moeny: "100.00",
-						status: false
-					}
-				]
+				page: 1,
+				lastPage: 1,
+				limit: 5,
+				recordData: []
 			}
 		},
+		onLoad() {
+			this.getRecord()
+		},
+		onReachBottom(){
+			this.getRecord()
+		},
 		methods: {
-			
+			getRecord(){
+				
+				if(this.page > this.lastPage){
+					console.log("没有更多数据")
+					return
+				}
+				this.$api.getWithdrawRecord({
+					page: this.page,
+					limit: this.limit,
+					uid: this.$store.state.userInfo.id
+				}).then(res => {
+					this.page += 1
+					this.lastPage = res.data.data.last_page
+					//this.recordData = res.data.data.data
+					for(let item of res.data.data.data){
+						if(item.status == 0){
+							item.status = "处理中"
+						}
+						if(item.status == 1){
+							item.status = "通过"
+						}
+						if(item.status == 2){
+							item.status = "未通过"
+						}
+						this.recordData.push(item)	
+					}
+				})
+			}
 		}
 	}
 </script>
@@ -73,26 +88,41 @@
 		.withdraw-list-head {
 			height: 47px;
 			line-height: 47px;
-			margin: 0 14px;
-			padding: 0 17px;
 			font-size: 16px;
-			display: flex;
-			justify-content: space-between;
 			border-bottom:1px solid rgba(229,229,229,1);
+			.withdraw-list-head-time {
+				display: inline-block;
+				width: 300rpx;
+				padding: 0 0 0 30px;
+			}
+			.withdraw-list-head-num {
+				display: inline-block;
+				padding: 0 0 0 7px;
+				width: 180rpx;
+			}
+			.withdraw-list-head-status {
+				display: inline-block;
+				padding: 0 0 0 7px;
+				width: 200rpx;
+			}
 		}
 		.withdraw-list-item {
 			height: 42px;
 			line-height: 42px;
-			font-size: 13px;
+			font-size: 26rpx;
 			color:rgba(153,153,153,1);
 			margin: 0 15px;
 			.withdraw-list-item-time {
 				display: inline-block;
-				width: 270rpx;
+				width: 285rpx;
 			}
 			.withdraw-list-item-num {
 				display: inline-block;
-				width: 250rpx;
+				width: 180rpx;
+			}
+			.withdraw-list-item-staus {
+				display: inline-block;
+				width: 150rpx;
 			}
 		}
 		.withdraw-list-item-color {

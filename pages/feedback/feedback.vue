@@ -45,7 +45,7 @@
 				this.$api.postFeedBack({
 					content: this.content,
 					status: 1,
-					uid: 5555
+					uid: this.$store.state.userInfo.id
 				}).then( res => {
 					if(res.data.code == 0){
 						this.$refs.aiPopupMessage.open({
@@ -54,6 +54,7 @@
 							timeout:2000,
 							isClick:false
 						})
+						this.$global.navTabBar('/pages/user/user')
 					}
 				})
 			}

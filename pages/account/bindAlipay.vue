@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<ai-navbar
-		    title="绑定支付宝"
+		    :title="navBarTitle"
 			:fixed="true"
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"
@@ -17,46 +17,70 @@
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="bindAlipay"></ai-button>
 		</view>
+		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
 <script>
 	import aiInput from '@/components/ai-input';
 	import aiButton from '@/components/ai-button';
+	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
 			aiInput,
-			aiButton
+			aiButton,
+			aiLoginHint,
 		},
 		data() {
 			return {
+				navBarTitle: null,
 				alipayAccount: "",
 				userName: ""
 			}
 		},
+		onLoad(res) {
+			this.navBarTitle = res.navbartitle
+		},
 		methods: {
 			getAlipayAccount(value){
 				this.alipayAccount = value.replace(/\s*/g,"")
-				console.log("支付宝账户：",this.alipayAccount)
 			},
 			getUserName(value){
 				this.userName = value.replace(/\s*/g,"")
-				console.log("真是姓名：",this.userName)
 			},
 			bindAlipay(){
 				//发送给数据库的接口
 				if(this.alipayAccount.length == 0){
-					uni.showToast({
-						title: "请输入正确的支付宝账户",
-					});
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'支付宝账户错误',
+						timeout:2000,
+						isClick:false
+					})
 					return
 				}
 				if(this.userName.length == 0){
-					uni.showToast({
-						title: "请输入正确的用户名",
-					});
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'用户名错误',
+						timeout:2000,
+						isClick:false
+					})
 					return
 				}
+				this.$api.getAlipay({
+					account: this.alipayAccount,
+					real_name: this.userName
+				}).then(res => {
+					if(res.data.code == 0){
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'绑定成功',
+							timeout:2000,
+							isClick:false
+						})
+					}
+				})
 				console.log("接收：",this.alipayAccount,this.userName)
 			}
 		}

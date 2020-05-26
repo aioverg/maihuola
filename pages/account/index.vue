@@ -65,21 +65,21 @@
 				}
 			},
 			weixin(){
-				if(this.$store.state.userInfo.wechat){
+				if(this.$store.state.authInfo.wechat){
 					return "已绑定"
 				}else{
 					return "未绑定"
 				}
 			},
 			taobao(){
-				if(this.$store.state.userInfo.taobao){
+				if(this.$store.state.authInfo.taobao){
 					return "已授权"
 				}else{
 					return "未授权"
 				}
 			},
 			alipay(){
-				if(this.$store.state.userInfo.alipay){
+				if(this.$store.state.authInfo.alipay){
 					return "已绑定"
 				}else{
 					return "未绑定"
@@ -89,7 +89,7 @@
 		methods: {
 			bindWx(){
 				const _this = this
-				if(!_this.$store.state.userInfo.wechat){
+				if(!_this.$store.state.authInfo.wechat){
 					uni.login({
 					    provider: 'weixin',
 					    success: function (loginRes) {
@@ -126,7 +126,7 @@
 			},
 			bindTB(){
 				const _this = this
-				if(_this.$store.state.userInfo.taobao){
+				if(_this.$store.state.authInfo.taobao){
 					_this.popupDialogTitle = "解除绑定"
 					_this.popupDialogContent = "确定要解除淘宝吗？"
 					_this.clearBind = "taobao"
@@ -137,10 +137,10 @@
 				}
 			},
 			bindAlipay(){
-				if(!this.$store.state.userInfo.alipay){
-					this.navTo('/pages/account/bindAlipay')
+				if(!this.$store.state.authInfo.alipay){
+					this.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')
 				}else{
-					this.navTo('/pages/account/alertAlipay')
+					this.navTo('/pages/account/bindAlipay?navbartitle=修改绑定支付宝')
 				}
 			},
 			close(done){
