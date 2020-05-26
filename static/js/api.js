@@ -91,7 +91,6 @@ api.getAuthInfo = () => {
 	return request({
 		url: "/api/v1.user/bindinfo",
 		method: "GET"
-		
 	})
 }
 //发送手机验证码

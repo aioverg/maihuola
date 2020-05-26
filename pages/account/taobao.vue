@@ -62,7 +62,7 @@
 				
 				console.log(666666)
 				const _this = this
-				
+				this.$store.commit("setTaoBao", 1)
 				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {
 					if(res.status){
@@ -75,12 +75,24 @@
 					if(res.status){
 						console.log("淘宝授权", res)
 						Alibcsdk.openwebviewurl({
-							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=1"
+							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=" + this.$store.state.userInfo.id
 						    //url:"https://oauth.taobao.com/authorize?client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=1"
 						},result=> {
 							if (result.status) {
 								//用户关闭页面后的回调
-								console.log(666,result)
+								console.log(99999)
+								_this.$api.getAuthInfo().then(res => {
+									for(let item of res.data.data){
+										if(item.type == 2){
+											_this.$store.commit('setTaoBao', true)
+											uni.setStorage({
+												key: 'authInfo',
+												data: true
+											})
+											break
+										}
+									}
+								})
 							} 
 						});
 						if(_this.pageId == 2){

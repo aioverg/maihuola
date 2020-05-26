@@ -75,7 +75,10 @@
 					<ai-list-cell title="意见反馈" dashed="dashed"></ai-list-cell>
 				</view>
 				<view class="list-box" @click="navTo('/pages/about/index')">
-					<ai-list-cell title="关于我们"></ai-list-cell>
+					<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
+				</view>
+				<view class="list-box" @click="">
+					<ai-list-cell title="版本号" :message="version"></ai-list-cell>
 				</view>
 			</view>
 			<view class="account-safe list-box" @click="logout" style="padding: 0 30rpx;">
@@ -104,8 +107,6 @@
 				userId: null,
 				noLogin: false,
 				yesLogin: false
-				//portrait: '/static/img/ai-default-user-icon.png'
-				
 			}
 		},
 		computed: {
@@ -115,8 +116,8 @@
 					return this.$store.state.userInfo.WXAvatarUrl
 				}else{
 					this.navTitle = "我的"
-					this.userId = "账户ID:" + this.$store.state.userInfo.userId
-					if(this.$store.state.authInfo.wechat){
+					this.userId = "账户ID:" + this.$store.state.userInfo.id
+					if(this.$store.state.userInfo.wechat){
 						this.userName = "微信昵称"
 					}else{
 						this.userName = "MH" + this.$store.state.userInfo.tel
@@ -126,6 +127,9 @@
 			},
 			loginState(){
 				return this.$store.state.hasLogin
+			},
+			version(){
+				return this.$store.state.appInfo.appVersion
 			}
 		},
 		onLoad(){

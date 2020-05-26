@@ -12,6 +12,11 @@ const store = new Vuex.Store({
 			token: null,
 			tel: null,
 			realName: null,
+			taobao: null,
+			wechat: null,
+			alipay: null,
+			wechatName: null,
+			WXAvatarUrl: null,
 		},
 		authInfo: {
 			taobao: null,
@@ -35,16 +40,20 @@ const store = new Vuex.Store({
 			state.userInfo.token = data.access_token
 			state.userInfo.tel = data.client.mobile
 			state.userInfo.realName = data.client.real_name || null
-			uni.setStorage({//缓存用户登陆状态
-			    key: 'userInfo',
-			    data: data
-			})
+			state.userInfo.taobao = data.client.taobao || null
+			state.userInfo.wechat = data.client.wechat || null
+			state.userInfo.alipay = data.client.alipay || null
+			state.userInfo.wechatName = null,
+			state.userInfo.WXAvatarUrl = null,
+			
+			uni.setStorageSync('userInfo', data)
 			console.log("设置用户信息",state)
 		},
 		setAuthInfo(state, data){
 			state.authInfo.taobao = data.client.taobao || null
 			state.authInfo.wechat = data.client.wechat || null
 			state.authInfo.alipay = data.client.alipay || null
+			uni.setStorageSync('authInfo', data)
 			console.log("设置授权信息",state)
 		},
 		logout(state) {
@@ -61,7 +70,15 @@ const store = new Vuex.Store({
             })
 		},
 		setTaoBao(state, status){
-			state.authInfo.taobao = status
+			console.log(status)
+			state.userInfo.taobao = status
+			uni.getStorage({
+				key: 'userInfo',
+				success: function(res){
+					res.data.client.taobao = 1
+					uni.setStorageSync('userInfo', res.data)
+				}
+			})
 		},
 		setAppInfo(state, data){
 			if(data.appType == "android"){
@@ -79,16 +96,20 @@ const store = new Vuex.Store({
 			console.log(state.appInfo)
 		},
 		setWeChat(state, data){
-			state.authInfo.wechat = true
-			state.userInfo.WXAvatarUrl = data
-			uni.setStorage({//缓存用户登陆状态
-			    key: 'WXAvatarUrl',
-			    data: data
+			state.userInfo.wechat = 1
+			state.userInfo.WXAvatarUrl = data || null
+			uni.getStorage({
+				key: 'userInfo',
+				success: function(res){
+					res.data.client.wechat = 1
+					res.data.client.WXAvatarUrl = data || null
+					uni.setStorageSync('userInfo', res.data)
+				}
 			})
 			
 		},
 		clearWeChat(state){
-			state.authInfo.wechat = null
+			state.userInfo.wechat = null
 			state.userInfo.WXAvatarUrl = null
 			uni.removeStorage({
 			    key: 'WXAvatarUrl'

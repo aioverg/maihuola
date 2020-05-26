@@ -104,7 +104,7 @@
 				return this.$store.state.hasLogin
 			},
 			taobao(){
-				return this.$store.state.authInfo.taobao
+				return this.$store.state.userInfo.taobao
 			}
 			
 		},
