@@ -23,25 +23,8 @@
 			    key: 'userInfo',
 			    success: function (res) {
 					_this.$store.commit("setUserInfo", res.data)
-					_this.$store.commit("setAuthInfo", res.data)
 			    }
 			})
-			//console.log("hahaah",this.$store.state)
-			
-			/*let userInfo = uni.getStorageSync('userInfo');
-			let userToken = uni.getStorageSync('token')
-			if(userToken.length == 0){
-				return
-			}
-			if(falsethis.$api.checkToken(userToken)){
-				
-			}else{
-				this.$store.commit("login", {
-					usertoken: userToken,
-					userInfo: userInfo,
-					hasLogin: true
-				})
-			}*/
 		},
 		onShow: function() {
 			console.log('App Show')

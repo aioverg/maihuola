@@ -18,13 +18,6 @@ const store = new Vuex.Store({
 			wechatName: null,
 			WXAvatarUrl: null,
 		},
-		authInfo: {
-			taobao: null,
-			wechat: null,
-			alipay: null,
-			wechatName: null,
-			WXAvatarUrl: null,
-		},
 		appInfo: {
 			appType: null,
 			update: false,
@@ -49,22 +42,15 @@ const store = new Vuex.Store({
 			uni.setStorageSync('userInfo', data)
 			console.log("设置用户信息",state)
 		},
-		setAuthInfo(state, data){
-			state.authInfo.taobao = data.client.taobao || null
-			state.authInfo.wechat = data.client.wechat || null
-			state.authInfo.alipay = data.client.alipay || null
-			uni.setStorageSync('authInfo', data)
-			console.log("设置授权信息",state)
-		},
 		logout(state) {
 			state.hasLogin = false;
 			state.userInfo.id = null
 			state.userInfo.token = null
 			state.userInfo.tel = null
 			state.userInfo.realName = null
-			state.authInfo.taobao = null
-			state.authInfo.wechat = null
-			state.authInfo.alipay = null
+			state.userInfo.taobao = null
+			state.userInfo.wechat = null
+			state.userInfo.alipay = null
 			uni.removeStorage({
                 key: 'userInfo'
             })
@@ -79,21 +65,6 @@ const store = new Vuex.Store({
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})
-		},
-		setAppInfo(state, data){
-			if(data.appType == "android"){
-				state.systemType = 1
-			}
-			if(data.appType == "ios"){
-				state.systemType = 2
-			}
-			if(data.update){
-				state.appInfo.appType = data.appType
-				state.appInfo.update = data.update
-				state.appInfo.appUrl = data.appUrl
-				state.appInfo.appVersion = data.appVersion
-			}
-			console.log(state.appInfo)
 		},
 		setWeChat(state, data){
 			state.userInfo.wechat = 1
@@ -114,6 +85,21 @@ const store = new Vuex.Store({
 			uni.removeStorage({
 			    key: 'WXAvatarUrl'
 			})
+		},
+		setAppInfo(state, data){
+			if(data.appType == "android"){
+				state.systemType = 1
+			}
+			if(data.appType == "ios"){
+				state.systemType = 2
+			}
+			if(data.update){
+				state.appInfo.appType = data.appType
+				state.appInfo.update = data.update
+				state.appInfo.appUrl = data.appUrl
+				state.appInfo.appVersion = data.appVersion
+			}
+			console.log(state.appInfo)
 		}
 	},
 	actions: {

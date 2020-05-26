@@ -59,10 +59,7 @@
 		},
 		methods: {
 			bindTB(){
-				
-				console.log(666666)
 				const _this = this
-				this.$store.commit("setTaoBao", 1)
 				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {
 					if(res.status){
@@ -84,11 +81,7 @@
 								_this.$api.getAuthInfo().then(res => {
 									for(let item of res.data.data){
 										if(item.type == 2){
-											_this.$store.commit('setTaoBao', true)
-											uni.setStorage({
-												key: 'authInfo',
-												data: true
-											})
+											_this.$store.commit('setTaoBao', 1)
 											break
 										}
 									}
