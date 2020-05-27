@@ -20,7 +20,7 @@
 				</view>
 			</view>
 			<view class="ai-popup-ok-button-fox" @click="onOk">
-				<text class="ai-popup-ok">确定</text>
+				<text class="ai-popup-ok">立即升级</text>
 			</view>
 			<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
 				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>

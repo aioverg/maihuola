@@ -29,27 +29,40 @@
 		<view class="tx-history" @click="navTo('/pages/withdraw/record')">
 			提现记录
 		</view>
-		<view class="tx-bt" @click="withdraw">
-			提交
+		<view class="tx-bt">
+			<view class="tx-hint" >*提现金额不能超过余额</view>
+			<ai-button btname="提现" @eventClick="withdraw" ></ai-button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import aiButton from '@/components/ai-button.vue'
 	import hintBox from '@/components/hint-box'
 	export default {
 		components: {
+			aiButton,
 			hintBox
 		},
 		data() {
 			return {
-				name: "张**",
-				tel: "17823456789",
+				name: null,
+				tel: null,
 				sum: null,
 				total: "560.92",
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
-				
 			}
+		},
+		onLoad() {
+			this.$api.getAuthInfo().then(res => {
+				for(let item of res.data.data){
+					if(item.type == 1){
+						this.name = (item.nickname).slice(0,1)+'**'
+						this.tel = item.title
+						break
+					}
+				}
+			})
 		},
 		methods: {
 			allWithdraw(){
@@ -150,16 +163,14 @@
 		color:rgba(153,153,153,1);
 	}
 	.tx-bt {
-		margin: 226px auto;
-		width: 690rpx;
-		height: 45px;
-		line-height: 45px;
-		text-align: center;
-		background:rgba(204,204,204,1);
-		border-radius: 22px;
-		font-size: 16px;
-		font-weight: 500;
-		color: rgba(255,255,255,1);
+		margin: 220px 0 0 0;
+		.tx-hint {
+			font-size: 12px;
+			color:rgba(234,58,106,1);
+			text-align: center;
+			margin: 0 0 10px;
+		}
 	}
+
 
 </style>

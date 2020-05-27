@@ -51,7 +51,7 @@
 			margin: 5px 0 0 0;
 			border-bottom: 1px solid rgba(229,229,229,1);;
 			font-size: 16px;
-			font-weight: 500;
+			font-weight: 600;
 			color: rgba(51,51,51,1);
 		}
 		.content {

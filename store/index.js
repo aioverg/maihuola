@@ -56,12 +56,11 @@ const store = new Vuex.Store({
             })
 		},
 		setTaoBao(state, status){
-			console.log(status)
 			state.userInfo.taobao = status
 			uni.getStorage({
 				key: 'userInfo',
 				success: function(res){
-					res.data.client.taobao = 1
+					res.data.client.taobao = status
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})

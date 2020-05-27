@@ -61,7 +61,7 @@
 		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupAiDialog" type="dialog">
-		    <ai-popup-dialog type="dialog" :cancel-show="false" :src="aiDialogSrc" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
+		    <ai-popup-dialog type="dialog" :cancel-show="false" :src="aiDialogSrc" :btname="popupDialogBtName" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupMessage">
 			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
@@ -92,9 +92,10 @@
 				TKLMessage: null,
 				popupDialogTitle: null,
 				popupDialogContent: null,
+				popupDialogBtName: null,
 				popupMessages: null,
 				confirmValue: null,
-				aiDialogSrc: '/static/img/ai-taobao.png',
+				aiDialogSrc: '/static/icon/icon-taobao.png',
 				taobaoAuth: "aa",
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
@@ -139,8 +140,9 @@
 					return
 				}
 				if(!this.taobao){
-					this.popupDialogTitle = "需要淘宝授权"
-					this.popupDialogContent = "是否授权"
+					this.popupDialogTitle = "请完成淘宝授权"
+					this.popupDialogContent = "授权后方可获取该商品淘口令"
+					this.popupDialogBtName = "现在去授权"
 					this.confirmValue = "taobao"
 					this.$refs.popupAiDialog.open()
 					return
@@ -168,7 +170,6 @@
 			}
 		}
 	}
-
 </script>
 
 <style lang="scss">
@@ -181,6 +182,7 @@
 		height: 600rpx;
 		background:rgba(255,255,255,1);
 		.guess-img {
+			width: 750rpx;
 			height: 600rpx;
 			display: block;
 			margin: 0 auto;
@@ -190,6 +192,7 @@
 		width: 750rpx;
 		height: 53px;
 		padding: 7px 15px 8px;
+		line-height: 19px;
 		background: rgba(255,255,255,1);
 		font-size: 16px;
 		color: rgba(51,51,51,1);
@@ -250,7 +253,7 @@
 			align-items: center;
 			margin: 0 0 5px;
 			font-size: 15px;
-			font-weight: 500;
+			font-weight: 600;
 			color: rgba(51,51,51,1);
 			.guess-nh-title-icon {
 				margin: 0 0 0 4px;
@@ -274,7 +277,7 @@
 			align-items: center;
 			margin: 0 0 5px;
 			font-size: 15px;
-			font-weight: 500;
+			font-weight: 600;
 			color: rgba(51,51,51,1);
 			.zb-script-title-icon {
 				margin: 0 0 0 4px;

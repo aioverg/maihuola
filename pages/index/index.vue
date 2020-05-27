@@ -299,6 +299,9 @@
 					line-height: 35px;
 					display: inline-block;
 					font-size: 15px;
+					z-index: 10;
+					color: #555500;
+					
 				}
 			}
 			.search-two {
@@ -374,7 +377,7 @@
 					}
 					.red {
 						color:rgba(244,122,115,1);
-						font-weight: 500;
+						font-weight: 600;
 					}
 					.sort-item-line {
 						display: inline-block;

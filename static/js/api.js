@@ -93,6 +93,14 @@ api.getAuthInfo = () => {
 		method: "GET"
 	})
 }
+//授权解绑
+api.getAuthUnbind = (data) => {
+	return request({
+		url: "/api/v1.user/unbind",
+		method: "POST",
+		data: data
+	})
+}
 //发送手机验证码
 api.getPhoneCode = (data) => {
 	return request({
@@ -122,6 +130,14 @@ api.getAlipay = (data) => {
 	return request({
 		url: "/api/v1.user/alipaybind",
 		method: "POST",
+		data: data
+	})
+}
+//申请提现
+api.getWithdraw = (data) => {
+	return request({
+		url: '/api/v1.cash/applycash',
+		method: 'POST',
 		data: data
 	})
 }

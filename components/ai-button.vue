@@ -3,6 +3,7 @@
 		<view class="img-box">
 			<image v-if="iconSrc" class="img" mode="widthFix" :src="iconSrc"></image>
 			<view class="btname">{{btname}}</view>
+			<view class="btshadow"></view>
 		</view>
 	</view>
 </template>
@@ -44,6 +45,7 @@
 		border-radius: 22px;
 		.img-box {
 			width: 690rpx;
+			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -55,9 +57,19 @@
 			}
 			.btname {
 				display: inline-block;
-				font-weight: 500;
+				font-weight: 600;
 				font-size: 16px;
 				color:rgba(255,255,255,1);
+			}
+			.btshadow {
+				width: 610rpx;
+				height: 41px;
+				position: absolute;
+				top: 10px;
+				background:linear-gradient(135deg,rgba(252,170,122,1) 0%,rgba(234,58,106,1) 100%);
+				filter:blur(10px);
+				border-radius:22px;
+				z-index: -1;
 			}
 		}
 	}

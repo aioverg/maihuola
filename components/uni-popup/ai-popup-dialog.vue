@@ -2,7 +2,6 @@
 	<view class="ai-popup-dialog">
 		<image mode="widthFix" class="ai-popup-bg" :src="popupbg"></image>
 		<view class="ai-popup-dialog-content-box">
-
 			<view class="ai-popup-logo">
 				<image class="ai-popup-logo-icon" mode="widthFix" :src="src"></image>
 			</view>
@@ -14,7 +13,7 @@
 				<input v-else class="ai-popup-input" v-model="val" type="text" :placeholder="placeholder" :focus="focus" >
 			</view>
 			<view class="ai-popup-ok-button-fox ai-border-left" @click="onOk">
-				<text class="ai-popup-ok">确定</text>
+				<text class="ai-popup-ok">{{btname}}</text>
 			</view>
 			<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
 				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
@@ -61,7 +60,11 @@
 			},
 			src: {
 				type: String,
-				default: '/static/img/ai-taobao.png'
+				default: '/static/icon/icon-taobao.png'
+			},
+			btname: {
+				type: String,
+				default: '确定'
 			},
 			/**
 			 * 对话框主题 success/warning/info/error	  默认 success
@@ -197,7 +200,7 @@
 	}
 	.ai-popup-title-text {
 		font-size: 17px;
-		font-weight: 500;
+		font-weight: 600;
 	}
 	.ai-popup-content {
 		/* #ifndef APP-NVUE */

@@ -54,7 +54,7 @@
 		.ai-list-cell-message {
 			flex-grow: 0;
 			margin: 0 20rpx 0 0;
-			color:rgba(153,153,153,1);
+			color: #cccccc;
 			font-size: 14px;
 		}
 	}

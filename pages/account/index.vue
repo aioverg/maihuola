@@ -147,14 +147,21 @@
 				done()
 			},
 			confirm(done){
-			    if(this.clearBind == "weixin"){
+				const _this = this
+			    if(_this.clearBind == "weixin"){
 					this.$store.commit('clearWeChat')
 					done()
 					return
 				}
-				if(this.clearBind == "taobao"){
-					this.$store.commit('setTaoBao', null)
-					done()
+				if(_this.clearBind == "taobao"){
+					_this.$api.getAuthUnbind({
+						code: "taobao"
+					}).then(res => {
+						if(res.data.code == 0){
+							_this.$store.commit('setTaoBao', 0)
+						}
+						done()
+					})
 					return
 				}
 			},

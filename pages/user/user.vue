@@ -199,7 +199,7 @@
 		position:relative;
 		z-index: 1;
 		.portrait{
-			width: 120rpx;
+			width: 60px;
 			height: 60px;
 			margin: 0 0 0 25px;
 			border:1px solid #fff;
@@ -237,6 +237,7 @@
 				height: 65px;
 				width: 690rpx;
 				display: flex;
+				align-items: flex-end;
 				.icon {
 					width: 17px;
 					height: 16px;
@@ -258,7 +259,7 @@
 					height: 25px;
 					width: 225rpx;
 					font-size:21px;
-					font-weight:500;
+					font-weight:600;
 					color:rgba(51,51,51,1);
 					margin: 20px 0;
 				}

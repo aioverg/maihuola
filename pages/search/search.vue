@@ -89,7 +89,7 @@
 			width:550rpx;
 			height: 35px;
 			background:rgba(255,255,255,1);
-			border-radius:12px;
+			border-radius:17px;
 			margin: 0 10px 0 0;
 			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
 			.input-box-icon {
@@ -123,7 +123,7 @@
 		.history {
 			display: inline-block;
 			font-size: 16px;
-			font-weight: 500;
+			font-weight: 600;
 			color:rgba(51,51,51,1);
 			margin-right: 246px;
 		}
