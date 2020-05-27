@@ -5,7 +5,7 @@ import App from './App'
 import Json from './Json' //测试用数据
 
 //将导航函数引入全局
-import global from './static/js/global.js'
+import aiRouter from './static/js/airouter.js'
 
 //引入弹窗组件
 import aiPopupMessage from './components/uni-popup/ai-popup-message.vue'
@@ -61,10 +61,12 @@ const json = type=>{
 Vue.config.productionTip = false
 Vue.prototype.$fire = new Vue();
 Vue.prototype.$store = store;
+Vue.prototype.$basePath = "";
 Vue.prototype.$deleteApi = {msg, json};
 
-//将全局函数绑定到Vue的原型$global上
-Vue.prototype.$global = global
+
+//将全局函数绑定到Vue的原型$aiRouter上
+Vue.prototype.$aiRouter = aiRouter
 Vue.prototype.$api = api
 
 App.mpType = 'app'

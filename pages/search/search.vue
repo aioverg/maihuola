@@ -56,13 +56,13 @@
 				    key: 'searchHistory',
 				    data: this.history,
 				})
-				this.$global.navTo('/pages/search/searchResult?id=' + obj)
+				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
 			},
 			historyNavTo(obj){
-				this.$global.navTo('/pages/search/searchResult?id=' + obj)
+				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
 			},
 			navTabBar(obj){
-				this.$global.navTabBar(obj)
+				this.$aiRouter.navTabBar(obj)
 			},
 			delHistory(){
 				const _this = this

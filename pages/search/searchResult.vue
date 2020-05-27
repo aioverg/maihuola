@@ -57,10 +57,10 @@
 		},
 		methods: {
 			navTo(obj){
-				this.$global.navTo(obj)
+				this.$aiRouter.navTo(obj)
 			},
 			navTabBar(obj){
-				this.$global.navTabBar(obj)
+				this.$aiRouter.navTabBar(obj)
 			},
 			getSearch(){
 				if(this.page > this.lastPage){

@@ -51,8 +51,7 @@
 			}
 		},
 		onLoad(res){
-			console.log("参数，666666", res)
-			this.pageId = res.page_id
+			this.pageId = res.page_id || null
 			this.pageParams = res.page_params || null
 		},
 		onReady() {
@@ -70,14 +69,11 @@
 				})
 				Alibcsdk.login( res => {
 					if(res.status){
-						console.log("淘宝授权", res)
 						Alibcsdk.openwebviewurl({
 							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=" + this.$store.state.userInfo.id
-						    //url:"https://oauth.taobao.com/authorize?client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=1"
 						},result=> {
 							if (result.status) {
 								//用户关闭页面后的回调
-								console.log(99999)
 								_this.$api.getAuthInfo().then(res => {
 									for(let item of res.data.data){
 										if(item.type == 2){
@@ -89,25 +85,24 @@
 							} 
 						});
 						if(_this.pageId == 2){
-							_this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+							_this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 							return
 						}
 						if(_this.pageId == 3){
-							_this.$global.navTo('/pages/account/index')
+							_this.$aiRouter.navTo('/pages/account/index')
 							return
 						}
-						_this.$global.navTo('/pages/index/index')
+						_this.$aiRouter.navTabBar('/pages/index/index')
 					}else{
-						_this.$global.navTo('/pages/index/index')
 						if(_this.pageId == 2){
-							_this.$global.navTo('/pages/detail/detail?tb_auth=fali&goods_id=' + this.pageParams)
+							_this.$aiRouter.navTo('/pages/detail/detail?tb_auth=fali&goods_id=' + this.pageParams)
 							return
 						}
 						if(_this.pageId == 3){
-							_this.$global.navTo('/pages/account/index')
+							_this.$aiRouter.navTo('/pages/account/index')
 							return
 						}
-						_this.$global.navTo('/pages/index/index')
+						_this.$aiRouter.navTabBar('/pages/index/index')
 					}
 				})
 			    //#endif

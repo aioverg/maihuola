@@ -65,7 +65,6 @@
 						})
 					}
 				})
-				console.log("发送获取验证码地址", this.phone)
 			},
 			checkPhoneCode(){
 				if(!Number(this.phoneCode) || Number(this.phoneCode) % 1 !== 0 || this.phoneCode.length !== 6){

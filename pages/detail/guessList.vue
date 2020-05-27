@@ -41,7 +41,7 @@
 				})
 			},
 			navTo(obj){
-				this.$global.navTo(obj)
+				this.$aiRouter.navTo(obj)
 			}
 		}
 	}

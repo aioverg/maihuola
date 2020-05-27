@@ -29,6 +29,7 @@
 		display: flex;
 		background: #F47A73;
 		align-items: center;
+		opacity: 0.9;
 		.ai-login-box-logo {
 			display: inline-block;
 			width: 118rpx;

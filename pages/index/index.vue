@@ -139,7 +139,7 @@
 			
 		},
 		onReachBottom(){
-			this.getGuess(this.sortId)
+			this.getGuess(this.sortId, this.sortIndex)
 		},
 		methods: {
 			change(e) {
@@ -156,9 +156,9 @@
 			//轮播图跳转
 			navToCarousel(typeId, id){
 				if(typeId.indexOf(",") == -1){
-					this.$global.navTo('/pages/detail/detail?goods_id=' + id)
+					this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + id)
 				}else{
-					this.$global.navTo('/pages/detail/guessList?goods_id=' + id)
+					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + id)
 				}
 			},
 			//获取商品分类列表
@@ -171,9 +171,12 @@
 				})
 			},
 			//获取商品
-			getGuess(soretId, index){
+			getGuess(sortId, index){
 				if(this.sortIndex != index){
 					this.sortIndex = index
+					this.sortId = sortId
+					console.log(this.sortIndex)
+					console.log("inex",index)
 					this.goodsList = []
 					this.goodsListPage = 1
 					this.rankValue = "new"
@@ -185,7 +188,7 @@
 				}
 				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
-					category_id: soretId,
+					category_id: sortId,
 					limit: 5,
 					sort: this.rankValue,
 					page: this.goodsListPage
@@ -204,7 +207,7 @@
 			},
 			//跳转
 			navTo(url) {
-				this.$global.navTo(url)
+				this.$aiRouter.navTo(url)
 			},
 			hides(){
 				if(this.hide == "show"){
@@ -218,7 +221,7 @@
 				this.rankValue = this.rankData[index].key
 				this.goodsList = []
 				this.goodsListPage = 1
-				this.getGuess(this.sortId)
+				this.getGuess(this.sortId, this.sortIndex)
 				this.hide = "null"
 			},
 			appUpdate(){
@@ -234,14 +237,6 @@
 				this.downloadPtogress = true
 				apkDownload()
 				done()
-			},
-			getUserInfo(){
-				uni.getStorage({
-				    key: 'userInfo',
-				    success: function (res) {
-				        console.log(res);
-				    }
-				});
 			}
 		},
 	}

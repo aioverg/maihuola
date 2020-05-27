@@ -1,4 +1,5 @@
 const api = {}
+const basePath = ""
 const token = uni.getStorage({
     key: 'token',
     success: function (res) {
@@ -9,6 +10,17 @@ const token = uni.getStorage({
 	}
 });
 const request = function(obj){
+	uni.getNetworkType({
+		success: function(res){
+			if(res.networkType == "none" /*|| res.networkType == "unknown"*/ ){
+				uni.navigateTo({
+					url: basePath + '/pages/error/408'
+				})
+				return
+			}
+		}
+	})
+	
 	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"
 	let authentication = null
 	if(uni.getStorageSync("userInfo")){

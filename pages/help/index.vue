@@ -49,7 +49,7 @@
 		},
 		methods: {
 			navTo(url){
-				this.$global.navTo(url)
+				this.$aiRouter.navTo(url)
 			},
 		}
 	}

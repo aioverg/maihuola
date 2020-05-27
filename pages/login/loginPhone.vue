@@ -141,9 +141,9 @@
 					if(res.data.code == 0){
 						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){
-							this.$global.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
+							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 						}else{
-							this.$global.navTabBar('/pages/index/index')
+							this.$aiRouter.navTabBar('/pages/index/index')
 						}
 					}else{
 						this.$refs.aiPopupMessage.open({
@@ -158,7 +158,7 @@
 			}
 			,
 			navTo(obj){
-				this.$global.navTo(obj)
+				this.$aiRouter.navTo(obj)
 			},
 		}
 	}

@@ -54,7 +54,7 @@
 							timeout:2000,
 							isClick:false
 						})
-						this.$global.navTabBar('/pages/user/user')
+						this.$aiRouter.navTabBar('/pages/user/user')
 					}
 				})
 			}

@@ -151,7 +151,7 @@
 			},
 			logout(){
 				this.$store.commit("logout")
-				this.$global.navTo("/pages/index/index")
+				this.$aiRouter.navTo("/pages/index/index")
 			}
         }  
     }  

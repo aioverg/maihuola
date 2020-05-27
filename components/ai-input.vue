@@ -48,7 +48,7 @@
 				if(this.timeRun){return}
 				this.$emit('postCode');
 				this.timeRun = true
-				this.times = 5
+				this.times = 60
 				this.btName = "s重新发送"
 				let timer = setInterval(()=>{
 					if(this.times == 1){
@@ -91,13 +91,14 @@
 		.ai-input-input {
 			display: inline-block;
 			font-size: 14px;
+			margin: 0 10px 0 0;
 		}
 		.ai-input-bt {
 			display: inline-block;
+			width: 100px;
 			font-size:14px;
 			color:rgba(244,122,115,1);
 			text-decoration: underline;
-			width: 150rpx;
 		}
 		
 	}

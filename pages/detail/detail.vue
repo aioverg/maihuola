@@ -158,12 +158,12 @@
 			},
 			confirm(done){
 				if(this.confirmValue == "login"){
-					this.$global.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
 					done()
 					return
 				}
 				if(this.confirmValue == "taobao"){
-					this.$global.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
 					done()
 					return
 				}
@@ -190,9 +190,8 @@
 	}
 	.guess-title {
 		width: 750rpx;
-		height: 53px;
 		padding: 7px 15px 8px;
-		line-height: 19px;
+		line-height: 20px;
 		background: rgba(255,255,255,1);
 		font-size: 16px;
 		color: rgba(51,51,51,1);

@@ -11,8 +11,8 @@
 		<view class="img-box">
 			<image class="img" src="/static/img/ai-maihuola1.png"></image>
 		</view>
-		<view @click="login">
-			<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
+		<view>
+			<ai-button @eventClick="login" btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
 		<view class="to-phone" @click="navTo('/pages/login/loginPhone?'+'page_id='+pageId+'&'+'page_prams='+pageParms)">
 			或手机快速登录
@@ -20,7 +20,6 @@
 		<view class="note">
 			<ai-login-hint></ai-login-hint>
 		</view>
-		
 	</view>
 </template>
 
@@ -45,9 +44,10 @@
 		},
 		methods: {
 			navTo(obj){
-				this.$global.navTo(obj)
+				this.$aiRouter.navTo(obj)
 			},
 			login(){
+				console.log("微信登录")
 				const _this = this
 				uni.login({
 				  provider: 'weixin',
@@ -65,7 +65,7 @@
 								_this.$store.commit('setWeChat',infoRes.userInfo.avatarUrl)
 							}
 						})
-						_this.$global.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
+						_this.$aiRouter.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
 						//console.log("返回信息2",infoRes)
 				        //console.log('用户昵称为：' + infoRes.userInfo.nickName);
 				      }

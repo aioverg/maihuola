@@ -133,7 +133,7 @@
 					_this.$refs.popupDialog.open()
 					//点击是向后台发送接触绑定，否什么也不做
 				}else{
-					this.$global.navTo('/pages/account/taobao?page_id=3')
+					this.$aiRouter.navTo('/pages/account/taobao?page_id=3')
 				}
 			},
 			bindAlipay(){

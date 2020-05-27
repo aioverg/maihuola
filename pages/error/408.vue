@@ -13,7 +13,7 @@
 		</view>
 		<view class="error-title-one">哎呀！网络好像有点问题</view>
 		<view class="error-title-two">请检查您的网络，重新加载</view>
-		<view class="error-bt">重试</view>
+		<view class="error-bt" @click="testNetwork">重试</view>
 	</view>
 </template>
 
@@ -27,7 +27,16 @@
 			}
 		},
 		methods: {
-			
+			testNetwork(){
+				const _this = this
+				uni.getNetworkType({
+					success: function(res){
+						if(res.networkType !== "none" /*|| res.networkType == "unknown"*/ ){
+							_this.$aiRouter.navTabBar(_this.$basePath + '/pages/index/index')
+						}
+					}
+				})
+			}
 		}
 	}
 </script>
