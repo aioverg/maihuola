@@ -16,7 +16,7 @@
 			<ai-input title="验证码" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
-		    <ai-button btname="确定" @eventClick="navAlertPhone"></ai-button>
+		    <ai-button btname="确定" @eventClick="alertPhone"></ai-button>
 		</view>
 		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
@@ -39,23 +39,86 @@
 			}
 		},
 		methods: {
-			postCode(){
-				this.$refs.aiPopupMessage.open({
-					type:'success',
-					content:'验证码已发送',
-					timeout: 2000,
-					isClick: false
-				})
-				console.log("发送获取验证码地址")
-				console.log("验证码手机", this.phone)
-			},
 			getPhone(res){
 				this.phone = res
-				console.log("获取手机号",res)
 			},
 			getCode(res){
-				console.log("获取验证码",res)
+				this.code = res
+			},
+			postCode(){
+				if(!Number(this.phone) || Number(this.phone) % 1 !== 0 || this.phone.length !== 11){
+					this.$refs.aiPopupMessage.open({
+						type:'success',
+						content:'手机号码错误',
+						timeout: 2000,
+						isClick: false
+					})
+					return
+				}
+				this.$api.getPhoneCode({
+					phone: this.phone
+				}).then( res => {
+					if(res.statusCode !== 200){
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'验证码发送失败',
+							timeout: 2000,
+							isClick: false
+						})
+					}else{
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'验证码已发送',
+							timeout: 2000,
+							isClick: false
+						})
+					}
+				})
+			},
+			alertPhone(){
+				if(!Number(this.phone) || Number(this.phone) % 1 !== 0 || this.phone.length !== 11){
+					this.$refs.aiPopupMessage.open({
+						type:'success',
+						content:'手机号码错误',
+						timeout: 2000,
+						isClick: false
+					})
+					return
+				}
+				if(!Number(this.code) || Number(this.code) % 1 !== 0 || this.code.length !== 6){
+					this.$refs.aiPopupMessage.open({
+						type:'success',
+						content:'手机号码错误',
+						timeout: 2000,
+						isClick: false
+					})
+					return
+				}
+				this.$api.getAlertPhone({
+					phone: this.phone,
+					code: this.code
+				}).then(res => {
+					if(res.data.code == 500){
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'手机号码已被注册',
+							timeout: 2000,
+							isClick: false
+						})
+						return
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'修改成功',
+							timeout: 2000,
+							isClick: false
+						})
+						uni.switchTab({
+						    url: '/pages/user/user'
+						});
+					}
+				})
 			}
+			
 		}
 	}
 </script>
@@ -64,7 +127,7 @@
 	page {
 		height:667px;
 		width:750rpx;
-		background:rgba(249,249,249,1);
+		background:rgba(249,249,249,0);
 	}
 	.phone-num {
 		margin: 15px 0;

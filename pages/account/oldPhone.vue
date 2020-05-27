@@ -44,7 +44,6 @@
 		methods: {
 			getIput(res){
 				this.phoneCode = res
-				console.log("获取验证码",res)
 			},
 			postCode(){
 				this.$api.getPhoneCode({
@@ -69,10 +68,20 @@
 				console.log("发送获取验证码地址", this.phone)
 			},
 			checkPhoneCode(){
-				this.$api.getChecktPhoneCode({
+				if(!Number(this.phoneCode) || Number(this.phoneCode) % 1 !== 0 || this.phoneCode.length !== 6){
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'验证码错误',
+						timeout: 2000,
+						isClick: false
+					})
+					return
+				}
+				this.$api.getChecktOldPhoneCode({
 					phone: this.phone,
 					code: this.phoneCode
 				}).then( res => {
+					console.log(res)
 					if(res.statusCode !== 200){
 						this.$refs.aiPopupMessage.open({
 							type:'err',
@@ -96,7 +105,7 @@
 	page {
 		height:667px;
 		width:750rpx;
-		background:rgba(249,249,249,1);
+		background:rgba(249,249,249,0);
 	}
 	.phone-num {
 		margin: 15px 0;

@@ -93,6 +93,13 @@ api.getAuthInfo = () => {
 		method: "GET"
 	})
 }
+//获取用户中心数据（余额等）
+api.getUserCenter = () => {
+	return request({
+		url: "/api/v1.user/getprofile",
+		method: "GET"
+	})
+}
 //授权解绑
 api.getAuthUnbind = (data) => {
 	return request({
@@ -113,6 +120,22 @@ api.getPhoneCode = (data) => {
 api.getChecktPhoneCode = (data) => {
 	return request({
 		url: "/api/v1.user/loginbymobile",
+		method: "POST",
+		data: data
+	})
+}
+//验证原手机号码
+api.getChecktOldPhoneCode = (data) => {
+	return request({
+		url: "/api/v1.user/checkoldmobile",
+		method: "GET",
+		data: data
+	})
+}
+//修改手机号
+api.getAlertPhone = (data) => {
+	return request({
+		url: "/api/v1.user/changemobile",
 		method: "POST",
 		data: data
 	})

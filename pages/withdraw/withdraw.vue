@@ -13,16 +13,16 @@
 			<view class="tx-account">
 				<text class="title">到账支付宝</text>
 				<text class="name">{{name}}</text>
-				<text class="phone">{{tel}}</text>
+				<text class="phone">{{account}}</text>
 			</view>
 			<view class="tx-input">
 				<view class="title">提现金额</view>
 				<view class="input-box">
 					<text class="icon">¥</text>
-					<input placeholder="请输入提现金额" v-model="sum" class="input" />
-					<text class="note">（不小于1元）</text>
+					<input placeholder="请输入提现金额" type="number" v-model="sum" class="input" />
+					<text class="note" v-if="inputHint">（不小于1元）</text>
 				</view>
-				<view class="tx-upper">可提现金额¥{{total}}</view>
+				<view class="tx-upper">可提现金额 ¥{{total}}</view>
 				<view class="tx-upperbt" @click="allWithdraw">全部提现</view>
 			</view>
 		</view>
@@ -30,9 +30,12 @@
 			提现记录
 		</view>
 		<view class="tx-bt">
-			<view class="tx-hint" >*提现金额不能超过余额</view>
-			<ai-button btname="提现" @eventClick="withdraw" ></ai-button>
+			<view class="tx-hint" >
+				<text v-if="txHint">*提现金额不能超过余额</text>
+			</view>
+			<ai-button btname="提交" :buttonbg="aiButtonBg" @eventClick="withdraw" ></ai-button>
 		</view>
+		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
@@ -47,18 +50,38 @@
 		data() {
 			return {
 				name: null,
-				tel: null,
+				account: null,
 				sum: null,
-				total: "560.92",
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				total: null,
+				txHint: false,
+				inputHint: true,
+				aiButtonBg: "ai-button-graybg",
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 			}
 		},
-		onLoad() {
+		watch:{
+			sum: function(){
+				if(Number(this.sum) < 1){
+					this.aiButtonBg ="ai-button-graybg"
+					this.txHint = false
+					this.inputHint = true
+				}else{
+					this.aiButtonBg ="ai-button-redbg"
+					this.inputHint = false
+				}
+				if(Number(this.sum) > Number(this.total)){
+					this.txHint = true
+					this.aiButtonBg ="ai-button-graybg"
+				}
+			}
+		},
+		onLoad(res) {
+			this.total = res.total
 			this.$api.getAuthInfo().then(res => {
 				for(let item of res.data.data){
 					if(item.type == 1){
 						this.name = (item.nickname).slice(0,1)+'**'
-						this.tel = item.title
+						this.account = item.title
 						break
 					}
 				}
@@ -69,7 +92,33 @@
 				this.sum = this.total
 			},
 			withdraw(){
-				console.log(666666666)
+				if(Number(this.sum) < 1){
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'不能小于1元',
+						timeout:2000,
+						isClick:false
+					})
+					return
+				}
+				if(Number(this.sum) > this.total){
+					this.$refs.aiPopupMessage.open({
+						type:'err',
+						content:'不能大于总金额',
+						timeout:2000,
+						isClick:false
+					})
+					return
+				}
+				this.$api.getWithdraw({
+					uid: this.$store.state.userInfo.id,
+					cash_num: this.sum,
+					type: 1,
+					account: this.account,
+					real_name: this.name,
+				}).then(res => {
+					console.log(res)
+				})
 			},
 			navTo(obj){
 				this.$global.navTo(obj)
@@ -166,6 +215,7 @@
 		margin: 220px 0 0 0;
 		.tx-hint {
 			font-size: 12px;
+			height: 12px;
 			color:rgba(234,58,106,1);
 			text-align: center;
 			margin: 0 0 10px;

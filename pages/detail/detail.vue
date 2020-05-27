@@ -228,16 +228,16 @@
 		.guess-price-info-two {
 			height: 37px;
 			line-height: 37px;
+			color: rgba(255,255,255,0.8);
 			.guess-scprice {
 				display: inline-block;
 				margin: 0 14px 0 0;
 				font-size:13px;
-				color: rgba(255,255,255,1);
+				
 			}
 			.guess-rate {
 				display: inline-block;
 				font-size: 13px;
-				color: rgba(255,255,255,1);
 			}
 		}
 	}

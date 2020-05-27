@@ -79,7 +79,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(255,255,255,1);
+		background:rgba(255,255,255,0);
 	}
 	.img-box {
 		width: 750rpx;

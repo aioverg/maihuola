@@ -33,7 +33,7 @@
 			return {
 				page: 1,
 				lastPage: 1,
-				limit: 5,
+				limit: 20,
 				recordData: []
 			}
 		},
@@ -45,7 +45,6 @@
 		},
 		methods: {
 			getRecord(){
-				
 				if(this.page > this.lastPage){
 					console.log("没有更多数据")
 					return

@@ -11,7 +11,7 @@
 			<image class="bg" src="/static/img/bg-02.png"></image>
 			<view class="search">
 				<view class="search-one" @click="navTo('/pages/search/search')">
-					<image class="search-icon" src="../../static/icon/ai-search04.png"></image>
+					<image class="search-icon" src="../../static/icon/ai-search.png"></image>
 					<view class="search-content">搜索你需要的商品关键词</view>
 				</view>
 				<view class="search-two" @click="navTo('/pages/search/search')">搜索</view>
@@ -31,8 +31,8 @@
 		<view class="sort-section">
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
-					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id)">
-					    <view class="sort-item" :class="sortId-1 ==index?'red':''">
+					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id, index)">
+					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
 							{{item.title}}
 					    </view>
 					    <view class="sort-item-line">|</view>
@@ -71,6 +71,7 @@
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login.vue'
+	import {apkDownload} from '@/static/js/apUpdate.js'
 	export default {
 		components: {
 			aiGuseeCard,
@@ -80,7 +81,8 @@
 		},
 		data() {
 			return {
-				sortList: ["推荐", "食品", "美妆", "母婴", "女装", "男装"],
+				sortList: [],
+				sortIndex: 0,
 				sortId: 1,
 				rankData: [
 					{
@@ -113,7 +115,7 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				hide: null,
 				blue: null,
-				id: 1,
+				//id: 1,
 				uniLoadMoreStatus: "more",
 				current: 0,
 				updateQequire: true,
@@ -129,13 +131,11 @@
 		onLoad() {
 			this.getCarousel()
 			this.getGuessSort()
-			this.getGuess(this.sortId)
 		},
 		onReady(){
 			// #ifdef APP-PLUS
 			this.appUpdate()
 			// #endif
-			this.appUpdate()
 			
 		},
 		onReachBottom(){
@@ -161,18 +161,20 @@
 					this.$global.navTo('/pages/detail/guessList?goods_id=' + id)
 				}
 			},
-			
 			//获取商品分类列表
 			getGuessSort(){
-				this.$api.getGuessSort().then( res =>
+				this.$api.getGuessSort().then( res =>{
 				    this.sortList = res.data.data
-				)
+					this.sortId = res.data.data[0].id
+				}).then(res => {
+					this.getGuess(this.sortId, 0)
+				})
 			},
 			//获取商品
-			getGuess(id){
-				if(this.sortId != id){
+			getGuess(soretId, index){
+				if(this.sortIndex != index){
+					this.sortIndex = index
 					this.goodsList = []
-					this.sortId = id
 					this.goodsListPage = 1
 					this.rankValue = "new"
 					this.rankId = 0
@@ -183,7 +185,7 @@
 				}
 				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
-					category_id: this.sortId,
+					category_id: soretId,
 					limit: 5,
 					sort: this.rankValue,
 					page: this.goodsListPage
@@ -220,9 +222,8 @@
 				this.hide = "null"
 			},
 			appUpdate(){
-				if(!this.$store.state.appInfo.update){
+				if(this.$store.state.appInfo.update){
 					this.$refs.popupAiDia.open()
-					
 				}
 			},
 			close(done){
@@ -230,9 +231,9 @@
 				done()
 			},
 			confirm(done){
-				
 				this.downloadPtogress = true
-				//done()
+				apkDownload()
+				done()
 			},
 			getUserInfo(){
 				uni.getStorage({
@@ -284,10 +285,9 @@
 				z-index: 4;
 				width: 550rpx;
 				height: 35px;
-				background:rgba(255,255,255,1);
+				background:rgba(255,255,255,0.19);
 				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
 				border-radius:35px;
-				opacity:0.19;
 				.search-icon {
 					display: inline-block;
 					margin: 0 10px 0 15px;
@@ -300,7 +300,7 @@
 					display: inline-block;
 					font-size: 15px;
 					z-index: 10;
-					color: #555500;
+					color: rgba(255,255,255,0.5);
 					
 				}
 			}
@@ -314,8 +314,8 @@
 				text-align: center;
 				border-radius:35px;
 				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
-				background:rgba(255,255,255,1);
-				opacity:0.19;
+				background:rgba(255,255,255,0.19);
+				color: rgba(255,255,255,0.5);
 			}
 		}
 	}
@@ -360,7 +360,7 @@
 			display: inline-block;
 			.typetitleTab {
 				width: 670rpx;
-				padding: 0 5px 0 25px;
+				padding: 0 5px 0 15px;
 				white-space: nowrap;
 				margin: 0 auto;
 				text-align: center;
@@ -369,7 +369,7 @@
 					.sort-item {
 						position: relative;
 						display: inline-block;
-						width: 120rpx;
+						margin: 0 15px;
 						height: 45px;
 						line-height: 45px;
 						text-align: center;

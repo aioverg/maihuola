@@ -41,18 +41,18 @@
 					<view class="balance">
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
-						<text class="num">00000.00</text>
-						<view class="cash" @click="navTo('/pages/withdraw/withdraw')">
+						<text class="num">{{blance}}</text>
+						<view class="cash" @click="navTo('/pages/withdraw/withdraw?total=' + blance)">
 							提现
 						</view>
 					</view>
 					<view class="estimate">
 						<view class="last">
-							<view class="num">00000.00</view>
+							<view class="num">{{curEar}}</view>
 							<view class="title">本月预估收入（元）</view>
 						</view>
 						<view class="next">
-							<view class="num">00000.00</view>
+							<view class="num">{{prevEar}}</view>
 							<view class="title">上月预估收入（元）</view>
 						</view>
 					</view>
@@ -105,6 +105,9 @@
 				navTitle: null,
 				userName: null,
 				userId: null,
+				blance: null,
+				curEar: null,
+				prevEar: null,
 				noLogin: false,
 				yesLogin: false
 			}
@@ -133,6 +136,12 @@
 			}
 		},
 		onLoad(){
+			this.$api.getUserCenter().then(res => {
+				console.log(6666,res.data.data)
+				this.blance = res.data.data.balance
+				this.curEar = res.data.data.cur_month_commission
+				this.prevEar = res.data.data.prev_month_commission
+			})
 		},
         methods: {
 			navTo(url){

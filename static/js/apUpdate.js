@@ -27,18 +27,18 @@ export function getServerNo(_this) {
 	}
 }
 //下载更新包
-export const apkDownload = function(){
-	plus.nativeUI.showWaiting("下载wgt文件..."); 
-	plus.downloader.createDownload(apkUrl, {filename: "_doc/update/"}, function(d, status){
-		if(status == 200){
-			console.log("下载成功："+d.filename)
-			installWgt(d.filename);//安装wgt包
-		}else{
-			console.log("下载wgt失败！");  
-			plus.nativeUI.alert("下载wgt失败！");  
-		}
-		plus.nativeUI.closeWaiting();
+export function apkDownload(){
+	console.log("开始")
+	let url="http://test.aixiaotu.com.cn/app/app.apk"
+	plus.downloader.createDownload( url, {}, function ( d, status ) {
+	    if ( status == 200 ) { // 下载成功  
+	        var path = d.filename;  
+	        console.log("正在下载",d.filename)
+	    } else {//下载失败  
+	        console.log("下载失败")
+	    }
 	}).start()
+	console.log("结束")
 }
 
 //// 更新应用资源  
