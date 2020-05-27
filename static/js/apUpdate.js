@@ -9,7 +9,7 @@ export function getServerNo(_this) {
 				url: "http://api.taobaoke.test.aixiaotu.com.cn/api/v1.version/info",
 				method: "GET",
 				data: {
-					client_type: 1,
+					client_type: 2,
 					app_type: 1,
 				}
 			}).then(res => {
@@ -29,30 +29,15 @@ export function getServerNo(_this) {
 //下载更新包
 export function apkDownload(){
 	console.log("开始")
-	let url="http://test.aixiaotu.com.cn/app/app.apk"
+	let url="https://app.aixiaotu.com.cn/download/app.apk"
 	plus.downloader.createDownload( url, {}, function ( d, status ) {
 	    if ( status == 200 ) { // 下载成功  
 	        var path = d.filename;  
 	        console.log("正在下载",d.filename)
+			plus.runtime.install(path)
 	    } else {//下载失败  
 	        console.log("下载失败")
 	    }
 	}).start()
 	console.log("结束")
-}
-
-//// 更新应用资源  
-function apkUndate(path){  
-    plus.nativeUI.showWaiting("安装wgt文件...");  
-    plus.runtime.install(path,{},function(){  
-        plus.nativeUI.closeWaiting();  
-    console.log("安装wgt文件成功！");  
-    plus.nativeUI.alert("应用资源更新完成！",function(){  
-        plus.runtime.restart();  
-    });  
-},function(e){  
-    plus.nativeUI.closeWaiting();  
-    console.log("安装wgt文件失败["+e.code+"]："+e.message);  
-    plus.nativeUI.alert("安装wgt文件失败["+e.code+"]："+e.message);  
-});  
 }
