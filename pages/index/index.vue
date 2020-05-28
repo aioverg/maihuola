@@ -397,7 +397,7 @@
 					}
 					.sort-item-line {
 						display: inline-block;
-						color: rgba(229,229,229,1);
+						color: #EEEEEE;
 						font-size: 14px;
 					}
 				}
