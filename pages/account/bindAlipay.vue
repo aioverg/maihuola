@@ -74,14 +74,18 @@
 				}).then(res => {
 					if(res.data.code == 0){
 						this.$refs.aiPopupMessage.open({
-							type:'err',
+							type:'success',
 							content:'绑定成功',
-							timeout:2000,
+							timeout:1500,
 							isClick:false
 						})
+						this.$store.commit('setAlipay', 1)
+						setTimeout(() => {
+							this.$aiRouter.navTabBar('/pages/user/user')
+						},2000)
+						
 					}
 				})
-				console.log("接收：",this.alipayAccount,this.userName)
 			}
 		}
 	}

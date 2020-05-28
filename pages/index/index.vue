@@ -44,7 +44,7 @@
 				    <image class="sort-rank-img" src="/static/icon/icon-rank.png"></image>
 				</view>
 				<view class="sort-rank-item" v-show="hide" >
-					<image class="sort-rank-item-bg" mode="widthFix" src="/static/icon/sort-rank-bg.png"></image>
+					<image class="sort-rank-item-bg" src="/static/icon/sort-rank-bg.png"></image>
 					<view class="sort-rank-item-box">
 						<view class="sort-rank-list-item" :class="rankId==index?'blue':''" v-for="(item, index) in rankData" @click="selectRank(index)" :key="index">{{item.title}}</view>
 					</view>
@@ -90,11 +90,11 @@
 						title: "上新排序",
 						key: "new"
 					},
-					{
+					/*{
 						id: "brokerage",
 						title: "佣金排序",
 						key: "new"
-					},
+					},*/
 					{
 						id: "priceUp",
 						title: "价格升序",
@@ -210,6 +210,15 @@
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
+						if(res.data.data.last_page = 1){
+							this.goodsListLastPage = res.data.data.last_page
+							this.goodsListPage += 1
+							for(let i of res.data.data.data){
+								this.goodsList.push(i)
+							}
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
 						this.goodsListLastPage = res.data.data.last_page
 						this.goodsListPage += 1
 						for(let i of res.data.data.data){
@@ -239,10 +248,12 @@
 				}
 			},
 			selectRank(index) {
+				console.log(999)
 			    this.rankId = index;
 				this.rankValue = this.rankData[index].key
 				this.goodsList = []
 				this.goodsListPage = 1
+				this.hide = false
 				this.getGuess(this.sortId, this.sortIndex)
 			},
 			appUpdate(){
@@ -428,6 +439,7 @@
 				top: 12px;
 				.sort-rank-item-bg {
 					width: 120px;
+					height: 150px;
 					position: absolute !important;
 				}
 				.sort-rank-item-box {

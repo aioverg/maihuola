@@ -86,7 +86,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
-		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+		    <ai-popup-update :version="updateVersion" :content="updateContent"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		</view>
     </view>  
@@ -140,11 +140,11 @@
 			},
 			updateMessage(){
 				if(this.$store.state.appInfo.update){
-					return this.updateMessage = "有更新"+ this.$store.state.appInfo.localVersion + ">" + this.$store.state.appInfo.appVersion
+					return "更新"
 				}else{
-					return this.updateMessage = "已是最新版本" + this.$store.state.appInfo.localVersion
+					return this.$store.state.appInfo.localVersion
 				}
-				return this.$store.state.appInfo.update
+				//return this.$store.state.appInfo.update
 			},
 			updateVersion(){
 				return this.$store.state.appInfo.appVersion
@@ -161,7 +161,6 @@
 		},
 		onLoad(){
 			this.$api.getUserCenter().then(res => {
-				console.log(6666,res.data.data)
 				this.blance = res.data.data.balance
 				this.curEar = res.data.data.cur_month_commission
 				this.prevEar = res.data.data.prev_month_commission
@@ -187,7 +186,6 @@
 				done()
 			},
 			confirm(done){
-				//this.downloadPtogress = true
 				apkDownload(this.$store.state.appInfo.appLink)
 				done()
 			}

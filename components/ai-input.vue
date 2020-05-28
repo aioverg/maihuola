@@ -84,7 +84,7 @@
 		margin: 0 auto;
 		.ai-input-title {
 			margin: 0 15px;
-			width: 150rpx;
+			width: 160rpx;
 			font-size:15px;
 			color:rgba(51,51,51,1);
 		}

@@ -11,7 +11,7 @@
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
-				<input class="input-box-input" v-model="searchInput" @click="navTo('/pages/search/search')" disabled />
+				<input class="input-box-input" v-model="searchInput" @click="navTo('/pages/search/search?id=' + searchInput)" disabled />
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
@@ -24,8 +24,8 @@
 				<view class="guess-item" v-for="(item, index) in searchResult" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
 					<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
 				</view>
+				<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 			</view>
-			<view v-if="over">到底啦</view>
 		</view>
 	</view>
 </template>
@@ -39,18 +39,29 @@
 		data() {
 			return {
 				searchInput: null,
-				over: false,
 				page: 1,
 				lastPage: 1,
 				limit: 5,
 				searchResult: [],
+				history: [],
+				uniLoadMoreStatus: "more",
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		onLoad(res){
 			this.searchInput = res.id
-			console.log(this.searchInput)
 			this.getSearch()
+			let searchHistory = uni.getStorageSync("searchHistory")
+			if(searchHistory){
+				if(!searchHistory.includes(this.searchInput)){
+					this.history = searchHistory
+					this.history.push(this.searchInput)
+					uni.setStorageSync("searchHistory", this.history)
+				}
+			}else{
+				this.history.push(this.searchInput)
+				uni.setStorageSync("searchHistory", this.history)
+			}
 		},
 		onReachBottom(){
 			this.getSearch()
@@ -64,9 +75,10 @@
 			},
 			getSearch(){
 				if(this.page > this.lastPage){
-					this.over = true
+					this.uniLoadMoreStatus = "noMore"
 					return
 				}
+				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
 					keywords: this.searchInput,
 					limit: this.limit,
@@ -77,7 +89,7 @@
 						this.searchResult.push(i)
 					}
 					this.page += 1
-					console.log(this.searchResult)
+					this.uniLoadMoreStatus = "more"
 				})
 			}
 		}

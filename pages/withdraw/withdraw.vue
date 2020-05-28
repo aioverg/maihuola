@@ -61,17 +61,15 @@
 		},
 		watch:{
 			sum: function(){
-				if(Number(this.sum) < 1){
-					this.aiButtonBg ="ai-button-graybg"
-					this.txHint = false
-					this.inputHint = true
-				}else{
+				if(this.sum){
 					this.aiButtonBg ="ai-button-redbg"
-					this.inputHint = false
-				}
-				if(Number(this.sum) > Number(this.total)){
-					this.txHint = true
+				}else{
 					this.aiButtonBg ="ai-button-graybg"
+				}
+				if(this.sum > this.total){
+					this.txHint = true
+				}else{
+					this.txHint = false
 				}
 			}
 		},
@@ -92,7 +90,10 @@
 				this.sum = this.total
 			},
 			withdraw(){
-				if(Number(this.sum) < 1){
+				if(!this.sum){
+					return
+				}
+				if(0< this.sum < 1){
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'不能小于1元',
@@ -118,6 +119,17 @@
 					real_name: this.name,
 				}).then(res => {
 					console.log(res)
+					if(res.data.code == 0){
+						this.$refs.aiPopupMessage.open({
+							type:'success',
+							content:'提交成功',
+							timeout:1500,
+							isClick:false
+						})
+						setTimeout(() => {
+							this.$aiRouter.navTabBar('/pages/user/user')
+						},2000)
+					}
 				})
 			},
 			navTo(obj){

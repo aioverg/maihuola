@@ -40,9 +40,7 @@ const store = new Vuex.Store({
 			state.userInfo.alipay = data.client.alipay || null
 			state.userInfo.wechatName = null,
 			state.userInfo.WXAvatarUrl = null,
-			
 			uni.setStorageSync('userInfo', data)
-			console.log("设置用户信息",state)
 		},
 		logout(state) {
 			state.hasLogin = false;
@@ -63,6 +61,16 @@ const store = new Vuex.Store({
 				key: 'userInfo',
 				success: function(res){
 					res.data.client.taobao = status
+					uni.setStorageSync('userInfo', res.data)
+				}
+			})
+		},
+		setAlipay(state, status){
+			state.userInfo.alipay = status
+			uni.getStorage({
+				key: 'userInfo',
+				success: function(res){
+					res.data.client.alipay = status
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})
@@ -97,7 +105,6 @@ const store = new Vuex.Store({
 				state.appInfo.appVersion = data.server_version
 				state.appInfo.appNote = data.update_note
 			}
-			console.log(111,state.appInfo)
 		}
 	},
 	actions: {

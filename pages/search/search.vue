@@ -36,13 +36,18 @@
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
-		onLoad(){
+		onLoad(res){
+			if(res){
+				this.inputValue = res.id
+			}
 			const _this = this
 			//获取历史搜索的本地缓存
 			uni.getStorage({
 				key: "searchHistory",
 				success: function(res){
-					_this.history = res.data
+					if(res.data){
+						_this.history = res.data
+					}
 				}
 			})
 		},
@@ -50,12 +55,6 @@
 			navTo(obj){
 				this.inputValue = obj.replace(/(^\s*)|(\s*$)/g, "")
 				if(this.inputValue.length == 0){return}
-				this.history.push(this.inputValue)
-				//将搜索缓存入本地
-				uni.setStorage({
-				    key: 'searchHistory',
-				    data: this.history,
-				})
 				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
 			},
 			historyNavTo(obj){

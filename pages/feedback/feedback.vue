@@ -51,10 +51,12 @@
 						this.$refs.aiPopupMessage.open({
 							type:'success',
 							content:'提交成功',
-							timeout:2000,
+							timeout:1500,
 							isClick:false
 						})
-						this.$aiRouter.navTabBar('/pages/user/user')
+						setTimeout(() => {
+							this.$aiRouter.navTabBar('/pages/user/user')
+						},2000)
 					}
 				})
 			}

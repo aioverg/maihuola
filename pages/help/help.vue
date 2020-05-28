@@ -44,9 +44,8 @@
 		width: 650rpx;
 		margin: 0 auto;
 		.title {
-			height: 39px;
-			line-height: 39px;
-			margin: 5px 0 0 0;
+			line-height: 20px;
+			padding: 15px 0;
 			border-bottom: 1px solid rgba(229,229,229,1);;
 			font-size: 16px;
 			font-weight: 600;

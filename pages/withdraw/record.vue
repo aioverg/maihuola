@@ -17,6 +17,9 @@
 			    </view>
 			</view>
 			<view>
+				<view v-if="listPlaceHolder" class="withdraw-list-item">
+					<view style="text-align: center;">没有提现记录</view>
+				</view>
 				<view class="withdraw-list-item" :class="item.status == '处理中' ? 'withdraw-list-item-color' : null" v-for="(item, index) in recordData" :key="index">
 					<text class="withdraw-list-item-time">{{item.create_time}}</text>
 					<text class="withdraw-list-item-num">￥{{item.cash}}</text>
@@ -34,7 +37,8 @@
 				page: 1,
 				lastPage: 1,
 				limit: 50,
-				recordData: []
+				recordData: [],
+				listPlaceHolder: true
 			}
 		},
 		onLoad() {
@@ -54,6 +58,11 @@
 					limit: this.limit,
 					uid: this.$store.state.userInfo.id
 				}).then(res => {
+					console.log(res)
+					if(res.data.data.total = 0){
+						this.listPlaceHolder = false
+						return
+					}
 					this.page += 1
 					this.lastPage = res.data.data.last_page
 					//this.recordData = res.data.data.data
