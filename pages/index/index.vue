@@ -183,44 +183,47 @@
 			},
 			//获取商品
 			getGuess(sortId, index){
-				if(this.sortIndex != index){
-					this.sortIndex = index
-					this.sortId = sortId
-					console.log(this.sortIndex)
-					console.log("inex",index)
-					this.goodsList = []
-					this.goodsListPage = 1
-					this.rankValue = "new"
-					this.rankId = 0
-				}
-				if(this.goodsListPage > this.goodsListLastPage){
-					this.uniLoadMoreStatus = "noMore"
+				if(this.hide){
+					this.hide = false
 					return
-				}
-				this.uniLoadMoreStatus = "loading"
-				this.$api.getSearchGuess({
-					category_id: sortId,
-					limit: 5,
-					sort: this.rankValue,
-					page: this.goodsListPage
-				}).then( res => {
-					if(res.data.data.last_page <= 0){
+				}else{
+					if(this.sortIndex != index){
+						this.sortIndex = index
+						this.sortId = sortId
+						this.goodsList = []
+						this.goodsListPage = 1
+						this.rankValue = "new"
+						this.rankId = 0
+					}
+					if(this.goodsListPage > this.goodsListLastPage){
 						this.uniLoadMoreStatus = "noMore"
 						return
 					}
-					this.goodsListLastPage = res.data.data.last_page
-					this.goodsListPage += 1
-					for(let i of res.data.data.data){
-						this.goodsList.push(i)
-					}
-					this.uniLoadMoreStatus = "more"
-				})
+					this.uniLoadMoreStatus = "loading"
+					this.$api.getSearchGuess({
+						category_id: sortId,
+						limit: 5,
+						sort: this.rankValue,
+						page: this.goodsListPage
+					}).then( res => {
+						if(res.data.data.last_page <= 0){
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
+						this.goodsListLastPage = res.data.data.last_page
+						this.goodsListPage += 1
+						for(let i of res.data.data.data){
+							this.goodsList.push(i)
+						}
+						this.uniLoadMoreStatus = "more"
+					})
+				}
 			},
 			//跳转
 			navToDetail(url){
 				if(this.hide){
 					this.hide = false
-					true
+					return
 				}else{
 					this.$aiRouter.navTo(url)
 				}
@@ -231,7 +234,7 @@
 			hides(){
 				if(this.hide){
 					this.hide = false
-				}else {
+				} else {
 					this.hide = true
 				}
 			},
@@ -241,7 +244,6 @@
 				this.goodsList = []
 				this.goodsListPage = 1
 				this.getGuess(this.sortId, this.sortIndex)
-				this.hide = "null"
 			},
 			appUpdate(){
 				if(this.$store.state.appInfo.update){
