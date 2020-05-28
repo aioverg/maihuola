@@ -43,7 +43,7 @@
 				<view class="sort-rank-img-box" @click="hides()">
 				    <image class="sort-rank-img" src="/static/icon/icon-rank.png"></image>
 				</view>
-				<view class="sort-rank-item" :class="hide">
+				<view class="sort-rank-item" v-show="hide" >
 					<image class="sort-rank-item-bg" mode="widthFix" src="/static/icon/sort-rank-bg.png"></image>
 					<view class="sort-rank-item-box">
 						<view class="sort-rank-list-item" :class="rankId==index?'blue':''" v-for="(item, index) in rankData" @click="selectRank(index)" :key="index">{{item.title}}</view>
@@ -52,7 +52,7 @@
 			</view>
 		</view>
 		<view class="guess-section">
-			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
+			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetail('/pages/detail/detail?goods_id=' + item.id)">
 				<ai-gusee-card :recommend="item.is_recommend" :data="item"></ai-gusee-card>
 			</view>
 		</view>
@@ -113,7 +113,7 @@
 				goodsListPage: 1,
 				goodsListLastPage: 1,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
-				hide: null,
+				hide: false,
 				blue: null,
 				//id: 1,
 				uniLoadMoreStatus: "more",
@@ -217,14 +217,22 @@
 				})
 			},
 			//跳转
+			navToDetail(url){
+				if(this.hide){
+					this.hide = false
+					true
+				}else{
+					this.$aiRouter.navTo(url)
+				}
+			},
 			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
 			hides(){
-				if(this.hide == "show"){
-					this.hide = "null"
+				if(this.hide){
+					this.hide = false
 				}else {
-					this.hide = "show"
+					this.hide = true
 				}
 			},
 			selectRank(index) {
@@ -412,7 +420,8 @@
 				position: absolute;
 				width: 120px;
 				height: 175px;
-				display: none;
+				z-index: 25;
+				//display: none;
 				right: -2px;
 				top: 12px;
 				.sort-rank-item-bg {
@@ -421,7 +430,7 @@
 				}
 				.sort-rank-item-box {
 					position: relative;
-					z-index: 0;
+					z-index: 25;
 					width: 120rpx;
 					margin: 40px auto 0;
 					.sort-rank-list-item {
