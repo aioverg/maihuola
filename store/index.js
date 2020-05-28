@@ -19,12 +19,13 @@ const store = new Vuex.Store({
 			WXAvatarUrl: null,
 		},
 		appInfo: {
+			localVersion: null,
 			appType: null,
 			update: false,
 			require: false,
 			appLink: null,
 			appVersion: null,
-			appNote: null
+			appNote: null,
 		}
 	},
 	mutations: {
@@ -88,6 +89,7 @@ const store = new Vuex.Store({
 		},
 		setAppInfo(state, data){
 			if(data.update){
+				state.appInfo.localVersion = data.local_version
 				state.appInfo.appType = data.app_type
 				state.appInfo.update = data.update
 				state.appInfo.require = data.is_required ? true : false

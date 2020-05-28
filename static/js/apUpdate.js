@@ -14,6 +14,7 @@ export function getServerNo(_this) {
 			}).then(res => {
 				if(inf.version !== res[1].data.server_version){
 					res[1].data.update = true
+					res[1].data.local_version = inf.version
 					_this.$store.commit('setAppInfo', res[1].data)
 				}
 			})

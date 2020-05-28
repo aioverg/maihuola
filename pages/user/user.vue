@@ -77,14 +77,17 @@
 				<view class="list-box" @click="navTo('/pages/about/index')">
 					<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
 				</view>
-				<view class="list-box" @click="">
-					<ai-list-cell title="版本号" :message="version"></ai-list-cell>
+				<view class="list-box" @click="updateApp">
+					<ai-list-cell title="版本号" :message="updateMessage"></ai-list-cell>
 				</view>
 			</view>
 			<view class="account-safe list-box" @click="logout" style="padding: 0 30rpx;">
 				<ai-list-cell title="退出账户"></ai-list-cell>
 			</view>
 		</view>
+		<uni-popup ref="popupAiDia" type="dialog">
+		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+		</uni-popup>
 		</view>
     </view>  
 </template>  
@@ -92,12 +95,16 @@
 	import aiListCell from '@/components/ai-list-cell'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
-    import { mapState } from 'vuex';
+	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
+	import {apkDownload} from '@/static/js/apUpdate.js'
     export default {
 		components: {
 			aiListCell,
 			aiButton,
-			aiLoginHint
+			aiLoginHint,
+			uniPopUp,
+			aiPopupUpdate
 		},
 		data(){
 			return {
@@ -131,8 +138,25 @@
 			loginState(){
 				return this.$store.state.hasLogin
 			},
-			version(){
+			updateMessage(){
+				if(this.$store.state.appInfo.update){
+					return this.updateMessage = "有更新"+ this.$store.state.appInfo.localVersion + ">" + this.$store.state.appInfo.appVersion
+				}else{
+					return this.updateMessage = "已是最新版本" + this.$store.state.appInfo.localVersion
+				}
+				return this.$store.state.appInfo.update
+			},
+			updateVersion(){
 				return this.$store.state.appInfo.appVersion
+			},
+			updateContent(){
+				return this.$store.state.appInfo.appNote
+			},
+			updataLink(){
+				return this.$store.state.appInfo.appLink
+			},
+			updataType(){
+				return this.$store.state.appInfo.require
 			}
 		},
 		onLoad(){
@@ -152,6 +176,20 @@
 			logout(){
 				this.$store.commit("logout")
 				this.$aiRouter.navTo("/pages/index/index")
+			},
+			updateApp(){
+				if(this.$store.state.appInfo.update){
+					this.$refs.popupAiDia.open()
+				}
+			},
+			close(done){
+			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+				done()
+			},
+			confirm(done){
+				//this.downloadPtogress = true
+				apkDownload(this.$store.state.appInfo.appLink)
+				done()
 			}
         }  
     }  
