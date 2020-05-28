@@ -123,7 +123,8 @@
 					})
 					return
 				}
-				if(this.code & 1 !==0 || this.code.length !== 6){
+				/*if(this.code & 1 !==0 || this.code.length !== 6){
+					console.log(888888)
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'验证码错误',
@@ -131,7 +132,7 @@
 						isClick:false
 					})
 					return
-				}
+				}*/
 				this.$api.getChecktPhoneCode({
 					terminal: this.$store.state.systemType,
 					phone: this.phone,

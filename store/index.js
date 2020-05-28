@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		systemType: 1, //0-PC;1-Android;3-IOS
+		systemType: 1, //0-PC;1-IOS;2-Android
 		hasLogin: false,
 		userInfo: {
 			id: null,
@@ -22,8 +22,9 @@ const store = new Vuex.Store({
 			appType: null,
 			update: false,
 			require: false,
-			appUrl: null,
-			appVersion: null
+			appLink: null,
+			appVersion: null,
+			appNote: null
 		}
 	},
 	mutations: {
@@ -86,19 +87,15 @@ const store = new Vuex.Store({
 			})
 		},
 		setAppInfo(state, data){
-			if(data.appType == "android"){
-				state.systemType = 1
-			}
-			if(data.appType == "ios"){
-				state.systemType = 2
-			}
 			if(data.update){
-				state.appInfo.appType = data.appType
+				state.appInfo.appType = data.app_type
 				state.appInfo.update = data.update
-				state.appInfo.appUrl = data.appUrl
-				state.appInfo.appVersion = data.appVersion
+				state.appInfo.require = data.is_required ? true : false
+				state.appInfo.appLink = data.app_link
+				state.appInfo.appVersion = data.server_version
+				state.appInfo.appNote = data.update_note
 			}
-			console.log(state.appInfo)
+			console.log(111,state.appInfo)
 		}
 	},
 	actions: {

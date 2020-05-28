@@ -60,7 +60,7 @@
 			<ai-login></ai-login>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
-		    <ai-popup-update :progress="downloadPtogress" popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="updateQequire" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 	</view>
@@ -118,7 +118,6 @@
 				//id: 1,
 				uniLoadMoreStatus: "more",
 				current: 0,
-				updateQequire: true,
 				downloadPtogress: false
 				
 			};
@@ -126,6 +125,18 @@
 		computed: {
 			loginBox(){
 				return this.$store.state.hasLogin
+			},
+			updateVersion(){
+				return this.$store.state.appInfo.appVersion
+			},
+			updateContent(){
+				return this.$store.state.appInfo.appNote
+			},
+			updataLink(){
+				return this.$store.state.appInfo.appLink
+			},
+			updataType(){
+				return this.$store.state.appInfo.require
 			}
 		},
 		onLoad() {
@@ -234,8 +245,8 @@
 				done()
 			},
 			confirm(done){
-				this.downloadPtogress = true
-				apkDownload()
+				//this.downloadPtogress = true
+				apkDownload(this.updataLink)
 				done()
 			}
 		},

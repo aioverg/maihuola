@@ -148,7 +148,12 @@
 					return
 				}
 				this.$api.getTKL(this.goodsId).then(res => {
-					console.log(res)
+					uni.setClipboardData({
+					    data: res.data.data.info,
+					    success: function () {
+					        console.log('success',res.data.data.info);
+					    }
+					});
 				})
 			},
 			close(done){

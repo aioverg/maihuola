@@ -4,10 +4,12 @@
 		<view class="ai-popup-dialog-content-box">
 			<view class="ai-popup-title">
 				<view class="ai-popup-title-one">发现新版本</view>
-				<view class="ai-popup-title-two">v1.3.2</view>
+				<view class="ai-popup-title-two">{{version}}</view>
 			</view>
 			<view class="ai-popup-content">
-				<view class="ai-popup-content-item">更新版本</view>
+				<view class="ai-popup-content-item">
+					{{content}}
+				</view>
 			</view>
 			<view class="ai-popup-progress">
 				<view v-if="progress">
@@ -33,6 +35,17 @@
 				type: String,
 				default: "/static/img/bg-popup01.png"
 			},
+			version: {
+				type: String,
+				default: null,
+			},
+			content: {
+				type: String,
+				default: null,
+			},
+			
+			
+			////////////
 			value: {
 				type: [String, Number],
 				default: ''
@@ -59,13 +72,7 @@
 				type: String,
 				default: 'base'
 			},
-			/**
-			 * 对话框内容
-			 */
-			content: {
-				type: String,
-				default: ''
-			},
+			
 			/**
 			 * 拦截取消事件 ，如果拦截取消事件，必须监听close事件，执行 done()
 			 */
