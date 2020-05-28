@@ -10,10 +10,10 @@
 		/>
 		<hint-box content="请填写新的手机号并验证完成绑定"></hint-box>
 		<view class="phone-num">
-			<ai-input title="手机号码" @getInput="getPhone" placeholder="请输入新手机号码" ></ai-input>
+			<ai-input title="手机号码" type="number" @getInput="getPhone" placeholder="请输入新手机号码" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="验证码" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
+			<ai-input title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="alertPhone"></ai-button>
@@ -46,7 +46,7 @@
 				this.code = res
 			},
 			postCode(){
-				if(!Number(this.phone) || Number(this.phone) % 1 !== 0 || this.phone.length !== 11){
+				if(this.phone % 1 !== 0 || this.phone.length !== 11){
 					this.$refs.aiPopupMessage.open({
 						type:'success',
 						content:'手机号码错误',
@@ -76,7 +76,7 @@
 				})
 			},
 			alertPhone(){
-				if(!Number(this.phone) || Number(this.phone) % 1 !== 0 || this.phone.length !== 11){
+				if(this.phone % 1 !== 0 || this.phone.length !== 11){
 					this.$refs.aiPopupMessage.open({
 						type:'success',
 						content:'手机号码错误',
@@ -85,7 +85,7 @@
 					})
 					return
 				}
-				if(!Number(this.code) || Number(this.code) % 1 !== 0 || this.code.length !== 6){
+				if(this.code % 1 !== 0 || this.code.length !== 6){
 					this.$refs.aiPopupMessage.open({
 						type:'success',
 						content:'手机号码错误',
@@ -127,7 +127,7 @@
 	page {
 		height:667px;
 		width:750rpx;
-		background:rgba(249,249,249,0);
+		background:rgba(249,249,249,1);
 	}
 	.phone-num {
 		margin: 15px 0;

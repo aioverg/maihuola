@@ -2,7 +2,7 @@
 	<view class="ai-input-box">
 		<view class="ai-input-title">{{title}}</view>
 		<view v-if="content" class="ai-input-content">{{content}}</view>
-		<input v-if="placeholder" v-model="inputValue" class="ai-input-input" @blur="getInput" @confirm="getInput" :placeholder="placeholder"/>
+		<input class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
 		<view class="ai-input-bt" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
 	</view>
 </template>
@@ -21,6 +21,10 @@
 			title: {
 				type: String,
 				default: ''
+			},
+			type: {
+				type: String,
+				default: "text",
 			},
 			content: {
 				//type: String,
@@ -71,27 +75,31 @@
 <style lang="scss">
 	.ai-input-box {
 		width: 690rpx;
-		height: 90rpx;
-		line-height: 90rpx;
+		height: 45px;
+		line-height: 45px;
 		display: flex;
 		align-items: center;
 		background:rgba(255,255,255,1);
-		border-radius:16rpx;
+		border-radius: 8px;
 		margin: 0 auto;
 		.ai-input-title {
-			margin: 0 30rpx;
-			width: 160rpx;
+			margin: 0 15px;
+			width: 150rpx;
 			font-size:15px;
 			color:rgba(51,51,51,1);
 		}
 		.ai-input-content {
+			width: 250rpx;
 			font-size: 14px;
 			color:rgba(153,153,153,1);
 		}
 		.ai-input-input {
+			border: none;
+			width: 250rpx;
 			display: inline-block;
 			font-size: 14px;
 			margin: 0 10px 0 0;
+			outline: none,
 		}
 		.ai-input-bt {
 			display: inline-block;

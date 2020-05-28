@@ -7,11 +7,7 @@
 				<view class="ai-popup-title-two">v1.3.2</view>
 			</view>
 			<view class="ai-popup-content">
-				<view class="ai-popup-content-item">777777777777</view>
-				<view class="ai-popup-content-item">777777777777</view>
-				<view class="ai-popup-content-item">777777777777</view>
-				<view class="ai-popup-content-item">777777777777</view>
-				<view class="ai-popup-content-item">777777777777</view>
+				<view class="ai-popup-content-item">更新版本</view>
 			</view>
 			<view class="ai-popup-progress">
 				<view v-if="progress">

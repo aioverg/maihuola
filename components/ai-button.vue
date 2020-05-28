@@ -48,7 +48,6 @@
 			background:linear-gradient(135deg,rgba(252,170,122,1) 0%,rgba(234,58,106,1) 100%);
 			filter:blur(10px);
 			border-radius:22px;
-			z-index: -1;
 		}
 	}
 	.ai-button-graybg {
@@ -70,12 +69,14 @@
 			justify-content: center;
 			margin: 0 3px 0 0;
 			.img {
+				z-index: 2;
 				display: inline-block;
 				width: 20px;
 				margin: 0 4px 0 0;
 			}
 			.btname {
 				display: inline-block;
+				z-index: 2;
 				font-weight: 600;
 				font-size: 16px;
 				color:rgba(255,255,255,1);

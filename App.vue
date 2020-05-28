@@ -4,7 +4,6 @@
 	 */
 	// #ifdef APP-PLUS
 	import {getServerNo} from "@/static/js/apUpdate.js";
-	//import APPUpdate from "@/static/js/APPUpdate.js";
 	// #endif
 	import {
 		mapMutations
@@ -16,7 +15,6 @@
 		onLaunch: function() {
 			const _this = this
 			// #ifdef APP-PLUS
-			//APPUpdate();
 			getServerNo(this)
 			// #endif
 			uni.getStorage({

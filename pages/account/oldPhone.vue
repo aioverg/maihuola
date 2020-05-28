@@ -13,10 +13,10 @@
 			<ai-input title="手机号码" :content="phone" ></ai-input>
 		</view>
 		<view class="code-num">
-			<ai-input title="验证码" @getInput="getIput" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
+			<ai-input title="验证码" type="number" @getInput="getIput" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 		</view>
 		<view class="bt">
-		    <ai-button btname="下一步" @eventClick="checkPhoneCode"></ai-button>
+		    <ai-button btname="下一步" :buttonbg="aiButtonBg" @eventClick="checkPhoneCode"></ai-button>
 		</view>
 		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
@@ -34,12 +34,23 @@
 		},
 		data() {
 			return {
-				phone: "13750892614",
-				phoneCode: null
+				phoneCode: null,
+				aiButtonBg: "ai-button-graybg",
 			}
 		},
-		methods: {
-			
+		computed:{
+			phone(){
+				return this.$store.state.userInfo.tel
+			}
+		},
+		watch: {
+			phoneCode: function(){
+				if(0 < this.phoneCode.length && this.phoneCode.length <= 6){
+					this.aiButtonBg ="ai-button-redbg"
+				}else{
+					this.aiButtonBg ="ai-button-graybg"
+				}
+			}
 		},
 		methods: {
 			getIput(res){
@@ -67,7 +78,7 @@
 				})
 			},
 			checkPhoneCode(){
-				if(!Number(this.phoneCode) || Number(this.phoneCode) % 1 !== 0 || this.phoneCode.length !== 6){
+				if(this.phoneCode % 1 !== 0 || this.phoneCode.length !== 6){
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'验证码错误',
@@ -104,10 +115,11 @@
 	page {
 		height:667px;
 		width:750rpx;
-		background:rgba(249,249,249,0);
+		background:rgba(249,249,249,1);
 	}
 	.phone-num {
 		margin: 15px 0;
+		
 	}
 	.code-num {
 		width: 750rpx;
