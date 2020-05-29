@@ -20,7 +20,7 @@
 				    <ai-list-cell title="淘宝授权" :message="taobao" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindAlipay()">
-				    <ai-list-cell title="支付宝绑定" :message="alipay"></ai-list-cell>
+				    <ai-list-cell title="支付宝账户" :message="alipay"></ai-list-cell>
 			    </view>
 		    </view>
 			<uni-popup ref="popupDialog" type="dialog">
@@ -59,7 +59,7 @@
 		computed: {
 			tel(){
 				if(this.$store.state.userInfo.tel){
-					return "已绑定"
+					return this.$store.state.userInfo.tel
 				}else{
 					return "未绑定"
 				}
@@ -80,9 +80,9 @@
 			},
 			alipay(){
 				if(this.$store.state.userInfo.alipay){
-					return "已绑定"
+					return this.$store.state.userInfo.alipay
 				}else{
-					return "未绑定"
+					return "未填写"
 				}
 			}
 		},

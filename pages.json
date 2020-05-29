@@ -8,13 +8,30 @@
 			"style": {
 				"navigationBarTitleText": "首页",
 				"app-plus":{
-				"scrollIndicator": "none"
+				    "scrollIndicator": "none",
+					"background": "#0000ff",
+				    "pullToRefresh": {
+				        "support": true,
+				        "color": "#fffff",
+				        "style": "circle",
+						"offset": "-300px"
+				    }
 				}
 			}
 		},{
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"app-plus":{
+				    "scrollIndicator": "none",
+					"background": "#0000ff",
+				    "pullToRefresh": {
+				        "support": true,
+				        "color": "#fffff",
+				        "style": "circle",
+						"offset": "-300px"
+				    }
+				}
 			}
 		}, {
 			"path": "pages/detail/detail",

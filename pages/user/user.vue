@@ -78,7 +78,7 @@
 					<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
 				</view>
 				<view class="list-box" @click="updateApp">
-					<ai-list-cell title="版本号" :message="updateMessage"></ai-list-cell>
+					<ai-list-cell title="版本号" :message="updateMessage" aimessagecolor="ai-list-cell-message-red"></ai-list-cell>
 				</view>
 			</view>
 			<view class="account-safe list-box" @click="logout" style="padding: 0 30rpx;">
@@ -89,9 +89,11 @@
 		    <ai-popup-update :version="updateVersion" :content="updateContent"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		</view>
+		<mix-loading v-show="refresh"></mix-loading>
     </view>  
 </template>  
 <script>
+	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
@@ -100,6 +102,7 @@
 	import {apkDownload} from '@/static/js/apUpdate.js'
     export default {
 		components: {
+			mixLoading,
 			aiListCell,
 			aiButton,
 			aiLoginHint,
@@ -110,32 +113,24 @@
 			return {
 				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
 				navTitle: null,
+				portrait: '/static/img/ai-default-user-icon.png',
 				userName: null,
 				userId: null,
 				blance: null,
 				curEar: null,
 				prevEar: null,
 				noLogin: false,
-				yesLogin: false
+				yesLogin: false,
+				refresh: false
 			}
 		},
 		computed: {
-			portrait(){
-				if(this.$store.state.userInfo.WXAvatarUrl){
+			loginState(){
+				if(this.$store.state.hasLogin){
 					this.navTitle = "微信登录"
-					return this.$store.state.userInfo.WXAvatarUrl
 				}else{
 					this.navTitle = "我的"
-					this.userId = "账户ID:" + this.$store.state.userInfo.id
-					if(this.$store.state.userInfo.wechat){
-						this.userName = "微信昵称"
-					}else{
-						this.userName = "MH" + this.$store.state.userInfo.tel
-					}
-					return '/static/img/ai-default-user-icon.png'
 				}
-			},
-			loginState(){
 				return this.$store.state.hasLogin
 			},
 			updateMessage(){
@@ -144,7 +139,6 @@
 				}else{
 					return this.$store.state.appInfo.localVersion
 				}
-				//return this.$store.state.appInfo.update
 			},
 			updateVersion(){
 				return this.$store.state.appInfo.appVersion
@@ -165,8 +159,26 @@
 				this.blance = res.data.data.balance
 				this.curEar = res.data.data.cur_month_commission
 				this.prevEar = res.data.data.prev_month_commission
+				this.userName = res.data.data.username
+				this.userId = "账户ID:" + res.data.data.id
 				this.$store.commit("setAlipay", res.data.data.alipay)
 			})
+		},
+		onPullDownRefresh() {
+			const _this = this
+		    _this.refresh = true
+			this.$api.getUserCenter().then(res => {
+				this.blance = res.data.data.balance
+				this.curEar = res.data.data.cur_month_commission
+				this.prevEar = res.data.data.prev_month_commission
+				this.userName = res.data.data.username
+				this.userId = "账户ID:" + res.data.data.id
+				this.$store.commit("setAlipay", res.data.data.alipay)
+			})
+		    setTimeout(() => {
+				_this.refresh = false
+		        uni.stopPullDownRefresh();
+		    }, 1000);
 		},
         methods: {
 			navTo(url){

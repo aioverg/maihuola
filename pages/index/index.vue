@@ -63,10 +63,12 @@
 		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
+		<mix-loading v-show="refresh"></mix-loading>
 	</view>
 </template>
 
 <script>
+	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
@@ -74,6 +76,7 @@
 	import {apkDownload} from '@/static/js/apUpdate.js'
 	export default {
 		components: {
+			mixLoading,
 			aiGuseeCard,
 			uniPopUp,
 			aiPopupUpdate,
@@ -118,7 +121,8 @@
 				//id: 1,
 				uniLoadMoreStatus: "more",
 				current: 0,
-				downloadPtogress: false
+				downloadPtogress: false,
+				refresh: false
 				
 			};
 		},
@@ -140,6 +144,7 @@
 			}
 		},
 		onLoad() {
+			console.log(6666)
 			this.getCarousel()
 			this.getGuessSort()
 		},
@@ -148,6 +153,16 @@
 			this.appUpdate()
 			// #endif
 			
+		},
+		onPullDownRefresh() {
+			const _this = this
+		    _this.refresh = true
+			this.getCarousel()
+			this.getGuessSort()
+		    setTimeout(() => {
+				_this.refresh = false
+		        uni.stopPullDownRefresh();
+		    }, 1000);
 		},
 		onReachBottom(){
 			this.getGuess(this.sortId, this.sortIndex)

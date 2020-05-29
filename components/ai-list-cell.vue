@@ -1,7 +1,7 @@
 <template>
 	<view class="ai-list-cell" :class="dashed">
 		<view class="ai-list-cell-title">{{title}}</view>
-		<view class="ai-list-cell-message" v-if="message">{{message}}</view>
+		<view class="ai-list-cell-message" :class="aimessagecolor" v-if="message">{{message}}</view>
 		<image class="ai-list-cell-icon" src="/static/icon/ai-right-arrow.png"></image>
 	</view>
 </template>
@@ -23,6 +23,10 @@
 				default: null
 			},
 			dashed: {
+				type: String,
+				default: null
+			},
+			aimessagecolor: {
 				type: String,
 				default: null
 			}
@@ -56,6 +60,9 @@
 			margin: 0 20rpx 0 0;
 			color: #cccccc;
 			font-size: 14px;
+		}
+		.ai-list-cell-message-red {
+			color: #F47A73;
 		}
 	}
 </style>
