@@ -80,13 +80,8 @@
 				code: "alipay"
 			}).then(res => {
 				console.log(1111,res)
-				for(let item of res.data.data){
-					if(item.type == 1){
-						this.name = (item.nickname).slice(0,1)+'**'
-						this.account = item.title
-						break
-					}
-				}
+				this.name = res.data.data.nickname
+				this.account = res.data.data.title
 			})
 		},
 		methods: {

@@ -72,7 +72,7 @@ api.getCarouselList = (data) => {
 //搜索 + 获取分类商品
 api.getSearchGuess = (data) => {
 	return request({
-		url: "/api/v1.item/searchlist",
+		url: "/api/v1.item",
 		method: "GET",
 		data: data
 	})

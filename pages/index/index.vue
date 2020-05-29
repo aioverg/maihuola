@@ -110,7 +110,8 @@
 					}
 				],
 				rankId: 0,
-				rankValue: "new",
+				rankValue: "id",
+				rankType: "DESC",
 				carouselList: [],
 				goodsList: [],
 				goodsListPage: 1,
@@ -144,9 +145,12 @@
 			}
 		},
 		onLoad() {
-			console.log(6666)
-			this.getCarousel()
 			this.getGuessSort()
+			//console.log(6666)
+			//this.getCarousel()
+		},
+		onShow() {
+			//this.getRecommend()
 		},
 		onReady(){
 			// #ifdef APP-PLUS
@@ -188,15 +192,44 @@
 				}
 			},
 			//获取商品分类列表
-			getGuessSort(){
+			/*getGuessSort(){
 				this.$api.getGuessSort().then( res =>{
 				    this.sortList = res.data.data
 					this.sortId = res.data.data[0].id
 				}).then(res => {
 					this.getGuess(this.sortId, 0)
 				})
+			},*/
+			//获取推荐商品
+			getGuessSort(){
+				this.$api.getSearchGuess({
+					is_recommend: 1,
+				}).then(res => {
+					if(res.data.data.length !== 0){
+						this.sortList.push({
+							id: "推荐",
+							title: "推荐",
+							pid: "推荐"
+						})
+						this.$api.getGuessSort().then( res =>{
+							console.log(res.data.data)
+							for(let item of res.data.data){
+								this.sortList.push(item)
+							}
+						})
+						for(let item of res.data.data){
+							this.goodsList.push(item)
+						}
+					}else{
+						this.$api.getGuessSort().then( res =>{
+							console.log(res.data.data)
+							for(let item of res.data.data){
+								this.sortList.push(item)
+							}
+						})
+					}
+				})
 			},
-			//获取商品
 			getGuess(sortId, index){
 				if(this.hide){
 					this.hide = false
@@ -207,7 +240,7 @@
 						this.sortId = sortId
 						this.goodsList = []
 						this.goodsListPage = 1
-						this.rankValue = "new"
+						this.rankValue = "id"
 						this.rankId = 0
 					}
 					if(this.goodsListPage > this.goodsListLastPage){
@@ -217,10 +250,62 @@
 					this.uniLoadMoreStatus = "loading"
 					this.$api.getSearchGuess({
 						category_id: sortId,
-						limit: 5,
 						sort: this.rankValue,
-						page: this.goodsListPage
+						is_recommend: 0,
+						sort_type: this.rankType,
+						page: this.goodsListPage,
+						size: 10
 					}).then( res => {
+						if(res.data.pagination.pages <= 0){
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
+						if(res.data.pagination.pages = 1){
+							this.goodsListLastPage = res.data.pagination.pages
+							this.goodsListPage += 1
+							for(let i of res.data.data.data){
+								this.goodsList.push(i)
+							}
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
+						this.goodsListLastPage = res.data.pagination.pages
+						this.goodsListPage += 1
+						for(let i of res.data.data.data){
+							this.goodsList.push(i)
+						}
+						this.uniLoadMoreStatus = "more"
+					})
+				}
+			},
+			//获取商品
+			/*getGuess(sortId, index){
+				if(this.hide){
+					this.hide = false
+					return
+				}else{
+					if(this.sortIndex != index){
+						this.sortIndex = index
+						this.sortId = sortId
+						this.goodsList = []
+						this.goodsListPage = 1
+						this.rankValue = "id"
+						this.rankId = 0
+					}
+					if(this.goodsListPage > this.goodsListLastPage){
+						this.uniLoadMoreStatus = "noMore"
+						return
+					}
+					this.uniLoadMoreStatus = "loading"
+					this.$api.getSearchGuess({
+						category_id: sortId,
+						sort: this.rankValue,
+						is_recommend: 0,
+						sort_type: this.rankType,
+						page: this.goodsListPage,
+						size: 10
+					}).then( res => {
+						console.log(res)
 						if(res.data.data.last_page <= 0){
 							this.uniLoadMoreStatus = "noMore"
 							return
@@ -242,7 +327,7 @@
 						this.uniLoadMoreStatus = "more"
 					})
 				}
-			},
+			},*/
 			//跳转
 			navToDetail(url){
 				if(this.hide){

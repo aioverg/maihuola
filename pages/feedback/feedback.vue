@@ -9,7 +9,7 @@
 			leftArrow="true"
 		/>
 		<view class="feedback-box">
-			<textarea class="feedback-area" v-model="content" placeholder="请留下你的意见..."></textarea>
+			<textarea class="feedback-area" v-model="content" placeholder="请留下您的意见..."></textarea>
 		</view>
 		<view class="feedback-bt">
 			<ai-button @eventClick="feedBack" btname="提交"></ai-button>
