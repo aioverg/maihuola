@@ -56,6 +56,7 @@
 				txHint: false,
 				inputHint: true,
 				aiButtonBg: "ai-button-graybg",
+				run: true,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 			}
 		},
@@ -89,6 +90,21 @@
 			})
 		},
 		methods: {
+			aiPopupMessage(type, content){
+				if(!this.run){
+					return
+				}
+				this.run = false
+				this.$refs.aiPopupMessage.open({
+					type: type,
+					content: content,
+					timeout:1500,
+					isClick:false
+				})
+				setTimeout(() => {
+					this.run = true
+				}, 2000)
+			},
 			allWithdraw(){
 				this.sum = Number(this.total)
 			},
@@ -97,21 +113,11 @@
 					return
 				}
 				if(0< this.sum && this.sum < 1){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'不能小于1元',
-						timeout:2000,
-						isClick:false
-					})
+					this.aiPopupMessage('err', '不能小于1元')
 					return
 				}
 				if(Number(this.sum) > this.total){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'不能大于总金额',
-						timeout:2000,
-						isClick:false
-					})
+					this.aiPopupMessage('err', '不能大于总金额')
 					return
 				}
 				this.$api.getWithdraw({
