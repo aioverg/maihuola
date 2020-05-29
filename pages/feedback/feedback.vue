@@ -33,7 +33,8 @@
 		},
 		methods: {
 			feedBack(){
-				if(!this.content){
+				this.content = this.content.trim()
+				if(!this.content || this.content.length == 0){
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'内容不能为空',

@@ -42,7 +42,7 @@
 						<image class="icon" src="/static/icon/ai-coin.png"></image>
 						<text class="title">余额（元）：</text>
 						<text class="num">{{blance}}</text>
-						<view class="cash" @click="navTo('/pages/withdraw/withdraw?total=' + blance)">
+						<view class="cash" @click="withdraw">
 							提现
 						</view>
 					</view>
@@ -157,20 +157,25 @@
 			},
 			updataType(){
 				return this.$store.state.appInfo.require
-			}
+			},
+			
 		},
-		onLoad(){
+		onShow() {
 			this.$api.getUserCenter().then(res => {
 				this.blance = res.data.data.balance
 				this.curEar = res.data.data.cur_month_commission
 				this.prevEar = res.data.data.prev_month_commission
+				this.$store.commit("setAlipay", res.data.data.alipay)
 			})
 		},
         methods: {
 			navTo(url){
-				uni.navigateTo({  
-					url
-				})  
+				this.$aiRouter.navTo(url)
+			},
+			withdraw(){
+				if(this.$store.state.userInfo.alipay){
+					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.blance)
+				}
 			},
 			logout(){
 				this.$store.commit("logout")

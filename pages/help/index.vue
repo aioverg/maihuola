@@ -25,12 +25,12 @@
 				helpList: [
 					{
 						id: "whatTKL",
-						title: "淘口令是什么",
+						title: "推广码是什么",
 						url: "/pages/help/help?id="
 					},
 					{
 						id: "getTKL",
-						title: "如何获取淘口令",
+						title: "如何获取推广码",
 						url: "/pages/help/help?id="
 					},
 					{

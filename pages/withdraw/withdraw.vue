@@ -75,7 +75,10 @@
 		},
 		onLoad(res) {
 			this.total = res.total
-			this.$api.getAuthInfo().then(res => {
+			this.$api.getAuthInfo({
+				code: "alipay"
+			}).then(res => {
+				console.log(1111,res)
 				for(let item of res.data.data){
 					if(item.type == 1){
 						this.name = (item.nickname).slice(0,1)+'**'
@@ -87,13 +90,13 @@
 		},
 		methods: {
 			allWithdraw(){
-				this.sum = this.total
+				this.sum = Number(this.total)
 			},
 			withdraw(){
 				if(!this.sum){
 					return
 				}
-				if(0< this.sum < 1){
+				if(0< this.sum && this.sum < 1){
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'不能小于1元',

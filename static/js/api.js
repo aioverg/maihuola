@@ -99,10 +99,11 @@ api.getTKL = (data) => {
 	})
 }
 //获取用户授权信息
-api.getAuthInfo = () => {
+api.getAuthInfo = (data) => {
 	return request({
 		url: "/api/v1.user/bindinfo",
-		method: "GET"
+		method: "GET",
+		data: data
 	})
 }
 //获取用户中心数据（余额等）
