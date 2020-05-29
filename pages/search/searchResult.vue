@@ -80,12 +80,13 @@
 				}
 				this.uniLoadMoreStatus = "loading"
 				this.$api.getSearchGuess({
-					keywords: this.searchInput,
-					limit: this.limit,
+					q: this.searchInput,
+					size: this.limit,
 					page: this.page
 				}).then(res => {
-					this.lastPage = res.data.data.last_page
-					for(let i of res.data.data.data){
+					console.log(res.data)
+					this.lastPage = res.data.pagination.pages
+					for(let i of res.data.data){
 						this.searchResult.push(i)
 					}
 					this.page += 1

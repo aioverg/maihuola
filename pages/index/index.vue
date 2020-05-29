@@ -91,7 +91,8 @@
 					{
 						id: "update",
 						title: "上新排序",
-						key: "new"
+						rank: "id",
+						rankType: "DESC"
 					},
 					/*{
 						id: "brokerage",
@@ -101,12 +102,14 @@
 					{
 						id: "priceUp",
 						title: "价格升序",
-						key: "+price"
+						rank: "price",
+						rankType: "ASC"
 					},
 					{
 						id: "priceDown",
 						title: "价格降序",
-						key: "-price"
+						rank: "price",
+						rankType: "DESC"
 					}
 				],
 				rankId: 0,
@@ -191,28 +194,18 @@
 					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + id)
 				}
 			},
-			//获取商品分类列表
-			/*getGuessSort(){
-				this.$api.getGuessSort().then( res =>{
-				    this.sortList = res.data.data
-					this.sortId = res.data.data[0].id
-				}).then(res => {
-					this.getGuess(this.sortId, 0)
-				})
-			},*/
-			//获取推荐商品
+			//获取分類菜單
 			getGuessSort(){
 				this.$api.getSearchGuess({
 					is_recommend: 1,
 				}).then(res => {
 					if(res.data.data.length !== 0){
 						this.sortList.push({
-							id: "推荐",
+							id: "-1",
 							title: "推荐",
 							pid: "推荐"
 						})
 						this.$api.getGuessSort().then( res =>{
-							console.log(res.data.data)
 							for(let item of res.data.data){
 								this.sortList.push(item)
 							}
@@ -230,11 +223,13 @@
 					}
 				})
 			},
+			//获取菜单商品
 			getGuess(sortId, index){
 				if(this.hide){
 					this.hide = false
 					return
 				}else{
+					console.log(sortId)
 					if(this.sortIndex != index){
 						this.sortIndex = index
 						this.sortId = sortId
@@ -243,91 +238,77 @@
 						this.rankValue = "id"
 						this.rankId = 0
 					}
-					if(this.goodsListPage > this.goodsListLastPage){
-						this.uniLoadMoreStatus = "noMore"
-						return
-					}
-					this.uniLoadMoreStatus = "loading"
-					this.$api.getSearchGuess({
-						category_id: sortId,
-						sort: this.rankValue,
-						is_recommend: 0,
-						sort_type: this.rankType,
-						page: this.goodsListPage,
-						size: 10
-					}).then( res => {
-						if(res.data.pagination.pages <= 0){
+					if(sortId == "-1"){
+						if(this.goodsListPage > this.goodsListLastPage){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						if(res.data.pagination.pages = 1){
+						this.uniLoadMoreStatus = "loading"
+						this.$api.getSearchGuess({
+							sort: this.rankValue,
+							is_recommend: 1,
+							sort_type: this.rankType,
+							page: this.goodsListPage,
+							size: 5
+						}).then( res => {
+							console.log(res.data)
+							if(res.data.pagination.pages <= 0){
+								this.uniLoadMoreStatus = "noMore"
+								return
+							}
+							if(res.data.pagination.pages = 1){
+								this.goodsListLastPage = res.data.pagination.pages
+								this.goodsListPage += 1
+								for(let i of res.data.data){
+									this.goodsList.push(i)
+								}
+								this.uniLoadMoreStatus = "noMore"
+								return
+							}
 							this.goodsListLastPage = res.data.pagination.pages
 							this.goodsListPage += 1
-							for(let i of res.data.data.data){
+							for(let i of res.data.data){
 								this.goodsList.push(i)
 							}
+						})
+					}else{
+						if(this.goodsListPage > this.goodsListLastPage){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						this.goodsListLastPage = res.data.pagination.pages
-						this.goodsListPage += 1
-						for(let i of res.data.data.data){
-							this.goodsList.push(i)
-						}
-						this.uniLoadMoreStatus = "more"
-					})
+						this.uniLoadMoreStatus = "loading"
+						this.$api.getSearchGuess({
+							category_id: this.sortId,
+							sort: this.rankValue,
+							is_recommend: this.recommend,
+							sort_type: this.rankType,
+							page: this.goodsListPage,
+							size: 5
+						}).then( res => {
+							console.log(res.data)
+							if(res.data.pagination.pages <= 0){
+								this.uniLoadMoreStatus = "noMore"
+								return
+							}
+							if(res.data.pagination.pages = 1){
+								this.goodsListLastPage = res.data.pagination.pages
+								this.goodsListPage += 1
+								for(let i of res.data.data){
+									this.goodsList.push(i)
+								}
+								this.uniLoadMoreStatus = "noMore"
+								return
+							}
+							this.goodsListLastPage = res.data.pagination.pages
+							this.goodsListPage += 1
+							for(let i of res.data.data){
+								this.goodsList.push(i)
+							}
+							this.uniLoadMoreStatus = "more"
+						})
+					}
 				}
 			},
-			//获取商品
-			/*getGuess(sortId, index){
-				if(this.hide){
-					this.hide = false
-					return
-				}else{
-					if(this.sortIndex != index){
-						this.sortIndex = index
-						this.sortId = sortId
-						this.goodsList = []
-						this.goodsListPage = 1
-						this.rankValue = "id"
-						this.rankId = 0
-					}
-					if(this.goodsListPage > this.goodsListLastPage){
-						this.uniLoadMoreStatus = "noMore"
-						return
-					}
-					this.uniLoadMoreStatus = "loading"
-					this.$api.getSearchGuess({
-						category_id: sortId,
-						sort: this.rankValue,
-						is_recommend: 0,
-						sort_type: this.rankType,
-						page: this.goodsListPage,
-						size: 10
-					}).then( res => {
-						console.log(res)
-						if(res.data.data.last_page <= 0){
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						if(res.data.data.last_page = 1){
-							this.goodsListLastPage = res.data.data.last_page
-							this.goodsListPage += 1
-							for(let i of res.data.data.data){
-								this.goodsList.push(i)
-							}
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						this.goodsListLastPage = res.data.data.last_page
-						this.goodsListPage += 1
-						for(let i of res.data.data.data){
-							this.goodsList.push(i)
-						}
-						this.uniLoadMoreStatus = "more"
-					})
-				}
-			},*/
 			//跳转
 			navToDetail(url){
 				if(this.hide){
@@ -348,9 +329,9 @@
 				}
 			},
 			selectRank(index) {
-				console.log(999)
 			    this.rankId = index;
-				this.rankValue = this.rankData[index].key
+				this.rankValue = this.rankData[index].rank
+				this.rankType = this.rankData[index].rankType
 				this.goodsList = []
 				this.goodsListPage = 1
 				this.hide = false
@@ -362,11 +343,9 @@
 				}
 			},
 			close(done){
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
 				done()
 			},
 			confirm(done){
-				//this.downloadPtogress = true
 				apkDownload(this.updataLink)
 				done()
 			}
