@@ -57,9 +57,6 @@
 		<view class="tkl-bt">
 			<ai-button btname="复制推广码" @eventClick="copyTKL" ></ai-button>
 		</view>
-		<uni-popup ref="popupDialog" type="dialog">
-		    <uni-popup-dialog type="dialog" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
-		</uni-popup>
 		<uni-popup ref="popupAiDialog" type="dialog">
 		    <ai-popup-dialog type="dialog" :cancel-show="false" :src="aiDialogSrc" :btname="popupDialogBtName" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
 		</uni-popup>
@@ -72,7 +69,6 @@
 <script>
 	import aiButton from '@/components/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
 	import aiPopupDialog from '@/components/uni-popup/ai-popup-dialog.vue'
 	//详情页
@@ -80,7 +76,6 @@
 		components: {
 			aiButton,
 			uniPopUp,
-			uniPopupDialog,
 			uniPopupMessage,
 			aiPopupDialog
 		},
@@ -94,9 +89,7 @@
 				popupDialogContent: null,
 				popupDialogBtName: null,
 				popupMessages: null,
-				confirmValue: null,
 				aiDialogSrc: '/static/icon/icon-taobao.png',
-				taobaoAuth: "aa",
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
@@ -118,7 +111,6 @@
 				this.aiDialogSrc = '/static/img/taobao-err.png'
 				this.popupDialogTitle = "授权失败"
 				this.popupDialogContent = "将无法通过分享商品获得收益"
-				this.confirmValue = "taobao"
 				this.$refs.popupAiDialog.open()
 			}
 			
@@ -133,17 +125,13 @@
 			},
 			copyTKL(){
 				if(!this.hasLogin){
-					this.popupDialogTitle = "没有登录"
-					this.popupDialogContent = "现在去登录"
-					this.confirmValue = "login"
-					this.$refs.popupDialog.open()
+					this.$aiRouter.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
 					return
 				}
 				if(!this.taobao){
 					this.popupDialogTitle = "请完成淘宝授权"
 					this.popupDialogContent = "授权后方可获取该商品淘口令"
 					this.popupDialogBtName = "现在去授权"
-					this.confirmValue = "taobao"
 					this.$refs.popupAiDialog.open()
 					return
 				}
@@ -162,16 +150,8 @@
 				
 			},
 			confirm(done){
-				if(this.confirmValue == "login"){
-					this.$aiRouter.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
-					done()
-					return
-				}
-				if(this.confirmValue == "taobao"){
-					this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
-					done()
-					return
-				}
+				this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
+				done()
 			}
 		}
 	}

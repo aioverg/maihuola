@@ -57,7 +57,8 @@
 				timeRun: false,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				pageId: null,
-				pageParams: null
+				pageParams: null,
+				run: true
 			}
 		},
 		onLoad(res) {
@@ -66,28 +67,33 @@
 			this.pageParams = res.page_params || null
 		},
 		methods: {
+			aiPopupMessage(type, content){
+				if(!this.run){
+					return
+				}
+				this.run = false
+				this.$refs.aiPopupMessage.open({
+					type: type,
+					content: content,
+					timeout:1500,
+					isClick:false
+				})
+				setTimeout(() => {
+					this.run = true
+				}, 2000)
+			},
 			getCode(){
 				if(this.phone % 1 == 0 && this.phone.length == 11){
 					this.$api.getPhoneCode({
 						phone: this.phone
 					}).then( res => {
 						if(res.data.code !== 0){
-							this.$refs.aiPopupMessage.open({
-								type:'err',
-								content:'获取验证码失败',
-								timeout:2000,
-								isClick:false
-							})
+							this.aiPopupMessage("err", "获取验证码过于频繁")
 							return
 						}
 						if(res.data.code == 0){
 							if(this.timeRun){return}
-							this.$refs.aiPopupMessage.open({
-								type:'success',
-								content:'验证码正在发送',
-								timeout:2000,
-								isClick:false
-							})
+							this.aiPopupMessage("success", "验证码已发送")
 							this.timeRun = true
 							this.times = 60
 							this.btName = "s重新发送"
@@ -104,23 +110,12 @@
 						}
 					})
 				}else{
-					console.log(this.phone.length)
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'手机号码错误',
-						timeout:2000,
-						isClick:false
-					})
+					this.aiPopupMessage("err", "手机号码错误")
 				}
 			},
 			login(){
 				if(this.phone % 1 !== 0 || this.phone.length !== 11){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'手机号码错误',
-						timeout:2000,
-						isClick:false
-					})
+					this.aiPopupMessage("err", "手机号码错误")
 					return
 				}
 				/*if(this.code & 1 !==0 || this.code.length !== 6){
@@ -147,12 +142,7 @@
 							this.$aiRouter.navTabBar('/pages/index/index')
 						}
 					}else{
-						this.$refs.aiPopupMessage.open({
-							type:'err',
-							content:'登录失败',
-							timeout:2000,
-							isClick:false
-						})
+						this.aiPopupMessage("err", "验证码错误")
 					}
 				})
 				return

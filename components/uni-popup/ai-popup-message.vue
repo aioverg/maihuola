@@ -190,7 +190,7 @@
 		justify-content: center;
 		align-items: center;
 		height: 40px;
-		width: 300rpx;
+		width: 400rpx;
 		transition :all .5s;
 		position: fixed;
 		left: 0;

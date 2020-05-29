@@ -1,14 +1,14 @@
 const path = ""
 const aiRouter = {}
 //防抖函数
-const throttle = function (fn, obj){
+const throttle = function (fn, obj, interval){
 	let run = true
 	if(!run){return}
 	run = false
 	setTimeout(() => {
 		fn(obj)
 		run = true
-	}, 300)
+	}, interval)
 }
 
 //判断网络状态跳转非tabBar页面，navigatorFlag用于解决手机端点击多次多次跳转的问题

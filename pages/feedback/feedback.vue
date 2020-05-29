@@ -73,7 +73,7 @@
 		padding: 15px 25px;
 		.feedback-area {
 			width: 650rpx;
-			height: 910rpx;
+			height: 400px;
 		}
 	}
 	.feedback-bt {
