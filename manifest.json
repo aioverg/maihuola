@@ -100,6 +100,13 @@
                         "spotlight@2x" : "unpackage/res/icons/80x80.png"
                     }
                 }
+            },
+            "splashscreen" : {
+                "android" : {
+                    "hdpi" : "static/img/boot-page480.png",
+                    "xhdpi" : "static/img/boot-page720.png",
+                    "xxhdpi" : "static/img/boot-page1080.png"
+                }
             }
         },
         "nativePlugins" : {
