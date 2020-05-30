@@ -79,7 +79,6 @@
 			this.$api.getAuthInfo({
 				code: "alipay"
 			}).then(res => {
-				console.log(1111,res)
 				this.name = res.data.data.nickname
 				this.account = res.data.data.title
 			})
@@ -159,7 +158,6 @@
 			border-bottom: 1px dashed rgba(229,229,229,1);
 			.title {
 				font-size: 16px;
-				color: rgba(51,51,51,1);
 			}
 			.name {
 				display: inline-block;
@@ -176,7 +174,6 @@
 			margin: 10px 0 0 15px;
 			.title {
 				font-size:16px;
-				color:rgba(51,51,51,1);
 			}
 			.input-box {
 				height: 72px;
@@ -189,7 +186,6 @@
 					height: 42px;
 					width: 37rpx;
 					font-weight:500;
-					color:rgba(51,51,51,1);
 					font-size:30px;
 				}
 				.input {
@@ -209,23 +205,21 @@
 				display: inline-block;
 				margin: 15px 0;
 				font-size:14px;
-				color:rgba(51,51,51,1);
 			}
 			.tx-upperbt {
 				display: inline-block;
 				margin: 15px 0 15px 25px;
-				width: 114rpx;
-				height: 20px;
 				font-size: 14px;
-				color:rgba(252,170,122,1);
+				color: #FCAA7A;
 			}
 		}
 	}
 	.tx-history {
-		margin: 15px 16px 0 303px;
-		font-size:14px;
+		margin: 15px 16px 0 0;
+		font-size: 14px;
+		text-align: right;
 		text-decoration: underline;
-		color:rgba(153,153,153,1);
+		color: #999999;
 	}
 	.tx-bt {
 		margin: 220px 0 0 0;
