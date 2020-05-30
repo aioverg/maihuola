@@ -121,6 +121,7 @@
 				prevEar: null,
 				noLogin: false,
 				yesLogin: false,
+				alipay: false,
 				refresh: false
 			}
 		},
@@ -155,37 +156,38 @@
 			
 		},
 		onShow() {
-			this.$api.getUserCenter().then(res => {
-				this.blance = res.data.data.balance
-				this.curEar = res.data.data.cur_month_commission
-				this.prevEar = res.data.data.prev_month_commission
-				this.userName = res.data.data.username
-				this.userId = "账户ID:" + res.data.data.id
-				this.$store.commit("setAlipay", res.data.data.alipay)
-			})
+			this.getUserInfo()
 		},
 		onPullDownRefresh() {
 			const _this = this
-		    _this.refresh = true
-			this.$api.getUserCenter().then(res => {
-				this.blance = res.data.data.balance
-				this.curEar = res.data.data.cur_month_commission
-				this.prevEar = res.data.data.prev_month_commission
-				this.userName = res.data.data.username
-				this.userId = "账户ID:" + res.data.data.id
-				this.$store.commit("setAlipay", res.data.data.alipay)
+			_this.refresh = true
+			uni.startPullDownRefresh({
+				success: function(){
+					_this.getUserInfo().then(res => {
+						_this.refresh = false
+						uni.stopPullDownRefresh()
+					})
+				}
 			})
-		    setTimeout(() => {
-				_this.refresh = false
-		        uni.stopPullDownRefresh();
-		    }, 1000);
 		},
         methods: {
 			navTo(url){
 				this.$aiRouter.navTo(url)
 			},
+			login(){console.log(微信登录)},
+			getUserInfo(){
+				return this.$api.getUserCenter().then( res => {
+					this.blance = res.data.data.balance
+					this.curEar = res.data.data.cur_month_commission
+					this.prevEar = res.data.data.prev_month_commission
+					this.userName = res.data.data.username
+					this.userId = "账户ID:" + res.data.data.id
+					this.alipay = res.data.data.alipay
+					return true
+				})
+			},
 			withdraw(){
-				if(this.$store.state.userInfo.alipay){
+				if(this.alipay){
 					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.blance)
 				}
 			},
@@ -199,7 +201,7 @@
 				}
 			},
 			close(done){
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
+			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框 
 				done()
 			},
 			confirm(done){

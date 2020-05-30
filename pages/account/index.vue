@@ -14,7 +14,7 @@
 		    </view>
 		    <view class="box-sofeitem">
 			    <view class="box-item" @click="bindWx()">
-				    <ai-list-cell title="微信绑定" :message="weixin" dashed="dashed"></ai-list-cell>
+				    <ai-list-cell title="微信绑定" :message="wechat" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindTB()">
 				    <ai-list-cell title="淘宝授权" :message="taobao" dashed="dashed"></ai-list-cell>
@@ -48,6 +48,10 @@
 		},
 		data() {
 			return {
+				tel: null,
+				wechat: null,
+				taobao: null,
+				alipay: null,
 				popupDialogTitle: null,
 				popupDialogContent: null,
 				popupMessages: null,
@@ -56,45 +60,36 @@
 				
 			}
 		},
-		computed: {
-			tel(){
-				if(this.$store.state.userInfo.tel){
-					return this.$store.state.userInfo.tel
-				}else{
-					return "未绑定"
-				}
-			},
-			weixin(){
-				if(this.$store.state.userInfo.wechat){
-					return "已绑定"
-				}else{
-					return "未绑定"
-				}
-			},
-			taobao(){
-				if(this.$store.state.userInfo.taobao){
-					return "已授权"
-				}else{
-					return "未授权"
-				}
-			},
-			alipay(){
-				if(this.$store.state.userInfo.alipay){
-					return this.$store.state.userInfo.alipay
-				}else{
-					return "未填写"
-				}
-			}
+		onLoad() {
+			this.getBindInfo()
 		},
 		methods: {
+			getBindInfo(){
+				this.$api.getUserCenter().then(res => {
+					console.log(res.data.data)
+					this.tel = res.data.data.mobile
+					this.wechat = res.data.data.wechat ? "已绑定" : "未绑定"
+					this.taobao = res.data.data.taobao ? "已授权" : "未授权"
+					if(res.data.data.alipay){
+						this.$api.getAuthInfo({
+							code: "alipay"
+						}).then(res => {
+							this.alipay = res.data.data.account
+						})
+					}else{
+						this.alipay = "未填写"
+					}
+				})
+			},
 			bindWx(){
 				const _this = this
-				if(!_this.$store.state.userInfo.wechat){
+				if(this.wechat = "未绑定"){
 					uni.login({
 					    provider: 'weixin',
 					    success: function (loginRes) {
-							_this.popupMessages = "绑定成功"
-							_this.$refs.popupMessage.open()
+							console.log(9999)
+							//_this.popupMessages = "绑定成功"
+							//_this.$refs.popupMessage.open()
 					        // 获取用户信息
 					        uni.getUserInfo({
 					            provider: 'weixin',
@@ -107,7 +102,7 @@
 										}
 									})
 					            }
-					        });
+					        })
 					    },
 						fail: function(){
 							_this.popupMessage = true
@@ -126,18 +121,17 @@
 			},
 			bindTB(){
 				const _this = this
-				if(_this.$store.state.userInfo.taobao){
+				if(_this.taobao == "已授权"){
 					_this.popupDialogTitle = "解除绑定"
 					_this.popupDialogContent = "确定要解除淘宝吗？"
 					_this.clearBind = "taobao"
 					_this.$refs.popupDialog.open()
-					//点击是向后台发送接触绑定，否什么也不做
 				}else{
 					this.$aiRouter.navTo('/pages/account/taobao?page_id=3')
 				}
 			},
 			bindAlipay(){
-				if(!this.$store.state.userInfo.alipay){
+				if(this.alipay == "未填写"){
 					this.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')
 				}else{
 					this.navTo('/pages/account/bindAlipay?navbartitle=修改绑定支付宝')
@@ -150,7 +144,14 @@
 				const _this = this
 			    if(_this.clearBind == "weixin"){
 					this.$store.commit('clearWeChat')
-					done()
+					this.$api.getAuthUnbind({
+						code: "wechat"
+					}).then(res => {
+						if(res.data.code == 0){
+							this.getBindInfo()
+						}
+						done()
+					})
 					return
 				}
 				if(_this.clearBind == "taobao"){
@@ -158,7 +159,7 @@
 						code: "taobao"
 					}).then(res => {
 						if(res.data.code == 0){
-							_this.$store.commit('setTaoBao', 0)
+							this.getBindInfo()
 						}
 						done()
 					})

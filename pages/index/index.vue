@@ -163,13 +163,22 @@
 		},
 		onPullDownRefresh() {
 			const _this = this
-		    _this.refresh = true
-			this.getCarousel()
-			this.getGuessSort()
-		    setTimeout(() => {
-				_this.refresh = false
-		        uni.stopPullDownRefresh();
-		    }, 1000);
+			uni.startPullDownRefresh({
+				success: function() {
+					//_this.refresh = true
+					_this.getCarousel()
+					_this.getGuessSort()
+					_this.goodsList = []
+					_this.goodsListPage = 1
+					_this.hide = false
+					_this.sortIndex = 0;
+					_this.getGuess(this.sortId, this.sortIndex)
+					setTimeout(() => {
+						//_this.refresh = false
+						uni.stopPullDownRefresh()
+					},1500)
+				}
+			})
 		},
 		onReachBottom(){
 			this.getGuess(this.sortId, this.sortIndex)
@@ -194,7 +203,7 @@
 					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + id)
 				}
 			},
-			//获取分類菜單
+			//获取分类菜单
 			getGuessSort(){
 				this.$api.getSearchGuess({
 					is_recommend: 1,
@@ -215,7 +224,6 @@
 						}
 					}else{
 						this.$api.getGuessSort().then( res =>{
-							console.log(res.data.data)
 							for(let item of res.data.data){
 								this.sortList.push(item)
 							}
@@ -229,7 +237,6 @@
 					this.hide = false
 					return
 				}else{
-					console.log(sortId)
 					if(this.sortIndex != index){
 						this.sortIndex = index
 						this.sortId = sortId
@@ -251,7 +258,6 @@
 							page: this.goodsListPage,
 							size: 5
 						}).then( res => {
-							console.log(res.data)
 							if(res.data.pagination.pages <= 0){
 								this.uniLoadMoreStatus = "noMore"
 								return
@@ -285,7 +291,6 @@
 							page: this.goodsListPage,
 							size: 5
 						}).then( res => {
-							console.log(res.data)
 							if(res.data.pagination.pages <= 0){
 								this.uniLoadMoreStatus = "noMore"
 								return
