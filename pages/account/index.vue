@@ -63,6 +63,9 @@
 		onLoad() {
 			this.getBindInfo()
 		},
+		onShow(){
+			this.getBindInfo()
+		},
 		methods: {
 			getBindInfo(){
 				this.$api.getUserCenter().then(res => {
@@ -125,6 +128,7 @@
 					_this.popupDialogTitle = "解除绑定"
 					_this.popupDialogContent = "确定要解除淘宝吗？"
 					_this.clearBind = "taobao"
+					_this.$store.commit("setTaoBao", 0)
 					_this.$refs.popupDialog.open()
 				}else{
 					this.$aiRouter.navTo('/pages/account/taobao?page_id=3')

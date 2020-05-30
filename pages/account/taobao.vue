@@ -59,7 +59,7 @@
 		methods: {
 			bindTB(){
 				const _this = this
-				//#ifdef APP-PLUS
+				
 				Alibcsdk.init( res => {
 					if(res.status){
 						console.log("初始化成功")
@@ -77,9 +77,9 @@
 								_this.$api.getAuthInfo({
 									code: "taobao"
 								}).then(res => {
-									console.log("淘宝",res.data)
+									_this.$store.commit("setTaoBao", 1)
 								})
-							} 
+							}
 						});
 						if(_this.pageId == 2){
 							_this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
@@ -102,7 +102,7 @@
 						_this.$aiRouter.navTabBar('/pages/index/index')
 					}
 				})
-			    //#endif
+			    
 			}
 		}
 	}

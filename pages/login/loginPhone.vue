@@ -62,7 +62,6 @@
 			}
 		},
 		onLoad(res) {
-			console.log(res)
 			this.pageId = res.page_id || null
 			this.pageParams = res.page_params || null
 		},

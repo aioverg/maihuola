@@ -124,6 +124,7 @@
 				})
 			},
 			copyTKL(){
+				console.log(this.taobao)
 				if(!this.hasLogin){
 					this.$aiRouter.navTo('/pages/login/loginPhone?page_id=2&page_params=' + this.goodsId)
 					return
@@ -136,12 +137,14 @@
 					return
 				}
 				this.$api.getTKL(this.goodsId).then(res => {
-					uni.setClipboardData({
-					    data: res.data.data.info,
-					    success: function () {
-					        console.log('success',res.data.data.info);
-					    }
-					});
+						uni.setClipboardData({
+						    data: res.data.data.info,
+						    success: function () {
+								uni.showToast({
+									title: "复制成功"
+								})
+						    }
+						})
 				})
 			},
 			close(done){
