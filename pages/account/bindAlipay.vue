@@ -35,7 +35,8 @@
 			return {
 				navBarTitle: null,
 				alipayAccount: "",
-				userName: ""
+				userName: "",
+				navigateFlag: false
 			}
 		},
 		onLoad(res) {

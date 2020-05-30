@@ -28,7 +28,8 @@
 		},
 		data() {
 			return {
-				content: null
+				content: null,
+				navigateFlag: false
 			}
 		},
 		methods: {

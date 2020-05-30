@@ -7,6 +7,7 @@ const store = new Vuex.Store({
 	state: {
 		systemType: 1, //0-PC;1-IOS;2-Android
 		hasLogin: false,
+		token: null,
 		userInfo: {
 			id: null,
 			token: null,
@@ -29,6 +30,11 @@ const store = new Vuex.Store({
 		}
 	},
 	mutations: {
+		login(state, data){
+			state.hasLogin = true;
+			console.log(data)
+			uni.setStorageSync('token', data)
+		},
 		setUserInfo(state, data){
 			state.hasLogin = true;
 			state.userInfo.id = data.client.id

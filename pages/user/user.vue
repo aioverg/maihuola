@@ -183,6 +183,7 @@
 					this.userName = res.data.data.username
 					this.userId = "账户ID:" + res.data.data.id
 					this.alipay = res.data.data.alipay
+					console.log(res.data.data)
 					return true
 				})
 			},

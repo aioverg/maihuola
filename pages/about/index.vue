@@ -34,9 +34,7 @@
 		methods: {
 			/*跳转统一接口*/
 			navTo(url){
-				uni.navigateTo({  
-					url: url
-				})  
+				this.$aiRouter.navTo(url)
 			},
 		}
 	}

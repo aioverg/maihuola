@@ -43,9 +43,6 @@
 			"style": {
 				"navigationBarTitleText": ""
 			}
-		}, {
-			"path": "pages/money/money",
-			"style": {}
 		},{
             "path" : "pages/search/search",
             "style" : {

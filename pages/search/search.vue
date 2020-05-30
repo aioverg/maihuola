@@ -17,9 +17,10 @@
 		</view>
 		<view class="history-box">
 			<view class="history">搜索历史</view>
-			<image class="delete-icon" src="/static/icon/ai-delete.png" @click="delHistory"></image>
+			<image v-if="delHint" class="delete-icon" src="/static/icon/ai-delete.png" @click="delHistory"></image>
 		</view>
 		<view class="history-label-box">
+			<view class="history-label-no" v-if="!delHint">暂无搜索记录</view>
 			<view class="history-label" v-for="(value, index) in history" :key="index" @click="historyNavTo(value)">{{value}}</view>
 		</view>
 	</view>
@@ -33,6 +34,7 @@
 			return {
 				inputValue: null,
 				history: [],
+				delHint: false,
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
@@ -46,7 +48,12 @@
 				key: "searchHistory",
 				success: function(res){
 					if(res.data){
-						_this.history = res.data
+						if(res.data.length == 0){
+							_this.delHint = false
+						}else{
+							_this.delHint = true
+							_this.history = res.data
+						}
 					}
 				}
 			})
@@ -65,6 +72,7 @@
 			},
 			delHistory(){
 				const _this = this
+				_this.delHint = false
 				uni.removeStorage({
 				    key: 'searchHistory',
 					success: function(){
@@ -144,6 +152,10 @@
 			padding: 0 12px;
 			background: rgba(242,242,242,1);
 			border-radius: 16px;
+		}
+		.history-label-no {
+			font-size: 14px;
+			color: #CCCCCC;
 		}
 	}
 </style>

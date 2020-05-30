@@ -135,6 +135,7 @@
 				}).then( res => {
 					console.log(res)
 					if(res.data.code == 0){
+						console.log(res.data.data)
 						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){
 							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
