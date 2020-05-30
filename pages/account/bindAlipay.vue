@@ -84,7 +84,13 @@
 						setTimeout(() => {
 							this.$aiRouter.navTabBar('/pages/user/user')
 						},2000)
-						
+					}else{
+						this.$refs.aiPopupMessage.open({
+							type:'err',
+							content:'绑定失败',
+							timeout:1500,
+							isClick:false
+						})
 					}
 				})
 			}

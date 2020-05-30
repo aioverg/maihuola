@@ -31,7 +31,7 @@
 		<view class="sort-section">
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
-					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(item.id, index)">
+					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
 					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
 							{{item.title}}
 					    </view>
@@ -53,7 +53,7 @@
 		</view>
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetail('/pages/detail/detail?goods_id=' + item.id)">
-				<ai-gusee-card :recommend="item.is_recommend" :data="item"></ai-gusee-card>
+				<ai-gusee-card :recommend="item.tag" :data="item"></ai-gusee-card>
 			</view>
 		</view>
 		<view class="login-box" v-if="!loginBox">
@@ -87,6 +87,7 @@
 				sortList: [],
 				sortIndex: 0,
 				sortId: 1,
+				sortIds: 0,
 				rankData: [
 					{
 						id: "update",
@@ -165,23 +166,21 @@
 			const _this = this
 			uni.startPullDownRefresh({
 				success: function() {
-					//_this.refresh = true
 					_this.getCarousel()
 					_this.getGuessSort()
 					_this.goodsList = []
+					_this.sortList = []
 					_this.goodsListPage = 1
 					_this.hide = false
-					_this.sortIndex = 0;
-					_this.getGuess(this.sortId, this.sortIndex)
+					this.getGuess(this.sortIndex)
 					setTimeout(() => {
-						//_this.refresh = false
 						uni.stopPullDownRefresh()
 					},1500)
 				}
 			})
 		},
 		onReachBottom(){
-			this.getGuess(this.sortId, this.sortIndex)
+			this.getGuess(this.sortIndex)
 		},
 		methods: {
 			change(e) {
@@ -210,7 +209,8 @@
 				}).then(res => {
 					if(res.data.data.length !== 0){
 						this.sortList.push({
-							id: "-1",
+							id: -100,
+							ids: 0,
 							title: "推荐",
 							pid: "推荐"
 						})
@@ -218,10 +218,8 @@
 							for(let item of res.data.data){
 								this.sortList.push(item)
 							}
+							this.getGuess(this.sortIndex)
 						})
-						for(let item of res.data.data){
-							this.goodsList.push(item)
-						}
 					}else{
 						this.$api.getGuessSort().then( res =>{
 							for(let item of res.data.data){
@@ -232,86 +230,81 @@
 				})
 			},
 			//获取菜单商品
-			getGuess(sortId, index){
-				if(this.hide){
-					this.hide = false
-					return
+			getGuess(index){
+				if(this.sortIndex !== index){
+					this.sortIndex = index
+					this.sortId = this.sortList[index].id
+					this.goodsList = []
+					this.goodsListPage = 1
+				}
+				if(this.sortList[index].id == -100){
+					if(this.goodsListPage > this.goodsListLastPage){
+						this.uniLoadMoreStatus = "noMore"
+						return
+					}
+					this.uniLoadMoreStatus = "loading"
+					this.$api.getSearchGuess({
+						sort: this.rankValue,
+						is_recommend: 1,
+						sort_type: this.rankType,
+						page: this.goodsListPage,
+						size: 10
+					}).then(res => {
+						if(res.data.pagination.pages <= 0){
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
+						if(res.data.pagination.pages = 1){
+							this.goodsListLastPage = res.data.pagination.pages
+							this.goodsListPage += 1
+							for(let i of res.data.data){
+								this.goodsList.push(i)
+							}
+							this.uniLoadMoreStatus = "noMore"
+							return
+						}
+						this.goodsListLastPage = res.data.pages
+						this.goodsListPage += 1
+						for(let item of res.data.data){
+							this.goodsList.push(item)
+						}
+						this.uniLoadMoreStatus = "more"
+					})
 				}else{
-					if(this.sortIndex != index){
-						this.sortIndex = index
-						this.sortId = sortId
-						this.goodsList = []
-						this.goodsListPage = 1
-						this.rankValue = "id"
-						this.rankId = 0
+					if(this.goodsListPage > this.goodsListLastPage){
+						this.uniLoadMoreStatus = "noMore"
+						return
 					}
-					if(sortId == "-1"){
-						if(this.goodsListPage > this.goodsListLastPage){
+					this.uniLoadMoreStatus = "loading"
+					this.$api.getSearchGuess({
+						category_id: this.sortId,
+						sort: this.rankValue,
+						is_recommend: this.recommend,
+						sort_type: this.rankType,
+						page: this.goodsListPage,
+						size: 10
+					}).then(res => {
+						if(res.data.pagination.pages <= 0){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						this.uniLoadMoreStatus = "loading"
-						this.$api.getSearchGuess({
-							sort: this.rankValue,
-							is_recommend: 1,
-							sort_type: this.rankType,
-							page: this.goodsListPage,
-							size: 5
-						}).then( res => {
-							if(res.data.pagination.pages <= 0){
-								this.uniLoadMoreStatus = "noMore"
-								return
-							}
-							if(res.data.pagination.pages = 1){
-								this.goodsListLastPage = res.data.pagination.pages
-								this.goodsListPage += 1
-								for(let i of res.data.data){
-									this.goodsList.push(i)
-								}
-								this.uniLoadMoreStatus = "noMore"
-								return
-							}
+						if(res.data.pagination.pages = 1){
 							this.goodsListLastPage = res.data.pagination.pages
 							this.goodsListPage += 1
 							for(let i of res.data.data){
 								this.goodsList.push(i)
 							}
-						})
-					}else{
-						if(this.goodsListPage > this.goodsListLastPage){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						this.uniLoadMoreStatus = "loading"
-						this.$api.getSearchGuess({
-							category_id: this.sortId,
-							sort: this.rankValue,
-							is_recommend: this.recommend,
-							sort_type: this.rankType,
-							page: this.goodsListPage,
-							size: 5
-						}).then( res => {
-							if(res.data.pagination.pages <= 0){
-								this.uniLoadMoreStatus = "noMore"
-								return
-							}
-							if(res.data.pagination.pages = 1){
-								this.goodsListLastPage = res.data.pagination.pages
-								this.goodsListPage += 1
-								for(let i of res.data.data){
-									this.goodsList.push(i)
-								}
-								this.uniLoadMoreStatus = "noMore"
-								return
-							}
-							this.goodsListLastPage = res.data.pagination.pages
-							this.goodsListPage += 1
-							for(let i of res.data.data){
-								this.goodsList.push(i)
-							}
-							this.uniLoadMoreStatus = "more"
-						})
-					}
+						this.goodsListLastPage = res.data.pages
+						this.goodsListPage += 1
+						for(let item of res.data.data){
+							this.goodsList.push(item)
+						}
+						this.uniLoadMoreStatus = "more"
+						console.log(this.guessList)
+					})
 				}
 			},
 			//跳转
@@ -340,7 +333,7 @@
 				this.goodsList = []
 				this.goodsListPage = 1
 				this.hide = false
-				this.getGuess(this.sortId, this.sortIndex)
+				this.getGuess(this.sortIndex)
 			},
 			appUpdate(){
 				if(this.$store.state.appInfo.update){
