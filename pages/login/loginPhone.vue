@@ -228,6 +228,7 @@
 		margin: 40px 0 0 0;
 	}
 	.huo {
+		visibility:hidden;
 		width: 100%;
 		text-align: center;
 		font-size: 13px;
@@ -236,6 +237,7 @@
 		margin: 26px 0 15px 0;
 	}
 	.wx-box {
+		visibility:hidden;
 		display: flex;
 		align-items: center;
 		justify-content: center;

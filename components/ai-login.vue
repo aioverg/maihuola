@@ -16,7 +16,7 @@
 		methods: {
 			navToLogin(){
 				uni.navigateTo({
-					url: '/pages/login/login'
+					url: '/pages/login/loginPhone'
 				})
 			}
 		}

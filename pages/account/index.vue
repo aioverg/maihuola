@@ -160,6 +160,7 @@
 					}).then(res => {
 						if(res.data.code == 0){
 							this.getBindInfo()
+							_this.taobao == "未授权"
 						}
 						done()
 					})

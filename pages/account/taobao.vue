@@ -74,13 +74,10 @@
 						},result=> {
 							if (result.status) {
 								//用户关闭页面后的回调
-								_this.$api.getAuthInfo().then(res => {
-									for(let item of res.data.data){
-										if(item.type == 2){
-											_this.$store.commit('setTaoBao', 1)
-											break
-										}
-									}
+								_this.$api.getAuthInfo({
+									code: "taobao"
+								}).then(res => {
+									console.log("淘宝",res.data)
 								})
 							} 
 						});

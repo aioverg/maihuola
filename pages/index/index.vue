@@ -150,8 +150,7 @@
 		},
 		onLoad() {
 			this.getGuessSort()
-			//console.log(6666)
-			//this.getCarousel()
+			this.getCarousel()
 		},
 		onShow() {
 			//this.getRecommend()

@@ -88,7 +88,7 @@ api.getGuessDetail = (goods_id) => {
 		}
 	})
 }
-//获取淘口
+//获取淘口令
 api.getTKL = (data) => {
 	return request({
 		url: "/api/v1.item/gettpwd",
@@ -109,7 +109,7 @@ api.getAuthInfo = (data) => {
 //获取用户中心数据（余额等）
 api.getUserCenter = () => {
 	return request({
-		url: "/api/v1.user/getprofile",
+		url: "/api/v1.user/profile",
 		method: "GET"
 	})
 }
@@ -117,6 +117,14 @@ api.getUserCenter = () => {
 api.getAuthUnbind = (data) => {
 	return request({
 		url: "/api/v1.user/unbind",
+		method: "POST",
+		data: data
+	})
+}
+//授权绑定
+api.getAuthBind = (data) => {
+	return request({
+		url: "/api/v1.user/bind",
 		method: "POST",
 		data: data
 	})

@@ -125,7 +125,7 @@
 			},
 			copyTKL(){
 				if(!this.hasLogin){
-					this.$aiRouter.navTo('/pages/login/login?page_id=2&page_params=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/login/loginPhone?page_id=2&page_params=' + this.goodsId)
 					return
 				}
 				if(!this.taobao){
