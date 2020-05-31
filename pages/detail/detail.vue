@@ -90,22 +90,28 @@
 				popupDialogBtName: null,
 				popupMessages: null,
 				aiDialogSrc: '/static/icon/icon-taobao.png',
+				taobao: 0,
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
 		computed: {
 			hasLogin(){
 				return this.$store.state.hasLogin
-			},
+			}/*,
 			taobao(){
 				return this.$store.state.userInfo.taobao
-			}
+			}*/
 			
 		},
 		onLoad: function(obj){
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
 				this.guessDetailData = res.data.data
+			})
+			this.$api.getAuthInfo({
+				code: "taobao"
+			}).then( res => {
+				this.taobao = res.data.data.status
 			})
 			if(obj.tb_auth == "fail"){
 				this.aiDialogSrc = '/static/img/taobao-err.png'

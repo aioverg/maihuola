@@ -69,7 +69,6 @@
 		methods: {
 			getBindInfo(){
 				this.$api.getUserCenter().then(res => {
-					console.log(res.data.data)
 					this.tel = res.data.data.mobile
 					this.wechat = res.data.data.wechat ? "已绑定" : "未绑定"
 					this.taobao = res.data.data.taobao ? "已授权" : "未授权"

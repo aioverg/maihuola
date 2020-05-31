@@ -90,7 +90,12 @@
 						this.searchResult.push(i)
 					}
 					this.page += 1
-					this.uniLoadMoreStatus = "more"
+					if(this.page > this.lastPage){
+						this.uniLoadMoreStatus = "noMore"
+						return
+					}else{
+						this.uniLoadMoreStatus = "more"
+					}
 				})
 			}
 		}

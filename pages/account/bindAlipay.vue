@@ -69,9 +69,11 @@
 					})
 					return
 				}
-				this.$api.getAlipay({
+				this.$api.getAuthBind({
 					account: this.alipayAccount,
-					real_name: this.userName
+					real_name: this.userName,
+					nickname: "",
+					type: 1
 				}).then(res => {
 					if(res.data.code == 0){
 						this.$refs.aiPopupMessage.open({
