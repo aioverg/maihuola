@@ -1,2 +1,1 @@
-使用uni-app开发的适用于 Android iOS 的App，git没有忽略node_moudles文件夹，以免插件不稳定造成BUG.
-包名：ai.maihuola.app
+使用uni-app开发的适用于 Android iOS 的App，证书文件Test.keystore，证书密码：123456 证书别名：test
