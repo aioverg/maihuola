@@ -214,9 +214,14 @@
 							pid: "推荐"
 						})
 						this.$api.getGuessSort().then( res =>{
-							for(let item of res.data.data){
-								this.sortList.push(item)
+							if(res.data.data){
+								for(let item of res.data.data){
+									this.sortList.push(item)
+								}
 							}
+							/*for(let item of res.data.data){
+								this.sortList.push(item)
+							}*/
 							this.getGuess(this.sortIndex)
 						})
 					}else{
