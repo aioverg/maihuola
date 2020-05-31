@@ -50,7 +50,7 @@
 		methods: {
 			getRecord(){
 				if(this.page > this.lastPage){
-					console.log("没有更多数据")
+					this.listPlaceHolder = false
 					return
 				}
 				this.$api.getWithdrawRecord({
@@ -65,7 +65,9 @@
 					}
 					this.page += 1
 					this.lastPage = res.data.data.last_page
-					//this.recordData = res.data.data.data
+					if(this.page > this.lastPage){
+						this.listPlaceHolder = false
+					}
 					for(let item of res.data.data.data){
 						if(item.status == 0){
 							item.status = "处理中"
