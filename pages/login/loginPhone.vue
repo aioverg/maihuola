@@ -58,7 +58,6 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				pageId: null,
 				pageParams: null,
-				run: true
 			}
 		},
 		onLoad(res) {
@@ -66,33 +65,18 @@
 			this.pageParams = res.page_params || null
 		},
 		methods: {
-			aiPopupMessage(type, content){
-				if(!this.run){
-					return
-				}
-				this.run = false
-				this.$refs.aiPopupMessage.open({
-					type: type,
-					content: content,
-					timeout:1500,
-					isClick:false
-				})
-				setTimeout(() => {
-					this.run = true
-				}, 2000)
-			},
 			getCode(){
 				if(this.phone % 1 == 0 && this.phone.length == 11){
 					this.$api.getPhoneCode({
 						phone: this.phone
 					}).then( res => {
 						if(res.data.code !== 0){
-							this.aiPopupMessage("err", "获取验证码过于频繁")
+							this.$aiGlobal.aiPopupMessage.apply(this,['err', '获取验证码过于频繁'])
 							return
 						}
 						if(res.data.code == 0){
 							if(this.timeRun){return}
-							this.aiPopupMessage("success", "验证码已发送")
+							this.$aiGlobal.aiPopupMessage.apply(this,['success', '验证码已发送'])
 							this.timeRun = true
 							this.times = 60
 							this.btName = "s重新发送"
@@ -109,12 +93,12 @@
 						}
 					})
 				}else{
-					this.aiPopupMessage("err", "手机号码错误")
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '手机号码错误'])
 				}
 			},
 			login(){
 				if(this.phone % 1 !== 0 || this.phone.length !== 11){
-					this.aiPopupMessage("err", "手机号码错误")
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '手机号码错误'])
 					return
 				}
 				/*if(this.code & 1 !==0 || this.code.length !== 6){
@@ -142,7 +126,7 @@
 							this.$aiRouter.navTabBar('/pages/index/index')
 						}
 					}else{
-						this.aiPopupMessage("err", "验证码错误")
+						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
 					}
 				})
 				return

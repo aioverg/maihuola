@@ -52,21 +52,11 @@
 			bindAlipay(){
 				//发送给数据库的接口
 				if(this.alipayAccount.length == 0){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'支付宝账户错误',
-						timeout:2000,
-						isClick:false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err','支付宝账户错误'])
 					return
 				}
 				if(this.userName.length == 0){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'用户名错误',
-						timeout:2000,
-						isClick:false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err','用户名错误'])
 					return
 				}
 				this.$api.getAuthBind({
@@ -76,23 +66,13 @@
 					type: 1
 				}).then(res => {
 					if(res.data.code == 0){
-						this.$refs.aiPopupMessage.open({
-							type:'success',
-							content:'绑定成功',
-							timeout:1500,
-							isClick:false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['success','绑定成功'])
 						this.$store.commit('setAlipay', 1)
 						setTimeout(() => {
 							this.$aiRouter.navTabBar('/pages/user/user')
 						},2000)
 					}else{
-						this.$refs.aiPopupMessage.open({
-							type:'err',
-							content:'绑定失败',
-							timeout:1500,
-							isClick:false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['err','绑定失败'])
 					}
 				})
 			}

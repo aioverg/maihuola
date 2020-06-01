@@ -47,51 +47,26 @@
 			},
 			postCode(){
 				if(this.phone % 1 !== 0 || this.phone.length !== 11){
-					this.$refs.aiPopupMessage.open({
-						type:'success',
-						content:'手机号码错误',
-						timeout: 2000,
-						isClick: false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err','手机号码错误'])
 					return
 				}
 				this.$api.getPhoneCode({
 					phone: this.phone
 				}).then( res => {
 					if(res.statusCode !== 200){
-						this.$refs.aiPopupMessage.open({
-							type:'err',
-							content:'验证码发送失败',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['err','验证码发送失败'])
 					}else{
-						this.$refs.aiPopupMessage.open({
-							type:'success',
-							content:'验证码已发送',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['success','验证码已发送'])
 					}
 				})
 			},
 			alertPhone(){
 				if(this.phone % 1 !== 0 || this.phone.length !== 11){
-					this.$refs.aiPopupMessage.open({
-						type:'success',
-						content:'手机号码错误',
-						timeout: 2000,
-						isClick: false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err','手机号码错误'])
 					return
 				}
 				if(this.code % 1 !== 0 || this.code.length !== 6){
-					this.$refs.aiPopupMessage.open({
-						type:'success',
-						content:'手机号码错误',
-						timeout: 2000,
-						isClick: false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err','验证码错误'])
 					return
 				}
 				this.$api.getAlertPhone({
@@ -99,19 +74,10 @@
 					code: this.code
 				}).then(res => {
 					if(res.data.code == 500){
-						this.$refs.aiPopupMessage.open({
-							type:'success',
-							content:'手机号码已被注册',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['err','手机号码已被注册'])
 						return
-						this.$refs.aiPopupMessage.open({
-							type:'success',
-							content:'修改成功',
-							timeout: 2000,
-							isClick: false
-						})
+					}else{
+						this.$aiGlobal.aiPopupMessage.apply(this,['success','修改成功'])
 						uni.switchTab({
 						    url: '/pages/user/user'
 						});

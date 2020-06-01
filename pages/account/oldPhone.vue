@@ -35,7 +35,7 @@
 		data() {
 			return {
 				phoneCode: null,
-				aiButtonBg: "ai-button-graybg",
+				aiButtonBg: "ai-button-graybg"
 			}
 		},
 		computed:{
@@ -61,30 +61,15 @@
 					phone: this.phone
 				}).then( res => {
 					if(res.statusCode !== 200){
-						this.$refs.aiPopupMessage.open({
-							type:'err',
-							content:'验证码发送失败',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['success', '验证码发送失败'])
 					}else{
-						this.$refs.aiPopupMessage.open({
-							type:'success',
-							content:'验证码已发送',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['success', '验证码已发送'])
 					}
 				})
 			},
 			checkPhoneCode(){
 				if(this.phoneCode % 1 !== 0 || this.phoneCode.length !== 6){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'验证码错误',
-						timeout: 2000,
-						isClick: false
-					})
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
 					return
 				}
 				this.$api.getChecktOldPhoneCode({
@@ -93,12 +78,7 @@
 				}).then( res => {
 					console.log(res)
 					if(res.statusCode !== 200){
-						this.$refs.aiPopupMessage.open({
-							type:'err',
-							content:'验证码错误',
-							timeout: 2000,
-							isClick: false
-						})
+						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
 					}else{
 						uni.navigateTo({
 							url: '/pages/account/alertPhone'
