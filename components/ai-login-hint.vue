@@ -2,9 +2,9 @@
 <template>
 	<view class="ai-login-hint">
 		<text class="note-text">登录即代表同意卖货啦账号</text>
-		<text class="note-link" @click="natTo('?id=protocol')">《用户协议》</text>
+		<text class="note-link" @click="natTo('/pages/about/agreement')">《用户协议》</text>
 		<text class="note-text">和</text>
-		<text class="note-link" @click="natTo('?id=privacy')">《隐私政策》</text>
+		<text class="note-link" @click="natTo('/pages/about/privacy')">《隐私政策》</text>
 	</view>
 </template>
 
@@ -16,10 +16,9 @@
 			};
 		},
 		methods: {
-			natTo(data){
-				let url = '/pages/document/index'
+			natTo(url){
 				uni.navigateTo({
-					url: url + data
+					url: url
 				})
 			}
 		}
