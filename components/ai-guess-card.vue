@@ -8,8 +8,8 @@
 			<view class="ai-guess-info">{{data.title}}</view>
 			<view class="ai-guess-price-box">
 				<view class="price">
-					<view class="zb-price">直播价：￥{{data.price}}</view>
-					<view class="sc-price">市场价：￥{{data.promotion_price}}</view>
+					<view class="zb-price">直播价：￥{{data.promotion_price}}</view>
+					<view class="sc-price">市场价：￥{{data.price}}</view>
 				</view>
 				<view class="rate">
 					<view class="ck-earn">参考收益：{{data.commission}}</view>
