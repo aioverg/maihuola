@@ -103,9 +103,9 @@
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "static/img/boot-page480.png",
-                    "xhdpi" : "static/img/boot-page720.png",
-                    "xxhdpi" : "static/img/boot-page1080.png"
+                    "hdpi" : "static/img/001.png",
+                    "xhdpi" : "static/img/002.png",
+                    "xxhdpi" : "static/img/003.png"
                 },
                 "alwaysShowBeforeRender" : true, //白屏时是否开启程序启动界面
                 "waiting" : true, //程序启动界面是否显示等待雪花

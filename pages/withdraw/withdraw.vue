@@ -84,6 +84,7 @@
 			this.$api.getAuthInfo({
 				code: "alipay"
 			}).then(res => {
+				console.log(999,res)
 				this.name = res.data.data.real_name
 				this.account = res.data.data.account
 			})

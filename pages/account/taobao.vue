@@ -77,7 +77,9 @@
 								_this.$api.getAuthInfo({
 									code: "taobao"
 								}).then(res => {
-									_this.$store.commit("setTaoBao", 1)
+									if(res.data.data.status){
+										_this.$store.commit("setTaoBao", 1)
+									}
 								})
 							}
 						});
