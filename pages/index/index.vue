@@ -196,9 +196,9 @@
 			//轮播图跳转
 			navToCarousel(typeId, id){
 				if(typeId.indexOf(",") == -1){
-					this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + id)
+					this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + typeId)
 				}else{
-					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + id)
+					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + typeId)
 				}
 			},
 			//获取分类菜单

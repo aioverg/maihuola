@@ -20,8 +20,8 @@ const request = function(obj){
 			}
 		}
 	})
-	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"//测试环境地址
-	//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn"
+	//const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn"//测试环境地址
+	const baseUrl = "http://api.taobaoke.aixiaotu.com.cn"
 	let authentication = null
 	if(uni.getStorageSync("userInfo")){
 		let token = uni.getStorageSync("userInfo").access_token

@@ -61,13 +61,7 @@
             /* ios打包配置 */
             "sdkConfigs" : {
                 "ad" : {},
-                "oauth" : {
-                    "weixin" : {
-                        "appid" : "wx6f225dc7d0fc70ad",
-                        "appsecret" : "cd4e4b40b7f9e16b8c2dae9f75c79118",
-                        "UniversalLinks" : ""
-                    }
-                }
+                "oauth" : {}
             },
             "icons" : {
                 "android" : {
