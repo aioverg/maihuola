@@ -25,6 +25,7 @@
 					<text class="withdraw-list-item-num">￥{{item.cash}}</text>
 					<text class="withdraw-list-item-staus">{{item.status}}</text>
 				</view>
+				<uni-load-more v-if="!listPlaceHolder" :status="uniLoadMoreStatus"></uni-load-more>
 			</view>
 		</view>
 	</view>
@@ -38,7 +39,8 @@
 				lastPage: 1,
 				limit: 50,
 				recordData: [],
-				listPlaceHolder: true
+				listPlaceHolder: true,
+				uniLoadMoreStatus: "more",
 			}
 		},
 		onLoad() {
@@ -50,7 +52,7 @@
 		methods: {
 			getRecord(){
 				if(this.page > this.lastPage){
-					this.listPlaceHolder = false
+					this.uniLoadMoreStatus = "noMore"
 					return
 				}
 				this.$api.getWithdrawRecord({
@@ -58,16 +60,20 @@
 					limit: this.limit,
 					uid: this.$store.state.userInfo.id
 				}).then(res => {
-					console.log(res)
 					if(res.data.data.total = 0){
-						this.listPlaceHolder = false
+						this.listPlaceHolder = true
 						return
+					}else{
+						this.listPlaceHolder = false
 					}
 					this.page += 1
 					this.lastPage = res.data.data.last_page
 					if(this.page > this.lastPage){
-						this.listPlaceHolder = false
+						this.uniLoadMoreStatus = "noMore"
+					}else{
+						this.uniLoadMoreStatus = "more"
 					}
+					
 					for(let item of res.data.data.data){
 						if(item.status == 0){
 							item.status = "处理中"
