@@ -182,9 +182,9 @@
 		computed: {
 			loginState(){
 				if(this.$store.state.hasLogin){
-					this.navTitle = "微信登录"
-				}else{
 					this.navTitle = "我的"
+				}else{
+					this.navTitle = "手机登录"
 				}
 				return this.$store.state.hasLogin
 			},

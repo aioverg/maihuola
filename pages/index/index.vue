@@ -219,9 +219,6 @@
 									this.sortList.push(item)
 								}
 							}
-							/*for(let item of res.data.data){
-								this.sortList.push(item)
-							}*/
 							this.getGuess(this.sortIndex)
 						})
 					}else{
@@ -252,7 +249,7 @@
 						is_recommend: 1,
 						sort_type: this.rankType,
 						page: this.goodsListPage,
-						size: 10
+						size: 5
 					}).then(res => {
 						if(res.data.pagination.pages <= 0){
 							this.uniLoadMoreStatus = "noMore"
@@ -288,6 +285,7 @@
 						page: this.goodsListPage,
 						size: 10
 					}).then(res => {
+						console.log(res)
 						if(res.data.pagination.pages <= 0){
 							this.uniLoadMoreStatus = "noMore"
 							return

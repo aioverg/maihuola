@@ -19,7 +19,7 @@
 			</view>
 			<view class="icon-box-item">
 			    <view class="icon">
-					<image class="img" src="/static/img/ai-maihuo.png"></image>
+					<image class="img" src="/static/img/icon-maihuola01.png"></image>
 				</view>
 				<view class="icon-title">卖货啦</view>
 			</view>
@@ -38,7 +38,9 @@
 
 <script>
 	import aiButton from '@/components/ai-button.vue'
+	//#ifdef APP-PLUS
 	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
+	//#endif
 	export default {
 		components: {
 			aiButton
@@ -59,7 +61,7 @@
 		methods: {
 			bindTB(){
 				const _this = this
-				
+				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {
 					if(res.status){
 						console.log("初始化成功")
@@ -104,7 +106,7 @@
 						_this.$aiRouter.navTabBar('/pages/index/index')
 					}
 				})
-			    
+			    //#endif
 			}
 		}
 	}

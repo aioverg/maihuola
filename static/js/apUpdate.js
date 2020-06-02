@@ -16,6 +16,8 @@ export function getServerNo(_this) {
 					res[1].data.update = true
 					res[1].data.local_version = inf.version
 					_this.$store.commit('setAppInfo', res[1].data)
+				}else{
+					_this.$store.commit('setAppInfo', inf.version)
 				}
 			})
 		});

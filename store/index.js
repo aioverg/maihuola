@@ -102,14 +102,16 @@ const store = new Vuex.Store({
 			})
 		},
 		setAppInfo(state, data){
-			state.appInfo.localVersion = data.local_version
 			if(data.update){
 				state.appInfo.appType = data.app_type
 				state.appInfo.update = data.update
+				state.appInfo.localVersion = data.local_version
 				state.appInfo.require = data.is_required ? true : false
 				state.appInfo.appLink = data.app_link
 				state.appInfo.appVersion = data.server_version
 				state.appInfo.appNote = data.update_note
+			}else{
+				state.appInfo.localVersion = data
 			}
 		}
 	},
