@@ -11,7 +11,7 @@
 			<image class="bg" src="/static/img/bg-02.png"></image>
 			<view class="search">
 				<view class="search-one" @click="navTo('/pages/search/search')">
-					<image class="search-icon" src="../../static/icon/ai-search.png"></image>
+					<image class="search-icon" src="../../static/icon/icon-search-01.png"></image>
 					<view class="search-content">搜索你需要的商品关键词</view>
 				</view>
 				<view class="search-two" @click="navTo('/pages/search/search')">搜索</view>
@@ -73,7 +73,7 @@
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login.vue'
-	import {apkDownload} from '@/static/js/apUpdate.js'
+	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
 			mixLoading,

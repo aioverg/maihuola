@@ -2,7 +2,7 @@
 	<view class="ai-list-cell" :class="dashed">
 		<view class="ai-list-cell-title">{{title}}</view>
 		<view class="ai-list-cell-message" :class="aimessagecolor" v-if="message">{{message}}</view>
-		<image class="ai-list-cell-icon" src="/static/icon/ai-right-arrow.png"></image>
+		<image class="ai-list-cell-icon" src="/static/icon/icon-right-arrow-01.png"></image>
 	</view>
 </template>
 

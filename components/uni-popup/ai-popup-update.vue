@@ -21,7 +21,7 @@
 				<text class="ai-popup-ok">立即升级</text>
 			</view>
 			<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
-				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
+				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/icon/icon-err-02.png"></image>
 			</view>
 		</view>
 	</view>
@@ -33,7 +33,7 @@
 		props: {
 			popupbg: {
 				type: String,
-				default: "/static/img/bg-popup01.png"
+				default: "/static/img/icon-bg-popup-01.png"
 			},
 			version: {
 				type: String,

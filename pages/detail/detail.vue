@@ -14,7 +14,7 @@
 		<view class="guess-title">{{guessDetailData.title}}</view>
 		<view class="guess-price-info">
 			<view class="guess-price-info-one">
-				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/ai-zbprice.png"></image>
+				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/icon-zbprice-01.png"></image>
 				<view class="guess-zbprice">
 					<text>¥</text>
 					<text>{{guessDetailData.promotion_price}}</text>
@@ -41,7 +41,7 @@
 		<view class="guess-nh">
 			<view class="guess-nh-title">
 				<view>商品卖点</view>
-			    <image class="guess-nh-title-icon" mode="widthFix" src="/static/icon/ai-praise.png"></image>
+			    <image class="guess-nh-title-icon" mode="widthFix" src="/static/icon/icon-praise-01.png"></image>
 			</view>
 			<view class="guess-nh-content">
 				{{guessDetailData.sell_point}}
@@ -50,7 +50,7 @@
 		<view class="zb-script">
 			<view class="zb-script-title">
 				<view>直播脚本</view>
-			    <image class="zb-script-title-icon" mode="widthFix" src="/static/icon/ai-vidicon.png"></image>
+			    <image class="zb-script-title-icon" mode="widthFix" src="/static/icon/icon-video-01.png"></image>
 			</view>
 			<view class="zb-script-content">{{guessDetailData.live_script}}</view>
 		</view>
@@ -90,16 +90,13 @@
 				popupDialogBtName: null,
 				popupMessages: null,
 				aiDialogSrc: '/static/icon/icon-taobao.png',
-				//: 0,
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题,
+				taobao: 0
 			}
 		},
 		computed: {
 			hasLogin(){
 				return this.$store.state.hasLogin
-			},
-			taobao(){
-				return this.$store.state.userInfo.taobao
 			}
 		},
 		onLoad: function(obj){
@@ -153,7 +150,7 @@
 					}else{
 						uni.showToast({
 							icon: "none",
-							title: "复制失败"
+							title: res.data.msg
 						})
 					}
 				})

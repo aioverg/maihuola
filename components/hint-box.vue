@@ -1,6 +1,6 @@
 <template>
 	<view class="caution">
-		<image class="img" src="/static/icon/ai-caution.png"></image>
+		<image class="img" src="/static/icon/icon-caution.png"></image>
 		<text class="note">{{content}}</text>
 	</view>
 </template>

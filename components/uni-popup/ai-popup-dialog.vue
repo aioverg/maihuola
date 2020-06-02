@@ -16,7 +16,7 @@
 				<text class="ai-popup-ok">{{btname}}</text>
 			</view>
 			<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
-				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/img/icon-cancel.png"></image>
+				<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/icon/icon-err-02.png"></image>
 			</view>
 		</view>
 	</view>

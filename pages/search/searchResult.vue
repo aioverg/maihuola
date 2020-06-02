@@ -10,7 +10,7 @@
 		/>
 		<view class="head">
 			<view class="input-box">
-				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
+				<image class="input-box-icon" src="/static/icon/icon-search-02.png"></image>
 				<input class="input-box-input" v-model="searchInput" @click="navTo('/pages/search/search?id=' + searchInput)" disabled />
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>

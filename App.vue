@@ -3,7 +3,7 @@
 	 * vuex管理登陆状态，具体可以参考官方登陆模板示例
 	 */
 	// #ifdef APP-PLUS
-	import {getServerNo} from "@/static/js/apUpdate.js";
+	import {getServerNo} from "@/static/js/appUpdate.js";
 	// #endif
 	import {
 		mapMutations

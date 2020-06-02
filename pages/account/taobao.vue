@@ -9,11 +9,11 @@
 			leftArrow="true"
 		/>
 	<view class="icon-card">
-		<image class="box-bg" src="/static/img/ai-tb-bg.png"></image>
+		<image class="box-bg" src="/static/img/icon-bg-01.png"></image>
 		<view class="icon-box">
 			<view class="icon-box-item">
 				<view class="icon">
-					<image class="img" src="/static/img/ai-taobao.png"></image>
+					<image class="img" src="/static/img/icon-tb-01.png"></image>
 				</view>
 				<view class="icon-title">手机淘宝</view>
 			</view>
@@ -60,6 +60,7 @@
 		},
 		methods: {
 			bindTB(){
+				console.log(this.$store.state.userInfo.id)
 				const _this = this
 				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {

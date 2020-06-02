@@ -9,7 +9,7 @@
 			leftArrow="true"
 		/>
 		<view class="img-box">
-			<image class="img" src="/static/img/ai-maihuola1.png"></image>
+			<image class="img" src="/static/img/icon-mhl-01.png"></image>
 		</view>
 		<view>
 			<ai-button @eventClick="login" btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>

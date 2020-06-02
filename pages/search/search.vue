@@ -10,14 +10,14 @@
 		/>
 		<view class="head">
 			<view class="input-box">
-				<image class="input-box-icon" src="/static/icon/ai-search01.png"></image>
+				<image class="input-box-icon" src="/static/icon/icon-search-02.png"></image>
 				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo(inputValue)" />
 			</view>
 			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="history-box">
 			<view class="history">搜索历史</view>
-			<image v-if="delHint" class="delete-icon" src="/static/icon/ai-delete.png" @click="delHistory"></image>
+			<image v-if="delHint" class="delete-icon" src="/static/icon/icon-delete.png" @click="delHistory"></image>
 		</view>
 		<view class="history-label-box">
 			<view class="history-label-no" v-if="!delHint">暂无搜索记录</view>

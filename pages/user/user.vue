@@ -10,7 +10,7 @@
 		
 		<view v-if="false">
 			<view class="img-box">
-				<image class="img" src="/static/img/ai-maihuola1.png"></image>
+				<image class="img" src="/static/img/icon-mhl-01.png"></image>
 			</view>
 			<view @click="login">
 				<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
@@ -34,7 +34,7 @@
 					leftArrow="true"
 				/>
 				<view class="img-box">
-					<image class="img" src="/static/img/ai-maihuola1.png"></image>
+					<image class="img" src="/static/img/icon-mhl-01.png"></image>
 				</view>
 				<view>
 					<view class="phone-box">
@@ -78,10 +78,10 @@
 				</view>
 			</view>
 			<view class="money-card">
-				<image class="card-bg" src="/static/img/bg-03.png"></image>
+				<image class="card-bg" src="/static/img/icon-bg-02.png"></image>
 				<view class="card-info">
 					<view class="balance">
-						<image class="icon" src="/static/icon/ai-coin.png"></image>
+						<image class="icon" src="/static/icon/icon-coin.png"></image>
 						<text class="title">余额（元）：</text>
 						<text class="num">{{blance}}</text>
 						<view class="cash" @click="withdraw">
@@ -141,7 +141,7 @@
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
-	import {apkDownload} from '@/static/js/apUpdate.js'
+	import {apkDownload} from '@/static/js/appUpdate.js'
     export default {
 		components: {
 			mixLoading,
@@ -155,7 +155,7 @@
 			return {
 				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
 				navTitle: null,
-				portrait: '/static/img/ai-default-user-icon.png',
+				portrait: '/static/img/icon-portrait-01.png',
 				userName: null,
 				userId: null,
 				blance: null,

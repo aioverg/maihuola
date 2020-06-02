@@ -46,27 +46,27 @@
 			
 			init:function(list){	
 				if (list.type == 'success') {
-					list.icon = '/static/icon/ai-popup-success.png';
+					list.icon = '/static/icon/icon-success-01.png';
 					list.typeClass='mpopup-success';
 					return list;
 				}
 				if (list.type == 'warn') {
-					list.icon = '/static/icon/ai-popup-warn.png';
+					list.icon = '/static/icon/icon-warn-01.png';
 					list.typeClass='mpopup-warn';
 					return list;
 				}
 				if (list.type == 'info') {
-					list.icon = '/static/icon/ai-popup-info.png';
+					list.icon = '/static/icon/icon-info-01.png';
 					list.typeClass='mpopup-info';
 					return list;
 				}
 				if (list.type == 'err') {
-					list.icon = '/static/icon/ai-popup-err.png';
+					list.icon = '/static/icon/icon-err-01.png';
 					list.typeClass='mpopup-err';
 					return list;
 				}
 				if (list.type == 'loading') {
-					list.icon = '/static/icon/ai-popup-loading.png';
+					list.icon = '/static/icon/icon-loading-01.png';
 					list.typeClass='mpopup-loading';
 					return list;
 				}

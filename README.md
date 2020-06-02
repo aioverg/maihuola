@@ -1,1 +1,1 @@
-使用uni-app开发的适用于 Android iOS 的App，证书文件Test.keystore，证书密码：123456 证书别名：test
+使用uni-app开发，打包成Android、IOS
