@@ -142,11 +142,6 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/document/index",
-            "style" : {}
-        }
-
-        ,{
             "path" : "pages/withdraw/record",
             "style" : {}
         }

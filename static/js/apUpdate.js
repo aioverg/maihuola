@@ -5,6 +5,7 @@ export function getServerNo(_this) {
 	if(phoneSystem == "android"){
 		plus.runtime.getProperty(plus.runtime.appid,function(inf){
 			uni.request({
+				//url: "http://api.taobaoke.test.aixiaotu.com.cn/api/v1.version/info",
 				url: "http://api.taobaoke.aixiaotu.com.cn/api/v1.version/info",
 				method: "GET",
 				data: {

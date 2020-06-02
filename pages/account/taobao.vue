@@ -72,6 +72,7 @@
 				Alibcsdk.login( res => {
 					if(res.status){
 						Alibcsdk.openwebviewurl({
+							//url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.test.aixiaotu.com.cn/api/v1.service/rollback?user_id=" + this.$store.state.userInfo.id
 							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=http://api.taobaoke.aixiaotu.com.cn/api/v1.service/rollback?user_id=" + this.$store.state.userInfo.id
 						},result=> {
 							if (result.status) {

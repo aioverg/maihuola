@@ -249,13 +249,13 @@
 						is_recommend: 1,
 						sort_type: this.rankType,
 						page: this.goodsListPage,
-						size: 5
+						size: 10
 					}).then(res => {
 						if(res.data.pagination.pages <= 0){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						if(res.data.pagination.pages = 1){
+						if(res.data.pagination.pages == 1){
 							this.goodsListLastPage = res.data.pagination.pages
 							this.goodsListPage += 1
 							for(let i of res.data.data){
@@ -264,7 +264,7 @@
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						this.goodsListLastPage = res.data.pages
+						this.goodsListLastPage = res.data.pagination.pages
 						this.goodsListPage += 1
 						for(let item of res.data.data){
 							this.goodsList.push(item)
@@ -285,12 +285,11 @@
 						page: this.goodsListPage,
 						size: 10
 					}).then(res => {
-						console.log(res)
 						if(res.data.pagination.pages <= 0){
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						if(res.data.pagination.pages = 1){
+						if(res.data.pagination.pages == 1){
 							this.goodsListLastPage = res.data.pagination.pages
 							this.goodsListPage += 1
 							for(let i of res.data.data){
@@ -299,13 +298,12 @@
 							this.uniLoadMoreStatus = "noMore"
 							return
 						}
-						this.goodsListLastPage = res.data.pages
+						this.goodsListLastPage = res.data.pagination.pages
 						this.goodsListPage += 1
 						for(let item of res.data.data){
 							this.goodsList.push(item)
 						}
 						this.uniLoadMoreStatus = "more"
-						console.log(this.guessList)
 					})
 				}
 			},
