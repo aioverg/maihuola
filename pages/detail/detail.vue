@@ -171,12 +171,12 @@
 <style lang="scss">
 	page {
 		width: 750rpx;
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.guess-img-box {
 		width: 750rpx;
 		height: 600rpx;
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 		.guess-img {
 			width: 750rpx;
 			height: 600rpx;
@@ -188,15 +188,15 @@
 		width: 750rpx;
 		padding: 7px 15px 8px;
 		line-height: 20px;
-		background: rgba(255,255,255,1);
+		background: #FFFFFF;
 		font-size: 16px;
-		color: rgba(51,51,51,1);
+		color: #333333;
 	}
 	.guess-price-info {
 		width: 750rpx;
 		height: 77px;
 		padding: 0 15px 0;
-		background: rgba(244,122,115,1);
+		background: #F47A73;
 		.guess-price-info-one {
 			height: 40px;
 			display: flex;
@@ -211,13 +211,13 @@
 				line-height: 27.5px;
 				flex-grow: 1;
 				font-size: 30px;
-				color: rgba(255,255,255,1);
+				color: #FFFFFF;
 			}
 			.guess-ckprice {
 				display: inline-block;
 				flex-grow: 1;
 				font-size: 15px;
-				color:rgba(255,255,255,1);
+				color:#FFFFFF;
 			}
 		}
 		.guess-price-info-two {
@@ -241,7 +241,7 @@
 		min-height: 105px;
 		margin: 10px auto;
 		padding: 10px 15px 13px;
-		background: rgba(255,255,255,1);
+		background: #FFFFFF;
 		border-radius: 8px;
 		.guess-nh-title {
 			display: flex;
@@ -249,7 +249,7 @@
 			margin: 0 0 5px;
 			font-size: 15px;
 			font-weight: 600;
-			color: rgba(51,51,51,1);
+			color: #333333;
 			.guess-nh-title-icon {
 				margin: 0 0 0 4px;
 				width: 18px;
@@ -257,7 +257,7 @@
 		}
 		.guess-nh-content {
 			font-size:13px;
-			color:rgba(102,102,102,1);
+			color: #666666;
 		}
 	}
 	.zb-script {
@@ -265,7 +265,7 @@
 		min-height: 105px;
 		margin: 0 auto 25px;
 		padding: 10px 15px 13px;
-		background: rgba(255,255,255,1);
+		background: #FFFFFF;
 		border-radius: 8px;
 		.zb-script-title {
 			display: flex;
@@ -273,7 +273,7 @@
 			margin: 0 0 5px;
 			font-size: 15px;
 			font-weight: 600;
-			color: rgba(51,51,51,1);
+			color: #333333;
 			.zb-script-title-icon {
 				margin: 0 0 0 4px;
 				width: 18px;
@@ -281,7 +281,7 @@
 		}
 		.zb-script-content {
 			font-size: 13px;
-			color: rgba(102,102,102,1);
+			color: #666666;
 		}
 	}
 	.tkl-bt {

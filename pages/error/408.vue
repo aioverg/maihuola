@@ -46,7 +46,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 	}
 	.img-box {
 		margin: 100px 0 60px 0;
@@ -59,13 +59,13 @@
 	}
 	.error-title-one {
 		font-size: 18px;
-		color: rgba(51,51,51,1);
+		color: #333333;
 		text-align: center;
 	}
 	.error-title-two {
 		margin: 5px 0 45px;
 		font-size: 15px;
-		color:rgba(102,102,102,1);
+		color: #666666;
 		text-align: center;
 	}
 	.error-bt {
@@ -75,8 +75,8 @@
 		line-height: 40px;
 		text-align: center;
 		font-size: 15px;
-		color: rgba(255,255,255,1);
-		background: rgba(244,122,115,1);
+		color: #FFFFFF;
+		background: #F47A73;
 		border-radius:45px;
 	}
 </style>

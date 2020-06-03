@@ -50,7 +50,7 @@
 
 <style lang="scss">
 	page {
-		background-color: rgba(249,249,249,1);
+		background-color: #F9F9F9;
 	}
 	.guess-list {
 		width: 750rpx;

@@ -32,7 +32,6 @@ const store = new Vuex.Store({
 	mutations: {
 		login(state, data){
 			state.hasLogin = true;
-			console.log(data)
 			uni.setStorageSync('token', data)
 		},
 		setUserInfo(state, data){

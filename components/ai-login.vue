@@ -1,3 +1,4 @@
+//登录提醒组件
 <template>
 	<view class="ai-login-box">
 		<image class="ai-login-box-logo" mode="widthFix" src="/static/img/maihuola.png"></image>
@@ -38,7 +39,7 @@
 		.ai-login-box-title {
 			display: inline-block;
 			font-size: 13px;
-			color:rgba(255,255,255,1);
+			color: #ffffff;
 			margin: 0 198rpx 0 0;
 			
 		}
@@ -50,8 +51,8 @@
 			line-height: 56rpx;
 			text-align: center;
 			border-radius: 28rpx;
-			background: rgba(255,255,255,1);
-			color: rgba(234,58,106,1);
+			background: #ffffff;
+			color: #ea3a6a;
 		}
 	}
 </style>

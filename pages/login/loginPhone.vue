@@ -102,7 +102,6 @@
 					return
 				}
 				/*if(this.code & 1 !==0 || this.code.length !== 6){
-					console.log(888888)
 					this.$refs.aiPopupMessage.open({
 						type:'err',
 						content:'验证码错误',
@@ -118,7 +117,6 @@
 				}).then( res => {
 					console.log(res)
 					if(res.data.code == 0){
-						console.log(res.data.data)
 						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){
 							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
@@ -208,7 +206,7 @@
 		}
 	}
 	.login-button {
-		margin: 40px 0 0 0;
+		margin: 50px 0 0 0;
 	}
 	.huo {
 		visibility:hidden;
@@ -236,6 +234,8 @@
 		}
 	}
 	.note {
-		margin: 50px 0 0 0;
+		position: absolute;
+		left: 37px;
+		bottom: 50px;
 	}
 </style>

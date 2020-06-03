@@ -57,13 +57,13 @@
 
 <style lang="scss">
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.help-list {
 		width: 690rpx;
 		height: 45px;
 		margin: 10px auto 0;
-		background: rgba(255,255,255,1);
+		background: #FFFFFF;
 		padding: 0 15px;
 		border-radius: 8px;
 	}

@@ -84,7 +84,6 @@
 			this.$api.getAuthInfo({
 				code: "alipay"
 			}).then(res => {
-				console.log(999,res)
 				this.name = res.data.data.real_name
 				this.account = res.data.data.account
 			})
@@ -131,7 +130,6 @@
 					account: this.account,
 					real_name: this.name,
 				}).then(res => {
-					console.log(res)
 					if(res.data.code == 0){
 						this.$refs.aiPopupMessage.open({
 							type:'success',
@@ -154,30 +152,30 @@
 
 <style lang='scss'>
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.tx-box {
 		width: 690rpx;
 		height:208px;
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 		margin: 7px auto 0;
 		border-radius:16px;
 		.tx-account {
 			margin: 0 0 0 15px;
 			padding: 15px 0 15px 0;
-			border-bottom: 1px dashed rgba(229,229,229,1);
+			border-bottom: 1px dashed #E5E5E5;
 			.title {
 				font-size: 16px;
 			}
 			.name {
 				display: inline-block;
 				font-size:14px;
-				color:rgba(102,102,102,1);
+				color: #666666;
 				margin: 0 15px 0 25px;
 			}
 			.phone {
 				font-size:14px;
-				color:rgba(102,102,102,1);
+				color: #666666;
 			}
 		}
 		.tx-input {
@@ -190,7 +188,7 @@
 				display: flex;
 				align-items: baseline;
 				padding: 15px 0 0 0;
-				border-bottom: 1px dashed rgba(229,229,229,1);
+				border-bottom: 1px dashed #E5E5E5;
 				.icon {
 					display: inline-block;
 					height: 42px;
@@ -208,7 +206,7 @@
 				.note {
 					display: inline-block;
 					font-size:13px;
-					color:rgba(204,204,204,1);
+					color: #CCCCCC;
 				}
 			}
 			.tx-upper {
@@ -236,7 +234,7 @@
 		.tx-hint {
 			font-size: 12px;
 			height: 12px;
-			color:rgba(234,58,106,1);
+			color: #EA3A6A;
 			text-align: center;
 			margin: 0 0 10px;
 		}

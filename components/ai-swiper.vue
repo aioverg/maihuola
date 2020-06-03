@@ -20,9 +20,6 @@
 				type: Array,
 				default: []
 			}
-		},
-		mounted: function(){
-			console.log(this)
 		}
 	}
 </script>

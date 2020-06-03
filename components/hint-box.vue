@@ -1,3 +1,4 @@
+//顶部提示框组件
 <template>
 	<view class="caution">
 		<image class="img" src="/static/icon/icon-caution.png"></image>
@@ -35,7 +36,7 @@
 		}
 		.note {
 			margin: 18rpx 0 18rpx 10rpx;
-			color:rgba(234,58,106,1);
+			color: #ea3a6a;
 			font-size: 12px;
 		}
 	}

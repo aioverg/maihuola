@@ -94,18 +94,18 @@
 
 <style lang="scss">
     page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.withdraw-box {
 		border-radius: 8px;
 		width: 686rpx;
-		background: rgba(255,255,255,1);
+		background: #FFFFFF;
 		margin: 10px auto 0;
 		.withdraw-list-head {
 			height: 47px;
 			line-height: 47px;
 			font-size: 16px;
-			border-bottom:1px solid rgba(229,229,229,1);
+			border-bottom:1px solid #E5E5E5;
 			.withdraw-list-head-time {
 				display: inline-block;
 				width: 300rpx;
@@ -126,7 +126,7 @@
 			height: 42px;
 			line-height: 42px;
 			font-size: 26rpx;
-			color:rgba(153,153,153,1);
+			color: #999999;
 			margin: 0 15px;
 			.withdraw-list-item-time {
 				display: inline-block;
@@ -142,7 +142,7 @@
 			}
 		}
 		.withdraw-list-item-color {
-			color: rgba(244,122,115,1);
+			color: #F47A73;
 		}
 	}
 </style>

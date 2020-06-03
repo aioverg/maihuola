@@ -1,3 +1,4 @@
+//按钮组件
 <template>
 	<view class="ai-button" :class="buttonbg" @click="eventClick">
 		<view class="img-box">
@@ -51,7 +52,7 @@
 		}
 	}
 	.ai-button-graybg {
-		background: rgba(204,204,204,1);
+		background: #cccccc;
 	}
 	.ai-button {
 		width: 690rpx;
@@ -59,7 +60,7 @@
 		line-height: 45px;
 		//text-align: center;
 		margin: 0 auto;
-		color:rgba(255,255,255,1);
+		color: #ffffff;
 		border-radius: 22px;
 		.img-box {
 			width: 690rpx;
@@ -79,7 +80,7 @@
 				z-index: 2;
 				font-weight: 600;
 				font-size: 16px;
-				color:rgba(255,255,255,1);
+				color: #ffffff;
 			}
 		}
 	}

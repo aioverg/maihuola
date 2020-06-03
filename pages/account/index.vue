@@ -89,7 +89,6 @@
 					uni.login({
 					    provider: 'weixin',
 					    success: function (loginRes) {
-							console.log(9999)
 							//_this.popupMessages = "绑定成功"
 							//_this.$refs.popupMessage.open()
 					        // 获取用户信息
@@ -181,7 +180,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.account-box {
 		width: 690rpx;

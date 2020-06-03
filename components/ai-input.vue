@@ -1,3 +1,4 @@
+//输入框组件
 <template>
 	<view class="ai-input-box">
 		<view class="ai-input-title">{{title}}</view>
@@ -79,19 +80,19 @@
 		line-height: 45px;
 		display: flex;
 		align-items: center;
-		background:rgba(255,255,255,1);
+		background: #ffffff;
 		border-radius: 8px;
 		margin: 0 auto;
 		.ai-input-title {
 			margin: 0 15px;
 			width: 160rpx;
 			font-size:15px;
-			color:rgba(51,51,51,1);
+			color: #333333;
 		}
 		.ai-input-content {
 			width: 250rpx;
 			font-size: 14px;
-			color:rgba(153,153,153,1);
+			color: #999999;
 		}
 		.ai-input-input {
 			border: none;
@@ -105,7 +106,7 @@
 			display: inline-block;
 			width: 100px;
 			font-size:14px;
-			color:rgba(244,122,115,1);
+			color: #f47a73;
 			text-decoration: underline;
 		}
 		

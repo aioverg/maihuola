@@ -36,7 +36,7 @@
 
 <style lang="scss">
 	.dashed {
-		border-bottom: 1px dashed rgba(229,229,229,1);
+		border-bottom: 1px dashed #e5e5e5;
 	}
 	.ai-list-cell {
 		width: 100%;

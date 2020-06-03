@@ -38,7 +38,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 	}
 	.docunemt {
 		width: 650rpx;
@@ -46,16 +46,16 @@
 		.title {
 			line-height: 20px;
 			padding: 15px 0;
-			border-bottom: 1px solid rgba(229,229,229,1);;
+			border-bottom: 1px solid #E5E5E5;
 			font-size: 16px;
 			font-weight: 600;
-			color: rgba(51,51,51,1);
+			color: #333333;
 		}
 		.content {
 			line-height: 19px;
 			margin: 10px 0 0 0;
 			font-size: 13px;
-			color: rgba(153,153,153,1);
+			color: #999999;
 		}
 	}
 

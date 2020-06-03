@@ -237,7 +237,6 @@
 					this.userName = res.data.data.username
 					this.userId = "账户ID:" + res.data.data.id
 					this.alipay = res.data.data.alipay
-					console.log(res.data.data)
 					return true
 				})
 			},
@@ -333,9 +332,7 @@
 					phone: this.phone,
 					code: this.code
 				}).then( res => {
-					console.log(res)
 					if(res.data.code == 0){
-						console.log(res.data.data)
 						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){
 							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
@@ -360,7 +357,7 @@
 	 align-items: center;
 	}
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 		.img-box {
 			width: 750rpx;
@@ -376,7 +373,7 @@
 			margin: 26px 0 101rpx 0;
 			text-align: center;
 			font-size: 13px;
-			color:rgba(204,204,204,1);
+			color: #CCCCCC;
 			height:37px;
 			text-decoration-line: underline;
 		}
@@ -414,12 +411,12 @@
 		}
 		.info-box-user-name{
 			font-size: 17px;
-			color:rgba(255,255,255,1);
+			color:#FFFFFF;
 			margin: 0 0 5px 0;
 		}
 		.info-box-user-id {
 			font-size: 14px;
-			color:rgba(255,255,255,1);
+			color:#FFFFFF;
 		}
 	}
 	.money-card {
@@ -454,7 +451,7 @@
 					height: 19px;
 					margin: 23px 0;
 					font-size:15px;
-					color:rgba(51,51,51,1);
+					color:#333333;
 				}
 				.num {
 					display: inline-block;
@@ -464,7 +461,7 @@
 					width: 225rpx;
 					font-size:21px;
 					font-weight:600;
-					color:rgba(51,51,51,1);
+					color:#333333;
 					margin: 20px 0;
 				}
 				.cash {
@@ -473,11 +470,11 @@
 					height: 27px;
 					margin: 19px;
 					border-radius:13px;
-					background:rgba(244,122,115,1);
+					background: #F47A73;
 					line-height:27px;
 					text-align: center;
 					font-size:15px;
-					color:rgba(255,255,255,1);
+					color:#FFFFFF;
 				}
 			}
 		}
@@ -493,12 +490,12 @@
 					text-overflow: ellipsis;
 					font-size:18px;
 					font-weight:600;
-					color:rgba(51,51,51,1);
+					color:#333333;
 				}
 				.title {
 					margin: 6px 0 0 0;
 					font-size:13px;
-					color:rgba(102,102,102,1);
+					color: #666666;
 				}
 			}
 			.next {
@@ -509,12 +506,12 @@
 					text-overflow: ellipsis;
 					font-size:18px;
 					font-weight:600;
-					color:rgba(51,51,51,1);
+					color:#333333;
 				}
 				.title {
 					margin: 6px 0 0 0;
 					font-size:13px;
-					color:rgba(102,102,102,1);
+					color: #666666;
 				}
 			}
 		}
@@ -531,17 +528,17 @@
 		.account-safe {
 			margin: 10px 0 0 0;
 			border-radius:8px;
-			background:rgba(255,255,255,1);
+			background:#FFFFFF;
 		}
 		.message {
 			margin: 10px 0 0 0;
 			border-radius: 8px;
-			background:rgba(255,255,255,1);
+			background:#FFFFFF;
 		}
 		.logout {
 			margin: 10px 0 0 0;
 			border-radius:8px;
-			background:rgba(255,255,255,1);
+			background:#FFFFFF;
 		}
 	}
 	
@@ -567,7 +564,7 @@
 		height: 32px;
 		width: 650rpx;
 		margin: 0 auto;
-		border-bottom: 1px solid rgba(204,204,204,1);
+		border-bottom: 1px solid #CCCCCC;
 		.phone-icon {
 			width: 20px;
 			display: inline-block;
@@ -592,7 +589,7 @@
 			display: flex;
 			height: 40px;
 			align-items: center;
-			border-bottom: 1px solid rgba(204,204,204,1);
+			border-bottom: 1px solid #CCCCCC;
 			.code-icon {
 				width: 20px;
 				display: inline-block;
@@ -608,11 +605,11 @@
 			width: 100px;
 			height: 40px;
 			text-align: center;
-			background:rgba(244,122,115,1);
+			background:#F47A73;
 			border-radius: 22px;
 			line-height: 40px;
 			font-size: 14px;
-			color: rgba(255,255,255,1);
+			color: #FFFFFF;
 		}
 	}
 	.login-button {
@@ -623,7 +620,7 @@
 		width: 100%;
 		text-align: center;
 		font-size: 13px;
-		color: rgba(204,204,204,1);
+		color: #CCCCCC;
 		height: 28px;
 		margin: 26px 0 15px 0;
 	}
@@ -639,7 +636,7 @@
 		.wx-bt {
 			display: inline-block;
 			font-size: 13px;
-			color: rgba(244,122,115,1);
+			color: #F47A73;
 			margin: 0 0 0 5px;
 		}
 	}

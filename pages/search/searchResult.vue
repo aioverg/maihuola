@@ -104,7 +104,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.head {
 		margin: 10px 15px 25px;
@@ -113,7 +113,7 @@
 			display: inline-block;
 			width:550rpx;
 			height: 35px;
-			background:rgba(255,255,255,1);
+			background: #FFFFFF;
 			border-radius:17px;
 			margin: 0 10px 0 0;
 			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
@@ -132,11 +132,11 @@
 			display: inline-block;
 			width: 120rpx;
 			height: 35px;
-			background:rgba(255,255,255,1);
+			background: #FFFFFF;
 			box-shadow:0 0 13px 0 rgba(153,153,153,0.24);
 			border-radius:17px;
 			font-size: 15px;
-			color:rgba(51,51,51,1);
+			color: #333333;
 			text-align: center;
 			line-height: 35px;
 		}

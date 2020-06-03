@@ -115,13 +115,13 @@
 
 <style lang="scss">
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.icon-card {
 		width: 690rpx;
-		height: 462px;
+		height: 924rpx;
 		margin: 10px auto 0;
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 		position: relative;
 		.box-bg {
 			width: 100%;
@@ -145,7 +145,7 @@
 					position: relative;
 					width: 76px;
 					height: 76px;
-					background:rgba(255,255,255,1);
+					background: #FFFFFF;
 					box-shadow:0px 0px 30px 0px rgba(205,59,51,0.5);
 					opacity:0.9;
 					filter:blur(0px);
@@ -163,7 +163,7 @@
 					width: 76px;
 					margin: 6px 0 0;
 					text-align: center;
-					color:rgba(255,255,255,1);
+					color: #FFFFFF;
 				}
 			}
 		}
@@ -171,16 +171,16 @@
 			margin: 15px 0 0 25px;
 			.icon-box-describe-one {
 				font-size:16px;
-				color:rgba(51,51,51,1);
+				color: #333333;
 			}
 			.icon-box-describe-two {
 				margin: 15px 0 0;
 				font-size:14px;
-				color:rgba(153,153,153,1);
+				color: #999999;
 				.dot {
 					width: 3px;
 					height: 3px;
-					background:rgba(153,153,153,1);
+					background: #999999;
 					display: inline-block;
 					margin: 4px 10px 4px 0;
 				}
@@ -188,7 +188,8 @@
 		}
 	}
 	.bt {
-		position: relative;
-		top: 40px;
+		position: absolute;
+		left: 30rpx;
+		bottom: 46px;
 	}
 </style>

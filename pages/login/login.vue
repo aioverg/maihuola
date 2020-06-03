@@ -84,6 +84,7 @@
 	.img-box {
 		width: 750rpx;
 		text-align: center;
+		height: 350px;
 		.img {
 			display: inline-block;
 			width: 286rpx;
@@ -92,14 +93,16 @@
 		}
 	}
 	.to-phone {
-		margin: 26px 0 101rpx 0;
+		margin: 26px 0 0;
 		text-align: center;
 		font-size: 13px;
-		color:rgba(204,204,204,1);
-		height:37px;
+		color: #CCCCCC;
 		text-decoration-line: underline;
 	}
 	.note {
-		margin: 0 0 50px 0;
+		position: absolute;
+		left: 75rpx;
+		bottom: 50px;
+		//margin: 0 0 50px 0;
 	}
 </style>

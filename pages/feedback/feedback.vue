@@ -68,7 +68,7 @@
 
 <style lang="scss">
     page {
-		background:rgba(255,255,255,1);
+		background: #FFFFFF;
 	}
 	.feedback-box {
 		width: 750rpx;
@@ -79,6 +79,8 @@
 		}
 	}
 	.feedback-bt {
-		margin: 42px 0 0 0;
+		position: absolute;
+		left: 30rpx;
+		bottom: 46px;
 	}
 </style>

@@ -93,14 +93,15 @@
 	page {
 		height:667px;
 		width:750rpx;
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.phone-num {
 		margin: 15px 0;
 	}
 	.bt {
-		position: relative;
-		top: 367px;
+		position: absolute;
+		left: 30rpx;
+		bottom: 46px;
 	}
 
 </style>

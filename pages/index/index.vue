@@ -354,7 +354,7 @@
 
 <style lang="scss">
 	page {
-		background: rgba(249, 249, 249, 1);
+		background: #F9F9F9;
 	}
 	.login-box {
 		width: 750rpx;
@@ -434,7 +434,6 @@
 		.carousel {
 			width: 100% !important;
 			height: 150px !important;
-
 			.swiper-item {
 				width: 100% !important;
 				height: 150px !important;
@@ -458,7 +457,7 @@
 		width: 100%;
 		display: flex;
 		align-items: center;
-		background: rgba(255, 255, 255, 1);
+		background: #FFFFFF;
 		.sort-items {
 			height: 45px;
 			flex-grow: 1;
@@ -481,7 +480,7 @@
 						font-size: 16px;
 					}
 					.red {
-						color:rgba(244,122,115,1);
+						color: #F47A73;
 						font-weight: 600;
 					}
 					.sort-item-line {
@@ -530,12 +529,11 @@
 						text-align-last: justify;
 						text-align: center;
 						font-size: 12px;
-						color:rgba(51,51,51,1);
 						padding: 0px 0 4px 0;
 						margin: 8px 0 0 0;
 					}
 					.blue {
-						color:rgba(244,122,115,1);
+						color: #F47A73;
 					}
 				}
 			}

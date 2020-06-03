@@ -1,3 +1,4 @@
+//商品卡片组件
 <template>
 	<view class="ai-guess-card">
 		<image class="zhutui" v-if="recommend" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
@@ -37,7 +38,7 @@
 	.ai-guess-card {
 		width: 690rpx;
 		height: 280rpx;
-		background:rgba(255,255,255,1);
+		background: #ffffff;
 		border-radius:16px;
 		display: flex;
 		position: relative;
@@ -66,7 +67,7 @@
 				text-overflow: ellipsis;
 				line-height: 20px;
 				font-size: 15px;
-				color:rgba(51,51,51,1);
+				color: #333333;
 			}
 		}
 		.ai-guess-price-box {
@@ -76,19 +77,19 @@
 			margin: 28rpx 0 0 0;
 			.zb-price {
 				font-size:13px;
-				color:rgba(255,51,51,1);
+				color: #ff3333;
 			}
 			.sc-price {
 				font-size:11px;
-				color:rgba(153,153,153,1);
+				color: #999999;
 			}
 			.ck-earn {
 				font-size:13px;
-				color:rgba(255,51,51,1);
+				color: #ff3333;
 			}
 			.yj-rate {
 				font-size:11px;
-				color:rgba(153,153,153,1);
+				color: #999999;
 			}
 		}
 	}

@@ -42,7 +42,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(249,249,249,1);
+		background: #F9F9F9;
 	}
 	.help-box {
 		width: 750rpx;
@@ -52,7 +52,7 @@
 			padding:  0 15px;
 			margin: 0 auto;
 			margin: 10px 0 0 0;
-			background: rgba(255,255,255,1);
+			background: #FFFFFF;
 			border-radius: 8px;
 			color: rgba(51,51,51,1);
 			font-size: 15px;
