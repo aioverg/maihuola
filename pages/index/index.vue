@@ -90,32 +90,33 @@
 				sortIds: 0,
 				rankData: [
 					{
+						id: "default",
+						title: "默认",
+						key: null,
+						rankType: null
+					},
+					{
 						id: "update",
 						title: "上新排序",
 						rank: "id",
 						rankType: "DESC"
 					},
-					/*{
-						id: "brokerage",
-						title: "佣金排序",
-						key: "new"
-					},*/
 					{
 						id: "priceUp",
 						title: "价格升序",
-						rank: "price",
+						rank: "promotion_price",
 						rankType: "ASC"
 					},
 					{
 						id: "priceDown",
 						title: "价格降序",
-						rank: "price",
+						rank: "promotion_price",
 						rankType: "DESC"
 					}
 				],
 				rankId: 0,
-				rankValue: "id",
-				rankType: "DESC",
+				rankValue: null,
+				rankType: null,
 				carouselList: [],
 				goodsList: [],
 				goodsListPage: 1,
@@ -508,29 +509,30 @@
 			}
 			.sort-rank-item {
 				position: absolute;
-				width: 120px;
+				width: 110px;
 				height: 175px;
 				z-index: 25;
 				//display: none;
 				right: -2px;
 				top: 12px;
 				.sort-rank-item-bg {
-					width: 120px;
-					height: 150px;
+					width: 110px;
+					height: 170px;
 					position: absolute !important;
 				}
 				.sort-rank-item-box {
 					position: relative;
 					z-index: 25;
-					width: 120rpx;
+					width: 110rpx;
 					margin: 40px auto 0;
 					.sort-rank-list-item {
-						width: 54px;
+						width: 52px;
+						text-align-last: justify;
 						text-align: center;
 						font-size: 12px;
 						color:rgba(51,51,51,1);
 						padding: 0px 0 4px 0;
-						margin: 9px 0 0 0;
+						margin: 8px 0 0 0;
 					}
 					.blue {
 						color:rgba(244,122,115,1);

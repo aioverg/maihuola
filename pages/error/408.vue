@@ -14,6 +14,7 @@
 		<view class="error-title-one">哎呀！网络好像有点问题</view>
 		<view class="error-title-two">请检查您的网络，重新加载</view>
 		<view class="error-bt" @click="testNetwork">重试</view>
+		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
@@ -32,7 +33,9 @@
 				uni.getNetworkType({
 					success: function(res){
 						if(res.networkType !== "none" /*|| res.networkType == "unknown"*/ ){
-							_this.$aiRouter.navTabBar(_this.$basePath + '/pages/index/index')
+							_this.$aiRouter.navTabBar('/pages/index/index')
+						}else{
+							_this.$aiGlobal.aiPopupMessage.apply(_this,['err', '连接网络失败'])
 						}
 					}
 				})
