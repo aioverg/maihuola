@@ -39,7 +39,7 @@ Vue.config.productionTip = false
 //Vue.prototype.$fire = new Vue();
 
 //将全局函数绑定到Vue的原型$aiRouter上
-Vue.prototype.$basePath = "";
+Vue.prototype.$basePath = "http://api.taobaoke.aixiaotu.com.cn/api/v1.";
 Vue.prototype.$store = store;
 Vue.prototype.$aiRouter = aiRouter
 Vue.prototype.$aiGlobal = aiGlobal
