@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<ai-navbar
-		    title="绑定淘宝授权"
+		    title="淘宝账户授权"
 			:fixed="true"
 			backgroundImg="/static/img/bg-01.png"
 			height="88rpx"
