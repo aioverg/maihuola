@@ -243,6 +243,8 @@
 			withdraw(){
 				if(this.alipay){
 					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.blance)
+				}else{
+					this.$aiRouter.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')
 				}
 			},
 			logout(){
