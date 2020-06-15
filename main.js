@@ -7,7 +7,6 @@ import App from './App'
 import aiRouter from './static/js/airouter.js'//路由
 import aiGlobal from './static/js/aiglobal.js'//函数封装
 import api from './static/js/api.js'//接口
-import TabbarView from "./static/js/TabBarView.js";
 
 
 //引入弹窗组件
@@ -45,7 +44,6 @@ Vue.prototype.$store = store;
 Vue.prototype.$aiRouter = aiRouter
 Vue.prototype.$aiGlobal = aiGlobal
 Vue.prototype.$api = api
-Vue.prototype.$tabbarView = new TabbarView();
 
 
 App.mpType = 'app'
