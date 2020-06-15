@@ -1,5 +1,9 @@
 <template>
 	<view class="launch">
+		<view class="launch-bg">
+			<image class="launch-img" mode="widthFix" src="../../static/icon/bg-launch01.png"></image>
+		</view>
+		<view class="launch-shade"></view>
 		<view class="launch-content">
 			<view class="launch-content-box">
 				<view class="launch-content-title">用户协议及隐私政策</view>
@@ -56,20 +60,32 @@
 			}
 		}
 	}
+	//background-color: rgba(0, 0, 0, .4);
 </script>
 <style>
-	page{
-		width: 100%;
-		background-image: url("../../static/icon/bg-launch01.png");
-		background-size: cover;
-	}
 	.launch {
 		width: 100%;
 		height: 100%;
+		position: relative;
+		background-color: rgba(0, 0, 0, .4);
+	}
+	.launch-bg {
+		width: 100%;
+		height: 100%;
+		background-color: #f7f7f7;
+	}
+	.launch-img {
+		width: 750rpx;
+	}
+	.launch-shade {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
 		background-color: rgba(0, 0, 0, .4);
 	}
 	.launch-content {
-		position: relative;
+		position: absolute;
 		padding: 25px;
 		width: 80%;
 		left: 10%;
