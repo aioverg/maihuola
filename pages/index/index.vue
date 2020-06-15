@@ -1,14 +1,10 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="选品"
-			:fixed=true
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
+		<uni-nav-bar
+		fixed="true"
+		title="不知道"
 		/>
 		<view class="head">
-			<image class="bg" src="/static/img/bg-02.png"></image>
 			<view class="search">
 				<view class="search-one" @click="navTo('/pages/search/search')">
 					<image class="search-icon" src="../../static/icon/icon-search-01.png"></image>
@@ -68,6 +64,7 @@
 </template>
 
 <script>
+	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
@@ -76,11 +73,12 @@
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
+			uniNavBar,
 			mixLoading,
 			aiGuseeCard,
 			uniPopUp,
 			aiPopupUpdate,
-			aiLogin
+			aiLogin,
 		},
 		data() {
 			return {
@@ -372,13 +370,6 @@
 		height: 215px;
 		padding: 20px 0 0 0;
 		position: relative;
-		.bg{
-			position:absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-		}
 		.search {
 			position: relative;
 			z-index: 3;

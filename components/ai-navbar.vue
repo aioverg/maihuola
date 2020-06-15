@@ -2,7 +2,6 @@
 
 <template>
 	<view class="ai-navbar" >
-		
 		<view
 			:class="{'ai-navbar--fixed': fixed,'ai-navbar--shadow':border,'ai-navbar--border':border}"
 			:style="{'background': backgroundColorRgba}"

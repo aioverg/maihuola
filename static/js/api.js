@@ -10,8 +10,8 @@ const basePath = ""
 	}
 });*/
 const request = function(obj){
-	//const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
-	const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
+	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
+	//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
 	let authentication = null
 	uni.getNetworkType({
 		success: function(res){

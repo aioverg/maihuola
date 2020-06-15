@@ -18,7 +18,24 @@
 				    }
 				}
 			}
-		},{
+		},
+		{
+			"path": "pages/tabbar/hot/hot",
+			"style": {
+				"navigationBarTitleText": "爆款",
+				"app-plus":{
+				    "scrollIndicator": "none",
+					"background": "#0000ff",
+				    "pullToRefresh": {
+				        "support": true,
+				        "color": "#fffff",
+				        "style": "circle",
+						"offset": "-300px"
+				    }
+				}
+			}
+		},
+		{
 			"path": "pages/user/user",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -171,6 +188,12 @@
 				"iconPath": "static/icon/icon-tabbar-02.png",
 				"selectedIconPath": "static/icon/icon-tabbar-01.png",
 				"text": "选品"
+			},
+			{
+				"pagePath": "pages/tabbar/hot/hot",
+				"iconPath": "static/icon/tabbar-hot01.png",
+				"selectedIconPath": "static/icon/tabbar-hot01.png",
+				"text": "爆款"
 			},
 			{
 				"pagePath": "pages/user/user",
