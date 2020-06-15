@@ -1,4 +1,4 @@
-<!--tabbar组件-->
+<!--navbar组件-->
 
 <template>
 	<view class="ai-navbar" >
@@ -113,6 +113,11 @@
 			leftArrow: {
 				type: String,
 				default: null
+			},
+			//登录页返回到首页
+			navIndex: {
+				style: Boolean,
+				default: false
 			},
 			height:{
 				type: String,
@@ -411,6 +416,12 @@
 			
 			onClickLeft () {
 				if(this.back){
+					if(this.navIndex){
+						uni.switchTab({
+						    url: '/pages/index/index'
+						});
+						return
+					}
 					if(getCurrentPages().length>1){
 						uni.navigateBack();
 					}else{
@@ -430,6 +441,7 @@
 					}
 					
 				}else{
+					console.log(6666)
 					this.$emit('click-left')
 				}
 		    },

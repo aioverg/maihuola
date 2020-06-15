@@ -23,6 +23,14 @@
 					_this.$store.commit("setUserInfo", res.data)
 			    }
 			})
+			uni.getStorage({
+				key: 'launchFlag',
+				fail: function() {
+					uni.reLaunch({
+						url: "/pages/start/index"
+					})
+				}
+			})
 		},
 		onShow: function() {
 			console.log('App Show')

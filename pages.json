@@ -33,7 +33,14 @@
 				    }
 				}
 			}
-		}, {
+		}, 
+		{
+			"path":"pages/start/index",
+			"style": {
+				
+			}
+		},
+		{
 			"path": "pages/detail/detail",
 			"style": {
 				"navigationBarTitleText": "商品详情"

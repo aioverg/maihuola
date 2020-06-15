@@ -7,6 +7,7 @@
 			height="88rpx"
 			color="#FFFFFF"
 			leftArrow="true"
+			:navIndex="true"
 		/>
 		<view class="img-box">
 			<image class="img" src="/static/img/icon-mhl-01.png"></image>
