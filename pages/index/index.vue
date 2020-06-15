@@ -154,6 +154,9 @@
 			this.getCarousel()
 		},
 		onShow() {
+			// #ifdef APP-PLUS
+			this.$tabbarView.$watch();
+			// #endif
 			//this.getRecommend()
 		},
 		onReady(){
