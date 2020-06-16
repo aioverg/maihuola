@@ -4,9 +4,6 @@
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
-				<view>
-					<image style="width: 20px;" mode="widthFix" src="../../static/icon/maihuola02.png"></image>
-				</view>
 				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />

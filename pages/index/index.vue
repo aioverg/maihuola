@@ -1,25 +1,30 @@
 <template>
 	<view>
-		<uni-nav-bar
-		fixed="true"
-		title="不知道"
-		/>
-		<view class="head">
-			<view class="search">
-				<view class="search-one" @click="navTo('/pages/search/search')">
-					<image class="search-icon" src="../../static/icon/icon-search-01.png"></image>
-					<view class="search-content">搜索你需要的商品关键词</view>
-				</view>
-				<view class="search-two" @click="navTo('/pages/search/search')">搜索</view>
+		<uni-nav-bar fixed="true">
+		    <block slot="left">
+			    <image class="input-left" mode="widthFix" src="../../static/icon/maihuola02.png"></image>
+		    </block>
+			<view class="input-view" @click="navTo('/pages/search/search')">
+				<image class="input-uni-icon" mode="widthFix" src="../../static/icon/search01.png"></image>
+				<text class="input-placeholder">搜索你需要的商品关键词</text>
 			</view>
-
-			<!-- 头部轮播 -->
+			<block slot="right">
+				<view class="message-box">
+					<image class="input-right" mode="widthFix" src="../../static/icon/message01.png"></image>
+					<text class="message-hint"></text>
+				</view>
+			</block>
+		</uni-nav-bar>
+		<!-- 轮播图 -->
+		<view class="carousel-box">
 			<view class="carousel-section">
-				<swiper indicator-active-color="rgba(255,255,255,1)" autoplay="true" interval="5000" duration="1500" class="carousel" circular indicator-dots>
+				<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
+				<swiper autoplay="true" class="carousel" @change="change">
 					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToCarousel(item.link_goods_id, item.id)">
 						<image :src="item.pic" class="bannar-image" />
 					</swiper-item>
 				</swiper>
+				</uni-swiper-dot>
 			</view>
 		</view>
 
@@ -65,6 +70,7 @@
 
 <script>
 	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
+	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
@@ -74,6 +80,7 @@
 	export default {
 		components: {
 			uniNavBar,
+			uniSwiperDot,
 			mixLoading,
 			aiGuseeCard,
 			uniPopUp,
@@ -82,6 +89,16 @@
 		},
 		data() {
 			return {
+				current: 0,
+				dotsStyles: {
+					bottom: 0,
+					width: 10,
+					height: 10,
+					backgroundColor: "rgba(244,122,115,0.49)",
+					border: "none",
+					selectedBackgroundColor: "#F47A73",
+					selectedBorder: "none"
+				},
 				sortList: [],
 				sortIndex: 0,
 				sortId: 1,
@@ -355,6 +372,53 @@
 	page {
 		background: #F9F9F9;
 	}
+	/*顶部tabbar，搜索栏*/
+	.input-left {
+		width: 138px
+	}
+	.input-right {
+		width: 20px;
+	}
+	.message-box {
+		width: 15px;
+		position: relative;
+	}
+	.message-hint {
+		width: 8px;
+		height: 8px;
+		line-height: 15px;
+		border-radius: 50%;
+		background-color: #FFD83A;
+		position: absolute;
+		top: 4px;
+		left: 15px;
+	}
+	.input-view {
+		display: flex;
+		flex-direction: row;
+		width: 460rpx;
+		flex: 1;
+		background-color: #f8f8f8;
+		height: 35px;
+		border-radius: 15px;
+		padding: 0 15px;
+		flex-wrap: nowrap;
+		margin: 7px 0;
+		line-height: 35px;
+	}
+	.input-uni-icon {
+		width: 14px;
+		height: 14px;
+		margin: 10.5px 10px 0 5px;
+	}
+	.input-placeholder {
+		color: #CCCCCC;
+		font-size: 15px;
+	}
+	
+	
+	
+	/*底部登录提示栏*/
 	.login-box {
 		width: 750rpx;
 		position: fixed;
@@ -366,82 +430,29 @@
 		bottom: 0;
 	}
 	/* #endif */
-	.head{
-		height: 215px;
-		padding: 20px 0 0 0;
-		position: relative;
-		.search {
-			position: relative;
-			z-index: 3;
-			height: 45px;
-			width: 690rpx;
-			margin: 0 auto;
-			.search-one {
-				display: inline-block;
-				position: relative;
-				z-index: 4;
-				width: 550rpx;
-				height: 35px;
-				background:rgba(255,255,255,0.19);
-				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
-				border-radius:35px;
-				.search-icon {
-					display: inline-block;
-					margin: 0 10px 0 15px;
-					width: 12px;
-					height: 12px;
-				}
-				.search-content {
-					height: 35px;
-					line-height: 35px;
-					display: inline-block;
-					font-size: 15px;
-					z-index: 10;
-					color: rgba(255,255,255,0.5);
-					
-				}
-			}
-			.search-two {
-				display: inline-block;
-				width: 120rpx;
-				height: 35px;
-				font-size: 15px;
-				margin: 0 0 0 10px;
-				line-height: 35px;
-				text-align: center;
-				border-radius:35px;
-				box-shadow:0px 4px 15px 0px rgba(153,153,153,0.24);
-				background:rgba(255,255,255,0.19);
-				color: rgba(255,255,255,0.5);
-			}
-		}
-	}
-
-	.carousel-section {
-		clear: both;
+	
+	/*轮播图*/
+	.carousel-box {
+		height: 200px;
 		width: 100%;
-		margin-top: 10px;
-		height: 150px;
-
+		background-color: #FFFFFF;
+		padding: 10px 0;
 		.carousel {
-			width: 100% !important;
-			height: 150px !important;
+		    width: 100%;
+			height: 175px;
 			.swiper-item {
-				width: 100% !important;
-				height: 150px !important;
+				width: 100%;
+				height: 150px;
 				border-radius: 8px;
-
 			}
 		}
-
-		/deep/ .bannar-image {
-			width: 92% !important;
-			height: 150px !important;
+		.bannar-image {
+			width: 640rpx;
+			height: 160px;
 			border-radius: 8px;
 			margin: 0 auto;
 			display: block;
 		}
-
 	}
 
 	.sort-section {
