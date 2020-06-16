@@ -139,7 +139,7 @@
 	}
 
 	.uni-swiper__dots-long {
-		border-radius: 50px;
+		border-radius: 30%;
 	}
 
 	.uni-swiper__dots-bar {

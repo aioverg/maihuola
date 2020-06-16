@@ -16,16 +16,14 @@
 			</block>
 		</uni-nav-bar>
 		<!-- 轮播图 -->
-		<view class="carousel-box">
-			<view class="carousel-section">
-				<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
-				<swiper autoplay="true" class="carousel" @change="change">
-					<swiper-item v-for="(item, index) in carouselList" :key="index" class="carousel-item" @click="navToCarousel(item.link_goods_id, item.id)">
-						<image :src="item.pic" class="bannar-image" />
+		<view class="banner-box">
+			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
+				<swiper autoplay="true" class="banner-carousel" @change="change">
+					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item.link_goods_id, item.id)">
+						<image :src="item.pic" class="banner-image" />
 					</swiper-item>
 				</swiper>
-				</uni-swiper-dot>
-			</view>
+			</uni-swiper-dot>
 		</view>
 
 		<!--分类-->
@@ -34,9 +32,9 @@
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
 					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
-							{{item.title}}
+							<text>{{item.title}}</text>
+							<view class="sort-underline"></view>
 					    </view>
-					    <view class="sort-item-line">|</view>
 					</view>
 				</scroll-view>
 			</view>
@@ -92,8 +90,8 @@
 				current: 0,
 				dotsStyles: {
 					bottom: 0,
-					width: 10,
-					height: 10,
+					width: 5,
+					height: 5,
 					backgroundColor: "rgba(244,122,115,0.49)",
 					border: "none",
 					selectedBackgroundColor: "#F47A73",
@@ -432,32 +430,28 @@
 	/* #endif */
 	
 	/*轮播图*/
-	.carousel-box {
+	.banner-box {
 		height: 200px;
 		width: 100%;
 		background-color: #FFFFFF;
 		padding: 10px 0;
-		.carousel {
+		.banner-carousel {
 		    width: 100%;
-			height: 175px;
-			.swiper-item {
-				width: 100%;
-				height: 150px;
-				border-radius: 8px;
+			height: 180px;
+			.banner-item {
+				.banner-image {
+					width: 640rpx;
+					height: 160px;
+					border-radius: 15px;
+					margin: 0 auto;
+					display: block;
+				}
 			}
 		}
-		.bannar-image {
-			width: 640rpx;
-			height: 160px;
-			border-radius: 8px;
-			margin: 0 auto;
-			display: block;
-		}
 	}
-
 	.sort-section {
-		margin-top: 20px;
 		width: 100%;
+		height: 60px;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;
@@ -481,15 +475,24 @@
 						line-height: 45px;
 						text-align: center;
 						font-size: 16px;
+						.sort-underline {
+							position: absolute;
+							display: none;
+							left: 0px;
+							height: 2px;
+							bottom: 3px;
+							width: 1.2em;
+							border-radius: 3px;
+							background-color: #F47A73;
+						}
 					}
 					.red {
 						color: #F47A73;
-						font-weight: 600;
-					}
-					.sort-item-line {
-						display: inline-block;
-						color: #EEEEEE;
-						font-size: 14px;
+						font-size: 20px;
+						font-weight: bold;
+						.sort-underline {
+							display: inline-block;
+						}
 					}
 				}
 				.sort-item-box:last-child .sort-item-line {

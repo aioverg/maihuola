@@ -3,7 +3,7 @@
 	<view class="ai-login-box">
 		<image class="ai-login-box-logo" mode="widthFix" src="/static/img/maihuola.png"></image>
 		<view class="ai-login-box-title">登录即可赚取佣金</view>
-		<view class="ai-login-box-bt" @click="navToLogin()">注册/登录</view>
+		<view class="ai-login-box-bt" @click="navToLogin()">登录</view>
 	</view>
 </template>
 
@@ -28,7 +28,7 @@
 	.ai-login-box {
 		height: 90rpx;
 		display: flex;
-		background: #F47A73;
+		background: #FCAA7A;
 		align-items: center;
 		opacity: 0.95;
 		.ai-login-box-logo {
@@ -52,7 +52,7 @@
 			text-align: center;
 			border-radius: 28rpx;
 			background: #ffffff;
-			color: #ea3a6a;
+			color: #FCAA7A;
 		}
 	}
 </style>
