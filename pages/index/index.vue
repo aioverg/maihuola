@@ -11,7 +11,9 @@
 			<block slot="right">
 				<view class="message-box">
 					<image class="input-right" mode="widthFix" src="../../static/icon/message01.png"></image>
-					<text class="message-hint"></text>
+					
+						<text class="message-hint"></text>
+					
 				</view>
 			</block>
 		</ai-navbar>
@@ -378,9 +380,10 @@
 		width: 20px;
 	}
 	.message-box {
-		width: 15px;
+		width: 20px;
 		position: relative;
 	}
+
 	.message-hint {
 		width: 8px;
 		height: 8px;
@@ -388,7 +391,12 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		top: 24px;
+		/* #ifdef APP-PLUS */
+		top: 7px;
+		/* #endif */
+		/* #ifdef H5 */
+		top: 15px;
+		/* #endif */
 		left: 15px;
 	}
 	.input-view {

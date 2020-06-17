@@ -51,7 +51,7 @@
 			<!--顶部-->
 			<ai-navbar fixed="true" background-img="/static/icon/navbar-bg-01.png">
 				<block slot="right">
-					<view class="message-box">
+					<view class="message-box" style="width: 20px; position: relative;" >
 						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
 						<text class="message-hint"></text>
 					</view>
@@ -390,6 +390,22 @@
 
 	page {
 		background: #FFFFFF;
+	}
+	/*顶部导航栏*/
+	.message-hint {
+		width: 8px;
+		height: 8px;
+		line-height: 15px;
+		border-radius: 50%;
+		background-color: #FFD83A;
+		position: absolute;
+		/* #ifdef APP-PLUS */
+		top: 7px;
+		/* #endif */
+		/* #ifdef H5 */
+		top: 15px;
+		/* #endif */
+		left: 15px;
 	}
 
 	.img-box {
