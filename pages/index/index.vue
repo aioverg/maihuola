@@ -388,7 +388,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		top: 4px;
+		top: 24px;
 		left: 15px;
 	}
 	.input-view {

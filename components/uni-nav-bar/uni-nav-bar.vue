@@ -4,7 +4,7 @@
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
-				<view @tap="onClickLeft" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
+				<view @tap="onClickLeft" :style="{width: leftWidth + 'px'}" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
@@ -58,6 +58,10 @@
 			leftText: {
 				type: String,
 				default: ""
+			},
+			leftWidth: {
+				type: String,
+				default: "75"
 			},
 			rightText: {
 				type: String,
@@ -113,7 +117,7 @@
 </script>
 
 <style lang="scss" scoped>
-	$nav-height: 44px;
+	$nav-height: 80px;
 	.uni-nav-bar-text {
 		/* #ifdef APP-PLUS */
 		font-size: 34rpx;
@@ -154,6 +158,7 @@
 		width: 750rpx;
 		height: $nav-height;
 		line-height: $nav-height;
+		padding: 30px 0 0 0;
 		font-size: 16px;
 		// background-color: #ffffff;
 	}

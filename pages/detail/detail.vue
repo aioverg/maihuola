@@ -1,18 +1,17 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="商品详情"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" left-width="150" right-icon="help" @clickRight="navMessage">
+			<block slot="left">
+				<image @click="navBarBack" style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
+			    <view style="font-size: 20px; font-weight:bold;">商品详情</view>
+			</block>
+		</uni-nav-bar>
+		
 		<view class="guess-img-box">
 			<image mode="heightFix" class="guess-img" :src="guessDetailData.pic"></image>
 		</view>
-		<view class="guess-title">{{guessDetailData.title}}</view>
 		<view class="guess-price-info">
+			<view class="guess-title">{{guessDetailData.title}}</view>
 			<view class="guess-price-info-one">
 				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/icon-zbprice-01.png"></image>
 				<view class="guess-zbprice">
@@ -54,11 +53,25 @@
 			</view>
 			<view class="zb-script-content">{{guessDetailData.live_script}}</view>
 		</view>
-		<view class="tkl-bt">
-			<ai-button btname="复制推广码" @eventClick="copyTKL" ></ai-button>
+		<view class="copy-box">
+			<view class="collect">
+				<image class="collect-icon" src="/static/icon/start-01.png"></image>
+				<view class="collect-hint">我要收藏</view>
+			</view>
+			<view class="copy-bt">
+				<ai-button btname="复制推广码" width="540" shadow-width="492" @eventClick="copyTKL" ></ai-button>
+			</view>
 		</view>
+		<uni-popup ref="navBarHelp" type="dialog">
+			<ai-popup-dialog type="dialog" :cancelShow="false" btname="我知道了" :message="navHelp" :before-close="true" @confirm="close"></ai-popup-dialog>
+		</uni-popup>
 		<uni-popup ref="popupAiDialog" type="dialog">
-		    <ai-popup-dialog type="dialog" :cancel-show="false" :src="aiDialogSrc" :btname="popupDialogBtName" :title="popupDialogTitle" :content="popupDialogContent" :before-close="true" @close="close" @confirm="confirm"></ai-popup-dialog>
+			<ai-popup-dialog type="dialog" iconSrc="/static/icon/icon-taobao.png" btname="去授权" @close="close" @confirm="confirm">
+				<block slot="message">
+					<view style="font-size: 17px; text-align: center;">请完成淘宝授权</view>
+					<view style="font-size: 14px; text-align: center; margin: 4px 0 0 0; color: #666666;">授权后方可获取该商品淘口令</view>
+				</block>
+			</ai-popup-dialog>
 		</uni-popup>
 		<uni-popup ref="popupMessage">
 			<uni-popup-message v-if="TKLBox" message="成功消息" type="success"></uni-popup-message>
@@ -67,10 +80,10 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button.vue'
+	import aiButton from '@/components/ai-button/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
-	import aiPopupDialog from '@/components/uni-popup/ai-popup-dialog.vue'
+	import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
 	//详情页
 	export default {
 		components: {
@@ -91,7 +104,13 @@
 				popupMessages: null,
 				aiDialogSrc: '/static/icon/icon-taobao.png',
 				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题,
-				taobao: 0
+				taobao: 0,
+				navHelp: [
+					{
+						title: "如何使用推广码",
+						content: "选好商品 — 查看商品详情 — 复制推广码 — 把推广码关联到您的直播间 — 用户成 功购买 — 获取佣金"
+					}
+				]
 			}
 		},
 		computed: {
@@ -120,11 +139,20 @@
 		onReady(){
 		},
 		methods: {
-			navTo(url) {
-				uni.navigateTo({
-					url: url
-				})
+			//导航栏返回
+			navBarBack(){
+				uni.navigateBack()
 			},
+			//导航栏帮助弹框
+			navMessage(){
+				this.$refs.navBarHelp.open()
+			},
+			//提示淘宝授权弹框
+			confirm(done){
+				this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
+				done()
+			},
+			//复制推广码
 			copyTKL(){
 				if(!this.hasLogin){
 					this.$aiRouter.navTo('/pages/login/loginPhone?page_id=2&page_params=' + this.goodsId)
@@ -155,15 +183,11 @@
 					}
 				})
 			},
+			//关闭弹窗按钮
 			close(done){
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框
 			    done()
-				
 			},
-			confirm(done){
-				this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
-				done()
-			}
+			
 		}
 	}
 </script>
@@ -171,8 +195,9 @@
 <style lang="scss">
 	page {
 		width: 750rpx;
-		background: #F9F9F9;
+		background: #FFFFFF;
 	}
+	/*商品图片*/
 	.guess-img-box {
 		width: 750rpx;
 		height: 600rpx;
@@ -184,19 +209,18 @@
 			margin: 0 auto;
 		}
 	}
-	.guess-title {
-		width: 750rpx;
-		padding: 7px 15px 8px;
-		line-height: 20px;
-		background: #FFFFFF;
-		font-size: 16px;
-		color: #333333;
-	}
+	/*商品信息*/
 	.guess-price-info {
-		width: 750rpx;
-		height: 77px;
-		padding: 0 15px 0;
-		background: #F47A73;
+		width: 690rpx;
+		padding: 10px 15px;
+		margin: 20px auto 0;
+		border-radius: 8px;
+		background: #FFFFFF;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		.guess-title {
+			font-size: 16px;
+			margin: 0 0 5px 0;
+		};
 		.guess-price-info-one {
 			height: 40px;
 			display: flex;
@@ -204,31 +228,31 @@
 			.guess-zbprice-icon {
 				display: inline-block;
 				width: 60px;
-				margin: 0 20px 0 0;
+				margin: 0 10px 0 0;
 			}
 			.guess-zbprice {
 				display: inline-block;
 				line-height: 27.5px;
 				flex-grow: 1;
 				font-size: 30px;
-				color: #FFFFFF;
+				color: #FF716E;
 			}
 			.guess-ckprice {
 				display: inline-block;
+				text-align: end;
 				flex-grow: 1;
 				font-size: 15px;
-				color:#FFFFFF;
+				color: #FF716E;
 			}
 		}
 		.guess-price-info-two {
 			height: 37px;
 			line-height: 37px;
-			color: rgba(255,255,255,0.8);
+			color: #666666;
 			.guess-scprice {
 				display: inline-block;
 				margin: 0 14px 0 0;
 				font-size:13px;
-				
 			}
 			.guess-rate {
 				display: inline-block;
@@ -236,6 +260,7 @@
 			}
 		}
 	}
+	/*商品买点*/
 	.guess-nh {
 		width: 690rpx;
 		min-height: 105px;
@@ -243,6 +268,7 @@
 		padding: 10px 15px 13px;
 		background: #FFFFFF;
 		border-radius: 8px;
+		box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
 		.guess-nh-title {
 			display: flex;
 			align-items: center;
@@ -260,12 +286,14 @@
 			color: #666666;
 		}
 	}
+	/*直播脚本*/
 	.zb-script {
 		width: 690rpx;
 		min-height: 105px;
 		margin: 0 auto 25px;
 		padding: 10px 15px 13px;
 		background: #FFFFFF;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
 		.zb-script-title {
 			display: flex;
@@ -284,7 +312,25 @@
 			color: #666666;
 		}
 	}
-	.tkl-bt {
+	.copy-box {
+		width: 750rpx;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 19px;
 		margin: 0 0 46px;
+		.collect {
+			height: 43px;
+			display: inline-block;
+			text-align: center;
+			.collect-icon {
+				width: 19px;
+				height: 18px;
+				margin: 0 auto;
+			}
+			.collect-hint {
+				font-size: 13.5px;
+			}
+		}
 	}
 </style>
