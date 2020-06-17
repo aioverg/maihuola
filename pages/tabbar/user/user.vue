@@ -1,13 +1,5 @@
-<template>  
-    <view>
-		<ai-navbar
-		    :title="navTitle"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-		/>
-		
+<template>
+	<view>
 		<view v-if="false">
 			<view class="img-box">
 				<image class="img" src="/static/img/icon-mhl-01.png"></image>
@@ -22,17 +14,11 @@
 				<ai-login-hint></ai-login-hint>
 			</view>
 		</view>
-		
+
 		<view v-if="!loginState" class="loginmm">
 			<view>
-				<ai-navbar
-				    title="手机登录"
-					:fixed="true"
-					backgroundImg="/static/img/bg-01.png"
-					height="88rpx"
-					color="#FFFFFF"
-					leftArrow="true"
-				/>
+				<ai-navbar title="手机登录" :fixed="true" backgroundImg="/static/img/bg-01.png" height="88rpx" color="#FFFFFF"
+				 leftArrow="true" />
 				<view class="img-box">
 					<image class="img" src="/static/img/icon-mhl-01.png"></image>
 				</view>
@@ -59,91 +45,130 @@
 				<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 			</view>
 		</view>
-		
-		
-		
-		
-		
-		
-		<view v-if="loginState">
-		<view class="user-section">
-			<image class="bg" src="/static/img/bg-02.png" mode="widthFix"></image>
-			<view class="user-info-box">
-				<view class="portrait-box">
-					<image class="portrait" :src="portrait"></image>
-				</view>
-				<view class="info-box">
-					<view class="info-box-user-name">{{userName}}</view>
-					<view class="info-box-user-id">{{userId}}</view>
-				</view>
-			</view>
-			<view class="money-card">
-				<image class="card-bg" src="/static/img/icon-bg-02.png"></image>
-				<view class="card-info">
-					<view class="balance">
-						<image class="icon" src="/static/icon/icon-coin.png"></image>
-						<text class="title">余额（元）：</text>
-						<text class="num">{{blance}}</text>
-						<view class="cash" @click="withdraw">
-							提现
-						</view>
-					</view>
-					<view class="estimate">
-						<view class="last">
-							<view class="num">{{curEar}}</view>
-							<view class="title">本月预估收入（元）</view>
-						</view>
-						<view class="next">
-							<view class="num">{{prevEar}}</view>
-							<view class="title">上月预估收入（元）</view>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		
-		<view class="list-card">
-			<!--账户安全-->
-			<view class="account-safe list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
-				<ai-list-cell title="账户安全" message="手机号、微信号、淘宝授权"></ai-list-cell>
-			</view>
 
-			<!-- 其它 -->
-			<view class="message">
-				<view class="list-box" @click="navTo('/pages/help/index')">
-					<ai-list-cell title="我要帮助" dashed="dashed"></ai-list-cell>
+
+		<view v-if="loginState">
+			<!--顶部-->
+			<ai-navbar fixed="true" background-img="/static/icon/navbar-bg-01.png">
+				<block slot="right">
+					<view class="message-box">
+						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
+						<text class="message-hint"></text>
+					</view>
+				</block>
+			</ai-navbar>
+			<!--账户信息账户余额-->
+			<view class="user-section">
+				<image class="bg" src="/static/icon/bg-user-01.png" mode="widthFix"></image>
+				<view class="user-info-box">
+					<view class="portrait-box">
+						<image class="portrait" :src="portrait"></image>
+					</view>
+					<view class="info-box">
+						<view class="info-box-user-name">{{userName}}</view>
+						<view class="info-box-user-id">{{userId}}</view>
+					</view>
+					<view class="info-user-mark">
+						<image class="info-user-mark-icon" src="../../../static/icon/icon-mark-01.png"></image>
+					</view>
 				</view>
-				<view class="list-box" @click="navTo('/pages/feedback/feedback')">
-					<ai-list-cell title="意见反馈" dashed="dashed"></ai-list-cell>
+				<view class="estimate">
+					<view class="estimate-item-box">
+						<view class="num">{{curEar}}</view>
+						<view class="title">今日预估（元）</view>
+					</view>
+					<view class="estimate-item-box">
+						<view class="num">{{prevEar}}</view>
+						<view class="title">昨日预估（元）</view>
+					</view>
+					<view class="estimate-item-box">
+						<view class="num">{{prevEar}}</view>
+						<view class="title">本月预估（元）</view>
+					</view>
 				</view>
-				<view class="list-box" @click="navTo('/pages/about/index')">
-					<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
-				</view>
-				<view class="list-box" @click="updateApp">
-					<ai-list-cell title="版本号" :message="updateMessage" aimessagecolor="ai-list-cell-message-red"></ai-list-cell>
+				<view class="money-card">
+					<image class="card-bg" src="/static/icon/bg-user-02.png"></image>
+					<view class="balance">
+						<view class="title">账户余额（元）：</view>
+						<view class="num">{{blance}}</view>
+						<view class="cash" @click="withdraw">
+								提现
+						</view>
+					</view>
+					<view class="money-hint">每月25号可提现上月结算收益</view>
 				</view>
 			</view>
-			<view class="account-safe list-box" @click="logout" style="padding: 0 30rpx;">
-				<ai-list-cell title="退出账户"></ai-list-cell>
+			
+			<!--藏品收益订单团队-->
+			<view class="project">
+				<image class="project-bg" src="../../../static/icon/bg-user-03.png" mode="widthFix"></image>
+				<view class="project-box">
+					<view class="project-item">
+						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
+						<view class="project-item-name">藏品</view>
+					</view>
+					<view class="project-item">
+						<image class="project-item-icon" src="/static/icon/coin-01.png"></image>
+						<view class="project-item-name">收益</view>
+					</view>
+					<view class="project-item">
+						<image class="project-item-icon" src="/static/icon/text-01.png"></image>
+						<view class="project-item-name">订单</view>
+					</view>
+					<view class="project-item">
+						<image class="project-item-icon" src="/static/icon/people-01.png"></image>
+						<view class="project-item-name">团队</view>
+					</view>
+				</view>
 			</view>
-		</view>
-		<uni-popup ref="popupAiDia" type="dialog">
-		    <ai-popup-update :version="updateVersion" :content="updateContent"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
-		</uni-popup>
+			
+			
+			<view class="list-card">
+				<view class="message">
+					<view class="list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
+						<ai-list-cell title="账户安全" dashed="dashed" message="手机号、微信号、淘宝授权"></ai-list-cell>
+					</view>
+					<view class="list-box" @click="navTo('/pages/help/index')">
+						<ai-list-cell title="我要帮助" dashed="dashed"></ai-list-cell>
+					</view>
+					<view class="list-box" @click="navTo('/pages/feedback/feedback')">
+						<ai-list-cell title="意见反馈" dashed="dashed"></ai-list-cell>
+					</view>
+					<view class="list-box" @click="navTo('/pages/about/index')">
+						<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
+					</view>
+					<view class="list-box" @click="updateApp">
+						<ai-list-cell title="版本号" :message="updateMessage" aimessagecolor="ai-list-cell-message-red"></ai-list-cell>
+					</view>
+				</view>
+				<view class="loginout">
+					<view class="list-box" @click="logout" style="padding: 0 30rpx;">
+						<ai-list-cell title="退出账户"></ai-list-cell>
+					</view>
+				</view>
+			</view>
+			<uni-popup ref="popupAiDia" type="dialog">
+				<ai-popup-update :version="updateVersion" :content="updateContent" popupbg="/static/img/bg-update.png" type="dialog"
+				 :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+			</uni-popup>
 		</view>
 		<mix-loading v-show="refresh"></mix-loading>
-    </view>  
-</template>  
+	</view>
+</template>
 <script>
+	import aiNavbar from "@/components/ai-navbar/ai-navbar.vue"
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
-	import {apkDownload} from '@/static/js/appUpdate.js'
-    export default {
+	import {
+		apkDownload
+	} from '@/static/js/appUpdate.js'
+	export default {
 		components: {
+			aiNavbar,
 			mixLoading,
 			aiListCell,
 			aiButton,
@@ -151,9 +176,9 @@
 			uniPopUp,
 			aiPopupUpdate
 		},
-		data(){
+		data() {
 			return {
-				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				navTitle: null,
 				portrait: '/static/img/icon-portrait-01.png',
 				userName: null,
@@ -165,8 +190,8 @@
 				yesLogin: false,
 				alipay: false,
 				refresh: false,
-				
-				
+
+
 				//登录登录录登录录登录
 				phone: null,
 				code: null,
@@ -180,34 +205,34 @@
 			}
 		},
 		computed: {
-			loginState(){
-				if(this.$store.state.hasLogin){
+			loginState() {
+				if (this.$store.state.hasLogin) {
 					this.navTitle = "我的"
-				}else{
+				} else {
 					this.navTitle = "手机登录"
 				}
 				return this.$store.state.hasLogin
 			},
-			updateMessage(){
-				if(this.$store.state.appInfo.update){
+			updateMessage() {
+				if (this.$store.state.appInfo.update) {
 					return "更新"
-				}else{
+				} else {
 					return this.$store.state.appInfo.localVersion
 				}
 			},
-			updateVersion(){
+			updateVersion() {
 				return this.$store.state.appInfo.appVersion
 			},
-			updateContent(){
+			updateContent() {
 				return this.$store.state.appInfo.appNote
 			},
-			updataLink(){
+			updataLink() {
 				return this.$store.state.appInfo.appLink
 			},
-			updataType(){
+			updataType() {
 				return this.$store.state.appInfo.require
 			},
-			
+
 		},
 		onShow() {
 			this.getUserInfo()
@@ -216,7 +241,7 @@
 			const _this = this
 			_this.refresh = true
 			uni.startPullDownRefresh({
-				success: function(){
+				success: function() {
 					_this.getUserInfo().then(res => {
 						_this.refresh = false
 						uni.stopPullDownRefresh()
@@ -224,13 +249,15 @@
 				}
 			})
 		},
-        methods: {
-			navTo(url){
+		methods: {
+			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
-			login(){console.log(微信登录)},
-			getUserInfo(){
-				return this.$api.getUserCenter().then( res => {
+			login() {
+				console.log(微信登录)
+			},
+			getUserInfo() {
+				return this.$api.getUserCenter().then(res => {
 					this.blance = res.data.data.balance
 					this.curEar = res.data.data.cur_month_commission
 					this.prevEar = res.data.data.prev_month_commission
@@ -240,82 +267,84 @@
 					return true
 				})
 			},
-			withdraw(){
-				if(this.alipay){
+			withdraw() {
+				if (this.alipay) {
 					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.blance)
-				}else{
+				} else {
 					this.$aiRouter.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')
 				}
 			},
-			logout(){
+			logout() {
 				this.$store.commit("logout")
 				this.$aiRouter.navTo("/pages/index/index")
 			},
-			updateApp(){
-				if(this.$store.state.appInfo.update){
+			updateApp() {
+				if (this.$store.state.appInfo.update) {
 					this.$refs.popupAiDia.open()
 				}
 			},
-			close(done){
-			// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框 
+			close(done) {
+				// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框 
 				done()
 			},
-			confirm(done){
+			confirm(done) {
 				apkDownload(this.$store.state.appInfo.appLink)
 				done()
 			},
-			
-			
-			
+
+
+
 			//登陆登录
-			aiPopupMessage(type, content){
-				if(!this.run){
+			aiPopupMessage(type, content) {
+				if (!this.run) {
 					return
 				}
 				this.run = false
 				this.$refs.aiPopupMessage.open({
 					type: type,
 					content: content,
-					timeout:1500,
-					isClick:false
+					timeout: 1500,
+					isClick: false
 				})
 				setTimeout(() => {
 					this.run = true
 				}, 2000)
 			},
-			getCode(){
-				if(this.phone % 1 == 0 && this.phone.length == 11){
+			getCode() {
+				if (this.phone % 1 == 0 && this.phone.length == 11) {
 					this.$api.getPhoneCode({
 						phone: this.phone
-					}).then( res => {
-						if(res.data.code !== 0){
+					}).then(res => {
+						if (res.data.code !== 0) {
 							this.aiPopupMessage("err", "获取验证码过于频繁")
 							return
 						}
-						if(res.data.code == 0){
-							if(this.timeRun){return}
+						if (res.data.code == 0) {
+							if (this.timeRun) {
+								return
+							}
 							this.aiPopupMessage("success", "验证码已发送")
 							this.timeRun = true
 							this.times = 60
 							this.btName = "s重新发送"
-							let timer = setInterval(()=>{
-							    if(this.times == 1){
-								    clearInterval(timer)
-								    this.timeRun = false
-								    this.times = null
-								    this.btName = "获取验证码"
-								    return
-							    }
-							    this.times -= 1
-							},1000)
+							let timer = setInterval(() => {
+								if (this.times == 1) {
+									clearInterval(timer)
+									this.timeRun = false
+									this.times = null
+									this.btName = "获取验证码"
+									return
+								}
+								this.times -= 1
+							}, 1000)
 						}
 					})
-				}else{
+				} else {
 					this.aiPopupMessage("err", "手机号码错误")
 				}
 			},
-			login(){
-				if(this.phone % 1 !== 0 || this.phone.length !== 11){
+			login() {
+				if (this.phone % 1 !== 0 || this.phone.length !== 11) {
 					this.aiPopupMessage("err", "手机号码错误")
 					return
 				}
@@ -333,319 +362,374 @@
 					terminal: this.$store.state.systemType,
 					phone: this.phone,
 					code: this.code
-				}).then( res => {
-					if(res.data.code == 0){
+				}).then(res => {
+					if (res.data.code == 0) {
 						this.$store.commit("setUserInfo", res.data.data)
-						if(this.pageId == 2){
+						if (this.pageId == 2) {
 							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
-						}else{
+						} else {
 							this.$aiRouter.navTabBar('/pages/index/index')
 						}
-					}else{
+					} else {
 						this.aiPopupMessage("err", "验证码错误")
 					}
 				})
 				return
 			}
-        }  
-    }  
-</script>  
+		}
+	}
+</script>
 <style lang='scss'>
 	/*定义css变量，暂时没有用到*/
 	%flex-center {
-	 display:flex;
-	 flex-direction: column;
-	 justify-content: center;
-	 align-items: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
+
 	page {
-		background: #F9F9F9;
+		background: #FFFFFF;
 	}
-		.img-box {
-			width: 750rpx;
-			text-align: center;
-			.img {
-				display: inline-block;
-				width: 286rpx;
-				height: 286rpx;
-				margin: 88px auto;
-			}
-		}
-		.to-phone {
-			margin: 26px 0 101rpx 0;
-			text-align: center;
-			font-size: 13px;
-			color: #CCCCCC;
-			height:37px;
-			text-decoration-line: underline;
-		}
-		.note {
-			margin: 0 0 50px 0;
-		}
-		
-	
-	.user-section{
-		height: 205px;
-		
-		position:relative;
-		.bg{
-			position:absolute;
-			left: 0;
-			top: 0;
-			width: 100%;
+
+	.img-box {
+		width: 750rpx;
+		text-align: center;
+
+		.img {
+			display: inline-block;
+			width: 286rpx;
+			height: 286rpx;
+			margin: 88px auto;
 		}
 	}
-	.user-info-box{
-		height: 70px;
-		display:flex;
-		align-items:center;
-		position:relative;
-		z-index: 1;
-		.portrait{
-			width: 60px;
-			height: 60px;
-			margin: 0 0 0 25px;
-			border:1px solid #fff;
-			border-radius: 50%;
-		}
-		.info-box {
-			margin: 0 0 0 15px;
-		}
-		.info-box-user-name{
-			font-size: 17px;
-			color:#FFFFFF;
-			margin: 0 0 5px 0;
-		}
-		.info-box-user-id {
-			font-size: 14px;
-			color:#FFFFFF;
-		}
+
+	.to-phone {
+		margin: 26px 0 101rpx 0;
+		text-align: center;
+		font-size: 13px;
+		color: #CCCCCC;
+		height: 37px;
+		text-decoration-line: underline;
 	}
-	.money-card {
-		width: 690rpx;
-		height: 130px;
-		margin: 5px auto 0;
+
+	.note {
+		margin: 0 0 50px 0;
+	}
+
+
+	/*账户信息、账户余额*/
+	.user-section {
+		height: 178px;
 		position: relative;
-		.card-bg {
-			position:absolute;
+
+		.bg {
+			position: absolute;
 			left: 0;
 			top: 0;
 			width: 100%;
-			height: 100%;
 		}
-		.card-info {
-			position:relative;
+
+		.user-info-box {
+			height: 70px;
+			display: flex;
+			align-items: center;
+			position: relative;
 			z-index: 1;
-			.balance {
-				height: 65px;
-				width: 690rpx;
-				display: flex;
-				align-items: flex-end;
-				.icon {
-					width: 17px;
-					height: 16px;
-					margin: 24px 5px 24px 15px;
-					display: inline-block;
+			.portrait {
+				width: 60px;
+				height: 60px;
+				margin: 0 0 0 25px;
+				border: 1px solid #fff;
+				border-radius: 50%;
+			}
+
+			.info-box {
+				margin: 0 0 0 15px;
+				.info-box-user-name {
+					font-size: 17px;
+					margin: 0 0 5px 0;
 				}
-				.title {
-					display: inline-block;
-					width: 95px;
-					height: 19px;
-					margin: 23px 0;
-					font-size:15px;
-					color:#333333;
+				.info-box-user-id {
+					font-size: 14px;
 				}
-				.num {
-					display: inline-block;
-					overflow-x: hidden;
-					text-overflow: ellipsis;
-					height: 25px;
-					width: 225rpx;
-					font-size:21px;
-					font-weight:600;
-					color:#333333;
-					margin: 20px 0;
-				}
-				.cash {
-					display: inline-block;
-					width: 142rpx;
-					height: 27px;
-					margin: 19px;
-					border-radius:13px;
-					background: #F47A73;
-					line-height:27px;
-					text-align: center;
-					font-size:15px;
-					color:#FFFFFF;
+			}
+			.info-user-mark {
+				height: 60px;
+				margin: 0 0 0 30px;
+
+				.info-user-mark-icon {
+					width: 69px;
+					height: 22px;
+					margin: 30px 0 0 0;
 				}
 			}
 		}
 		.estimate {
+			position: relative;
 			height: 65px;
-			width: 690rpx;
+			width: 750rpx;
+			padding: 0 15px;
+			margin: 5px 0 0;
 			display: flex;
-			.last {
-				margin: 0 0 0 25px;
+			justify-content: space-around;
+			.estimate-item-box {
 				.num {
-					width: 125px;
 					overflow-x: hidden;
 					text-overflow: ellipsis;
-					font-size:18px;
-					font-weight:600;
-					color:#333333;
+					font-size: 16px;
+					font-weight: 600;
+					color: #333333;
+					text-align: center;
 				}
 				.title {
 					margin: 6px 0 0 0;
-					font-size:13px;
-					color: #666666;
-				}
-			}
-			.next {
-				margin: 0 0 0 55px;
-				.num {
-					width: 125px;
-					overflow-x: hidden;
-					text-overflow: ellipsis;
-					font-size:18px;
-					font-weight:600;
-					color:#333333;
-				}
-				.title {
-					margin: 6px 0 0 0;
-					font-size:13px;
+					font-size: 12px;
 					color: #666666;
 				}
 			}
 		}
+
+		.money-card {
+			width: 750rpx;
+			height: 49px;
+			padding: 5px 15px 0;
+			position: relative;
+			.card-bg {
+				position: absolute;
+				width: 750rpx;
+				height: 148px;
+				top: -30px;
+				left: 0;
+			}
+				.balance {
+					position: relative;
+					display: flex;
+					align-items: center;
+					.title {
+						display: inline-block;
+						margin: 0 0 0 15px;
+						width: 130px;
+						font-size: 15px;
+						color: rgba(255,255,255,0.8);
+					}
+					.num {
+						display: inline-block;
+						overflow-x: hidden;
+						text-overflow: ellipsis;
+						height: 25px;
+						font-size: 20px;
+						font-weight: bold;
+						color: rgba(255,255,255,0.9);
+					}
+					.cash {
+						display: inline-block;
+						width: 60px;
+						height: 24px;
+						margin: 0 15px 0 0;
+						border-radius: 14px;
+						border: 1px solid rgba(255,255,255,0.7);
+						line-height: 22px;
+						text-align: center;
+						font-size: 12px;
+						color: rgba(255,255,255,0.7);
+					}
+			}
+			.money-hint {
+				position: relative;
+				font-size: 12px;
+				height: 19px;
+				line-height: 30px;
+				margin: 0 0 0 15px;
+				color: rgba(255,255,255,0.6);
+			}
+		}
 	}
+	
+	/*藏品 收益订单团队*/
+	.project {
+		position: relative;
+		width: 750rpx;
+		height: 110px;
+		margin: 5px 0 0 0;
+		.project-bg {
+			position: absolute;
+			width: 750rpx
+		}
+		.project-box {
+			position: relative;
+			top: 45px;
+			width: 750rpx;
+			padding: 0 31px;
+			display: flex;
+			justify-content: space-between;
+			.project-item {
+				position: relative;
+				width: 67px;
+				height: 75px;
+				background-color: #FFFFFF;
+				box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+				border-radius: 8px;
+				.project-item-icon {
+					width: 27px;
+					height: 26px;
+					margin: 15px 20px 0;
+				}
+				.project-item-name {
+					font-size: 12px;
+					text-align: center;
+				}
+				
+			}
+		}
+	}
+	
+	
+	
+	
+	
 	.list-card {
 		height: 350px;
 		width: 690rpx;
 		margin: 0 auto;
+
 		.list-box {
 			font-size: 15px;
 			height: 45px;
 			padding: 0 15px;
 		}
-		.account-safe {
-			margin: 10px 0 0 0;
-			border-radius:8px;
-			background:#FFFFFF;
-		}
+
 		.message {
+			margin: 30px 0 0 0;
+			border-radius: 8px;
+			background: #FFFFFF;
+			box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
+		}
+
+		.loginout {
 			margin: 10px 0 0 0;
 			border-radius: 8px;
-			background:#FFFFFF;
-		}
-		.logout {
-			margin: 10px 0 0 0;
-			border-radius:8px;
-			background:#FFFFFF;
+			background: #FFFFFF;
+			box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	///等路过路过路过
 	.loginmm {
-	.img-box {
-		width: 750rpx;
-		text-align: center;
-		.img {
-			display: inline-block;
-			width: 143px;
-			height: 143px;
-			margin: 38px auto 40px;
+		.img-box {
+			width: 750rpx;
+			text-align: center;
+
+			.img {
+				display: inline-block;
+				width: 143px;
+				height: 143px;
+				margin: 38px auto 40px;
+			}
 		}
-	}
-	.phone-box {
-		display: flex;
-		align-items: center;
-		height: 32px;
-		width: 650rpx;
-		margin: 0 auto;
-		border-bottom: 1px solid #CCCCCC;
-		.phone-icon {
-			width: 20px;
-			display: inline-block;
-		}
-		.phone-area {
-			display: inline-block;
-			margin: 0 0 0 35px;
-		}
-		.phone-input {
-			display: inline-block;
-			margin: 0 0 0 13px;
-			font-size: 17px;
-		}
-	}
-	.code-box {
-		display: flex;
-		align-items: center;
-		height: 40px;
-		width: 650rpx;
-		margin: 16px auto 0;
-		.code-input-box {
+
+		.phone-box {
 			display: flex;
-			height: 40px;
 			align-items: center;
+			height: 32px;
+			width: 650rpx;
+			margin: 0 auto;
 			border-bottom: 1px solid #CCCCCC;
-			.code-icon {
+
+			.phone-icon {
 				width: 20px;
 				display: inline-block;
 			}
-			.code-input {
+
+			.phone-area {
 				display: inline-block;
 				margin: 0 0 0 35px;
+			}
+
+			.phone-input {
+				display: inline-block;
+				margin: 0 0 0 13px;
 				font-size: 17px;
 			}
 		}
-		.code-button {
-			display: inline-block;
-			width: 100px;
-			height: 40px;
-			text-align: center;
-			background:#F47A73;
-			border-radius: 22px;
-			line-height: 40px;
-			font-size: 14px;
-			color: #FFFFFF;
-		}
-	}
-	.login-button {
-		margin: 40px 0 0 0;
-	}
-	.huo {
-		visibility:hidden;
-		width: 100%;
-		text-align: center;
-		font-size: 13px;
-		color: #CCCCCC;
-		height: 28px;
-		margin: 26px 0 15px 0;
-	}
-	.wx-box {
-		visibility:hidden;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		.wx-icon {
-			display: inline-block;
-			width: 35px;
-		}
-		.wx-bt {
-			display: inline-block;
-			font-size: 13px;
-			color: #F47A73;
-			margin: 0 0 0 5px;
-		}
-	}
-	.note {
-		margin: 50px 0 0 0;
-	}
-	}
 
-	
+		.code-box {
+			display: flex;
+			align-items: center;
+			height: 40px;
+			width: 650rpx;
+			margin: 16px auto 0;
+
+			.code-input-box {
+				display: flex;
+				height: 40px;
+				align-items: center;
+				border-bottom: 1px solid #CCCCCC;
+
+				.code-icon {
+					width: 20px;
+					display: inline-block;
+				}
+
+				.code-input {
+					display: inline-block;
+					margin: 0 0 0 35px;
+					font-size: 17px;
+				}
+			}
+
+			.code-button {
+				display: inline-block;
+				width: 100px;
+				height: 40px;
+				text-align: center;
+				background: #F47A73;
+				border-radius: 22px;
+				line-height: 40px;
+				font-size: 14px;
+				color: #FFFFFF;
+			}
+		}
+
+		.login-button {
+			margin: 40px 0 0 0;
+		}
+
+		.huo {
+			visibility: hidden;
+			width: 100%;
+			text-align: center;
+			font-size: 13px;
+			color: #CCCCCC;
+			height: 28px;
+			margin: 26px 0 15px 0;
+		}
+
+		.wx-box {
+			visibility: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.wx-icon {
+				display: inline-block;
+				width: 35px;
+			}
+
+			.wx-bt {
+				display: inline-block;
+				font-size: 13px;
+				color: #F47A73;
+				margin: 0 0 0 5px;
+			}
+		}
+
+		.note {
+			margin: 50px 0 0 0;
+		}
+	}
 </style>

@@ -4,6 +4,7 @@
 		 class="ai-navbar__content">
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="ai-navbar__header ai-navbar__content_view">
+				<image class="ai-navbar-bg" v-if="backgroundImg" :src="backgroundImg" mode="widthFix"></image>
 				<view @tap="onClickLeft" :style="{width: leftWidth + 'px'}" class="ai-navbar__header-btns ai-navbar__header-btns-left ai-navbar__content_view">
 					<view class="ai-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
@@ -83,6 +84,10 @@
 				type: String,
 				default: "#000000"
 			},
+			backgroundImg: {
+				type: String,
+				default: null
+			},
 			backgroundColor: {
 				type: String,
 				default: "#FFFFFF"
@@ -117,7 +122,7 @@
 </script>
 
 <style lang="scss" scoped>
-	$nav-height: 80px;
+	$nav-height: 64px;
 	.ai-nav-bar-text {
 		/* #ifdef APP-PLUS */
 		font-size: 34rpx;
@@ -125,6 +130,10 @@
 		/* #ifndef APP-PLUS */
 		font-size: $uni-font-size-lg;
 		/* #endif */
+	}
+	.ai-navbar-bg {
+		position: absolute;
+		width: 750rpx;
 	}
 	.ai-nav-bar-right-text {
 		font-size: $uni-font-size-base;
@@ -158,7 +167,6 @@
 		width: 750rpx;
 		height: $nav-height;
 		line-height: $nav-height;
-		padding: 30px 0 0 0;
 		font-size: 16px;
 		// background-color: #ffffff;
 	}
