@@ -30,12 +30,12 @@
 				default: "ai-button-redbg"
 			},
 			width: {
-				type: Number,
-				default: 690
+				type: String,
+				default: "690"
 			},
 			shadowWidth: {
-				type: Number,
-				default: 610
+				type: String,
+				default: "610"
 			}
 		},
 		methods: {

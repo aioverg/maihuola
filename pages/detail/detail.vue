@@ -80,6 +80,7 @@
 </template>
 
 <script>
+	import aiNavbar from "@/components/ai-navbar/ai-navbar.vue"
 	import aiButton from '@/components/ai-button/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
@@ -87,6 +88,7 @@
 	//详情页
 	export default {
 		components: {
+			aiNavbar,
 			aiButton,
 			uniPopUp,
 			uniPopupMessage,

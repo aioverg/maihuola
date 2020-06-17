@@ -11,9 +11,7 @@
 			<block slot="right">
 				<view class="message-box">
 					<image class="input-right" mode="widthFix" src="../../static/icon/message01.png"></image>
-					
-						<text class="message-hint"></text>
-					
+					<text class="message-hint"></text>
 				</view>
 			</block>
 		</ai-navbar>
@@ -380,10 +378,9 @@
 		width: 20px;
 	}
 	.message-box {
-		width: 20px;
+		width: 15px;
 		position: relative;
 	}
-
 	.message-hint {
 		width: 8px;
 		height: 8px;
