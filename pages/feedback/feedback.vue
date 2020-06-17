@@ -57,7 +57,7 @@
 							isClick:false
 						})
 						setTimeout(() => {
-							this.$aiRouter.navTabBar('/pages/user/user')
+							this.$aiRouter.navTabBar('pages/tabbar/user/user')
 						},2000)
 					}
 				})

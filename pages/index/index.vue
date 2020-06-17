@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true">
+		<ai-navbar fixed="true">
 		    <block slot="left">
 			    <image class="input-left" mode="widthFix" src="../../static/icon/maihuola02.png"></image>
 		    </block>
@@ -14,7 +14,7 @@
 					<text class="message-hint"></text>
 				</view>
 			</block>
-		</uni-nav-bar>
+		</ai-navbar>
 		<!-- 轮播图 -->
 		<view class="banner-box">
 			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-	import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
+	import aiNavbar from "@/components/ai-navbar/ai-navbar.vue"
 	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
@@ -77,7 +77,7 @@
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
-			uniNavBar,
+			aiNavbar,
 			uniSwiperDot,
 			mixLoading,
 			aiGuseeCard,
