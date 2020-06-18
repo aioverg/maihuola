@@ -69,7 +69,7 @@
 						this.$aiGlobal.aiPopupMessage.apply(this,['success','绑定成功'])
 						this.$store.commit('setAlipay', 1)
 						setTimeout(() => {
-							this.$aiRouter.navTabBar('/pages/tabbar/user/user')
+							this.$aiRouter.navTabBar('/pages/tabbar/user')
 						},2000)
 					}else{
 						this.$aiGlobal.aiPopupMessage.apply(this,['err','绑定失败'])

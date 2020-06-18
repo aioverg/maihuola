@@ -1,14 +1,11 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="手机登录"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-			:navIndex="true"
-		/>
+		<uni-nav-bar fixed="true" left-width="150" right-icon="help" @clickRight="navMessage">
+			<block slot="left">
+				<image @click="navBarBack" style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
+			    <view style="font-size: 20px; font-weight:bold;">登录</view>
+			</block>
+		</uni-nav-bar>
 		<view class="img-box">
 			<image class="img" src="/static/img/icon-mhl-01.png"></image>
 		</view>

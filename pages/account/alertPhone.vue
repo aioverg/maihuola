@@ -79,7 +79,7 @@
 					}else{
 						this.$aiGlobal.aiPopupMessage.apply(this,['success','修改成功'])
 						uni.switchTab({
-						    url: '/pages/tabbar/user/user'
+						    url: '/pages/tabbar/user'
 						});
 					}
 				})

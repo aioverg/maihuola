@@ -1,7 +1,7 @@
 //商品卡片组件
 <template>
 	<view class="ai-guess-card">
-		<image class="zhutui" v-if="recommend" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
+		<image class="zhutui" v-if="data.tag == '主推'" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
 		<view class="ai-guess-image-box">
 			<image class="ai-guess-image" mode="widthFix" :src="data.pic"></image>
 		</view>

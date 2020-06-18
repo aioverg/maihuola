@@ -1,21 +1,16 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="微信登录"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" left-width="150" right-icon="help" @clickRight="navMessage">
+			<block slot="left">
+				<image @click="navBarBack" style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
+			    <view style="font-size: 20px; font-weight:bold;">商品详情</view>
+			</block>
+		</uni-nav-bar>
 		<view class="img-box">
 			<image class="img" src="/static/img/icon-mhl-01.png"></image>
 		</view>
 		<view>
 			<ai-button @eventClick="login" btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
-		</view>
-		<view class="to-phone" @click="navTo('/pages/login/loginPhone?'+'page_id='+pageId+'&'+'page_prams='+pageParms)">
-			或手机快速登录
 		</view>
 		<view class="note">
 			<ai-login-hint></ai-login-hint>
@@ -24,7 +19,7 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button'
+	import aiButton from '@/components/ai-button/ai-button.vue'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
@@ -79,7 +74,7 @@
 
 <style lang="scss">
 	page {
-		background:rgba(255,255,255,0);
+		background: #FFFFFF;
 	}
 	.img-box {
 		width: 750rpx;
@@ -91,13 +86,6 @@
 			height: 286rpx;
 			margin: 88px auto;
 		}
-	}
-	.to-phone {
-		margin: 26px 0 0;
-		text-align: center;
-		font-size: 13px;
-		color: #CCCCCC;
-		text-decoration-line: underline;
 	}
 	.note {
 		position: absolute;

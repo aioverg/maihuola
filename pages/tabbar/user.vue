@@ -70,7 +70,7 @@
 						<view class="info-box-user-id">{{userId}}</view>
 					</view>
 					<view class="info-user-mark">
-						<image class="info-user-mark-icon" src="../../../static/icon/icon-mark-01.png"></image>
+						<image class="info-user-mark-icon" src="/static/icon/icon-mark-01.png"></image>
 					</view>
 				</view>
 				<view class="estimate">
@@ -102,9 +102,9 @@
 			
 			<!--藏品收益订单团队-->
 			<view class="project">
-				<image class="project-bg" src="../../../static/icon/bg-user-03.png" mode="widthFix"></image>
+				<image class="project-bg" src="/static/icon/bg-user-03.png" mode="widthFix"></image>
 				<view class="project-box">
-					<view class="project-item">
+					<view class="project-item" @click="navTo('/pages/detail/collect')">
 						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
 						<view class="project-item-name">藏品</view>
 					</view>
