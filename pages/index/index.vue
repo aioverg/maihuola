@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<ai-navbar fixed="true">
+		<uni-nav-bar fixed="true">
 		    <block slot="left">
 			    <image class="input-left" mode="widthFix" src="../../static/icon/maihuola02.png"></image>
 		    </block>
@@ -14,7 +14,7 @@
 					<text class="message-hint"></text>
 				</view>
 			</block>
-		</ai-navbar>
+		</uni-nav-bar>
 		<!-- 轮播图 -->
 		<view class="banner-box">
 			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
@@ -388,12 +388,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		/* #ifdef APP-PLUS */
-		top: 7px;
-		/* #endif */
-		/* #ifdef H5 */
-		top: 15px;
-		/* #endif */
+		top: 25px;
 		left: 15px;
 	}
 	.input-view {

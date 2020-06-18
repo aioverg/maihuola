@@ -49,17 +49,18 @@
 
 		<view v-if="loginState">
 			<!--顶部-->
-			<ai-navbar fixed="true" background-img="/static/icon/navbar-bg-01.png">
+			<uni-nav-bar fixed="true" backgroundImg="/static/icon/navbar-bg-01.png">
 				<block slot="right">
 					<view class="message-box" style="width: 20px; position: relative;" >
 						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
 						<text class="message-hint"></text>
 					</view>
 				</block>
-			</ai-navbar>
+			</uni-nav-bar>
+			<image class="" style="position: fixed; width: 750rpx;" class="bg" src="/static/icon/bg-user-01.png" mode="widthFix"></image>
 			<!--账户信息账户余额-->
 			<view class="user-section">
-				<image class="bg" src="/static/icon/bg-user-01.png" mode="widthFix"></image>
+				<!--<image class="bg" style="z-index: 1010;" src="/static/icon/bg-user-01.png" mode="widthFix"></image>-->
 				<view class="user-info-box">
 					<view class="portrait-box">
 						<image class="portrait" :src="portrait"></image>
@@ -399,12 +400,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		/* #ifdef APP-PLUS */
-		top: 7px;
-		/* #endif */
-		/* #ifdef H5 */
-		top: 15px;
-		/* #endif */
+		top: 25px;
 		left: 15px;
 	}
 
@@ -442,8 +438,9 @@
 		.bg {
 			position: absolute;
 			left: 0;
-			top: 0;
+			top: -80px;
 			width: 100%;
+			
 		}
 
 		.user-info-box {
@@ -455,13 +452,13 @@
 			.portrait {
 				width: 60px;
 				height: 60px;
-				margin: 0 0 0 25px;
+				margin: 0 0 0 50rpx;
 				border: 1px solid #fff;
 				border-radius: 50%;
 			}
 
 			.info-box {
-				margin: 0 0 0 15px;
+				margin: 0 0 0 30rpx;
 				.info-box-user-name {
 					font-size: 17px;
 					margin: 0 0 5px 0;
@@ -472,8 +469,12 @@
 			}
 			.info-user-mark {
 				height: 60px;
-				margin: 0 0 0 30px;
-
+				/*  #ifdef  APP-PLUS  */
+				margin: 0 0 0 120rpx;
+				/*  #endif  */
+				/*  #ifdef  H5  */
+				margin: 0 0 0 60rpx;
+				/*  #endif  */
 				.info-user-mark-icon {
 					width: 69px;
 					height: 22px;
@@ -522,9 +523,10 @@
 					position: relative;
 					display: flex;
 					align-items: center;
+					justify-content: space-between;
+					padding: 0 30rpx;
 					.title {
 						display: inline-block;
-						margin: 0 0 0 15px;
 						width: 130px;
 						font-size: 15px;
 						color: rgba(255,255,255,0.8);
@@ -541,11 +543,10 @@
 					.cash {
 						display: inline-block;
 						width: 60px;
-						height: 24px;
-						margin: 0 15px 0 0;
+						height: 26px;
 						border-radius: 14px;
 						border: 1px solid rgba(255,255,255,0.7);
-						line-height: 22px;
+						line-height: 24px;
 						text-align: center;
 						font-size: 12px;
 						color: rgba(255,255,255,0.7);
@@ -556,7 +557,7 @@
 				font-size: 12px;
 				height: 19px;
 				line-height: 30px;
-				margin: 0 0 0 15px;
+				margin: 0 0 0 30rpx;
 				color: rgba(255,255,255,0.6);
 			}
 		}

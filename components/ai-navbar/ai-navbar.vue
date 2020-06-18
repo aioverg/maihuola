@@ -1,9 +1,11 @@
 <template>
 	<view class="uni-navbar">
-		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
+		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" 
 		 class="uni-navbar__content">
 			<uni-status-bar v-if="statusBar" />
-			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
+			<image src="../../static/icon/bg-user-01.png"></image>
+			<view :style="{ color: color}" class="uni-navbar__header uni-navbar__content_view">
+				
 				<view @tap="onClickLeft" :style="{width: leftWidth + 'px'}" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
