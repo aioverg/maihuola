@@ -17,6 +17,8 @@ import aiNavbar from "@/components/ai-navbar"
 import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 //引入tabbar
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
+//引入图标
+import uniIcons from "@/components/uni-icons/uni-icons.vue"
 
 Vue.component('ai-navbar', aiNavbar)
 Vue.component('ai-popup-message', aiPopupMessage)

@@ -1,9 +1,9 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" left-width="150" right-icon="help" @clickRight="navMessage">
+		<uni-nav-bar fixed="true" left-width="150" right-icon="help">
 			<block slot="left">
-				<image @click="navBarBack" style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-			    <view style="font-size: 20px; font-weight:bold;">商品详情</view>
+				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
+			    <view style="font-size: 20px; font-weight:bold;">登录</view>
 			</block>
 		</uni-nav-bar>
 		<view class="img-box">

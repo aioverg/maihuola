@@ -173,6 +173,10 @@
             "path" : "pages/detail/collect",
             "style" : {}
         }
+        ,{
+            "path" : "pages/userinfo/earn",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
