@@ -112,7 +112,7 @@
 						<image class="project-item-icon" src="/static/icon/coin-01.png"></image>
 						<view class="project-item-name">收益</view>
 					</view>
-					<view class="project-item">
+					<view class="project-item" @click="navTo('/pages/userinfo/order')">
 						<image class="project-item-icon" src="/static/icon/text-01.png"></image>
 						<view class="project-item-name">订单</view>
 					</view>

@@ -1,0 +1,188 @@
+<template>
+	<view>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" left-width="150">
+			<block>
+				<view>
+					<view style="display: inline-block;">我的订单</view>
+					<view style="display: inline-block;">团队定单</view>
+				</view>
+			</block>
+			<block slot="right">
+				<image @click="datePicker" src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				<uni-icons @click="help" type="help" color="#333333" size="24"></uni-icons>
+			</block>
+		</uni-nav-bar>
+		<view class="oder-body">
+			<view class="status-box">
+				<view :class="index == selStatusIndex ? 'sel-status' : ''" v-for="(item, index) in oderStatus" :key="item.id" @click="clickStatus(item.id, index)">
+					{{item.name}}
+				</view>
+			</view>
+			<view class="oder-list">
+				<view class="ol-item" v-for="(item, index) in olList" :key="index">
+					<image class="ol-item-img" :src="item.pic"></image>
+					<view class="ol-item-info">
+						<view class="ol-item-title">{{item.title}}</view>
+						<view class="ol-item-one">
+							<view class="ol-num">订单号：{{item.oderNum}}</view>
+							<view class="ol-money">¥{{item.oderMoney}}</view>
+						</view>
+						<view class="ol-item-two">
+							<view class="ol-date">{{item.oderDate}}</view>
+							<view class="ol-status" :class="item.oderStatus == '已失效' ? 'ol-status-color' : '' ">{{item.oderStatus}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				oderStatus: [
+					{
+						id: 1,
+						name: "全部"
+					},
+					{
+						id: 2,
+						name: "已付款"
+					},
+					{
+						id: 3,
+						name: "已收货"
+					},
+					{
+						id: 4,
+						name: "已结算"
+					},
+					{
+						id: 5,
+						name: "已失效"
+					},
+				],
+				selStatusIndex: 0,
+				olList: [
+					{
+						pic: "/static/mock/mock-01.png",
+						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
+						oderNum: "202020202020220",
+						oderMoney: "7.96",
+						oderDate: "2020-04-09 11:29:28",
+						oderStatus: "已付款"
+					},
+					{
+						pic: "/static/mock/mock-01.png",
+						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
+						oderNum: "202020202020220",
+						oderMoney: "7.96",
+						oderDate: "2020-04-09 11:29:28",
+						oderStatus: "已收货"
+					},
+					{
+						pic: "/static/mock/mock-01.png",
+						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
+						oderNum: "202020202020220",
+						oderMoney: "7.96",
+						oderDate: "2020-04-09 11:29:28",
+						oderStatus: "已结算"
+					},
+					{
+						pic: "/static/mock/mock-01.png",
+						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
+						oderNum: "202020202020220",
+						oderMoney: "7.96",
+						oderDate: "2020-04-09 11:29:28",
+						oderStatus: "已失效"
+					}
+				]
+			}
+		},
+		methods: {
+			clickStatus(id, index){
+				this.selStatusIndex = index
+				console.log(id)
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.oder-body {
+		width: 750rpx;
+		padding: 10px 15px 30px 15px;
+	}
+	
+	/*订单状态选项，已付款、已收货等*/
+	.status-box {
+		height: 45px;
+		padding: 0 14px;
+		border-radius: 8px;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 15px;
+		color: #999999;
+		.sel-status {
+			color: #333333;
+			font-weight: bold;
+		}
+	}
+	
+	/*订单列表*/
+	.ol-item {
+		padding: 8px 15px 8px 8px;
+		margin: 10px 0 0 0;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
+		display: flex;
+		.ol-item-img {
+			width: 73px;
+			height: 73px;
+			margin: 0 10rpx 0 0;
+		}
+		.ol-item-title {
+			width: 480rpx;
+			font-size: 13px;
+			height: 34px;
+			line-height: 17px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.ol-item-one {
+			margin: 3px 0 0 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			line-height: 19px;
+			.ol-num {
+				font-size: 11px;
+				color: #999999;
+			}
+			.ol-money {
+				font-size: 15px;
+				color: #FF716E;
+			}
+		}
+		.ol-item-two {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.ol-date {
+				font-size: 11px;
+				color: #999999;
+			}
+			.ol-status {
+				font-size: 11px;
+				color: #999999;
+			}
+			.ol-status-color {
+				color: #FF1968;
+			}
+		}
+	}
+</style>

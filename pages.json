@@ -185,6 +185,10 @@
             "path" : "pages/userinfo/earnDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/userinfo/order",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
