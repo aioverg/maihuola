@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" left-width="150" right-icon="help">
+		<uni-nav-bar fixed="true" left-width="150" right-icon="help" @clickRight="navTo('/pages/help/earnRule')">
 			<block slot="left">
 				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
 			    <view style="font-size: 20px; font-weight:bold;">我的收益</view>
@@ -19,7 +19,7 @@
 							<view class="earn-source-overview-item-title">
 								<view class="title-mark"></view>
 								<view class="title-text">今日收益</view>
-								<uni-icons class="title-help" type="help" color="#CCCCCC" size="19"></uni-icons>
+								<uni-icons class="title-help" @click="itemHelp('today')" type="help" color="#CCCCCC" size="19"></uni-icons>
 							</view>
 							<view class="earn-source-overview-item-earn">
 								<view class="earn-sum">25456.80</view>
@@ -43,7 +43,7 @@
 							<view class="earn-source-overview-item-title">
 								<view class="title-mark"></view>
 								<view class="title-text">昨日收益</view>
-								<uni-icons class="title-help" type="help" color="#CCCCCC" size="19"></uni-icons>
+								<uni-icons class="title-help" @click="itemHelp('yestoday')" type="help" color="#CCCCCC" size="19"></uni-icons>
 							</view>
 							<view class="earn-source-overview-item-earn">
 								<view class="earn-sum">25456.80</view>
@@ -67,7 +67,7 @@
 							<view class="earn-source-overview-item-title">
 								<view class="title-mark"></view>
 								<view class="title-text">月度收益</view>
-								<uni-icons class="title-help" type="help" color="#CCCCCC" size="19"></uni-icons>
+								<uni-icons class="title-help" @click="itemHelp('month')" type="help" color="#CCCCCC" size="19"></uni-icons>
 							</view>
 							<view class="earn-source-overview-item-earn">
 								<view class="earn-sum">25456.80</view>
@@ -89,30 +89,76 @@
 				</view>
 			</view>
 			<view class="earn-detail">
-				<view class="earn-detail-item">
-					<ai-list-cell title="收益明细" dashed="dashed"></ai-list-cell>
+				<view class="earn-detail-item" @click="navTo('/pages/userinfo/earnDetail')">
+					<ai-list-cell title="收益结算明细" dashed="dashed"></ai-list-cell>
 				</view>
 				<view class="earn-detail-item">
 					<ai-list-cell title="提现记录"></ai-list-cell>
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="earnItemHelp" type="dialog">
+			<ai-popup-dialog type="dialog" :cancelShow="false" btname="我知道了" :message="HelpMessage" :before-close="true" @confirm="close"></ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiListCell from '@/components/ai-list-cell'
+	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+	import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
 	export default {
 		components:{
-			aiListCell
+			aiListCell,
+			uniPopUp,
+			aiPopupDialog
 		},
 		data() {
 			return {
-				
+				HelpMessage: []
 			}
 		},
 		methods: {
-			
+			navTo(url){
+				this.$aiRouter.navTo(url)
+			},
+			itemHelp(paras){
+				if(paras == "today" || paras == "yestoday"){
+					this.HelpMessage = [
+						{
+							title: "预估收益：",
+							content: "付款订单的收益总和"
+						},
+						{
+							title: "销售额：",
+							content: "付款订单的实付金额总和"
+						},
+						{
+							title: "订单数：",
+							content: "付款的订单笔数，包括失效订单数"
+						}
+					]
+					this.$refs.earnItemHelp.open()
+					return
+				}
+				if(paras == "month"){
+					this.HelpMessage = [
+						{
+							title: "预估收益：",
+							content: "付款订单的收益总和"
+						},
+						{
+							title: "结算收益：",
+							content: "确认收货的订单收益总和，本月25日可提现"
+						}
+					]
+					this.$refs.earnItemHelp.open()
+					return
+				}
+			},
+			close(done){
+				done()
+			}
 		}
 	}
 </script>

@@ -177,6 +177,14 @@
             "path" : "pages/userinfo/earn",
             "style" : {}
         }
+        ,{
+            "path" : "pages/help/earnRule",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/userinfo/earnDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
