@@ -19,10 +19,18 @@ import uniLoadMore from "@/components/uni-load-more/uni-load-more.vue"
 import uniNavBar from "@/components/uni-nav-bar/uni-nav-bar.vue"
 //引入图标
 import uniIcons from "@/components/uni-icons/uni-icons.vue"
+//引入遮罩层
+import uniPopUp from '@/components/uni-popup/uni-popup.vue'
+//引入弹窗
+import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
 
 Vue.component('ai-navbar', aiNavbar)
 Vue.component('ai-popup-message', aiPopupMessage)
 Vue.component('uni-load-more', uniLoadMore)
+Vue.component('uni-nav-bar', uniNavBar)
+Vue.component('uni-icons', uniIcons)
+Vue.component('uni-popup', uniPopUp)
+Vue.component('ai-popup-dialog', aiPopupDialog)
 
 
 const msg = (title, duration=1500, mask=false, icon='none')=>{

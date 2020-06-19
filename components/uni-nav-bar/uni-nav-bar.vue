@@ -25,7 +25,7 @@
 				</view>
 				<view :class="title.length ? 'uni-navbar__header-btns-right' : ''" @tap="onClickRight" class="uni-navbar__header-btns uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="rightIcon.length">
-						<uni-icons :color="color" :type="rightIcon" size="24" />
+						<uni-icons style="margin: 0 0 0 20px;" :color="color" :type="rightIcon" size="24" />
 					</view>
 					<!-- 优先显示图标 -->
 					<view class="uni-navbar-btn-text uni-navbar__content_view" v-if="rightText.length && !rightIcon.length">
@@ -174,7 +174,7 @@
 		display: flex;
 		/* #endif */
 		flex-wrap: nowrap;
-		width: 120rpx;
+		width: 160rpx;
 		padding: 0 6px;
 		justify-content: center;
 		align-items: center;

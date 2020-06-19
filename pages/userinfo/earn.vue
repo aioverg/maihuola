@@ -92,13 +92,13 @@
 				<view class="earn-detail-item" @click="navTo('/pages/userinfo/earnDetail')">
 					<ai-list-cell title="收益结算明细" dashed="dashed"></ai-list-cell>
 				</view>
-				<view class="earn-detail-item">
+				<view class="earn-detail-item" @click="navTo('/pages/withdraw/record')">
 					<ai-list-cell title="提现记录"></ai-list-cell>
 				</view>
 			</view>
 		</view>
 		<uni-popup ref="earnItemHelp" type="dialog">
-			<ai-popup-dialog type="dialog" :cancelShow="false" btname="我知道了" :message="HelpMessage" :before-close="true" @confirm="close"></ai-popup-dialog>
+			<ai-popup-dialog :cancelShow="false" btname="我知道了" :message="HelpMessage" @confirm="close"></ai-popup-dialog>
 		</uni-popup>
 	</view>
 </template>
@@ -158,6 +158,9 @@
 			},
 			close(done){
 				done()
+			},
+			navTo(url){
+				this.$aiRouter.navTo(url)
 			}
 		}
 	}

@@ -45,8 +45,8 @@
 				default: "/static/icon/popup-bg01.png"
 			},
 			message: {
-				type: Object,
-				default: {}
+				type: Array,
+				default: []
 			},
 			value: {
 				type: [String, Number],
@@ -73,23 +73,10 @@
 				default: true
 			}
 		},
-		data() {
-			return {
-				dialogType: 'error',
-				focus: false,
-				val: ""
-			}
-		},
 		inject: ['popup'],
 		created() {
 			// 对话框遮罩不可点击
 			this.popup.mkclick = false
-			if (this.mode === 'input') {
-				this.dialogType = 'info'
-				this.val = this.value
-			} else {
-				this.dialogType = this.type
-			}
 		},
 		mounted() {
 			this.focus = true
