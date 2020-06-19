@@ -8,8 +8,8 @@
 				</view>
 			</block>
 			<block slot="right">
-				<image @click="datePicker" src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
-				<uni-icons @click="help" type="help" color="#333333" size="24"></uni-icons>
+				<image src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				<uni-icons type="help" color="#333333" size="24"></uni-icons>
 			</block>
 		</uni-nav-bar>
 		<view class="oder-body">

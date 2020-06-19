@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true">
 		    <block slot="left">
-			    <image class="input-left" mode="widthFix" src="../../static/icon/maihuola02.png"></image>
+			    <image class="input-left" mode="widthFix" src="/static/icon/maihuola02.png"></image>
 		    </block>
 			<view class="input-view" @click="navTo('/pages/search/search')">
 				<image class="input-uni-icon" mode="widthFix" src="../../static/icon/search01.png"></image>
@@ -372,7 +372,7 @@
 	}
 	/*顶部tabbar，搜索栏*/
 	.input-left {
-		width: 138px
+		width: 70px
 	}
 	.input-right {
 		width: 20px;
@@ -380,6 +380,7 @@
 	.message-box {
 		width: 15px;
 		position: relative;
+		margin: 0 15px 0 0;
 	}
 	.message-hint {
 		width: 8px;
@@ -401,7 +402,6 @@
 		border-radius: 15px;
 		padding: 0 15px;
 		flex-wrap: nowrap;
-		margin: 7px 0;
 		line-height: 35px;
 	}
 	.input-uni-icon {

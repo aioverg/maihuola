@@ -2,11 +2,12 @@
 	<view class="uni-navbar">
 		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
 		 class="uni-navbar__content">
-		 <image v-if="backgroundImg" style="width: 750rpx; position: absolute;" :src="backgroundImg" mode="widthFix"></image>
+		    <!--背景图片-->
+		    <image v-if="backgroundImg" style="width: 750rpx; position: absolute;" :src="backgroundImg" mode="widthFix"></image>
+		    <!--uni-status-bar组件-->
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
-				
-				<view @tap="onClickLeft" :style="{width: leftWidth + 'px'}" class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
+				<view @tap="onClickLeft"  class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view class="uni-navbar__content_view" v-if="leftIcon.length">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
@@ -16,7 +17,7 @@
 					</view>
 					<slot name="left" />
 				</view>
-				<view class="uni-navbar__header-container uni-navbar__content_view">
+				<view class="uni-navbar__content_view">
 					<view class="uni-navbar__header-container-inner uni-navbar__content_view" v-if="title.length">
 						<text class="uni-nav-bar-text" :style="{color: color }">{{ title }}</text>
 					</view>
@@ -61,10 +62,6 @@
 				type: String,
 				default: ""
 			},
-			leftWidth: {
-				type: String,
-				default: "75"
-			},
 			rightText: {
 				type: String,
 				default: ""
@@ -85,22 +82,27 @@
 				type: String,
 				default: "#000000"
 			},
+			//背景图片
 			backgroundImg: {
 				type: String,
 				default: ""
 			},
+			//背景颜色
 			backgroundColor: {
 				type: String,
 				default: "#FFFFFF"
 			},
+			//uni-status-bar组件
 			statusBar: {
 				type: [Boolean, String],
 				default: false
 			},
+			//底部阴影
 			shadow: {
 				type: [String, Boolean],
 				default: false
 			},
+			//边框颜色
 			border: {
 				type: [String, Boolean],
 				default: true
@@ -148,63 +150,46 @@
 	}
 
 	.uni-navbar__content_view {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
 		align-items: center;
 		flex-direction: row;
 		// background-color: #FFFFFF;
 	}
 
 	.uni-navbar__header {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
 		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
 		width: 750rpx;
 		height: $nav-height;
-		line-height: $nav-height;
+		//line-height: $nav-height;
 		padding: 30px 0 0 0;
 		font-size: 16px;
 		// background-color: #ffffff;
 	}
 
 	.uni-navbar__header-btns {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
 		flex-wrap: nowrap;
-		width: 160rpx;
 		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
 	}
 
 	.uni-navbar__header-btns-left {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
-		width: 150rpx;
 		justify-content: flex-start;
 	}
 
 	.uni-navbar__header-btns-right {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
-		width: 150rpx;
 		padding-right: 30rpx;
 		justify-content: flex-end;
 	}
 
-	.uni-navbar__header-container {
-		flex: 1;
-	}
-
 	.uni-navbar__header-container-inner {
-		/* #ifndef APP-NVUE */
 		display: flex;
-		/* #endif */
 		flex: 1;
 		align-items: center;
 		justify-content: center;
@@ -222,9 +207,7 @@
 	}
 
 	.uni-navbar--shadow {
-		/* #ifndef APP-NVUE */
 		box-shadow: 0 1px 6px #ccc;
-		/* #endif */
 	}
 
 	.uni-navbar--border {
