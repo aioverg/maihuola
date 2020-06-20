@@ -5,7 +5,7 @@
 			<view v-if="iconSrc" class="ai-popup-logo">
 				<image class="ai-popup-logo-icon" mode="widthFix" :src="iconSrc"></image>
 			</view>
-			<view v-if="message" class="ai-popup-message-box" v-for="(item, index) of message">
+			<view v-if="message" class="ai-popup-message-box" v-for="(item, index) of message" :key="index">
 				<view class="ai-popup-title">{{item.title}}</view>
 				<view class="ai-popup-content">{{item.content}}</view>
 			</view>

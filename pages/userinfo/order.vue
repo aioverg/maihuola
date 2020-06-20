@@ -1,20 +1,27 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" left-width="150">
+		<uni-nav-bar fixed="true">
+			<block slot="left">
+				<view style="width: 150rpx;">
+					<uni-icons  type="arrowleft" size="24"></uni-icons>
+				</view>
+			</block>
 			<block>
-				<view>
-					<view style="display: inline-block;">我的订单</view>
-					<view style="display: inline-block;">团队定单</view>
+				<view class="nav-sel">
+					<view class="ns-my" @click="selCategory('my')" :class="selTag == 'my' ? 'sel-my' : ''">我的订单</view>
+					<view class="ns-group" @click="selCategory('order')" :class="selTag == 'order' ? 'sel-group' : ''">团队定单</view>
 				</view>
 			</block>
 			<block slot="right">
-				<image src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
-				<uni-icons type="help" color="#333333" size="24"></uni-icons>
+				<view style="width: 150rpx; padding: 0 10px 0 0; text-align: right;">
+				    <image src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				    <uni-icons @click="help" type="help" color="#333333" size="24"></uni-icons>
+				</view>
 			</block>
 		</uni-nav-bar>
 		<view class="oder-body">
 			<view class="status-box">
-				<view :class="index == selStatusIndex ? 'sel-status' : ''" v-for="(item, index) in oderStatus" :key="item.id" @click="clickStatus(item.id, index)">
+				<view :class="index == selStatusIndex ? 'sel-status' : ''" v-for="(item, index) in oderStatus" :key="item.id" @click="selStatus(item.id, index)">
 					{{item.name}}
 				</view>
 			</view>
@@ -35,6 +42,9 @@
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="orderDetailHelp" type="dialog">
+			<ai-popup-dialog :cancelShow="false" btname="我知道了" :message="HelpMessage" @confirm="close"></ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -42,6 +52,17 @@
 	export default {
 		data() {
 			return {
+				selTag: "my",
+				HelpMessage: [
+					{
+						title: "已结算：",
+						content: "即已收货的订单且没有产生售后维权的订单"
+					},
+					{
+						title: "已失效：",
+						content: "退款失效订单，订单系统会自动从余额 扣除佣金；"
+					}
+				],
 				oderStatus: [
 					{
 						id: 1,
@@ -102,9 +123,20 @@
 			}
 		},
 		methods: {
-			clickStatus(id, index){
+			//选择我的订单或团队订单
+			selCategory(name){
+				this.selTag = name
+			},
+			//选择订单状态
+			selStatus(id, index){
 				this.selStatusIndex = index
 				console.log(id)
+			},
+			help(){
+				this.$refs.orderDetailHelp.open()
+			},
+			close(done){
+				done()
 			}
 		}
 	}
@@ -115,7 +147,48 @@
 		width: 750rpx;
 		padding: 10px 15px 30px 15px;
 	}
-	
+	/*顶部tabbar*/
+	.nav-sel {
+		width: 380rpx;
+		position: relative;
+		height: 35px;
+		line-height: 35px;
+		border: 1px solid #FFA570;
+		
+		border-radius: 17px;
+		.ns-my {
+			position: absolute;
+			display: inline-block;
+			font-size: 15px;
+			width: 200rpx;
+			height: 33px;
+			line-height: 33px;
+			text-align: center;
+			border-radius: 17px;
+		}
+		.ns-group {
+			display: inline-block;
+			position: absolute;
+			background-color: #FFFFFF;
+			font-size: 15px;
+			width: 200rpx;
+			height: 33px;
+			line-height: 33px;
+			text-align: center;
+			right: 0;
+			border-radius: 17px;
+		}
+		.sel-my {
+			z-index: 100;
+			font-weight: bold;
+			background-color: #FFA570;
+		}
+		.sel-group {
+			z-index: 100;
+			font-weight: bold;
+			background-color: #FFA570;
+		}
+	}
 	/*订单状态选项，已付款、已收货等*/
 	.status-box {
 		height: 45px;

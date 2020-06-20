@@ -25,7 +25,6 @@
 				</swiper>
 			</uni-swiper-dot>
 		</view>
-
 		<!--分类-->
 		<view class="sort-section">
 			<view class="sort-items">
