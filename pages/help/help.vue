@@ -1,17 +1,14 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="帮助"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
-		
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" rightText="关闭" @clickRight="navTabBar('/pages/tabbar/user')" ></uni-nav-bar>
+		<view class="help-body">
 		<view class="docunemt">
-			<view class="title">{{question}}</view>
+			<view class="title">
+				<view class="long-string"></view>
+			    <view>{{question}}</view>
+			</view>
 			<view class="content">{{answer}}</view>
+		</view>
 		</view>
 	</view>
 </template>
@@ -32,28 +29,45 @@
 			this.answer = helpData[option.id].content
 		},
 		methods: {
+			navTabBar(url){
+				this.$aiRouter.navTabBar(url)
+			}
+			
 		}
 	}
 </script>
 
 <style lang="scss">
-	page {
-		background: #FFFFFF;
+	.help-body {
+		width: 750rpx;
+		padding: 0 30rpx;
 	}
 	.docunemt {
-		width: 650rpx;
-		margin: 0 auto;
+		width: 690rpx;
+		padding: 0 10rpx 20px 25rpx;
+		margin: 10px 0 0 0;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
 		.title {
+			display: flex;
+			align-items: center;
 			line-height: 20px;
 			padding: 15px 0;
+			border-radius: 8px;
 			border-bottom: 1px solid #E5E5E5;
 			font-size: 16px;
-			font-weight: 600;
-			color: #333333;
+			font-weight: bold;
+			.long-string {
+				width: 3px;
+				height: 15px;
+				background-color: #FF716E;
+				border-radius: 30%;
+				margin: 0 5px 0 5px;
+			}
 		}
 		.content {
 			line-height: 19px;
-			margin: 10px 0 0 0;
+			margin: 10px 0 0 5px;
 			font-size: 13px;
 			color: #999999;
 		}

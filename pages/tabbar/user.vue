@@ -136,10 +136,7 @@
 						<ai-list-cell title="意见反馈" dashed="dashed"></ai-list-cell>
 					</view>
 					<view class="list-box" @click="navTo('/pages/about/index')">
-						<ai-list-cell title="关于我们" dashed="dashed"></ai-list-cell>
-					</view>
-					<view class="list-box" @click="updateApp">
-						<ai-list-cell title="版本号" :message="updateMessage" aimessagecolor="ai-list-cell-message-red"></ai-list-cell>
+						<ai-list-cell title="关于我们"></ai-list-cell>
 					</view>
 				</view>
 				<view class="loginout">
@@ -148,10 +145,6 @@
 					</view>
 				</view>
 			</view>
-			<uni-popup ref="popupAiDia" type="dialog">
-				<ai-popup-update :version="updateVersion" :content="updateContent" popupbg="/static/img/bg-update.png" type="dialog"
-				 :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
-			</uni-popup>
 		</view>
 		<mix-loading v-show="refresh"></mix-loading>
 	</view>
@@ -162,8 +155,6 @@
 	import aiListCell from '@/components/ai-list-cell'
 	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
-	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import {
 		apkDownload
 	} from '@/static/js/appUpdate.js'
@@ -173,9 +164,7 @@
 			mixLoading,
 			aiListCell,
 			aiButton,
-			aiLoginHint,
-			uniPopUp,
-			aiPopupUpdate
+			aiLoginHint
 		},
 		data() {
 			return {
@@ -213,27 +202,7 @@
 					this.navTitle = "手机登录"
 				}
 				return this.$store.state.hasLogin
-			},
-			updateMessage() {
-				if (this.$store.state.appInfo.update) {
-					return "更新"
-				} else {
-					return this.$store.state.appInfo.localVersion
-				}
-			},
-			updateVersion() {
-				return this.$store.state.appInfo.appVersion
-			},
-			updateContent() {
-				return this.$store.state.appInfo.appNote
-			},
-			updataLink() {
-				return this.$store.state.appInfo.appLink
-			},
-			updataType() {
-				return this.$store.state.appInfo.require
-			},
-
+			}
 		},
 		onShow() {
 			this.getUserInfo()
@@ -278,11 +247,6 @@
 			logout() {
 				this.$store.commit("logout")
 				this.$aiRouter.navTo("/pages/index/index")
-			},
-			updateApp() {
-				if (this.$store.state.appInfo.update) {
-					this.$refs.popupAiDia.open()
-				}
 			},
 			close(done) {
 				// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框 
@@ -609,7 +573,7 @@
 		height: 350px;
 		width: 690rpx;
 		margin: 0 auto;
-
+		position: relative;
 		.list-box {
 			font-size: 15px;
 			height: 45px;

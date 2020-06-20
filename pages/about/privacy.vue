@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="隐私政策"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="隐私政策" ></uni-nav-bar>
 		<view class="privacy-box">
 			<view class="privacy-title">《隐私协议》</view>
 			<view class="privacy-hit">非常重视用户的隐私和个人信息保护。您在使用我们的产品与/或服务时，我们可能会收集和使用您的相关信息。我们希望通过《卖货啦隐私政策》（“本隐私政策”或“本政策”）向您说明我们在您使用我们的产品与/或服务时如何收集、使用、保存、共享和转让这些信息，以及我们为您提供的访问、更新、删除和保护这些信息的方式。如果您同意本隐私协议</view>

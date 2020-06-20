@@ -1,29 +1,22 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="意见反馈"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="意见反馈" ></uni-nav-bar>
 		<view class="feedback-box">
-			<textarea class="feedback-area" v-model="content" placeholder="请留下您的意见..."></textarea>
+			<view class="fb-area">
+				<textarea v-model="content" placeholder="请留下您的意见..."></textarea>
+			</view>
+			<view class="feedback-bt">
+				<ai-button @eventClick="feedBack" btname="提交"></ai-button>
+			</view>
+			<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 		</view>
-		<view class="feedback-bt">
-			<ai-button @eventClick="feedBack" btname="提交"></ai-button>
-		</view>
-		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button.vue'
 	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	export default {
 		components: {
-			aiButton,
 			uniPopUp
 		},
 		data() {
@@ -72,15 +65,17 @@
 	}
 	.feedback-box {
 		width: 750rpx;
-		padding: 15px 25px;
-		.feedback-area {
-			width: 650rpx;
-			height: 400px;
+		padding: 20rpx 30rpx 0;
+		.fb-area {
+			width: 690rpx;
+			height: 350px;
+			padding: 30rpx;
+			box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+			border-radius: 8px;
 		}
 	}
 	.feedback-bt {
-		position: absolute;
-		left: 30rpx;
-		bottom: 46px;
+		position: fixed;
+		bottom: 45px;
 	}
 </style>

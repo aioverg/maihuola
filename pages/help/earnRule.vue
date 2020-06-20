@@ -1,11 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" left-width="150">
-			<block slot="left">
-				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-			    <view style="font-size: 20px; font-weight:bold;">规则说明</view>
-			</block>
-		</uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="规则说明" ></uni-nav-bar>
 		<view class="rule-body">
 			<view class="explain-item-box">
 				<view class="item-title">

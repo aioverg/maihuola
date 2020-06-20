@@ -11,7 +11,7 @@
 					<view @tap="onClickLeft" class="uni-navbar__content_view" v-if="leftIcon.length" style="margin: 0 10px 0 0;">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
-					<view class="uni-navbar-btn-text uni-navbar__content_view" v-if="leftText.length">
+					<view class="uni-navbar__content_view" v-if="leftText.length">
 						<text :style="{ color: color, fontSize: '20px', fontWeight: 'bold' }">{{ leftText }}</text>
 					</view>
 					<slot name="left" />
@@ -28,7 +28,7 @@
 						<uni-icons style="margin: 0 0 0 20px;" :color="color" :type="rightIcon" size="24" />
 					</view>
 					<!-- 优先显示图标 -->
-					<view class="uni-navbar-btn-text uni-navbar__content_view" v-if="rightText.length && !rightIcon.length">
+					<view class="uni-navbar__content_view" v-if="rightText.length && !rightIcon.length">
 						<text class="uni-nav-bar-right-text">{{ rightText }}</text>
 					</view>
 					<slot name="right" />
@@ -143,7 +143,7 @@
 		/* #endif */
 	}
 	.uni-nav-bar-right-text {
-		font-size: $uni-font-size-base;
+		font-size: 15px;
 	}
 
 	.uni-navbar {
@@ -172,7 +172,7 @@
 		width: 750rpx;
 		height: $nav-height;
 		//line-height: $nav-height;
-		padding: 30px 0 0 0;
+		padding: 30px 30rpx 0 22rpx;
 		font-size: 16px;
 		// background-color: #ffffff;
 	}
@@ -180,7 +180,6 @@
 	.uni-navbar__header-btns {
 		display: flex;
 		flex-wrap: nowrap;
-		padding: 0 6px;
 		justify-content: center;
 		align-items: center;
 	}

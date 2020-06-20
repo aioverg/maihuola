@@ -1,13 +1,10 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="用户协议"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="用户协议" ></uni-nav-bar>
+		<view class="agreement-body">
+			<view class="ab-title">
+				<view class=""></view>
+			</view>
 		<view class="agreement-box">
 			<view class="agreement-title">《用户协议》</view>
 			<view class="agreement-hit">本协议是您与卖货啦平台所有者之间就卖货啦服务等相关事宜所订立的契约，请您仔细阅读本注册协议，您点击“同意以下协议，提交”按钮后，本协议即构成对双方有约束力的法律文件。</view>
@@ -125,7 +122,7 @@
 				<view class="agreement-item-title">16. 其他</view>
 			    <view class="agreement-item-content">16.1 条款的独立性：如果根据适用的法律认定本协议中的任何条款或者任何条款中的任何部分无效、违法或者不具有可执行性，这种无效、违法或者不具有可执行性不影响本协议中的任何其它条款或者这些条款中的任何其它部分的效力。</view>
 			</view>
-
+		</view>
 		</view>
 	</view>
 </template>

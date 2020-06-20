@@ -1,15 +1,7 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="卖货啦"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
 		<view class="img-box">
-			<image class="img" src="/static/error/ai-error01.png"></image>
+			<image class="img" src="/static/icon/err-02.png" mode="widthFix"></image>
 		</view>
 		<view class="error-title-one">哎呀！网络好像有点问题</view>
 		<view class="error-title-two">请检查您的网络，重新加载</view>
@@ -49,11 +41,11 @@
 		background: #FFFFFF;
 	}
 	.img-box {
-		margin: 100px 0 60px 0;
+		margin: 100px 0 60px;
 		.img {
 			display: block;
 			width: 456rpx;
-			height: 314rpx;
+			
 			margin: 0 auto;
 		}
 	}
