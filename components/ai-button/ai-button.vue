@@ -60,11 +60,14 @@
 	}
 	.ai-button-graybg {
 		background: #cccccc;
+		.btshadow {
+			position: absolute;
+		}
 	}
 	.ai-button {
 		height: 45px;
 		line-height: 45px;
-		//text-align: center;
+		text-align: center;
 		margin: 0 auto;
 		color: #ffffff;
 		border-radius: 22px;

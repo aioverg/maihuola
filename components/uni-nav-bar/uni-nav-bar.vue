@@ -7,13 +7,12 @@
 		    <!--uni-status-bar组件-->
 			<uni-status-bar v-if="statusBar" />
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
-				<view @tap="onClickLeft"  class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
-					<view class="uni-navbar__content_view" v-if="leftIcon.length">
+				<view class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
+					<view @tap="onClickLeft" class="uni-navbar__content_view" v-if="leftIcon.length" style="margin: 0 10px 0 0;">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
-					<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length }" class="uni-navbar-btn-text uni-navbar__content_view"
-					 v-if="leftText.length">
-						<text :style="{ color: color, fontSize: '14px' }">{{ leftText }}</text>
+					<view class="uni-navbar-btn-text uni-navbar__content_view" v-if="leftText.length">
+						<text :style="{ color: color, fontSize: '20px', fontWeight: 'bold' }">{{ leftText }}</text>
 					</view>
 					<slot name="left" />
 				</view>
@@ -106,6 +105,10 @@
 			border: {
 				type: [String, Boolean],
 				default: true
+			},
+			leftClickTag: {
+				type: String,
+				default: "back"
 			}
 		},
         mounted() {
@@ -115,7 +118,12 @@
         },
 		methods: {
 			onClickLeft() {
-				this.$emit("clickLeft");
+				if(this.leftClickTag == "back"){
+					uni.navigateBack()
+				}else{
+					this.$aiRouter.navTabBar(this.leftClickTag)
+				}
+				//this.$emit("clickLeft");
 			},
 			onClickRight() {
 				this.$emit("clickRight");

@@ -1,19 +1,11 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="搜索结果"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="搜索结果"></uni-nav-bar>
 		<view class="head">
 			<view class="input-box">
-				<image class="input-box-icon" src="/static/icon/icon-search-02.png"></image>
+				<image class="input-box-icon" src="/static/icon/search01.png"></image>
 				<input class="input-box-input" v-model="searchInput" @click="navTo('/pages/search/search?id=' + searchInput)" disabled />
 			</view>
-			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="search-result">
 			<view v-if="searchResult.length == 0" class="no-result">
@@ -70,8 +62,9 @@
 			navTo(obj){
 				this.$aiRouter.navTo(obj)
 			},
-			navTabBar(obj){
-				this.$aiRouter.navTabBar(obj)
+			backPage(){
+				console.log(666666)
+				uni.navigateBack()
 			},
 			getSearch(){
 				if(this.page > this.lastPage){
@@ -84,7 +77,6 @@
 					size: this.limit,
 					page: this.page
 				}).then(res => {
-					console.log(res.data)
 					this.lastPage = res.data.pagination.pages
 					for(let i of res.data.data){
 						this.searchResult.push(i)
@@ -104,41 +96,30 @@
 
 <style lang="scss">
 	page {
-		background: #F9F9F9;
+		background: #FFFFFF;
 	}
 	.head {
 		margin: 10px 15px 25px;
 		display: flex;
 		.input-box {
-			display: inline-block;
-			width:550rpx;
-			height: 35px;
-			background: #FFFFFF;
-			border-radius:17px;
-			margin: 0 10px 0 0;
-			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
+			display: flex;
+			align-items: center;
+			width: 690rpx;
+			height: 45px;
+			background: #F5F5F5;
+			border-radius: 23px;
 			.input-box-icon {
 				display: inline-block;
-				width: 22px;
-				height: 22px;
+				width: 20px;
+				height: 20px;
 				margin: 7px 7px 7px 15px;
 			}
 			.input-box-input {
 				display: inline-block;
+				color: #333333;
+				font-size: 15px;
 				height: 35px;
 			}
-		}
-		.input-bt {
-			display: inline-block;
-			width: 120rpx;
-			height: 35px;
-			background: #FFFFFF;
-			box-shadow:0 0 13px 0 rgba(153,153,153,0.24);
-			border-radius:17px;
-			font-size: 15px;
-			color: #333333;
-			text-align: center;
-			line-height: 35px;
 		}
 	}
 	.search-result {
@@ -160,6 +141,8 @@
 		.yes-result {
 			.guess-item {
 				margin: 0 auto 13px;
+				box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+				border-radius: 8px;
 			}
 		}
 		

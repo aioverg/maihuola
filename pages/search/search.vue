@@ -1,19 +1,14 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="搜索"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftClickTag="/pages/index/index" leftIcon="arrowleft" leftText="搜索"></uni-nav-bar>
 		<view class="head">
 			<view class="input-box">
-				<image class="input-box-icon" src="/static/icon/icon-search-02.png"></image>
+				<image class="input-box-icon" src="/static/icon/search01.png"></image>
 				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo(inputValue)" />
+				<view class="ib-cancel-box">
+					<image class="ib-cancel" :style="{visibility: errHidden}" src="../../static/icon/err-01.png"></image>
+				</view>
 			</view>
-			<view class="input-bt" @click="navTabBar('/pages/index/index')">取消</view>
 		</view>
 		<view class="history-box">
 			<view class="history">搜索历史</view>
@@ -32,10 +27,20 @@
 		},
 		data() {
 			return {
+				errHidden: "hidden",
 				inputValue: null,
 				history: [],
 				delHint: false,
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+			}
+		},
+		watch: {
+			inputValue: function(){
+				if(this.inputValue){
+					this.errHidden = "visible"
+				}else{
+					this.errHidden = "hidden"
+				}
 			}
 		},
 		onLoad(res){
@@ -85,29 +90,36 @@
 </script>
 
 <style lang="scss">
-	page {
-		background: #F9F9F9;
-	}
 	.head {
 		margin: 10px 15px 25px;
 		display: flex;
 		.input-box {
-			display: inline-block;
-			width:550rpx;
-			height: 35px;
-			background: #FFFFFF;
-			border-radius:17px;
-			margin: 0 10px 0 0;
-			box-shadow:0rpx 0rpx 13px 0rpx rgba(153,153,153,0.24);
+			width:690rpx;
+			height: 45px;
+			padding: 0 15px;
+			background: #F5F5F5;
+			border-radius: 23px;
+			display: flex;
+			align-items: center;
 			.input-box-icon {
 				display: inline-block;
-				width: 22px;
-				height: 22px;
-				margin: 7px 7px 7px 15px;
+				width: 20px;
+				height: 20px;
+				margin: 0 17px 0 0;
 			}
 			.input-box-input {
 				display: inline-block;
 				height: 35px;
+			}
+			.ib-cancel-box {
+				flex-grow: 1;
+				text-align: right;
+				.ib-cancel {
+					display: inline-block;
+					right: 0px;
+					width: 15px;
+					height: 15px;
+				}
 			}
 		}
 		.input-bt {
@@ -127,17 +139,21 @@
 		width: 690rpx;
 		height: 22px;
 		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 		.history {
 			display: inline-block;
 			font-size: 16px;
 			font-weight: 600;
 			color: #333333;
-			margin-right: 246px;
+			
 		}
 		.delete-icon {
 			display: inline-block;
 			width: 15px;
 			height: 15px;
+			margin: 0 10px 0 0;
 		}
 	}
 	.history-label-box {

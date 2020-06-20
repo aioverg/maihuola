@@ -1,7 +1,7 @@
 //顶部提示框组件
 <template>
 	<view class="caution">
-		<image class="img" src="/static/icon/icon-caution.png"></image>
+		<image class="img" src="/static/icon/exc-01.png"></image>
 		<text class="note">{{content}}</text>
 	</view>
 </template>
@@ -27,7 +27,7 @@
 		height: 70rpx;
 		width: 750rpx;
 		padding: 0 0 0 30rpx;
-		background:rgba(234,58,106,0.1);
+		background: rgba(255,25,104, 0.1);;
 		display: flex;
 		.img {
 			width: 26rpx;
@@ -36,7 +36,7 @@
 		}
 		.note {
 			margin: 18rpx 0 18rpx 10rpx;
-			color: #ea3a6a;
+			color: rgba(255, 0, 127, 1.0);
 			font-size: 12px;
 		}
 	}

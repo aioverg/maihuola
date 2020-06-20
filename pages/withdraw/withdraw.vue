@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="提现"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="提现"></uni-nav-bar>
 		<hint-box content="每月25号可提现上个月内确认收货的订单收益"></hint-box>
 		<view class="tx-box">
 			<view class="tx-account">
@@ -40,7 +33,7 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button.vue'
+	import aiButton from '@/components/ai-button/ai-button.vue'
 	import hintBox from '@/components/hint-box'
 	export default {
 		components: {
@@ -151,13 +144,11 @@
 </script>
 
 <style lang='scss'>
-	page {
-		background: #F9F9F9;
-	}
 	.tx-box {
 		width: 690rpx;
 		height:208px;
 		background: #FFFFFF;
+		box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
 		margin: 7px auto 0;
 		border-radius:16px;
 		.tx-account {
@@ -230,7 +221,9 @@
 		color: #999999;
 	}
 	.tx-bt {
-		margin: 220px 0 0 0;
+		position: fixed;
+		left: 30rpx;
+		bottom: 45px;
 		.tx-hint {
 			font-size: 12px;
 			height: 12px;

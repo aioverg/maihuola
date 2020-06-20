@@ -79,5 +79,9 @@
 	video {
 		box-sizing: border-box;
 	}
-
+	
+	/*input元素占位文字颜色*/
+	.input-placeholder {
+		color: #CCCCCC;
+	}
 </style>

@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="提现记录"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="提现记录"></uni-nav-bar>
 		<view class="withdraw-box">
 			<view>
 			    <view class="withdraw-list-head">
