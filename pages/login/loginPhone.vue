@@ -39,11 +39,9 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
-			aiButton,
 			aiLoginHint,
 		},
 		data() {

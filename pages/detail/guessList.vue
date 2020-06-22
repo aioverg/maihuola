@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="商品列表"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="商品列表"></uni-nav-bar>
 		<view class="guess-list">
 			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
 			    <ai-gusee-card :data="item"></ai-gusee-card>
