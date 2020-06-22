@@ -20,9 +20,9 @@
 			}
 		},
 		{
-			"path": "pages/tabbar/hot",
+			"path": "pages/tabbar/task",
 			"style": {
-				"navigationBarTitleText": "爆款",
+				"navigationBarTitleText": "赚金",
 				"app-plus":{
 				    "scrollIndicator": "none",
 					"background": "#0000ff",
@@ -189,6 +189,10 @@
             "path" : "pages/userinfo/order",
             "style" : {}
         }
+        ,{
+            "path" : "pages/tabbar/task",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
@@ -210,10 +214,10 @@
 				"text": "选品"
 			},
 			{
-				"pagePath": "pages/tabbar/hot",
+				"pagePath": "pages/tabbar/task",
 				"iconPath": "static/icon/tabbar-hot01.png",
 				"selectedIconPath": "static/icon/tabbar-hot01.png",
-				"text": "爆款"
+				"text": "赚金"
 			},
 			{
 				"pagePath": "pages/tabbar/user",
