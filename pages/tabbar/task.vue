@@ -12,7 +12,7 @@
 					<view class="tb-ih-time">{{item.time}}</view>
 					<view class="tb-ih-forms" v-if="item.past">查看报表</view>
 				</view>
-				<view class="tb-item-content">
+				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=1' + '&past=' + item.past)">
 					<view class="tb-ic-shade" v-if="item.past">
 						<view class="tb-ic-shade-describe">活动已结束</view>
 					</view>
@@ -48,7 +48,9 @@
 			}
 		},
 		methods: {
-			
+			navTo(url){
+				this.$aiRouter.navTo(url)
+			}
 		}
 	}
 </script>

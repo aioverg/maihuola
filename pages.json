@@ -193,6 +193,22 @@
             "path" : "pages/tabbar/task",
             "style" : {}
         }
+        ,{
+            "path" : "pages/task/taskDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/task/taskRule",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/task/checkHistory",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/task/taskUpload",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
