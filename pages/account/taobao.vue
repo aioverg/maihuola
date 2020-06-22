@@ -1,13 +1,6 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="淘宝账户授权"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="淘宝账户授权"></uni-nav-bar>
 	<view class="icon-card">
 		<image class="box-bg" src="/static/img/icon-bg-01.png"></image>
 		<view class="icon-box">
@@ -37,13 +30,11 @@
 </template>
 
 <script>
-	import aiButton from '@/components/ai-button.vue'
 	//#ifdef APP-PLUS
 	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
 	//#endif
 	export default {
 		components: {
-			aiButton
 		},
 		data() {
 			return {

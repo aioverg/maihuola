@@ -1,26 +1,19 @@
 <template>
 	<view>
-		<ai-navbar
-		    title="账户安全"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="账户安全"></uni-nav-bar>
 	    <view class="account-box">
 		    <view class="box-item-phone" @click="navTo('/pages/account/oldPhone')">
-			    <ai-list-cell title="手机号码" :message="tel"></ai-list-cell>
+			    <ai-list-cell title="手机号码" :color="telColor" :message="tel"></ai-list-cell>
 		    </view>
 		    <view class="box-sofeitem">
 			    <view class="box-item" @click="bindWx()">
-				    <ai-list-cell title="微信绑定" :message="wechat" dashed="dashed"></ai-list-cell>
+				    <ai-list-cell title="微信绑定" :color="wechatColor" :message="wechat" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindTB()">
-				    <ai-list-cell title="淘宝授权" :message="taobao" dashed="dashed"></ai-list-cell>
+				    <ai-list-cell title="淘宝授权" :color="taobaoColor" :message="taobao" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindAlipay()">
-				    <ai-list-cell title="支付宝账户" :message="alipay"></ai-list-cell>
+				    <ai-list-cell title="支付宝账户" :color="alipayColor" :message="alipay"></ai-list-cell>
 			    </view>
 		    </view>
 			<uni-popup ref="popupDialog" type="dialog">
@@ -49,9 +42,13 @@
 		data() {
 			return {
 				tel: null,
+				telColor: "#999999",
 				wechat: null,
+				wechatColor: "#FF1968",
 				taobao: null,
+				taobaoColor: "#FF1968",
 				alipay: null,
+				alipayColor: "#FF1968",
 				popupDialogTitle: null,
 				popupDialogContent: null,
 				popupMessages: null,
@@ -70,16 +67,30 @@
 			getBindInfo(){
 				this.$api.getUserCenter().then(res => {
 					this.tel = res.data.data.mobile
-					this.wechat = res.data.data.wechat ? "已绑定" : "未绑定"
-					this.taobao = res.data.data.taobao ? "已授权" : "未授权"
+					if(res.data.data.wechat){
+						this.wechat = "已绑定"
+						this.wechatColor = "#CCCCCC"
+					}else{
+						this.wechat = "未绑定"
+						this.wechatColor = "#FF1968"
+					}
+					if(res.data.data.taobao){
+						this.taobao = "已授权"
+						this.taobaoColor = "#CCCCCC"
+					}else{
+						this.taobao = "未授权"
+						this.taobaoColor = "#FF1968"
+					}
 					if(res.data.data.alipay){
 						this.$api.getAuthInfo({
 							code: "alipay"
 						}).then(res => {
 							this.alipay = res.data.data.account
+							this.alipayColor = "#999999"
 						})
 					}else{
 						this.alipay = "未填写"
+						this.alipayColor = "#FF1968"
 					}
 				})
 			},
@@ -179,25 +190,21 @@
 </script>
 
 <style lang="scss">
-	page {
-		background: #F9F9F9;
-	}
+
 	.account-box {
-		width: 690rpx;
-		margin: 0 auto;
+		width: 750rpx;
+		padding: 0 30rpx;
 	}
 	.box-item-phone {
-		width: 690rpx;
 		height: 45px;
-		background: rgba(255,255,255,1);
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
 		margin: 10px 0;
 		padding: 0 15px;
 	}
 	.box-sofeitem {
-		width: 690rpx;
 		padding: 0 15px;
-		background: rgba(255,255,255,1);
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
 		.box-item {
 		    height: 45px;

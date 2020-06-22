@@ -1,14 +1,8 @@
 <template>
 	<view>
-		<ai-navbar
-		    :title="navBarTitle"
-			:fixed="true"
-			backgroundImg="/static/img/bg-01.png"
-			height="88rpx"
-			color="#FFFFFF"
-			leftArrow="true"
-		/>
-		<view class="phone-num">
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" :leftText="navBarTitle"></uni-nav-bar>
+		<view class="bind-alipay">
+		<view class="phone-name">
 			<ai-input title="真实姓名" placeholder="请输入真实姓名" @getInput="getUserName" ></ai-input>
 		</view>
 		<view class="phone-num">
@@ -17,18 +11,17 @@
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="bindAlipay"></ai-button>
 		</view>
+		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
 <script>
 	import aiInput from '@/components/ai-input';
-	import aiButton from '@/components/ai-button';
 	import aiLoginHint from '@/components/ai-login-hint.vue'
 	export default {
 		components: {
 			aiInput,
-			aiButton,
 			aiLoginHint,
 		},
 		data() {
@@ -81,17 +74,21 @@
 </script>
 
 <style lang="scss">
-	page {
-		height:667px;
-		width:750rpx;
-		background: #F9F9F9;
+	.bind-alipay {
+		width: 750rpx;
+		padding: 10px 30rpx 0;
+	}
+	.phone-name {
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
 	}
 	.phone-num {
-		margin: 15px 0;
+		margin: 10px 0 0 0;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
 	}
 	.bt {
-		position: absolute;
-		left: 30rpx;
+		position: fixed;
 		bottom: 46px;
 	}
 

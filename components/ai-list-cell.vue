@@ -1,7 +1,7 @@
 <template>
 	<view class="ai-list-cell" :class="dashed">
 		<view class="ai-list-cell-title">{{title}}</view>
-		<view class="ai-list-cell-message" :class="aimessagecolor" v-if="message">{{message}}</view>
+		<view class="ai-list-cell-message" :class="aimessagecolor" :style="{color: color}" v-if="message">{{message}}</view>
 		<image class="ai-list-cell-icon" src="/static/icon/icon-right-arrow-01.png"></image>
 	</view>
 </template>
@@ -29,6 +29,10 @@
 			aimessagecolor: {
 				type: String,
 				default: null
+			},
+			color: {
+				type: String,
+				default: "#cccccc"
 			}
 		}
 	}
@@ -58,7 +62,6 @@
 		.ai-list-cell-message {
 			flex-grow: 0;
 			margin: 0 20rpx 0 0;
-			color: #cccccc;
 			font-size: 14px;
 		}
 		.ai-list-cell-message-red {

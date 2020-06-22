@@ -109,6 +109,5 @@
 			color: #f47a73;
 			text-decoration: underline;
 		}
-		
 	}
 </style>
