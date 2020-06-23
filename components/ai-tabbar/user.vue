@@ -350,12 +350,6 @@
 					title:'第4个页面'
 				})
 				console.log("加载了第四个页面，可以把网络请求放这里")
-			},
-			lower(){
-				uni.showToast({
-					title:'scroll-view的加载更多'
-				})
-				console.log("分页数据可以放这里~~~~~~嘿嘿")
 			}
 		}
 	}

@@ -374,27 +374,6 @@
 				this.getGuessSort()
 				this.getCarousel()
 				console.log("加载 首页，可以把网络请求放这里")
-			},
-			lower() {
-				uni.showToast({
-					title: 'scroll-view的加载更多'
-				})
-				const _this = this
-				uni.startPullDownRefresh({
-					success: function() {
-						_this.getCarousel()
-						_this.getGuessSort()
-						_this.goodsList = []
-						_this.sortList = []
-						_this.goodsListPage = 1
-						_this.hide = false
-						this.getGuess(this.sortIndex)
-						setTimeout(() => {
-							uni.stopPullDownRefresh()
-						},1500)
-					}
-				})
-				console.log("分页数据可以放这里~~~~~~嘿嘿")
 			}
 		}
 	}

@@ -55,12 +55,6 @@
 					title: '第1个页面'
 				})
 				console.log("加载了第一个页面3333333333，可以把网络请求放这里")
-			},
-			lower() {
-				uni.showToast({
-					title: 'scroll-view的加载更多'
-				})
-				console.log("分页数据可以放这里~~~~~~嘿嘿")
 			}
 		}
 	}
