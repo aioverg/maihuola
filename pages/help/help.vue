@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" rightText="关闭" @clickRight="navTabBar('/pages/tabbar/user')" ></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" rightText="关闭" @clickRight="navTo('/pages/index/index?tabId=2')" ></uni-nav-bar>
 		<view class="help-body">
 		<view class="docunemt">
 			<view class="title">
@@ -29,6 +29,10 @@
 			this.answer = helpData[option.id].content
 		},
 		methods: {
+			navTo(url){
+				this.$store.commit("setTabId", 2)
+				this.$aiRouter.navTo(url)
+			},
 			navTabBar(url){
 				this.$aiRouter.navTabBar(url)
 			}

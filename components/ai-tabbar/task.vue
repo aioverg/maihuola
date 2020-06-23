@@ -50,7 +50,7 @@
 			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
-			ontrueGetList() {
+			pageShow() {
 				uni.showToast({
 					title: '第1个页面'
 				})

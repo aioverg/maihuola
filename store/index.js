@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		systemType: 1, //0-PC;1-IOS;2-Android
+		tabId: 0,
 		hasLogin: false,
 		token: null,
 		userInfo: {
@@ -33,6 +34,9 @@ const store = new Vuex.Store({
 		login(state, data){
 			state.hasLogin = true;
 			uni.setStorageSync('token', data)
+		},
+		setTabId(state, data){
+			state.tabId = data
 		},
 		setUserInfo(state, data){
 			state.hasLogin = true;

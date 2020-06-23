@@ -344,7 +344,7 @@
 				})
 				return
 			},
-			ontrueGetList(){
+			pageShow(){
 				this.getUserInfo()
 				uni.showToast({
 					title:'第4个页面'

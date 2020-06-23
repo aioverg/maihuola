@@ -158,10 +158,6 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/tabbar/task",
-            "style" : {}
-        }
-        ,{
             "path" : "pages/task/taskDetail",
             "style" : {}
         }

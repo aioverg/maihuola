@@ -198,8 +198,6 @@
 		onReachBottom(){
 			this.getGuess(this.sortIndex)
 		},
-		
-		
 		methods: {
 			gg(){console.log(this.rankData)},
 			change(e) {
@@ -370,13 +368,12 @@
 			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
-			ontrueGetList() {
+			
+			//组件加载时运行的函数
+			pageShow() {
 				this.getGuessSort()
 				this.getCarousel()
-				uni.showToast({
-					title: '第10个页面'
-				})
-				console.log("加载了第一个页面33333333，可以把网络请求放这里")
+				console.log("加载 首页，可以把网络请求放这里")
 			},
 			lower() {
 				uni.showToast({

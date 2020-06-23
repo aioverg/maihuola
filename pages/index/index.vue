@@ -1,29 +1,29 @@
 <template>
 	<view class="content" style="position: relative;">
 		<!-- 发现 -->
-		<view :style="{'display':show_index == 0 ?'block':'none'}">
+		<view :style="{'display':selTabId == 0 ?'block':'none'}">
 			<index-page ref="index"></index-page>
 		</view>
 		<!-- 赚金 -->
-		<view :style="{'display':show_index == 1 ?'block':'none'}">
+		<view :style="{'display':selTabId == 1 ?'block':'none'}">
 			<task-page ref="task"></task-page>
 		</view>
-		<!-- 资讯 -->
-		<view :style="{'display':show_index == 2 ?'block':'none'}" style="position: relative;">
+		<!-- 我的 -->
+		<view :style="{'display':selTabId == 2 ?'block':'none'}" style="position: relative;">
 			<user-page ref="user"></user-page>
 		</view>
 		<!-- is_lhp判断是否为刘海屏在main.js里，好像uniapp有一个css变量获取刘海屏的安全区域 -->
-		<view class="tabBar" :style="{height:is_lhp?'140rpx':'98rpx'}">
+		<view class="tabBar" >
 			<!-- 导航的中间圆圈 -->
-			<view class="border_box" :style="{paddingBottom:is_lhp?'40rpx':''}">
+			<view class="border_box" >
 				<view class="tabBar_miden_border"></view>
 			</view>
-			<view class="tabBar_list" :style="{paddingBottom:is_lhp?'40rpx':''}">
+			<view class="tabBar_list" >
 				<view v-for="(item) in tabList" :key="item.id" :class="{'tabBar_item':item.id!=2,'tabBar_item2':item.id==2}"
 				 @tap="changeTabbar(item.id)">
-					<image v-if="show_index == item.id" :src="`/static/tabBar/${item.id+1}${item.id+1}.png`"></image>
+					<image v-if="selTabId == item.id" :src="`/static/tabBar/${item.id+1}${item.id+1}.png`"></image>
 					<image v-else :src="`/static/tabBar/${item.id+1}.png`"></image>
-					<view :class="{'tabBar_name':true,'nav_active':show_index == item.id}">{{item.name}}</view>
+					<view :class="{'tabBar_name':true,'nav_active':selTabId == item.id}">{{item.name}}</view>
 				</view>
 			</view>
 		</view>
@@ -42,48 +42,57 @@
 		},
 		data() {
 			return {
-				show_index: 0, //控制显示那个组件
-				tabList: [{'id': 0,'name': '首页'}, {'id': 1,'name': '赚金'}, {'id': 2,'name': '我的'}],
+				selTabId: 0, //控制显示那个组件
+				tabList: [{'id': '0','name': '首页'}, {'id': '1','name': '赚金'}, {'id': '2','name': '我的'}],
 			}
 		},
-		onLoad() {
+		onLoad(res) {
+			if(res.tabId){
+				console.log(333)
+				this.changeTabbar(res.tabId)
+				return
+			}
 			let _this = this
-			this.is_lhp = this.$is_bang
+			//this.is_lhp = this.$is_bang
 			this.$nextTick(function() {
 				//在组件挂在完成后调用方法，否则组件方法可能访问不到
 				//初次加载第一个页面的请求数据
-				if(this.show_index == 0){
-					_this.$refs.index.ontrueGetList()
-				}else if(this.show_index == 2){
-					_this.$refs.user.ontrueGetList()
+				if(this.selTabId == '0'){
+					_this.$refs.index.pageShow()
+				}else if(this.selTabId == '2'){
+					_this.$refs.user.pageShow()
 				}
 			})
-			console.log("是否为刘海屏", this.is_lhp)
+			//console.log("是否为刘海屏", this.is_lhp)
 		},
 		//滑动到底部时请求操作
 		onReachBottom() {
-			if (this.show_index == 0) {
+			if (this.selTabId == 0) {
 				this.$refs.index.getGuess(this.$refs.index.sortIndex)
 			}
 		},
 		methods: {
-			// 切换组件
-			changeTabbar(type) {
-				console.log('----------------------------------', type)
+			// 切换tabbar
+			changeTabbar(id) {
 				let _this = this
-				_this.show_index = type
-				if (_this.show_index == 0) {
-					_this.$refs.index.ontrueGetList()
-
-				} else if (_this.show_index == 1) {
-					_this.$refs.task.ontrueGetList()
-				} else if (_this.show_index == 2) {
-					_this.$refs.user.ontrueGetList()
+				_this.selTabId = id
+				if (_this.selTabId == '0') {
+					_this.$nextTick(function(){
+						_this.$refs.index.pageShow()
+					})
+				} else if (_this.selTabId == '1') {
+					_this.$nextTick(function(){
+						_this.$refs.task.pageShow()
+					})
+				} else if (_this.selTabId == '2') {
+					_this.$nextTick(function(){
+						_this.$refs.user.pageShow()
+					})
 				}
 			},
 			onPullDownRefresh() {
 				uni.showToast({
-					title: `第${this.show_index+1}个页面的刷新`
+					title: `第${this.selTabId+1}个页面的刷新`
 				})
 				setTimeout(function() {
 					uni.stopPullDownRefresh()
