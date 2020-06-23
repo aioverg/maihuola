@@ -1,560 +1,180 @@
 <template>
-	<view>
-		<uni-nav-bar fixed="true">
-		    <block slot="left">
-			    <image class="input-left" mode="widthFix" src="/static/icon/maihuola02.png"></image>
-		    </block>
-			<view class="input-view" @click="navTo('/pages/search/search')">
-				<image class="input-uni-icon" mode="widthFix" src="../../static/icon/search01.png"></image>
-				<text class="input-placeholder">搜索你需要的商品关键词</text>
-			</view>
-			<block slot="right">
-				<view class="message-box">
-					<image class="input-right" mode="widthFix" src="../../static/icon/message01.png"></image>
-					<text class="message-hint"></text>
-				</view>
-			</block>
-		</uni-nav-bar>
-		<!-- 轮播图 -->
-		<view class="banner-box">
-			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
-				<swiper autoplay="true" class="banner-carousel" @change="change">
-					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item.link_goods_id, item.id)">
-						<image :src="item.pic" class="banner-image" />
-					</swiper-item>
-				</swiper>
-			</uni-swiper-dot>
+	<view class="content" style="position: relative;">
+		<!-- 发现 -->
+		<view :style="{'display':show_index == 0 ?'block':'none'}">
+			<index-page ref="index"></index-page>
 		</view>
-		<!--分类-->
-		<view class="sort-section">
-			<view class="sort-items">
-				<scroll-view class="typetitleTab" scroll-x="true">
-					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
-					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
-							<text>{{item.title}}</text>
-							<view class="sort-underline"></view>
-					    </view>
-					</view>
-				</scroll-view>
+		<!-- 赚金 -->
+		<view :style="{'display':show_index == 1 ?'block':'none'}">
+			<task-page ref="task"></task-page>
+		</view>
+		<!-- 资讯 -->
+		<view :style="{'display':show_index == 2 ?'block':'none'}" style="position: relative;">
+			<user-page ref="user"></user-page>
+		</view>
+		<!-- is_lhp判断是否为刘海屏在main.js里，好像uniapp有一个css变量获取刘海屏的安全区域 -->
+		<view class="tabBar" :style="{height:is_lhp?'140rpx':'98rpx'}">
+			<!-- 导航的中间圆圈 -->
+			<view class="border_box" :style="{paddingBottom:is_lhp?'40rpx':''}">
+				<view class="tabBar_miden_border"></view>
 			</view>
-			<view class="sort-rank">
-				<view class="sort-rank-img-box" @click="hides()">
-				    <image class="sort-rank-img" src="/static/icon/icon-rank.png"></image>
-				</view>
-				<view class="sort-rank-item" v-show="hide" >
-					<image class="sort-rank-item-bg" src="/static/icon/sort-rank-bg.png"></image>
-					<view class="sort-rank-item-box">
-						<view class="sort-rank-list-item" :class="rankId==index?'blue':''" v-for="(item, index) in rankData" @click="selectRank(index)" :key="index">{{item.title}}</view>
-					</view>
+			<view class="tabBar_list" :style="{paddingBottom:is_lhp?'40rpx':''}">
+				<view v-for="(item) in tabList" :key="item.id" :class="{'tabBar_item':item.id!=2,'tabBar_item2':item.id==2}"
+				 @tap="changeTabbar(item.id)">
+					<image v-if="show_index == item.id" :src="`/static/tabBar/${item.id+1}${item.id+1}.png`"></image>
+					<image v-else :src="`/static/tabBar/${item.id+1}.png`"></image>
+					<view :class="{'tabBar_name':true,'nav_active':show_index == item.id}">{{item.name}}</view>
 				</view>
 			</view>
 		</view>
-		<view class="guess-section">
-			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetail('/pages/detail/detail?goods_id=' + item.id)">
-				<ai-gusee-card :recommend="item.tag" :data="item"></ai-gusee-card>
-			</view>
-		</view>
-		<view class="login-box" v-if="!loginBox">
-			<ai-login></ai-login>
-		</view>
-		<uni-popup ref="popupAiDia" type="dialog">
-		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
-		</uni-popup>
-		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
-		<mix-loading v-show="refresh"></mix-loading>
 	</view>
 </template>
 
 <script>
-	import aiNavbar from "@/components/ai-navbar/ai-navbar.vue"
-	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
-	import mixLoading from '@/components/mix-loading/mix-loading.vue'
-	import aiGuseeCard from '@/components/ai-guess-card.vue'
-	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
-	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
-	import aiLogin from '@/components/ai-login.vue'
-	import {apkDownload} from '@/static/js/appUpdate.js'
+	import indexPage from '@/components/ai-tabbar/index.vue'
+	import taskPage from '@/components/ai-tabbar/task.vue'
+	import userPage from '@/components/ai-tabbar/user.vue'
 	export default {
 		components: {
-			aiNavbar,
-			uniSwiperDot,
-			mixLoading,
-			aiGuseeCard,
-			uniPopUp,
-			aiPopupUpdate,
-			aiLogin,
+			indexPage, //首页
+			taskPage, //赚金
+			userPage, //我的
 		},
 		data() {
 			return {
-				current: 0,
-				dotsStyles: {
-					bottom: 0,
-					width: 5,
-					height: 5,
-					backgroundColor: "rgba(244,122,115,0.49)",
-					border: "none",
-					selectedBackgroundColor: "#F47A73",
-					selectedBorder: "none"
-				},
-				sortList: [],
-				sortIndex: 0,
-				sortId: 1,
-				sortIds: 0,
-				rankData: [
-					{
-						id: "default",
-						title: "默认",
-						key: null,
-						rankType: null
-					},
-					{
-						id: "update",
-						title: "上新排序",
-						rank: "id",
-						rankType: "DESC"
-					},
-					{
-						id: "priceUp",
-						title: "价格升序",
-						rank: "promotion_price",
-						rankType: "ASC"
-					},
-					{
-						id: "priceDown",
-						title: "价格降序",
-						rank: "promotion_price",
-						rankType: "DESC"
-					}
-				],
-				rankId: 0,
-				rankValue: null,
-				rankType: null,
-				carouselList: [],
-				goodsList: [],
-				goodsListPage: 1,
-				goodsListLastPage: 1,
-				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
-				hide: false,
-				blue: null,
-				//id: 1,
-				uniLoadMoreStatus: "more",
-				current: 0,
-				downloadPtogress: false,
-				refresh: false
-				
-			};
-		},
-		computed: {
-			loginBox(){
-				return this.$store.state.hasLogin
-			},
-			updateVersion(){
-				return this.$store.state.appInfo.appVersion
-			},
-			updateContent(){
-				return this.$store.state.appInfo.appNote
-			},
-			updataLink(){
-				return this.$store.state.appInfo.appLink
-			},
-			updataType(){
-				return this.$store.state.appInfo.require
+				show_index: 0, //控制显示那个组件
+				tabList: [{'id': 0,'name': '首页'}, {'id': 1,'name': '赚金'}, {'id': 2,'name': '我的'}],
 			}
 		},
 		onLoad() {
-			this.getGuessSort()
-			this.getCarousel()
-		},
-		onShow() {
-		},
-		onHide() {
-		},
-		onReady(){
-			// #ifdef APP-PLUS
-			this.appUpdate()
-			// #endif
-			
-		},
-		onPullDownRefresh() {
-			const _this = this
-			uni.startPullDownRefresh({
-				success: function() {
-					_this.getCarousel()
-					_this.getGuessSort()
-					_this.goodsList = []
-					_this.sortList = []
-					_this.goodsListPage = 1
-					_this.hide = false
-					this.getGuess(this.sortIndex)
-					setTimeout(() => {
-						uni.stopPullDownRefresh()
-					},1500)
+			let _this = this
+			this.is_lhp = this.$is_bang
+			this.$nextTick(function() {
+				//在组件挂在完成后调用方法，否则组件方法可能访问不到
+				//初次加载第一个页面的请求数据
+				if(this.show_index == 0){
+					_this.$refs.index.ontrueGetList()
+				}else if(this.show_index == 2){
+					_this.$refs.user.ontrueGetList()
 				}
 			})
+			console.log("是否为刘海屏", this.is_lhp)
 		},
-		onReachBottom(){
-			this.getGuess(this.sortIndex)
-		},
-		methods: {
-			change(e) {
-			    this.current = e.detail.current;
-			},
-			//获取轮播图数据
-			getCarousel(){
-				this.$api.getCarousel({
-					code: "Index.Banner"
-				}).then( res => {
-					this.carouselList = res.data.data
-				})
-			},
-			//轮播图跳转
-			navToCarousel(typeId, id){
-				if(typeId.indexOf(",") == -1){
-					this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + typeId)
-				}else{
-					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + typeId)
-				}
-			},
-			//获取分类菜单
-			getGuessSort(){
-				this.$api.getSearchGuess({
-					is_recommend: 1,
-				}).then(res => {
-					if(res.data.data.length !== 0){
-						this.sortList.push({
-							id: -100,
-							ids: 0,
-							title: "推荐",
-							pid: "推荐"
-						})
-						this.$api.getGuessSort().then( res =>{
-							if(res.data.data){
-								for(let item of res.data.data){
-									this.sortList.push(item)
-								}
-							}
-							this.getGuess(this.sortIndex)
-						})
-					}else{
-						this.$api.getGuessSort().then( res =>{
-							for(let item of res.data.data){
-								this.sortList.push(item)
-							}
-						})
-					}
-				})
-			},
-			//获取菜单商品
-			getGuess(index){
-				if(this.sortIndex !== index){
-					this.sortIndex = index
-					this.sortId = this.sortList[index].id
-					this.goodsList = []
-					this.goodsListPage = 1
-				}
-				if(this.sortList[index].id == -100){
-					if(this.goodsListPage > this.goodsListLastPage){
-						this.uniLoadMoreStatus = "noMore"
-						return
-					}
-					this.uniLoadMoreStatus = "loading"
-					this.$api.getSearchGuess({
-						sort: this.rankValue,
-						is_recommend: 1,
-						sort_type: this.rankType,
-						page: this.goodsListPage,
-						size: 10
-					}).then(res => {
-						if(res.data.pagination.pages <= 0){
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						if(res.data.pagination.pages == 1){
-							this.goodsListLastPage = res.data.pagination.pages
-							this.goodsListPage += 1
-							for(let i of res.data.data){
-								this.goodsList.push(i)
-							}
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						this.goodsListLastPage = res.data.pagination.pages
-						this.goodsListPage += 1
-						for(let item of res.data.data){
-							this.goodsList.push(item)
-						}
-						this.uniLoadMoreStatus = "more"
-					})
-				}else{
-					if(this.goodsListPage > this.goodsListLastPage){
-						this.uniLoadMoreStatus = "noMore"
-						return
-					}
-					this.uniLoadMoreStatus = "loading"
-					this.$api.getSearchGuess({
-						category_id: this.sortId,
-						sort: this.rankValue,
-						is_recommend: this.recommend,
-						sort_type: this.rankType,
-						page: this.goodsListPage,
-						size: 10
-					}).then(res => {
-						if(res.data.pagination.pages <= 0){
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						if(res.data.pagination.pages == 1){
-							this.goodsListLastPage = res.data.pagination.pages
-							this.goodsListPage += 1
-							for(let i of res.data.data){
-								this.goodsList.push(i)
-							}
-							this.uniLoadMoreStatus = "noMore"
-							return
-						}
-						this.goodsListLastPage = res.data.pagination.pages
-						this.goodsListPage += 1
-						for(let item of res.data.data){
-							this.goodsList.push(item)
-						}
-						this.uniLoadMoreStatus = "more"
-					})
-				}
-			},
-			//跳转
-			navToDetail(url){
-				if(this.hide){
-					this.hide = false
-					return
-				}else{
-					this.$aiRouter.navTo(url)
-				}
-			},
-			navTo(url) {
-				this.$aiRouter.navTo(url)
-			},
-			hides(){
-				if(this.hide){
-					this.hide = false
-				} else {
-					this.hide = true
-				}
-			},
-			selectRank(index) {
-			    this.rankId = index;
-				this.rankValue = this.rankData[index].rank
-				this.rankType = this.rankData[index].rankType
-				this.goodsList = []
-				this.goodsListPage = 1
-				this.hide = false
-				this.getGuess(this.sortIndex)
-			},
-			appUpdate(){
-				if(this.$store.state.appInfo.update){
-					this.$refs.popupAiDia.open()
-				}
-			},
-			close(done){
-				done()
-			},
-			confirm(done){
-				apkDownload(this.updataLink)
-				done()
+		//滑动到底部时请求操作
+		onReachBottom() {
+			if (this.show_index == 0) {
+				this.$refs.index.getGuess(this.$refs.index.sortIndex)
 			}
 		},
+		methods: {
+			// 切换组件
+			changeTabbar(type) {
+				console.log('----------------------------------', type)
+				let _this = this
+				_this.show_index = type
+				if (_this.show_index == 0) {
+					_this.$refs.index.ontrueGetList()
+
+				} else if (_this.show_index == 1) {
+					_this.$refs.task.ontrueGetList()
+				} else if (_this.show_index == 2) {
+					_this.$refs.user.ontrueGetList()
+				}
+			},
+			onPullDownRefresh() {
+				uni.showToast({
+					title: `第${this.show_index+1}个页面的刷新`
+				})
+				setTimeout(function() {
+					uni.stopPullDownRefresh()
+				}, 2000)
+				console.log('下拉刷新四个组件公用的下拉刷新方法,根据在哪个页面下拉执行哪个页面的刷新方方法即可')
+				console.log('如果想要自定义刷新的话，插件市场就有一个   非常好用也非常容易入手')
+			}
+		}
 	}
 </script>
 
 <style lang="scss">
-	page {
-		background: #F9F9F9;
-	}
-	/*顶部tabbar，搜索栏*/
-	.input-left {
-		width: 70px
-	}
-	.input-right {
-		width: 20px;
-	}
-	.message-box {
-		width: 15px;
-		position: relative;
-		margin: 0 15px 0 0;
-	}
-	.message-hint {
-		width: 8px;
-		height: 8px;
-		line-height: 15px;
-		border-radius: 50%;
-		background-color: #FFD83A;
-		position: absolute;
-		top: 0px;
-		left: 15px;
-	}
-	.input-view {
-		display: flex;
-		flex-direction: row;
-		width: 460rpx;
-		flex: 1;
-		background-color: #f8f8f8;
-		height: 35px;
-		border-radius: 15px;
-		padding: 0 15px;
-		flex-wrap: nowrap;
-		line-height: 35px;
-	}
-	.input-uni-icon {
-		width: 14px;
-		height: 14px;
-		margin: 10.5px 10px 0 5px;
-	}
-	.input-placeholder {
-		color: #CCCCCC;
-		font-size: 15px;
-	}
-	
-	
-	
-	/*底部登录提示栏*/
-	.login-box {
-		width: 750rpx;
+	.tabBar {
+		width: 100%;
+		height: 98rpx;
+		background: #fff;
+		border-top: 1px solid #E5E5E5;
 		position: fixed;
-		bottom: 50px;
-		z-index: 30;
-	}
-	/* #ifdef APP-PLUS */
-	.login-box {
-		bottom: 0;
-	}
-	/* #endif */
-	
-	/*轮播图*/
-	.banner-box {
-		height: 200px;
-		width: 100%;
-		background-color: #FFFFFF;
-		padding: 10px 0;
-		.banner-carousel {
-		    width: 100%;
-			height: 180px;
-			.banner-item {
-				.banner-image {
-					width: 640rpx;
-					height: 160px;
-					border-radius: 15px;
-					margin: 0 auto;
-					display: block;
-				}
-			}
-		}
-	}
-	.sort-section {
-		width: 100%;
-		height: 60px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
 		display: flex;
 		align-items: center;
-		background: #FFFFFF;
-		.sort-items {
-			height: 45px;
-			flex-grow: 1;
-			display: inline-block;
-			.typetitleTab {
-				width: 670rpx;
-				padding: 0 5px 0 15px;
-				white-space: nowrap;
-				margin: 0 auto;
-				text-align: center;
-				.sort-item-box {
-					display: inline-block;
-					.sort-item {
-						position: relative;
-						display: inline-block;
-						margin: 0 15px;
-						height: 45px;
-						line-height: 45px;
-						text-align: center;
-						font-size: 16px;
-						.sort-underline {
-							position: absolute;
-							display: none;
-							left: 0px;
-							height: 2px;
-							bottom: 3px;
-							width: 1.2em;
-							border-radius: 3px;
-							background-color: #F47A73;
-						}
-					}
-					.red {
-						color: #F47A73;
-						font-size: 20px;
-						font-weight: bold;
-						.sort-underline {
-							display: inline-block;
-						}
-					}
-				}
-				.sort-item-box:last-child .sort-item-line {
-					display: none;
+		justify-content: center;
+		z-index: 1000;
+
+		.tabBar_list {
+			width: 86%;
+			display: flex;
+			justify-content: space-between;
+
+			image {
+				width: 48rpx;
+				height: 48rpx;
+				margin-bottom: 2rpx
+			}
+
+			.tabBar_item {
+				width: 68rpx;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-size: 20rpx;
+				color: #969BA3;
+			}
+
+			.tabBar_item2 {
+				width: 68rpx;
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				flex-direction: column;
+				font-size: 20rpx;
+				color: #969BA3;
+				margin-top: -20rpx;
+				position: relative;
+				z-index: 101;
+
+				image {
+					width: 68rpx;
+					height: 68rpx;
 				}
 			}
-		}
-		.sort-rank {
-			display: inline-block;
-			position: relative;
-			.sort-rank-img-box {
-				width: 40px;
-				padding: 0 15px 0 0;
-				text-align: center;
-				.sort-rank-img {
-					width: 9px;
-					height: 14px;
-				}
-			}
-			.sort-rank-item {
-				position: absolute;
-				width: 110px;
-				height: 175px;
-				z-index: 25;
-				//display: none;
-				right: -2px;
-				top: 12px;
-				.sort-rank-item-bg {
-					width: 110px;
-					height: 170px;
-					position: absolute !important;
-				}
-				.sort-rank-item-box {
-					position: relative;
-					z-index: 25;
-					width: 110rpx;
-					margin: 40px auto 0;
-					.sort-rank-list-item {
-						width: 52px;
-						text-align-last: justify;
-						text-align: center;
-						font-size: 12px;
-						padding: 0px 0 4px 0;
-						margin: 8px 0 0 0;
-					}
-					.blue {
-						color: #F47A73;
-					}
-				}
-			}
-			.show {
-				display: inline-block;
-				z-index: 25;
-			}
-		}
-	}
-	
-	.guess-section {
-		width: 690rpx;
-		margin: 10px auto 0;
-		.guess-item {
-			margin: 13px 0 0 0;
 		}
 	}
 
+	.border_box {
+		// pointer-events: none; 事件穿透解决z-index层级问题
+		width: 750rpx;
+		height: 100rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		left: 0px;
+		bottom: 50rpx;
+		z-index: 100;
+		pointer-events: none;
+		.tabBar_miden_border {
+			width: 100rpx;
+			height: 50rpx;
+			border-top: 2rpx solid #E5E5E5;
+			border-radius: 50rpx 50rpx 0 0;
+			/* 左上、右上、右下、左下 */
+			background: #fff;
+		}
+	}
+
+	.nav_active {
+		color: #007AFF;
+	}
 </style>

@@ -117,7 +117,7 @@
 						if(this.pageId == 2){
 							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
 						}else{
-							this.$aiRouter.navTabBar('/pages/index/index')
+							this.$aiRouter.navTabBar('/pages/indexs/indexs')
 						}
 					}else{
 						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])

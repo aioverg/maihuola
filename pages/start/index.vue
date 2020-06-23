@@ -35,7 +35,7 @@
 				    if (value) {
 						// launchFlag=true直接跳转到首页
 						uni.switchTab({
-							url: '/pages/index/index'
+							url: '/pages/indexs/indexs'
 						});
 				    } else {
 						// launchFlag!=true显示引导页
@@ -54,7 +54,7 @@
 				}
 				return;
 				uni.switchTab({
-				    url: '/pages/index/index'
+				    url: '/pages/indexs/indexs'
 				});
 			}
 		}

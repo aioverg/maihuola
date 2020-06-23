@@ -2,10 +2,12 @@
 	<view class="uni-navbar">
 		<view :class="{ 'uni-navbar--fixed': fixed, 'uni-navbar--shadow': shadow, 'uni-navbar--border': border }" :style="{ 'background-color': backgroundColor }"
 		 class="uni-navbar__content">
-		    <!--背景图片-->
-		    <image v-if="backgroundImg" style="width: 750rpx; position: absolute;" :src="backgroundImg" mode="widthFix"></image>
 		    <!--uni-status-bar组件-->
 			<uni-status-bar v-if="statusBar" />
+			<!--背景图片-->
+			<view style="position: absolute;">
+			    <image v-if="backgroundImg" style="width: 750rpx" :src="backgroundImg" mode="widthFix"></image>
+			</view>
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
 				<view class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
 					<view @tap="onClickLeft" class="uni-navbar__content_view" v-if="leftIcon.length" style="margin: 0 10px 0 0;">
