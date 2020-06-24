@@ -2,7 +2,7 @@
 	<view class="content" style="position: relative;">
 		<!-- 发现 -->
 		<view :style="{'display':selTabId == 0 ?'block':'none'}">
-			<index-page ref="index"></index-page>
+			<home-page ref="index"></home-page>
 		</view>
 		<!-- 赚金 -->
 		<view :style="{'display':selTabId == 1 ?'block':'none'}">
@@ -21,8 +21,8 @@
 			<view class="tabBar_list" >
 				<view v-for="(item) in tabList" :key="item.id" :class="{'tabBar_item':item.id!=2,'tabBar_item2':item.id==2}"
 				 @tap="changeTabbar(item.id)">
-					<image v-if="selTabId == item.id" :src="`/static/tabBar/${item.id+1}${item.id+1}.png`"></image>
-					<image v-else :src="`/static/tabBar/${item.id+1}.png`"></image>
+					<image v-if="selTabId == item.id" :src="`/static/tabBar/${item.id+1}.png`"></image>
+					<image v-else :src="`/static/tabBar/${item.id}.png`"></image>
 					<view :class="{'tabBar_name':true,'nav_active':selTabId == item.id}">{{item.name}}</view>
 				</view>
 			</view>
@@ -31,12 +31,12 @@
 </template>
 
 <script>
-	import indexPage from '@/components/ai-tabbar/index.vue'
+	import homePage from '@/components/ai-tabbar/home.vue'
 	import taskPage from '@/components/ai-tabbar/task.vue'
 	import userPage from '@/components/ai-tabbar/user.vue'
 	export default {
 		components: {
-			indexPage, //首页
+			homePage, //首页
 			taskPage, //赚金
 			userPage, //我的
 		},

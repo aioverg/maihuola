@@ -50,11 +50,10 @@
 			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
+			//组件加载时运行的函数
 			pageShow() {
-				uni.showToast({
-					title: '第1个页面'
-				})
-				console.log("加载了第一个页面3333333333，可以把网络请求放这里")
+
+				console.log("加载 赚金 页面，可以把网络请求放这里")
 			}
 		}
 	}

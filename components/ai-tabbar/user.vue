@@ -106,7 +106,9 @@
 			
 			<!--藏品收益订单团队-->
 			<view class="project">
-				<image class="project-bg" src="/static/icon/bg-user-03.png" mode="widthFix"></image>
+				<view style="position: absolute;">
+					<image class="project-bg" src="/static/icon/bg-user-03.png" mode="widthFix"></image>
+				</view>
 				<view class="project-box">
 					<view class="project-item" @click="navTo('/pages/detail/collect')">
 						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
@@ -344,12 +346,10 @@
 				})
 				return
 			},
+			//组件加载时运行的函数
 			pageShow(){
 				this.getUserInfo()
-				uni.showToast({
-					title:'第4个页面'
-				})
-				console.log("加载了第四个页面，可以把网络请求放这里")
+				console.log("加载 我的 页面，可以把网络请求放这里")
 			}
 		}
 	}
