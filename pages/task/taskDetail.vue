@@ -1,7 +1,11 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情" @clickRight="navTo('/pages/task/taskRule')" rightText="活动规则"></uni-nav-bar>
-		<hint-box content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情" @clickRight="navTo('/pages/task/taskUpload')">
+			<block slot="right">
+				<view style="font-size: 15px;">上传截图</view>
+			</block>
+		</uni-nav-bar>
+		<hint-box v-if="checkHint" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
 		<view class="task-detail-body">
 			<view class="task-title">
 				<view class="tt-title">支付宝扫码领福利</view>
@@ -28,10 +32,17 @@
 				</view>
 			</view>
 			<view class="task-check-history" @click="navTo('/pages/task/checkHistory')">审核记录</view>
-		</view>
-		<view class="task-past" v-if="taskPsat == 'true'">活动已结束</view>
-		<view class="task-detail-foot" v-if="taskPsat == 'false'">
-			<ai-button @eventClick="navTo('/pages/task/taskUpload')" btname="上传推广截图"></ai-button>
+			<view class="task-past" v-if="taskPsat == 'true'">活动已结束</view>
+			<view class="qr-bt" v-if="!qrContent" @click="getQrContent">获取推广码</view>
+			<view class="qr-content" v-if="qrContent">
+				<image class="qr-img" src="/static/mock/mock-03.png" mode="widthFix"></image>
+				<view class="qr-one">支付宝拉新二维码</view>
+				<view class="qr-two">打开支付宝 扫一扫</view>
+				<view class="qr-save" @click="saveQr()">保存图片</view>
+			</view>
+			<view class="task-content">
+				
+			</view>
 		</view>
 	</view>
 </template>
@@ -48,12 +59,36 @@
 		},
 		data() {
 			return {
-				taskPsat: "false"
+				taskPsat: "false",
+				checkHint: true, //有提交数量不为零时显示
+				qrContent: false
 			}
 		},
 		methods: {
 			navTo(url){
 				this.$aiRouter.navTo(url)
+			},
+			getQrContent(){
+				this.qrContent = true
+			},
+			/*保存推广码到本地相册*/
+			saveQr(){
+				uni.downloadFile({
+				    url: 'http://static.adesk.com/wallpaper?imgid=5880a6b4e7bce7751fc433df&reso=1200x800', 
+				    success: (res) => {
+				        if (res.statusCode === 200) {
+							uni.saveImageToPhotosAlbum({
+							    filePath: res.tempFilePath,
+							    success: function () {
+							        console.log("保存成功")
+							    },
+								fail: function(){
+									console.log("保存失败")
+								}
+							});
+				        }
+				    }
+				});
 			}
 		}
 	}
@@ -62,7 +97,7 @@
 <style lang="scss">
 	.task-detail-body {
 		width: 750rpx;
-		padding: 15px 30rpx;
+		padding: 15px 30rpx 50px;
 	}
 	/*任务标题及时间*/
 	.task-title {
@@ -137,6 +172,8 @@
 	}
 	/*审核记录*/
 	.task-check-history {
+		height: 50px;
+		padding: 0 0 30px;
 		font-size: 1px;
 		color: #999999;
 		text-decoration-line: underline;
@@ -154,12 +191,59 @@
 		font-size: 15px;
 		color: rgba(255,255,255,0.8);
 	}
-		
-	/*底部按钮*/
-	.task-detail-foot {
-		position: absolute;
-		bottom: 45px;
-		left: 30rpx;
+	/*获取推广码按钮*/
+	.qr-bt {
+		width: 250px;
+		height: 45px;
+		line-height: 45px;
+		border-radius: 23px;
+		border: 1px solid #FFA570;
+		text-align: center;
+		font-size: 16px;
+		color: #FFA570;
+		margin: 0 auto 20px;
+	}
+	/*推广码内容*/
+	.qr-content {
+		width: 690rpx;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
+		padding: 15px 15px 40px;
+		margin: 0 0 10px 0;
+		.qr-img {
+			width: 630rpx;
+		}
+		.qr-one {
+			font-size: 20px;
+			font-weight: bold;
+			color: #FFA570;
+			text-align: center;
+			margin: 25px 0 8px;
+		}
+		.qr-two {
+			font-size: 14px;
+			color: #999999;
+			text-align: center;
+			margin: 0 0 30px;
+		}
+		.qr-save {
+			width: 250px;
+			height: 45px;
+			line-height: 45px;
+			margin: 0 auto;
+			border-radius: 23px;
+			border: 1px solid #FFA570;
+			font-size: 16px;
+			color: #FFA570;
+			text-align: center;
+		}
+	}
+	/*任务内容*/
+	.task-content {
+		width: 690rpx;
+		min-height: 300px;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
 	}
 
 </style>
