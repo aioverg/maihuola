@@ -177,29 +177,7 @@
 			// #endif
 			
 		},
-		
-		onPullDownRefresh() {
-			const _this = this
-			uni.startPullDownRefresh({
-				success: function() {
-					_this.getCarousel()
-					_this.getGuessSort()
-					_this.goodsList = []
-					_this.sortList = []
-					_this.goodsListPage = 1
-					_this.hide = false
-					this.getGuess(this.sortIndex)
-					setTimeout(() => {
-						uni.stopPullDownRefresh()
-					},1500)
-				}
-			})
-		},
-		onReachBottom(){
-			this.getGuess(this.sortIndex)
-		},
 		methods: {
-			gg(){console.log(this.rankData)},
 			change(e) {
 			    this.current = e.detail.current;
 			},
@@ -374,7 +352,25 @@
 				this.getGuessSort()
 				this.getCarousel()
 				console.log("加载 首页，可以把网络请求放这里")
-			}
+			},
+			//页面下拉时刷新组件
+			pageRefresh() {
+				const _this = this
+				uni.startPullDownRefresh({
+					success: function() {
+						_this.getCarousel()
+						_this.getGuessSort()
+						_this.goodsList = []
+						_this.sortList = []
+						_this.goodsListPage = 1
+						_this.hide = false
+						_this.getGuess(_this.sortIndex)
+						setTimeout(() => {
+							uni.stopPullDownRefresh()
+						},1500)
+					}
+				})
+			},
 		}
 	}
 </script>

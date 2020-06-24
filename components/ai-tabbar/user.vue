@@ -212,18 +212,6 @@
 		onShow() {
 			this.getUserInfo()
 		},
-		onPullDownRefresh() {
-			const _this = this
-			_this.refresh = true
-			uni.startPullDownRefresh({
-				success: function() {
-					_this.getUserInfo().then(res => {
-						_this.refresh = false
-						uni.stopPullDownRefresh()
-					})
-				}
-			})
-		},
 		methods: {
 			navTo(url) {
 				this.$aiRouter.navTo(url)
@@ -350,6 +338,19 @@
 			pageShow(){
 				this.getUserInfo()
 				console.log("加载 我的 页面，可以把网络请求放这里")
+			},
+			//页面下拉时刷新组件
+			pageRefresh() {
+				const _this = this
+				_this.refresh = true
+				uni.startPullDownRefresh({
+					success: function() {
+						_this.getUserInfo().then(res => {
+							_this.refresh = false
+							uni.stopPullDownRefresh()
+						})
+					}
+				})
 			}
 		}
 	}

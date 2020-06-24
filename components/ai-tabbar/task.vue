@@ -54,7 +54,11 @@
 			pageShow() {
 
 				console.log("加载 赚金 页面，可以把网络请求放这里")
-			}
+			},
+			//页面下拉时刷新组件
+			pageRefresh() {
+				return
+			},
 		}
 	}
 </script>
