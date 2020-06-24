@@ -1,6 +1,6 @@
 <template>
-	<view v-if="showPopup" class="uni-popup" :class="[popupstyle]" @touchmove.stop.prevent="clear">
-		<uni-transition v-if="maskShow" :mode-class="['fade']" :styles="maskClass" :duration="duration" :show="showTrans"
+	<view v-if="showPopup" class="uni-popup" :style="{zIndex: zIndex}" :class="[popupstyle]" @touchmove.stop.prevent="clear">
+		<uni-transition v-if="maskShow" :mode-class="['fade']" :styles="maskClass" :style="{backgroundColor: backgroundColor}" :duration="duration" :show="showTrans"
 		 @click="onTap" />
 		<uni-transition :mode-class="ani" :styles="transClass" :duration="duration" :show="showTrans" @click="onTap">
 			<view class="uni-popup__wrapper-box" @click.stop="clear">
@@ -50,7 +50,18 @@
 			maskClick: {
 				type: Boolean,
 				default: true
+			},
+			zIndex: {
+				type: Number,
+				default: 99
+			},
+			//遮罩背景颜色
+			backgroundColor: {
+				type: String,
+				default: 'rgba(0, 0, 0, 0.4)'
 			}
+			
+			
 		},
 		provide() {
 			return {
@@ -87,8 +98,7 @@
 					'bottom': 0,
 					'top': 0,
 					'left': 0,
-					'right': 0,
-					'backgroundColor': 'rgba(0, 0, 0, 0.4)'
+					'right': 0
 				},
 				transClass: {
 					'position': 'fixed',
@@ -208,9 +218,6 @@
 <style lang="scss" scoped>
 	.uni-popup {
 		position: fixed;
-		/* #ifndef APP-NVUE */
-		z-index: 99;
-		/* #endif */
 	}
 
 	.uni-popup__mask {
