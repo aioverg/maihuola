@@ -6,7 +6,7 @@
 				<image class="input-box-icon" src="/static/icon/search01.png"></image>
 				<input class="input-box-input" v-model="inputValue" placeholder="搜索你需要的商品关键词" @confirm="navTo(inputValue)" />
 				<view class="ib-cancel-box">
-					<image class="ib-cancel" :style="{visibility: errHidden}" src="../../static/icon/err-01.png"></image>
+					<image @click="delInput" class="ib-cancel" :style="{visibility: errHidden}" src="/static/icon/err-01.png"></image>
 				</view>
 			</view>
 		</view>
@@ -72,8 +72,8 @@
 			historyNavTo(obj){
 				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
 			},
-			navTabBar(obj){
-				this.$aiRouter.navTabBar(obj)
+			delInput(){
+				this.inputValue = null
 			},
 			delHistory(){
 				const _this = this

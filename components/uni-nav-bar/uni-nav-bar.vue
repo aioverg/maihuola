@@ -123,9 +123,8 @@
 				if(this.leftClickTag == "back"){
 					uni.navigateBack()
 				}else{
-					this.$aiRouter.navTabBar(this.leftClickTag)
+					this.$aiRouter.navTo(this.leftClickTag)
 				}
-				//this.$emit("clickLeft");
 			},
 			onClickRight() {
 				this.$emit("clickRight");

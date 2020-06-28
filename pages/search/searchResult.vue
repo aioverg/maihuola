@@ -9,8 +9,7 @@
 		</view>
 		<view class="search-result">
 			<view v-if="searchResult.length == 0" class="no-result">
-				<image class="no-result-img" src="/static/error/ai-error02.png" mode="widthFix"></image>
-				<view class="no-describe">哎呀！竟然没有匹配的宝贝</view>
+				<ai-null explain="哎呀！竟然没有匹配的宝贝"></ai-null>
 			</view>
 			<view v-if="searchResult.length !== 0" class="yes-result">
 				<view class="guess-item" v-for="(item, index) in searchResult" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
@@ -30,14 +29,14 @@
 		},
 		data() {
 			return {
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				searchInput: null,
 				page: 1,
 				lastPage: 1,
 				limit: 5,
 				searchResult: [],
 				history: [],
-				uniLoadMoreStatus: "more",
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				uniLoadMoreStatus: "more"
 			}
 		},
 		onLoad(res){
@@ -126,17 +125,7 @@
 		width: 690rpx;
 		margin: 10px auto 0;
 		.no-result {
-			width: 100%;
 			margin: 100px 0 0 0;
-			text-align: center;
-			.no-result-img {
-				width: 494rpx;
-			}
-			.no-describe {
-				margin: 50px 0 0 0;
-				font-size: 15px;
-				color: rgba(204,204,204,1);
-			}
 		}
 		.yes-result {
 			.guess-item {

@@ -109,10 +109,6 @@
 			}
         }
         ,{
-            "path" : "pages/error/error",
-            "style" : {}
-        }
-        ,{
             "path" : "pages/error/408",
             "style" : {
 				"navigationBarTitleText": "卖货啦"
