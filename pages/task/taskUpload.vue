@@ -10,6 +10,9 @@
 				<view class="tub-upload-title">请按示例上传截图</view>
 				<view class="tub-upload-box">
 					<view class="tub-upload-item" v-for="(item, index) in imgList" :key="index">
+						<view class="tu-cancel" @click="cancelImg(index)" v-if="item.uploadPic">
+							<image class="tu-cancel-img" src="/static/icon/err-01.png"></image>
+						</view>
 					    <view class="tu-img" @click="viewImg(item.exPic)">
 					        <image :src="item.exPic" mode="widthFix"></image>
 					    </view>
@@ -20,8 +23,10 @@
 					</view>
 				</view>
 			</view>
+			<view class="upload-button">
+				<ai-button :buttonbg="buttonbg" btname="提交审核" ></ai-button>
+			</view>
 		</view>
-		<uni-popup ref="uniPopup"></uni-popup>
 	</view>
 </template>
 
@@ -42,7 +47,9 @@
 						addPic: "/static/icon/add-01.png",
 						uploadPic: null
 					}
-				]
+				],
+				buttonbg: "ai-button-graybg",
+				submitFlag: false,
 			}
 		},
 		methods: {
@@ -59,11 +66,23 @@
 				uni.chooseImage({
 				    count: 1,
 				    sizeType: ['compressed'],
-					sourceType: ['album'],
 				    success: function (res) {
 						_this.imgList[index].uploadPic = res.tempFilePaths[0]
+						if(_this.imgList.some( res => { return res.uploadPic == null})){
+						}else{
+							_this.buttonbg = "ai-button-redbg"
+							_this.submitFlag = true
+						}
 				    }
 				});
+			},
+			cancelImg(index){
+				this.imgList[index].uploadPic = null
+				this.buttonbg = "ai-button-graybg"
+				this.submitFlag = false
+
+			},
+			nextTask(){
 			}
 		}
 	}
@@ -99,9 +118,20 @@
 		.tub-upload-box {
 			padding: 15px 40px 0;
 			.tub-upload-item {
+				position: relative;
 				display: flex;
 				justify-content: space-between;
 				margin: 0 0 15px;
+				.tu-cancel {
+					height: 15px;
+					position: absolute;
+					right: -20rpx;
+					top: -20px;
+					.tu-cancel-img {
+						width: 15px;
+						height: 15px;
+					}
+				}
 				.tu-img {
 					width: 240rpx;
 					height: 175px;
@@ -119,5 +149,9 @@
 				}
 			}
 		}
+	}
+	.upload-button {
+		width: 690rpx;
+		margin: 43px 0 0 0;
 	}
 </style>

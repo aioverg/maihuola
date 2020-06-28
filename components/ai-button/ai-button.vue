@@ -3,7 +3,7 @@
 	<view class="ai-button" :style= "{width: width +'rpx'}" :class="buttonbg" @click="eventClick">
 		<view class="img-box">
 			<image v-if="iconSrc" class="img" mode="widthFix" :src="iconSrc"></image>
-			<view class="btname">{{btname}}</view>
+			<view class="btname" :style="{color: color}">{{btname}}</view>
 			<view class="btshadow" :style= "{width: shadowWidth +'rpx'}"></view>
 		</view>
 	</view>
@@ -36,6 +36,10 @@
 			shadowWidth: {
 				type: String,
 				default: "610"
+			},
+			color: {
+				style: String,
+				default: "#ffffff"
 			}
 		},
 		methods: {
@@ -69,7 +73,6 @@
 		line-height: 45px;
 		text-align: center;
 		margin: 0 auto;
-		color: #ffffff;
 		border-radius: 22px;
 		.img-box {
 			position: relative;
@@ -88,7 +91,6 @@
 				z-index: 2;
 				font-weight: 600;
 				font-size: 16px;
-				color: #ffffff;
 			}
 		}
 	}
