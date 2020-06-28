@@ -1,20 +1,5 @@
 <template>
 	<view>
-		<view v-if="false">
-			<view class="img-box">
-				<image class="img" src="/static/img/icon-mhl-01.png"></image>
-			</view>
-			<view @click="login">
-				<ai-button btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
-			</view>
-			<view class="to-phone" @click="navTo('/pages/login/loginPhone')">
-				或手机快速登录
-			</view>
-			<view class="note">
-				<ai-login-hint></ai-login-hint>
-			</view>
-		</view>
-
 		<view v-if="!loginState" class="loginmm">
 			<view>
 				<uni-nav-bar fixed="true">
@@ -335,7 +320,7 @@
 				return
 			},
 			//组件加载时运行的函数
-			pageShow(){
+			pageOnload(){
 				this.getUserInfo()
 				console.log("加载 我的 页面，可以把网络请求放这里")
 			},
@@ -376,7 +361,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		top: 25px;
+		top: 0;
 		left: 15px;
 	}
 

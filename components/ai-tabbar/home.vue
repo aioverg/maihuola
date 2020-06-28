@@ -1,11 +1,12 @@
 <template>
 	<view>
+		<!--顶部导航栏-->
 		<uni-nav-bar fixed="true">
 		    <block slot="left">
 			    <image class="input-left" mode="widthFix" src="/static/icon/maihuola02.png"></image>
 		    </block>
 			<view class="input-view" @click="navTo('/pages/search/search')">
-				<image class="input-uni-icon" mode="widthFix" src="../../static/icon/search01.png"></image>
+				<image class="input-uni-icon"  mode="widthFix" src="../../static/icon/search01.png"></image>
 				<text class="input-placeholder">搜索你需要的商品关键词</text>
 			</view>
 			<block slot="right">
@@ -18,15 +19,16 @@
 		<!-- 轮播图 -->
 		<view class="banner-box">
 			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
-				<swiper autoplay="true" class="banner-carousel" @change="change">
+				<swiper class="banner-carousel" @change="change" autoplay="true" circular="true" next-margin="60rpx">
 					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item.link_goods_id, item.id)">
-						<image :src="item.pic" class="banner-image" />
+						<image :src="item.pic" class="banner-image" :class="current == index ? 'banner-img-show' : 'banner-img-hidden'" />
 					</swiper-item>
 				</swiper>
 			</uni-swiper-dot>
 		</view>
 		<!--分类-->
 		<view class="sort-section">
+			<!--分类菜单-->
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
@@ -37,6 +39,7 @@
 					</view>
 				</scroll-view>
 			</view>
+			<!--排序菜单-->
 			<view class="sort-rank">
 				<view class="sort-rank-img-box" @click="hides()">
 				    <image class="sort-rank-img" src="/static/icon/icon-rank.png"></image>
@@ -49,49 +52,50 @@
 				</view>
 			</view>
 		</view>
+		<!--商品列表-->
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetail('/pages/detail/detail?goods_id=' + item.id)">
 				<ai-gusee-card :recommend="item.tag" :data="item"></ai-gusee-card>
 			</view>
 		</view>
+		<!--登录提示横条-->
 		<view class="login-box" v-if="!loginBox">
 			<ai-login></ai-login>
 		</view>
+		<!--更新弹窗-->
 		<uni-popup ref="popupAiDia" type="dialog">
 		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
+		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
+		<!--刷新等待图标-->
 		<mix-loading v-show="refresh"></mix-loading>
 	</view>
 </template>
 
 <script>
-	import aiNavbar from "@/components/ai-navbar/ai-navbar.vue"
 	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
-	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	
-	
-	
 	export default {
 		components: {
-			aiNavbar,
 			uniSwiperDot,
 			mixLoading,
 			aiGuseeCard,
-			uniPopUp,
 			aiPopupUpdate,
 			aiLogin,
 		},
-		
-		
 		data() {
 			return {
+				//解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false,
+				//轮播图当前显示图片标志
 				current: 0,
+				//轮播图指示点样式
 				dotsStyles: {
 					bottom: 0,
 					width: 5,
@@ -101,10 +105,13 @@
 					selectedBackgroundColor: "#F47A73",
 					selectedBorder: "none"
 				},
+				//轮播图数据列表
+				carouselList: [],
+				//商品分类菜单
 				sortList: [],
 				sortIndex: 0,
 				sortId: 1,
-				sortIds: 0,
+				//排序菜单
 				rankData: [
 					{
 						id: "default",
@@ -134,17 +141,19 @@
 				rankId: 0,
 				rankValue: null,
 				rankType: null,
-				carouselList: [],
+				//商品列表
 				goodsList: [],
+				//当前显示的商品页数
 				goodsListPage: 1,
+				//商品总页数
 				goodsListLastPage: 1,
-				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
+				//是否显示排序列表
 				hide: false,
-				blue: null,
-				//id: 1,
+				//下拉加载提示类型
 				uniLoadMoreStatus: "more",
-				current: 0,
+				//是否显示下载进度提示条
 				downloadPtogress: false,
+				//是否显示刷新等待图标
 				refresh: false
 				
 			};
@@ -167,7 +176,7 @@
 				return this.$store.state.appInfo.require
 			}
 		},
-		onLoad() {
+		/*onLoad() {
 			this.getGuessSort()
 			this.getCarousel()
 		},
@@ -176,7 +185,7 @@
 			this.appUpdate()
 			// #endif
 			
-		},
+		},*/
 		methods: {
 			change(e) {
 			    this.current = e.detail.current;
@@ -207,7 +216,7 @@
 							id: -100,
 							ids: 0,
 							title: "推荐",
-							pid: "推荐"
+							pid: "推荐",
 						})
 						this.$api.getGuessSort().then( res =>{
 							if(res.data.data){
@@ -228,6 +237,9 @@
 			},
 			//获取菜单商品
 			getGuess(index){
+				if(this.hide){
+					this.hide = false
+				}
 				if(this.sortIndex !== index){
 					this.sortIndex = index
 					this.sortId = this.sortList[index].id
@@ -303,7 +315,7 @@
 					})
 				}
 			},
-			//跳转
+			//跳转到商品详情
 			navToDetail(url){
 				if(this.hide){
 					this.hide = false
@@ -312,9 +324,11 @@
 					this.$aiRouter.navTo(url)
 				}
 			},
+			//跳转
 			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
+			//展示\隐藏排序菜单
 			hides(){
 				if(this.hide){
 					this.hide = false
@@ -322,6 +336,7 @@
 					this.hide = true
 				}
 			},
+			//排序
 			selectRank(index) {
 			    this.rankId = index;
 				this.rankValue = this.rankData[index].rank
@@ -331,26 +346,29 @@
 				this.hide = false
 				this.getGuess(this.sortIndex)
 			},
+			//更新
 			appUpdate(){
-				if(this.$store.state.appInfo.update){
+				console.log(this.$store.state.appInfo.update)
+				if(!this.$store.state.appInfo.update){
 					this.$refs.popupAiDia.open()
 				}
 			},
+			//弹窗关闭
 			close(done){
 				done()
 			},
+			//弹窗确认
 			confirm(done){
 				apkDownload(this.updataLink)
 				done()
 			},
-			navTo(url) {
-				this.$aiRouter.navTo(url)
-			},
-			
 			//组件加载时运行的函数
-			pageShow() {
+			pageOnload() {
 				this.getGuessSort()
 				this.getCarousel()
+				// #ifdef APP-PLUS
+				this.appUpdate()
+				// #endif
 				console.log("加载 首页，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件
@@ -389,7 +407,7 @@
 	.message-box {
 		width: 15px;
 		position: relative;
-		margin: 0 15px 0 0;
+		margin: 0 10rpx 0 0;
 	}
 	.message-hint {
 		width: 8px;
@@ -447,17 +465,25 @@
 		.banner-carousel {
 		    width: 100%;
 			height: 180px;
+			margin: 0 10rpx 0 0;
 			.banner-item {
+				width: 670rpx;
 				.banner-image {
-					width: 640rpx;
+					width: 660rpx;
 					height: 160px;
 					border-radius: 15px;
-					margin: 0 auto;
 					display: block;
+				}
+				.banner-img-show {
+					margin: 0 0 0 30rpx;
+				}
+				.banner-img-hidden {
+					margin: 0 0 0 20rpx;
 				}
 			}
 		}
 	}
+	/*分类*/
 	.sort-section {
 		width: 100%;
 		height: 60px;

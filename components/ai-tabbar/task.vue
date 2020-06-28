@@ -51,8 +51,7 @@
 				this.$aiRouter.navTo(url)
 			},
 			//组件加载时运行的函数
-			pageShow() {
-
+			pageOnload() {
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件

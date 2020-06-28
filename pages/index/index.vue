@@ -52,9 +52,9 @@
 				//在组件挂在完成后调用方法，否则组件方法可能访问不到
 				//初次加载第一个页面的请求数据
 				if(this.selTabId == '0'){
-					_this.$refs.home.pageShow()
+					_this.$refs.home.pageOnload()
 				}else if(this.selTabId == '2'){
-					_this.$refs.user.pageShow()
+					_this.$refs.user.pageOnload()
 				}
 			})
 		},
@@ -81,11 +81,11 @@
 				_this.selTabId = id
 				this.$nextTick(function(){
 					if (_this.selTabId == '0') {
-						_this.$refs.home.pageShow()
+						_this.$refs.home.pageOnload()
 					} else if (_this.selTabId == '1') {
-						_this.$refs.task.pageShow()
+						_this.$refs.task.pageOnload()
 					} else if (_this.selTabId == '2') {
-						_this.$refs.user.pageShow()
+						_this.$refs.user.pageOnload()
 					}
 				})
 			}
