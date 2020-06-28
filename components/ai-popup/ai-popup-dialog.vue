@@ -13,6 +13,7 @@
 			<view class="ai-popup-ok-button-fox" @click="onOk">
 				<text class="ai-popup-ok">{{btname}}</text>
 			</view>
+			<slot name="button"></slot>
 		</view>
 		<view class="ai-popup-cancel" v-if="cancelShow" @click="close">
 			<image class="ai-popup-cancel-icon" mode="widthFix" src="/static/icon/icon-err-02.png"></image>

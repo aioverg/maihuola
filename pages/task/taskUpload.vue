@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickRight="navToBar('/pages/tabbar/task')" rightText="关闭"></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')" @clickRight="navTo('/pages/task/taskDetail')" rightText="关闭"></uni-nav-bar>
 		<view class="task-upload-body">
 			<view class="tub-user">
 				<view class="tub-user-title">请输入用户信息</view>
@@ -24,9 +24,18 @@
 				</view>
 			</view>
 			<view class="upload-button">
-				<ai-button :buttonbg="buttonbg" btname="提交审核" ></ai-button>
+				<ai-button :buttonbg="buttonbg" @eventClick="submit()" btname="提交审核" ></ai-button>
 			</view>
 		</view>
+		<uni-popup ref="popup">
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="navTo('/pages/task/taskUpload')" :cancelShow="false">
+				<block slot="button">
+					<view @click="navTo('/pages/task/taskDetail')" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
+						完成
+					</view>
+				</block>
+			</ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -34,6 +43,10 @@
 	export default {
 		data() {
 			return {
+				message: [{
+					title: "已提交审核",
+					content: "我们会在2-3个工作日完成审核，请您耐 心等待"
+				}],
 				imgList: [
 					{
 						id: 1,
@@ -80,9 +93,12 @@
 				this.imgList[index].uploadPic = null
 				this.buttonbg = "ai-button-graybg"
 				this.submitFlag = false
-
 			},
-			nextTask(){
+			submit(){
+				this.$refs.popup.open()
+			},
+			navTo(url){
+				this.$aiRouter.navTo(url)
 			}
 		}
 	}
