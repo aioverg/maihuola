@@ -482,40 +482,45 @@
 					position: relative;
 					display: flex;
 					align-items: center;
-					justify-content: space-between;
+					
 					padding: 0 30rpx;
 					.title {
 						display: inline-block;
-						width: 130px;
+						width: 240rpx;
 						font-size: 15px;
 						color: rgba(255,255,255,0.8);
 					}
 					.num {
 						display: inline-block;
 						overflow-x: hidden;
+						width: 240rpx;
+						margin: 0 10px 0 0;
 						text-overflow: ellipsis;
-						height: 25px;
+						text-align: left;
 						font-size: 20px;
 						font-weight: bold;
-						color: rgba(255,255,255,0.9);
+						color: rgba(255,255,255,0.8);
 					}
 					.cash {
 						display: inline-block;
 						width: 60px;
 						height: 26px;
 						border-radius: 14px;
-						border: 1px solid rgba(255,255,255,0.7);
+						border: 1px solid rgba(255,255,255,0.6);
 						line-height: 24px;
 						text-align: center;
 						font-size: 12px;
-						color: rgba(255,255,255,0.7);
+						color: rgba(255,255,255,0.6);
+						position: relative;
+						top: 10px;
+						
 					}
 			}
 			.money-hint {
 				position: relative;
 				font-size: 12px;
 				height: 19px;
-				line-height: 30px;
+				line-height: 20px;
 				margin: 0 0 0 30rpx;
 				color: rgba(255,255,255,0.6);
 			}

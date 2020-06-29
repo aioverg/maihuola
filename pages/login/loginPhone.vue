@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<view class="img-box">
-			<image class="img" src="/static/img/icon-mhl-01.png"></image>
+			<image class="img" src="/static/img/maihuola-01.png"></image>
 		</view>
 		<view>
 			<view class="phone-box">
@@ -18,7 +18,7 @@
 				<view class="code-button" @click="getCode">{{times}}{{btName}}</view>
 			</view>
 			<view class="login-button">
-				<ai-button btname="登录" @eventClick="login"></ai-button>
+				<ai-button width="540" shadowWidth="482" btname="登录" @eventClick="login"></ai-button>
 			</view>
 		</view>
 		<view class="huo">或</view>

@@ -136,7 +136,7 @@
 		align-items: baseline;
 		.es-kind-item {
 			margin: 0 10px;
-			height: 30px;
+			height: 34px;
 			position: relative;
 			font-size: 15px;
 		}

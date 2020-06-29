@@ -499,7 +499,7 @@
 	/*分类*/
 	.sort-section {
 		width: 100%;
-		height: 60px;
+		height: 36px;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;

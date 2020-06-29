@@ -192,7 +192,10 @@
 					margin: 0 0 0 10px;
 					height: 28px;
 					width: 285rpx;
-					font-size:20px;
+					font-size:30px;
+				}
+				.input-placeholder {
+					font-size: 20px;
 				}
 				.note {
 					display: inline-block;

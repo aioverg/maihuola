@@ -12,7 +12,7 @@
 			</view>
 			<view class="icon-box-item">
 			    <view class="icon">
-					<image class="img" src="/static/img/icon-maihuola01.png"></image>
+					<image class="img" src="/static/img/maihuola-02.png"></image>
 				</view>
 				<view class="icon-title">卖货啦</view>
 			</view>

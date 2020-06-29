@@ -106,7 +106,7 @@
 		justify-content: space-between;
 		padding: 0 110rpx;
 		z-index: 9999;
-		box-shadow: 0px -2px 17px 0px rgba(0,0,0,0.06);
+		box-shadow: 0px -2px 17px 0px rgba(255,25,104,0.1);
 	}
 	.tab-bar-item {
 		text-align: center;

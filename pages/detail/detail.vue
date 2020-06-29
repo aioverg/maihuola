@@ -237,6 +237,7 @@
 				line-height: 27.5px;
 				flex-grow: 1;
 				font-size: 30px;
+				font-weight: bold;
 				color: #FF716E;
 			}
 			.guess-ckprice {
@@ -276,7 +277,7 @@
 			align-items: center;
 			margin: 0 0 5px;
 			font-size: 15px;
-			font-weight: 600;
+			font-weight: bold;
 			color: #333333;
 			.guess-nh-title-icon {
 				margin: 0 0 0 4px;
@@ -302,7 +303,7 @@
 			align-items: center;
 			margin: 0 0 5px;
 			font-size: 15px;
-			font-weight: 600;
+			font-weight: bold;
 			color: #333333;
 			.zb-script-title-icon {
 				margin: 0 0 0 4px;
@@ -323,6 +324,7 @@
 		margin: 0 0 46px;
 		.collect {
 			height: 43px;
+			margin: 0 0 10px 0;
 			display: inline-block;
 			text-align: center;
 			.collect-icon {
