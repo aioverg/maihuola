@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="padding: 0 0 50px;">
 		<!--顶部导航栏-->
 		<uni-nav-bar fixed="true">
 		    <block slot="left">
@@ -591,6 +591,8 @@
 		margin: 10px auto 0;
 		.guess-item {
 			margin: 13px 0 0 0;
+			border-radius: 8px;
+			box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		}
 	}
 

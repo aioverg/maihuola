@@ -171,6 +171,7 @@
 			line-height: 33px;
 			text-align: center;
 			border-radius: 17px;
+			color: #FFA570;
 		}
 		.ns-group {
 			display: inline-block;
@@ -183,16 +184,20 @@
 			text-align: center;
 			right: 0;
 			border-radius: 17px;
+			color: #FFA570;
 		}
 		.sel-my {
 			z-index: 100;
 			font-weight: bold;
 			background-color: #FFA570;
+			color: #ffffff;
 		}
 		.sel-group {
 			z-index: 100;
 			font-weight: bold;
 			background-color: #FFA570;
+			color: #ffffff;
+			
 		}
 	}
 	/*订单状态选项，已付款、已收货等*/

@@ -3,7 +3,7 @@
 	<view class="ai-guess-card">
 		<image class="zhutui" v-if="data.tag == '主推'" mode="widthFix" src='/static/icon/icon-zhutui.png'></image>
 		<view class="ai-guess-image-box">
-			<image class="ai-guess-image" mode="widthFix" :src="data.pic"></image>
+			<image class="ai-guess-image" :src="data.pic"></image>
 		</view>
 		<view class="ai-guess-info-fox">
 			<view class="ai-guess-info">{{data.title}}</view>
@@ -37,7 +37,7 @@
 <style lang="scss">
 	.ai-guess-card {
 		width: 690rpx;
-		height: 280rpx;
+		//height: 280rpx;
 		background: #ffffff;
 		border-radius:16px;
 		display: flex;
@@ -53,6 +53,7 @@
 			margin: 20rpx;
 			.ai-guess-image {
 				width: 220rpx;
+				height: 220rpx;
 				border-radius: 16rpx;
 			}
 		}

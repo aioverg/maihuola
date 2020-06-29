@@ -123,6 +123,7 @@
 			.earn-blance-num {
 				position: relative;
 				display: inline-block;
+				font-weight: 700;
 				font-size: 26px;
 				color:rgba(255,255,255,0.9);
 			}
@@ -142,7 +143,7 @@
 		.es-ki-underline {
 			width: 20px;
 			height: 2px;
-			border-radius: 35%;
+			border-radius: 10%;
 			position: absolute;
 			bottom: 0;
 		}
@@ -204,7 +205,7 @@
 			width: 200rpx;
 			height: 35px;
 			line-height: 33px;
-			border: 2px solid #FFA570;
+			border: 1px solid #FFA570;
 			border-radius: 19px;
 			text-align: center;
 			color: #FFA570;

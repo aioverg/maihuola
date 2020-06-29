@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true">
 			<block slot="left">
-				<view style="font-weight:bold; font-size: 20px; margin: 0 0 0 9px;">赚金</view>
+				<view style="font-weight:650; font-size: 20px; margin: 0 0 0 9px;">赚金</view>
 			</block>
 		</uni-nav-bar>
 		<view class="task-body">

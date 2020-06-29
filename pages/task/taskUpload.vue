@@ -14,7 +14,7 @@
 							<image class="tu-cancel-img" src="/static/icon/err-01.png"></image>
 						</view>
 					    <view class="tu-img" @click="viewImg(item.exPic)">
-					        <image :src="item.exPic" mode="widthFix"></image>
+					        <image class="tu-ex-img" :src="item.exPic"></image>
 					    </view>
 					    <view class="tu-img">
 							<image class="tu-img-add" @click="chooseImg(index)" v-if="!item.uploadPic" :src="item.addPic"></image>
@@ -153,6 +153,10 @@
 					height: 175px;
 					border: 2px solid #FFA570;
 					border-radius: 8px;
+					.tu-ex-img {
+						width: 230rpx;
+						height: 165px;
+					}
 				}
 				image {
 					width: 100%;
