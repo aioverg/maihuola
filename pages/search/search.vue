@@ -63,6 +63,23 @@
 				}
 			})
 		},
+		onShow() {
+			const _this = this
+			//获取历史搜索的本地缓存
+			uni.getStorage({
+				key: "searchHistory",
+				success: function(res){
+					if(res.data){
+						if(res.data.length == 0){
+							_this.delHint = false
+						}else{
+							_this.delHint = true
+							_this.history = res.data
+						}
+					}
+				}
+			})
+		},
 		methods: {
 			navTo(obj){
 				this.inputValue = obj.replace(/(^\s*)|(\s*$)/g, "")

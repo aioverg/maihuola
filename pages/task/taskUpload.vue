@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')" @clickRight="navTo('/pages/task/taskDetail')" rightText="关闭"></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')" @clickRight="navTo('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
 		<view class="task-upload-body">
 			<view class="tub-user">
 				<view class="tub-user-title">请输入用户信息</view>

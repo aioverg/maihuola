@@ -1,10 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" left-width="150">
-			<block slot="left">
-				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-			    <view style="font-size: 20px; font-weight:bold;">结算明细</view>
-			</block>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="结算明细">
 			<block slot="right">
 				<image @click="datePicker" src="/static/icon/calendar-01.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
 				<uni-icons @click="help" type="help" color="#333333" size="24"></uni-icons>

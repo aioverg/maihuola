@@ -21,17 +21,18 @@
 		},
 		data() {
 			return {
-				content: null,
+				content: "",
 				navigateFlag: false
 			}
 		},
 		methods: {
 			feedBack(){
+				const _this = this
 				this.content = this.content.trim()
 				if(!this.content || this.content.length == 0){
 					this.$refs.aiPopupMessage.open({
 						type:'err',
-						content:'内容不能为空',
+						content:'请留下您宝贵的意见',
 						timeout:2000,
 						isClick:false
 					})
@@ -50,7 +51,7 @@
 							isClick:false
 						})
 						setTimeout(() => {
-							this.$aiRouter.navTabBar('pages/tabbar/user')
+							this.$aiRouter.navTo('/pages/index/index?tabId=2')
 						},2000)
 					}
 				})

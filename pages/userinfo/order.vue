@@ -1,13 +1,8 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true">
-			<block slot="left">
-				<view style="width: 150rpx;">
-					<uni-icons @click="navBack()" type="arrowleft" size="24"></uni-icons>
-				</view>
-			</block>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="我的订单">
 			<block>
-				<view class="nav-sel">
+				<view v-if="false" class="nav-sel">
 					<view class="ns-my" @click="selCategory('my')" :class="selTag == 'my' ? 'sel-my' : ''">我的订单</view>
 					<view class="ns-group" @click="selCategory('order')" :class="selTag == 'order' ? 'sel-group' : ''">团队定单</view>
 				</view>

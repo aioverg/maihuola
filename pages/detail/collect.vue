@@ -9,7 +9,7 @@
 				<ai-gusee-card :data="item"></ai-gusee-card>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
-		<ai-null></ai-null>
+		<ai-null v-if="false"></ai-null>
 	</view>
 </template>
 
