@@ -10,7 +10,7 @@
 				<text class="input-placeholder">搜索你需要的商品关键词</text>
 			</view>
 			<block slot="right">
-				<view class="message-box">
+				<view class="message-box" v-if="false">
 					<image class="input-right" mode="widthFix" src="../../static/icon/message01.png"></image>
 					<text class="message-hint"></text>
 				</view>
@@ -423,7 +423,7 @@
 	.input-view {
 		display: flex;
 		flex-direction: row;
-		width: 460rpx;
+		width: 500rpx;
 		flex: 1;
 		background-color: #f8f8f8;
 		height: 35px;

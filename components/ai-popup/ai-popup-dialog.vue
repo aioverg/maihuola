@@ -131,7 +131,7 @@
 	}
 	.ai-popup-title {
 		font-size: 17px;
-		font-weight: 600;
+		font-weight: 700;
 		margin: 0 0 5px;
 	}
 	.ai-popup-content {

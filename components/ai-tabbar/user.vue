@@ -38,7 +38,7 @@
 			<!--顶部-->
 			<uni-nav-bar fixed="true" backgroundImg="/static/icon/navbar-bg-01.png">
 				<block slot="right">
-					<view class="message-box" style="width: 20px; position: relative;" >
+					<view v-show="false" class="message-box" style="width: 20px; position: relative;" >
 						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
 						<text class="message-hint"></text>
 					</view>
@@ -49,7 +49,6 @@
 			</view>
 			<!--账户信息账户余额-->
 			<view class="user-section">
-				<!--<image class="bg" style="z-index: 1010;" src="/static/icon/bg-user-01.png" mode="widthFix"></image>-->
 				<view class="user-info-box">
 					<view class="portrait-box">
 						<image class="portrait" :src="portrait"></image>
@@ -411,10 +410,9 @@
 			position: relative;
 			z-index: 1;
 			.portrait {
-				width: 60px;
-				height: 60px;
+				width: 70px;
+				height: 70px;
 				margin: 0 0 0 50rpx;
-				border: 1px solid #fff;
 				border-radius: 50%;
 			}
 

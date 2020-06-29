@@ -188,13 +188,11 @@
 		}
 		.sel-my {
 			z-index: 100;
-			font-weight: bold;
 			background-color: #FFA570;
 			color: #ffffff;
 		}
 		.sel-group {
 			z-index: 100;
-			font-weight: bold;
 			background-color: #FFA570;
 			color: #ffffff;
 			

@@ -1,10 +1,10 @@
 //按钮组件
 <template>
 	<view class="ai-button" :style= "{width: width +'rpx'}" :class="buttonbg" @click="eventClick">
-		<view class="img-box">
-			<image v-if="iconSrc" class="img" mode="widthFix" :src="iconSrc"></image>
-			<view class="btname" :style="{color: color}">{{btname}}</view>
-			<view class="btshadow" :style= "{width: shadowWidth +'rpx'}"></view>
+		<view class="ai-bt-img-box">
+			<image v-if="iconSrc" class="ai-bt-img" mode="widthFix" :src="iconSrc"></image>
+			<view class="ai-bt-name" :style="{color: color}">{{btname}}</view>
+			<view class="ai-bt-shadow" :style= "{width: shadowWidth +'rpx'}"></view>
 		</view>
 	</view>
 </template>
@@ -53,7 +53,7 @@
 <style lang="scss">
 	.ai-button-redbg {
 		background:linear-gradient(135deg,rgba(255,113,110,1) 0%,rgba(255,184,110,1) 100%);
-		.btshadow {
+		.ai-bt-shadow {
 			height: 41px;
 			position: absolute;
 			top: 10px;
@@ -64,7 +64,7 @@
 	}
 	.ai-button-graybg {
 		background: #cccccc;
-		.btshadow {
+		.ai-bt-shadow {
 			position: absolute;
 		}
 	}
@@ -74,19 +74,19 @@
 		text-align: center;
 		margin: 0 auto;
 		border-radius: 22px;
-		.img-box {
+		.ai-bt-img-box {
 			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			margin: 0 3px 0 0;
-			.img {
+			.ai-bt-img {
 				z-index: 2;
 				display: inline-block;
 				width: 20px;
 				margin: 0 4px 0 0;
 			}
-			.btname {
+			.ai-bt-name {
 				display: inline-block;
 				z-index: 2;
 				font-weight: 600;

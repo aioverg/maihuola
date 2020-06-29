@@ -1,11 +1,7 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" left-width="150">
-			<block slot="left">
-				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-				<view style="font-size: 20px; font-weight:bold;">藏品</view>
-			</block>
-		</uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="藏品"></uni-nav-bar>
+		
 		
 		<uni-swipe-action class="collect-guess-box">
 			<uni-swipe-action-item class="collect-guess-item" v-for="(item,index) in collectList" :options="options" :key="item.id" @change="swipeChange"

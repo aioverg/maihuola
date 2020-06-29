@@ -149,6 +149,7 @@
 			font-size: 27px;
 			color: #FFFFFF;
 			opacity: 0.9;
+			font-weight: bold;
 		}
 		
 	}
@@ -167,6 +168,7 @@
 		.td-num {
 			font-size: 20px;
 			color: #FFA570;
+			font-weight: bold;
 		}
 		.td-num-center {
 			text-align: center;
