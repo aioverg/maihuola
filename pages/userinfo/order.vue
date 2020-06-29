@@ -3,7 +3,7 @@
 		<uni-nav-bar fixed="true">
 			<block slot="left">
 				<view style="width: 150rpx;">
-					<uni-icons  type="arrowleft" size="24"></uni-icons>
+					<uni-icons @click="navBack()" type="arrowleft" size="24"></uni-icons>
 				</view>
 			</block>
 			<block>
@@ -14,7 +14,7 @@
 			</block>
 			<block slot="right">
 				<view style="width: 150rpx; padding: 0 10px 0 0; text-align: right;">
-				    <image src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				    <image @click="navTo('/pages/search/orderSearch')" src="/static/icon/search-02.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
 				    <uni-icons @click="help" type="help" color="#333333" size="24"></uni-icons>
 				</view>
 			</block>
@@ -137,6 +137,12 @@
 			},
 			close(done){
 				done()
+			},
+			navBack(){
+				uni.navigateBack()
+			},
+			navTo(url){
+				this.$aiRouter.navTo(url)
 			}
 		}
 	}

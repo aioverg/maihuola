@@ -58,7 +58,7 @@
 						<view class="info-box-user-name">{{userName}}</view>
 						<view class="info-box-user-id">{{userId}}</view>
 					</view>
-					<view class="info-user-mark">
+					<view v-if="false" class="info-user-mark">
 						<image class="info-user-mark-icon" src="/static/icon/icon-mark-01.png"></image>
 					</view>
 				</view>
@@ -361,7 +361,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		top: 0;
+		top: -2px;
 		left: 15px;
 	}
 

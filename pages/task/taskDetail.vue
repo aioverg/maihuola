@@ -44,6 +44,7 @@
 				
 			</view>
 		</view>
+		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 	</view>
 </template>
 
@@ -73,6 +74,7 @@
 			},
 			/*保存推广码到本地相册*/
 			saveQr(){
+				const _this = this
 				uni.downloadFile({
 				    url: 'http://static.adesk.com/wallpaper?imgid=5880a6b4e7bce7751fc433df&reso=1200x800', 
 				    success: (res) => {
@@ -80,10 +82,10 @@
 							uni.saveImageToPhotosAlbum({
 							    filePath: res.tempFilePath,
 							    success: function () {
-							        console.log("保存成功")
+							        _this.$aiGlobal.aiPopupMessage.apply(_this,['success', '保存成功'])
 							    },
 								fail: function(){
-									console.log("保存失败")
+									_this.$aiGlobal.aiPopupMessage.apply(_this,['err', '保存失败'])
 								}
 							});
 				        }
@@ -174,7 +176,7 @@
 	.task-check-history {
 		height: 50px;
 		padding: 0 0 30px;
-		font-size: 1px;
+		font-size: 14px;
 		color: #999999;
 		text-decoration-line: underline;
 		text-align: right;

@@ -170,6 +170,10 @@
             "path" : "pages/task/taskUpload",
             "style" : {}
         }
+        ,{
+            "path" : "pages/search/orderSearch",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

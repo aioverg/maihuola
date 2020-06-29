@@ -7,16 +7,16 @@
 		</uni-nav-bar>
 		<view class="task-body">
 			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
-				<ai-title-list :title="item.title"></ai-title-list>
-				<view class="tb-item-head">
-					<view class="tb-ih-time">{{item.time}}</view>
-					<view class="tb-ih-forms" v-if="item.past">查看报表</view>
-				</view>
 				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=1' + '&past=' + item.past)">
 					<view class="tb-ic-shade" v-if="item.past">
 						<view class="tb-ic-shade-describe">活动已结束</view>
 					</view>
 					<image class="tb-ic-img" :src="item.pic"></image>
+				</view>
+				<ai-title-list :title="item.title"></ai-title-list>
+				<view class="tb-item-head">
+					<view class="tb-ih-time">{{item.time}}</view>
+					<view class="tb-ih-forms" v-if="item.past">查看报表</view>
 				</view>
 			</view>
 		</view>
@@ -70,12 +70,10 @@
 
 	.tb-item {
 		width: 690rpx;
-		height: 200px;
-		padding: 10px 10px 15px;
+		padding: 10px;
 		margin: 0 0 10px 0;
 		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
-
 		.tb-item-head {
 			height: 20px;
 			line-height: 20px;
@@ -97,7 +95,7 @@
 		}
 
 		.tb-item-content {
-			margin: 10px 0 0 0;
+			
 			border-radius: 8px;
 			position: relative;
 

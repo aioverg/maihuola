@@ -1,6 +1,6 @@
 <template>
 	<view class="ai-title-list">
-		<view class="atl-long"></view>
+		
 		<view class="atl-title">{{title}}</view>
 	</view>
 </template>
@@ -24,7 +24,7 @@
 			width: 3px;
 			height: 13px;
 			background-color: #FF716E;
-			border-radius: 35%;
+			border-radius: 30%;
 			margin: 0 5px 0 0;
 		}
 		.atl-title {

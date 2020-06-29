@@ -6,7 +6,7 @@
 			<uni-status-bar v-if="statusBar" />
 			<!--背景图片-->
 			<view style="position: absolute;">
-			    <image v-if="backgroundImg" style="width: 750rpx" :src="backgroundImg" mode="widthFix"></image>
+			    <image v-if="backgroundImg" style="width: 750rpx; height: 80px;" :src="backgroundImg"></image>
 			</view>
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
 				<view class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">

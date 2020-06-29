@@ -416,7 +416,7 @@
 		border-radius: 50%;
 		background-color: #FFD83A;
 		position: absolute;
-		top: 0px;
+		top: -2px;
 		left: 15px;
 	}
 	.input-view {
@@ -428,6 +428,7 @@
 		height: 35px;
 		border-radius: 15px;
 		padding: 0 15px;
+		margin: 0 20px 0 0;
 		flex-wrap: nowrap;
 		line-height: 35px;
 	}
