@@ -22,6 +22,7 @@
 				<swiper class="banner-carousel" @change="change" autoplay="true" circular="true" next-margin="60rpx">
 					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item.link_goods_id, item.id)">
 						<image :src="item.pic" class="banner-image" :class="current == index ? 'banner-img-show' : 'banner-img-hidden'" />
+						<view class="banner-shadow"></view>
 					</swiper-item>
 				</swiper>
 			</uni-swiper-dot>
@@ -474,6 +475,17 @@
 					height: 160px;
 					border-radius: 15px;
 					display: block;
+					z-index: 1;
+				}
+				.banner-shadow {
+					width: 610rpx;
+					height: 35px;
+					filter:blur(10px);
+					background-color: #FF716E;
+					margin: 0 0 0 55rpx;
+					position: absolute;
+					bottom: 23px;
+					z-index: 0;
 				}
 				.banner-img-show {
 					margin: 0 0 0 30rpx;
