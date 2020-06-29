@@ -24,6 +24,7 @@
 <script>
 	import aiListCell from '@/components/ai-list-cell'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
+	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
 			aiListCell,
@@ -65,6 +66,13 @@
 					this.$refs.popupAiDia.open()
 				}
 			},
+			confirm(done){
+				apkDownload(this.updataLink)
+				done()
+			},
+			close(done){
+				done()
+			}
 		}
 	}
 </script>
