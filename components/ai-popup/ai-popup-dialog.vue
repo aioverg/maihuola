@@ -47,7 +47,9 @@
 			},
 			message: {
 				type: Array,
-				default: []
+				default: function(){
+					return []
+				}
 			},
 			value: {
 				type: [String, Number],

@@ -136,7 +136,17 @@
 				this.popupDialogContent = "将无法通过分享商品获得收益"
 				this.$refs.popupAiDialog.open()
 			}
-			
+		},
+		onShow() {
+			let bindTabBao = uni.getStorageSync('bindTaoBao')
+			if(bindTabBao == 'bind'){
+				this.$api.getAuthInfo({
+					code: "taobao"
+				}).then( res => {
+					this.taobao = res.data.data.status
+					uni.removeStorageSync('bindTaoBao')
+				})
+			}
 		},
 		onReady(){
 		},
@@ -151,6 +161,7 @@
 			},
 			//提示淘宝授权弹框
 			confirm(done){
+				uni.setStorageSync("bindTaoBao", "bind")
 				this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
 				done()
 			},

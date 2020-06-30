@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftClickTag="/pages/index/index" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
 		<ai-phone-login></ai-phone-login>
 	</view>

@@ -209,6 +209,7 @@
 			},
 			//获取分类菜单
 			getGuessSort(){
+				this.sortList = []
 				this.$api.getSearchGuess({
 					is_recommend: 1,
 				}).then(res => {

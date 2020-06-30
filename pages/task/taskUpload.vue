@@ -14,11 +14,11 @@
 							<image class="tu-cancel-img" src="/static/icon/err-01.png"></image>
 						</view>
 					    <view class="tu-img" @click="viewImg(item.exPic)">
-					        <image class="tu-ex-img" :src="item.exPic"></image>
+					        <image :src="item.exPic"></image>
 					    </view>
 					    <view class="tu-img">
 							<image class="tu-img-add" @click="chooseImg(index)" v-if="!item.uploadPic" :src="item.addPic"></image>
-						    <image v-if="item.uploadPic" @click="viewImg(item.uploadPic)" :src="item.uploadPic" mode="widthFix"></image>
+						    <image v-if="item.uploadPic" @click="viewImg(item.uploadPic)" :src="item.uploadPic"></image>
 					    </view>
 					</view>
 				</view>
@@ -153,19 +153,18 @@
 					height: 175px;
 					border: 2px solid #FFA570;
 					border-radius: 8px;
-					.tu-ex-img {
-						width: 230rpx;
-						height: 165px;
-					}
+
 				}
 				image {
 					width: 100%;
+					height: 170px;
 					border-radius: 8px;
 				}
 				.tu-img-add {
 					width: 40px;
 					height: 40px;
-					margin: 66px 40px;
+					display: block;
+					margin: 66px auto;
 				}
 			}
 		}

@@ -4,7 +4,7 @@
 			<view>
 				<uni-nav-bar fixed="true">
 					<block slot="left">
-					    <view style="font-size: 20px; font-weight:bold;">登录</view>
+						<view style="font-size: 20px; font-weight:bold;">登录</view>
 					</block>
 				</uni-nav-bar>
 				<view class="img-box">
@@ -38,14 +38,14 @@
 			<!--顶部-->
 			<uni-nav-bar fixed="true" backgroundImg="/static/icon/navbar-bg-01.png">
 				<block slot="right">
-					<view v-show="false" class="message-box" style="width: 20px; position: relative;" >
+					<view v-show="false" class="message-box" style="width: 20px; position: relative;">
 						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
 						<text class="message-hint"></text>
 					</view>
 				</block>
 			</uni-nav-bar>
 			<view style="position: absolute;">
-			<image class="" style="position: fixed; width: 750rpx;" class="bg" src="/static/icon/bg-user-01.png" mode="widthFix"></image>
+				<image class="" style="position: fixed; width: 750rpx;" class="bg" src="/static/icon/bg-user-01.png" mode="widthFix"></image>
 			</view>
 			<!--账户信息账户余额-->
 			<view class="user-section">
@@ -81,13 +81,13 @@
 						<view class="title">账户余额（元）：</view>
 						<view class="num">{{blance}}</view>
 						<view class="cash" @click="withdraw">
-								提现
+							提现
 						</view>
 					</view>
 					<view class="money-hint">每月25号可提现上月结算收益</view>
 				</view>
 			</view>
-			
+
 			<!--藏品收益订单团队-->
 			<view class="project">
 				<view style="position: absolute;">
@@ -114,8 +114,8 @@
 					-->
 				</view>
 			</view>
-			
-			
+
+
 			<view class="list-card">
 				<view class="message">
 					<view class="list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
@@ -143,14 +143,15 @@
 </template>
 
 <script>
-	
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	import aiLoginHint from '@/components/ai-login-hint.vue'
-	import {apkDownload} from '@/static/js/appUpdate.js'
-	export default{
+	import {
+		apkDownload
+	} from '@/static/js/appUpdate.js'
+	export default {
 		components: {
-			
+
 			mixLoading,
 			aiListCell,
 			aiLoginHint
@@ -169,8 +170,8 @@
 				yesLogin: false,
 				alipay: false,
 				refresh: false,
-		
-		
+
+
 				//登录登录录登录录登录
 				phone: null,
 				code: null,
@@ -233,9 +234,9 @@
 				apkDownload(this.$store.state.appInfo.appLink)
 				done()
 			},
-			
-			
-			
+
+
+
 			//登陆登录
 			aiPopupMessage(type, content) {
 				if (!this.run) {
@@ -319,7 +320,7 @@
 				return
 			},
 			//组件加载时运行的函数
-			pageOnload(){
+			pageOnload() {
 				this.getUserInfo()
 				console.log("加载 我的 页面，可以把网络请求放这里")
 			},
@@ -352,6 +353,7 @@
 	page {
 		background: #FFFFFF;
 	}
+
 	/*顶部导航栏*/
 	.message-hint {
 		width: 8px;
@@ -400,7 +402,7 @@
 			left: 0;
 			top: -80px;
 			width: 100%;
-			
+
 		}
 
 		.user-info-box {
@@ -409,6 +411,7 @@
 			align-items: center;
 			position: relative;
 			z-index: 1;
+
 			.portrait {
 				width: 70px;
 				height: 70px;
@@ -418,14 +421,17 @@
 
 			.info-box {
 				margin: 0 0 0 30rpx;
+
 				.info-box-user-name {
 					font-size: 17px;
 					margin: 0 0 5px 0;
 				}
+
 				.info-box-user-id {
 					font-size: 14px;
 				}
 			}
+
 			.info-user-mark {
 				height: 60px;
 				/*  #ifdef  APP-PLUS  */
@@ -433,6 +439,7 @@
 				/*  #endif  */
 				/*  #ifdef  H5  */
 				margin: 0 0 0 60rpx;
+
 				/*  #endif  */
 				.info-user-mark-icon {
 					width: 69px;
@@ -441,6 +448,7 @@
 				}
 			}
 		}
+
 		.estimate {
 			position: relative;
 			height: 65px;
@@ -449,6 +457,7 @@
 			margin: 5px 0 0;
 			display: flex;
 			justify-content: space-around;
+
 			.estimate-item-box {
 				.num {
 					overflow-x: hidden;
@@ -458,6 +467,7 @@
 					color: #333333;
 					text-align: center;
 				}
+
 				.title {
 					margin: 6px 0 0 0;
 					font-size: 12px;
@@ -471,6 +481,7 @@
 			height: 49px;
 			padding: 5px 15px 0;
 			position: relative;
+
 			.card-bg {
 				position: absolute;
 				width: 750rpx;
@@ -478,65 +489,71 @@
 				top: -30px;
 				left: 0;
 			}
-				.balance {
+
+			.balance {
+				position: relative;
+				display: flex;
+				align-items: center;
+				padding: 0 30rpx;
+
+				.title {
+					display: inline-block;
+					width: 125px;
+					font-size: 15px;
+					color: rgba(255, 255, 255, 0.8);
+				}
+
+				.num {
+					display: inline-block;
+					overflow-x: hidden;
+					width: 125px;
+					margin: 0 10px 0 0;
+					text-overflow: ellipsis;
+					text-align: left;
+					font-size: 20px;
+					font-weight: bold;
+					color: rgba(255, 255, 255, 0.8);
+				}
+
+				.cash {
+					display: inline-block;
+					width: 60px;
+					height: 26px;
+					border-radius: 14px;
+					border: 1px solid rgba(255, 255, 255, 0.6);
+					line-height: 24px;
+					text-align: center;
+					font-size: 12px;
+					color: rgba(255, 255, 255, 0.6);
 					position: relative;
-					display: flex;
-					align-items: center;
-					
-					padding: 0 30rpx;
-					.title {
-						display: inline-block;
-						width: 240rpx;
-						font-size: 15px;
-						color: rgba(255,255,255,0.8);
-					}
-					.num {
-						display: inline-block;
-						overflow-x: hidden;
-						width: 240rpx;
-						margin: 0 10px 0 0;
-						text-overflow: ellipsis;
-						text-align: left;
-						font-size: 20px;
-						font-weight: bold;
-						color: rgba(255,255,255,0.8);
-					}
-					.cash {
-						display: inline-block;
-						width: 60px;
-						height: 26px;
-						border-radius: 14px;
-						border: 1px solid rgba(255,255,255,0.6);
-						line-height: 24px;
-						text-align: center;
-						font-size: 12px;
-						color: rgba(255,255,255,0.6);
-						position: relative;
-						top: 10px;
-						
-					}
+					top: 10px;
+
+				}
 			}
+
 			.money-hint {
 				position: relative;
 				font-size: 12px;
 				height: 19px;
 				line-height: 20px;
 				margin: 0 0 0 30rpx;
-				color: rgba(255,255,255,0.6);
+				color: rgba(255, 255, 255, 0.6);
 			}
 		}
 	}
-	
+
 	/*藏品 收益订单团队*/
 	.project {
 		position: relative;
 		width: 750rpx;
 		height: 110px;
 		margin: 5px 0 0 0;
+
 		.project-bg {
 			position: absolute;
 			width: 750rpx
 		}
+
 		.project-box {
 			position: relative;
 			top: 45px;
@@ -544,36 +561,40 @@
 			padding: 0 100rpx;
 			display: flex;
 			justify-content: space-between;
+
 			.project-item {
 				position: relative;
 				width: 67px;
 				height: 75px;
 				background-color: #FFFFFF;
-				box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+				box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 				border-radius: 8px;
+
 				.project-item-icon {
 					width: 27px;
 					height: 26px;
 					margin: 15px 20px 0;
 				}
+
 				.project-item-name {
 					font-size: 12px;
 					text-align: center;
 				}
-				
+
 			}
 		}
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 	.list-card {
 		height: 350px;
 		width: 690rpx;
 		margin: 0 auto;
 		position: relative;
+
 		.list-box {
 			font-size: 15px;
 			height: 45px;
@@ -584,14 +605,14 @@
 			margin: 30px 0 0 0;
 			border-radius: 8px;
 			background: #FFFFFF;
-			box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
+			box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		}
 
 		.loginout {
 			margin: 10px 0 0 0;
 			border-radius: 8px;
 			background: #FFFFFF;
-			box-shadow:0px 0px 50px 0px rgba(0,0,0,0.06);
+			box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		}
 	}
 
