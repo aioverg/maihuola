@@ -51,7 +51,6 @@
 		},
 		methods: {
 			bindTB(){
-				console.log(this.$store.state.userInfo.id)
 				const _this = this
 				//#ifdef APP-PLUS
 				Alibcsdk.init( res => {
@@ -61,9 +60,7 @@
 						console.log("初始化失败")
 					}
 				})
-				console.log(3333)
 				Alibcsdk.login( res => {
-					console.log(3333,res)
 					if(res.status){
 						Alibcsdk.openwebviewurl({
 							url:"https://oauth.m.taobao.com/authorize?response_type=code&client_id=29481726&response_type=code&view=Wap&redirect_uri=" + this.$basePath + "service/rollback?user_id=" + this.$store.state.userInfo.id

@@ -7,16 +7,16 @@
 		</uni-nav-bar>
 		<view class="task-body">
 			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
-				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=1' + '&past=' + item.past)">
-					<view class="tb-ic-shade" v-if="item.past">
+				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=1' + '&past=' + item.is_end)">
+					<view class="tb-ic-shade" v-if="item.is_end">
 						<view class="tb-ic-shade-describe">活动已结束</view>
 					</view>
 					<image class="tb-ic-img" :src="item.pic"></image>
 				</view>
 				<ai-title-list :title="item.title"></ai-title-list>
 				<view class="tb-item-head">
-					<view class="tb-ih-time">{{item.time}}</view>
-					<view class="tb-ih-forms" v-if="item.past">查看报表</view>
+					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
+					<view class="tb-ih-forms" v-if="item.is_end">查看报表</view>
 				</view>
 			</view>
 		</view>
@@ -32,19 +32,7 @@
 		data() {
 			return {
 				login: false,
-				taskList: [{
-						title: "支付宝扫码领福利",
-						time: "2020.06.17-2020.06.30",
-						past: false,
-						pic: "/static/mock/mock-02.png"
-					},
-					{
-						title: "支付宝扫码领福利",
-						time: "2020.06.17-2020.06.30",
-						past: true,
-						pic: "/static/mock/mock-02.png"
-					}
-				]
+				taskList: []
 			}
 		},
 		methods: {
@@ -55,13 +43,24 @@
 					this.$aiRouter.navTo('/pages/login/loginPhone')
 				}
 			},
+			getTaskList(){
+				this.$api.postTaskList().then(res => {
+					for(let item of res.data.data.data){
+						item.start_time = item.start_time.replace(/-/g, '.')
+						item.end_time = item.end_time.replace(/-/g, '.')
+					}
+					this.taskList = res.data.data.data
+				})
+			},
 			//组件加载时运行的函数
 			pageOnload() {
 				this.login = this.$store.state.hasLogin
+				this.getTaskList()
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件
 			pageRefresh() {
+				this.getTaskList()
 				return
 			},
 		}

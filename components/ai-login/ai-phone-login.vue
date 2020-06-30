@@ -105,7 +105,6 @@
 					phone: this.phone,
 					code: this.code
 				}).then( res => {
-					console.log(res)
 					if(res.data.code == 0){
 						this.$store.commit("setUserInfo", res.data.data)
 						if(this.pageId == 2){

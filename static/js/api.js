@@ -202,6 +202,13 @@ api.postFeedBack = (data) => {
 		data: data
 	})
 }
-
+//获取任务列表
+api.postTaskList = (data) => {
+	return request({
+		url: "mission",
+		method: "POST",
+		data: data
+	})
+}
 
 export default api
