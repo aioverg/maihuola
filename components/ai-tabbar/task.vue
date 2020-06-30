@@ -31,6 +31,7 @@
 		},
 		data() {
 			return {
+				login: false,
 				taskList: [{
 						title: "支付宝扫码领福利",
 						time: "2020.06.17-2020.06.30",
@@ -48,10 +49,15 @@
 		},
 		methods: {
 			navTo(url) {
-				this.$aiRouter.navTo(url)
+				if(this.login){
+					this.$aiRouter.navTo(url)
+				}else{
+					this.$aiRouter.navTo('/pages/login/loginPhone')
+				}
 			},
 			//组件加载时运行的函数
 			pageOnload() {
+				this.login = this.$store.state.hasLogin
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件

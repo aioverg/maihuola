@@ -117,7 +117,6 @@
 <script>
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
-	//import aiLoginHint from '@/components/ai-login-hint.vue'
 	import aiPhoneLogin from '@/components/ai-login/ai-phone-login.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {

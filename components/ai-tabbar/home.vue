@@ -79,7 +79,7 @@
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
-	import aiLogin from '@/components/ai-login.vue'
+	import aiLogin from '@/components/ai-login/ai-login.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	
 	export default {
@@ -161,7 +161,6 @@
 		},
 		computed: {
 			loginBox(){
-				console.log("是否登录6666666", this.$store.state.hasLogin)
 				return this.$store.state.hasLogin
 			},
 			updateVersion(){
