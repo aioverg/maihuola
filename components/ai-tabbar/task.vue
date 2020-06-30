@@ -7,7 +7,7 @@
 		</uni-nav-bar>
 		<view class="task-body">
 			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
-				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=1' + '&past=' + item.is_end)">
+				<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=' + item.id + '&is_end=' + item.is_end)">
 					<view class="tb-ic-shade" v-if="item.is_end">
 						<view class="tb-ic-shade-describe">活动已结束</view>
 					</view>

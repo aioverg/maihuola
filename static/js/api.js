@@ -210,5 +210,13 @@ api.postTaskList = (data) => {
 		data: data
 	})
 }
+//获取任务详情
+api.postTaskDetail = (data) => {
+	return request({
+		url: "mission/getById",
+		method: "POST",
+		data: data
+	})
+}
 
 export default api

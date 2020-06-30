@@ -9,39 +9,39 @@
 		<view class="task-detail-body">
 			<view class="task-title">
 				<view class="tt-title">支付宝扫码领福利</view>
-				<view class="tt-time">（2020.06.17-2020.06.30）</view>
+				<view class="tt-time">（{{taskContent.start_time}}-{{taskContent.end_time}}）</view>
 			</view>
 			<view class="task-hint">请阅读知悉活动规则后进行推广</view>
 			<view class="task-cash">
 				<image class="tc-bg" src="/static/icon/bg-earn-01.png"></image>
 			    <view class="tc-title">当前实际结算（元）：</view>
-				<view class="tc-num">243.28</view>
+				<view class="tc-num">{{taskContent.commission}}</view>
 			</view>
 			<view class="task-detail">
 				<view>
 					<view class="td-titme">预估收益（元）</view>
-					<view class="td-num">652.78</view>
+					<view class="td-num">{{taskContent.predict}}</view>
 				</view>
 				<view>
 					<view class="td-titme">提交数量</view>
-					<view class="td-num td-num-center">98</view>
+					<view class="td-num td-num-center">{{taskContent.total_num}}</view>
 				</view>
 				<view>
 					<view class="td-titme">过审数量</view>
-					<view class="td-num td-num-center">86</view>
+					<view class="td-num td-num-center">{{taskContent.com_num}}</view>
 				</view>
 			</view>
 			<view class="task-check-history" @click="navTo('/pages/task/checkHistory')">审核记录</view>
-			<view class="task-past" v-if="taskPsat == 'true'">活动已结束</view>
-			<view class="qr-bt" v-if="!qrContent" @click="getQrContent">获取推广码</view>
-			<view class="qr-content" v-if="qrContent">
-				<image class="qr-img" src="/static/mock/mock-03.png" mode="widthFix"></image>
-				<view class="qr-one">支付宝拉新二维码</view>
+			<view class="task-past" v-if="taskStatus == '1'">活动已结束</view>
+			<view class="qr-bt" v-if="qrCodeBt" @click="getqrCode">获取推广码</view>
+			<view class="qr-content" v-if="qrCode">
+				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
+				<view class="qr-one">{{taskContent.title}}</view>
 				<view class="qr-two">打开支付宝 扫一扫</view>
 				<view class="qr-save" @click="saveQr()">保存图片</view>
 			</view>
 			<view class="task-content">
-				
+				{{taskContent.rule}}
 			</view>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
@@ -54,25 +54,45 @@
 		components: {
 			hintBox
 		},
-		onLoad(res) {
-			this.taskPsat = res.past
-			console.log(res)
-		},
 		data() {
 			return {
-				taskPsat: "false",
+				taskId: 0, //任务ID
+				taskStatus: "0", //任务是否过期
+				taskContent: {},
 				checkHint: true, //有提交数量不为零时显示
-				qrContent: false
+				qrCodeBt: true, //是否显示获取推广码按钮
+				qrCode: false, //是否显示推广码
 			}
+		},
+		onLoad(res) {
+			this.taskId = res.id
+			this.taskStatus = res.is_end
+			if(res.is_end == "1"){
+				this.qrCodeBt = false
+			}
+			console.log(this.taskStatus)
+			this.getTaskDetail(res.id)
 		},
 		methods: {
 			navTo(url){
 				this.$aiRouter.navTo(url)
 			},
-			getQrContent(){
-				this.qrContent = true
+			//显示推广码
+			getqrCode(){
+				this.qrCode = true
 			},
-			/*保存推广码到本地相册*/
+			//获取任务信息
+			getTaskDetail(id){
+				this.$api.postTaskDetail({
+					id: id
+				}).then( res => {
+					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
+					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
+					this.taskContent = res.data.data
+					console.log(this.taskContent)
+				})
+			},
+			//保存推广码到本地相册
 			saveQr(){
 				const _this = this
 				uni.downloadFile({
@@ -185,7 +205,7 @@
 	}
 	/*活动已结束提示*/
 	.task-past {
-		margin: 0 auto;
+		margin: 0 auto 57px;
 		width: 110px;
 		height: 35px;
 		line-height: 35px;
