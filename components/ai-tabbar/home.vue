@@ -159,9 +159,9 @@
 				
 			};
 		},
-		
 		computed: {
 			loginBox(){
+				console.log("是否登录6666666", this.$store.state.hasLogin)
 				return this.$store.state.hasLogin
 			},
 			updateVersion(){
@@ -177,16 +177,6 @@
 				return this.$store.state.appInfo.require
 			}
 		},
-		/*onLoad() {
-			this.getGuessSort()
-			this.getCarousel()
-		},
-		onReady(){
-			// #ifdef APP-PLUS
-			this.appUpdate()
-			// #endif
-			
-		},*/
 		methods: {
 			change(e) {
 			    this.current = e.detail.current;
@@ -366,6 +356,7 @@
 			},
 			//组件加载时运行的函数
 			pageOnload() {
+				
 				this.getGuessSort()
 				this.getCarousel()
 				// #ifdef APP-PLUS
@@ -453,11 +444,6 @@
 		bottom: 50px;
 		z-index: 30;
 	}
-	/* #ifdef APP-PLUS */
-	.login-box {
-		bottom: 0;
-	}
-	/* #endif */
 	
 	/*轮播图*/
 	.banner-box {
