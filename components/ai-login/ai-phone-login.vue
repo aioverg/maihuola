@@ -46,13 +46,17 @@
 				times: null,
 				timeRun: false,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
-				pageId: null,
-				pageParams: null,
 			}
 		},
-		onLoad(res) {
-			this.pageId = res.page_id || null
-			this.pageParams = res.page_params || null
+		props: {
+			tabId: {
+				type: String,
+				default: null
+			},
+			jumpUrl: {
+				type: String,
+				default: null
+			}
 		},
 		methods: {
 			getCode(){
@@ -107,14 +111,9 @@
 				}).then( res => {
 					if(res.data.code == 0){
 						this.$store.commit("setUserInfo", res.data.data)
-						if(this.pageId == 2){
-							this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + this.pageParams)
-						}else{
-							uni.reLaunch({
-							    url: '/pages/index/index'
-							});
-							//this.$aiRouter.navTo('/pages/index/index')
-						}
+						uni.redirectTo({
+							url: this.jumpUrl
+						});
 					}else{
 						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
 					}

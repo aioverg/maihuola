@@ -158,7 +158,7 @@
 			//复制推广码
 			copyTKL(){
 				if(!this.hasLogin){
-					this.$aiRouter.navTo('/pages/login/loginPhone?page_id=2&page_params=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/detail/detail?goods_id=' + this.goodsId)
 					return
 				}
 				if(!this.taobao){

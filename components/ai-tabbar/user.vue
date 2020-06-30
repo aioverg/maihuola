@@ -2,7 +2,7 @@
 	<view>
 		<!--登录-->
 		<view v-if="!loginState" class="loginmm" style="padding: 80px 0 0 0;">
-			<ai-phone-login></ai-phone-login>
+			<ai-phone-login jumpUrl="/pages/index/index?tabId=2"></ai-phone-login>
 		</view>
 		
 		<!--我的-->

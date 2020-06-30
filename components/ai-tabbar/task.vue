@@ -40,7 +40,7 @@
 				if(this.login){
 					this.$aiRouter.navTo(url)
 				}else{
-					this.$aiRouter.navTo('/pages/login/loginPhone')
+					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/index/index?tabId=1')
 				}
 			},
 			getTaskList(){

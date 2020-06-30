@@ -61,7 +61,7 @@
 		</view>
 		<!--登录提示横条-->
 		<view class="login-box" v-if="!loginBox">
-			<ai-login></ai-login>
+			<ai-login jumpUrl="/pages/index/index?tabId=0"></ai-login>
 		</view>
 		<!--更新弹窗-->
 		<uni-popup ref="popupAiDia" type="dialog">

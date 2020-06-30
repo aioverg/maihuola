@@ -14,10 +14,16 @@
 				
 			};
 		},
+		props: {
+			jumpUrl: {
+			    type: String,
+			    default: null,
+			}
+		},
 		methods: {
 			navToLogin(){
 				uni.navigateTo({
-					url: '/pages/login/loginPhone'
+					url: "/pages/login/loginPhone?jumpUrl=" + this.jumpUrl
 				})
 			}
 		}

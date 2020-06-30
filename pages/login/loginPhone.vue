@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftClickTag="/pages/index/index" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
+		<uni-nav-bar fixed="true" :tabId="tabId" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
-		<ai-phone-login></ai-phone-login>
+		<ai-phone-login :jumpUrl="jumpUrl" :tabId="tabId"></ai-phone-login>
 	</view>
 </template>
 
@@ -22,9 +22,14 @@
 				timeRun: false,
 				pageId: null,
 				pageParams: null,
+				tabId: null,
+				jumpUrl: null
 			}
 		},
 		onLoad(res) {
+			this.tabId = res.tabId
+			this.jumpUrl = res.jumpUrl
+			console.log(res)
 			this.pageId = res.page_id || null
 			this.pageParams = res.page_params || null
 		},
