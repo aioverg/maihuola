@@ -94,6 +94,8 @@
 			return {
 				//解决快速点击跳转，页面跳转多次问题
 				navigateFlag: false,
+				//判断是否请求菜单栏
+				menuFlag: true,
 				//轮播图当前显示图片标志
 				current: 0,
 				//轮播图指示点样式
@@ -198,10 +200,13 @@
 			},
 			//获取分类菜单
 			getGuessSort(){
-				this.sortList = []
+				if(!this.menuFlag){
+					return
+				}
 				this.$api.getSearchGuess({
 					is_recommend: 1,
 				}).then(res => {
+					this.menuFlag = false
 					if(res.data.data.length !== 0){
 						this.sortList.push({
 							id: -100,
