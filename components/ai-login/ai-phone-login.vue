@@ -13,8 +13,8 @@
 				<view class="apl-code-input-box">
 					<image class="apl-code-icon" mode="widthFix" src="/static/icon/icon-dialog.png"></image>
 					<input class="apl-code-input" type="number" v-model="code" placeholder="请输入验证码" />
+					<view class="apl-code-button" @click="getCode">{{times}}{{btName}}</view>
 				</view>
-				<view class="apl-code-button" @click="getCode">{{times}}{{btName}}</view>
 			</view>
 			<view class="apl-login-button">
 				<ai-button width="540" shadowWidth="482" btname="登录" @eventClick="login"></ai-button>
@@ -145,7 +145,7 @@
 	.apl-phone-box {
 		display: flex;
 		align-items: center;
-		height: 32px;
+		height: 40px;
 		width: 650rpx;
 		margin: 0 auto;
 		border-bottom: 1px solid rgba(204,204,204,1);
@@ -168,7 +168,7 @@
 		align-items: center;
 		height: 40px;
 		width: 650rpx;
-		margin: 16px auto 0;
+		margin: 22px auto 0;
 		.apl-code-input-box {
 			display: flex;
 			height: 40px;
@@ -186,14 +186,14 @@
 		}
 		.apl-code-button {
 			display: inline-block;
+			text-decoration-line: underline;
 			width: 100px;
 			height: 40px;
 			text-align: center;
-			background:rgba(244,122,115,1);
 			border-radius: 22px;
 			line-height: 40px;
 			font-size: 14px;
-			color: rgba(255,255,255,1);
+			color: #FF716E;
 		}
 	}
 	.apl-login-button {

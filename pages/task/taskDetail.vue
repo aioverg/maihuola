@@ -8,7 +8,7 @@
 		<hint-box v-if="checkHint" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
 		<view class="task-detail-body">
 			<view class="task-title">
-				<view class="tt-title">支付宝扫码领福利</view>
+				<view class="tt-title">{{taskContent.title}}</view>
 				<view class="tt-time">（{{taskContent.start_time}}-{{taskContent.end_time}}）</view>
 			</view>
 			<view class="task-hint">请阅读知悉活动规则后进行推广</view>
@@ -31,17 +31,19 @@
 					<view class="td-num td-num-center">{{taskContent.com_num}}</view>
 				</view>
 			</view>
-			<view class="task-check-history" @click="navTo('/pages/task/checkHistory')">审核记录</view>
+			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?id=' + taskId + '&tasktitle=' + taskContent.title)">审核记录</view>
 			<view class="task-past" v-if="taskStatus == '1'">活动已结束</view>
 			<view class="qr-bt" v-if="qrCodeBt" @click="getqrCode">获取推广码</view>
 			<view class="qr-content" v-if="qrCode">
 				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
-				<view class="qr-one">{{taskContent.title}}</view>
+				<!--
+				<view class="qr-one">支付宝拉新二维码</view>
 				<view class="qr-two">打开支付宝 扫一扫</view>
+				-->
 				<view class="qr-save" @click="saveQr()">保存图片</view>
 			</view>
 			<view class="task-content">
-				{{taskContent.rule}}
+				<jyf-parser :html="taskContent.rule"></jyf-parser>
 			</view>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
@@ -50,9 +52,11 @@
 
 <script>
 	import hintBox from '@/components/hint-box';
+	import jyfParser from "@/components/jyf-parser/jyf-parser";
 	export default {
 		components: {
-			hintBox
+			hintBox,
+			jyfParser
 		},
 		data() {
 			return {
@@ -237,7 +241,7 @@
 		.qr-img {
 			width: 630rpx;
 		}
-		.qr-one {
+		/*.qr-one {
 			font-size: 20px;
 			font-weight: bold;
 			color: #FFA570;
@@ -249,12 +253,12 @@
 			color: #999999;
 			text-align: center;
 			margin: 0 0 30px;
-		}
+		}*/
 		.qr-save {
 			width: 250px;
 			height: 45px;
 			line-height: 45px;
-			margin: 0 auto;
+			margin: 25px auto 0;
 			border-radius: 23px;
 			border: 1px solid #FFA570;
 			font-size: 16px;

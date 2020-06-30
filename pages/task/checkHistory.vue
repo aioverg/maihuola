@@ -6,12 +6,12 @@
 				<view class="tcb-item-one">
 					<view class="tcb-io-title">{{item.title}}</view>
 					<view class="tcb-io-status" :class="item.status == '审核通过' ? 'tcb-io-status-pass' : (item.status == '未通过') ? 'tcb-io-status-fail' : 'tcb-io-status-load' ">
-					    {{item.describe}}{{item.status}}
+					    {{item.remark}}{{item.status}}
 					</view>
 				</view>
 				<view class="tcb-item-two">
 					<view>{{item.time}}</view>
-					<view>{{item.tel}}</view>
+					<view>{{item.mobile}}</view>
 				</view>
 			</view>
 		</view>
@@ -22,6 +22,8 @@
 	export default {
 		data() {
 			return {
+				taskId: 0,
+				taskTitle: null,
 				dataList: [
 					{
 						title: "支付宝扫码领福利",
@@ -45,8 +47,35 @@
 				]
 			}
 		},
+		onLoad(res) {
+			this.taskId = res.id
+			this.taskTitle = res.tasktitle
+			this.getDataList()
+		},
 		methods: {
-			
+			getDataList(){
+				let userId = uni.getStorageSync("userInfo").client.id
+				this.$api.postTaskCheckHistory({
+					user_id: userId,
+					mission_id: this.taskId
+				}).then( res => {
+					for(let item of res.data.data.data){
+						item.title = this.taskTitle
+						if(item.status == 0){
+							item.status = "未通过"
+							item.remark = "（" + item.remark + "）"
+						}
+						if(item.status == 1){
+							item.status = "审核通过"
+						}
+						if(item.status == 2 || item.status == 3){
+							item.status = "待审核"
+						}
+					}
+					this.dataList = res.data.data.data
+					console.log(this.dataList)
+				})
+			}
 		}
 	}
 </script>

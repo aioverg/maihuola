@@ -218,5 +218,13 @@ api.postTaskDetail = (data) => {
 		data: data
 	})
 }
+//任务审核记录接口
+api.postTaskCheckHistory = (data) => {
+	return request({
+		url: "mission/getVerifyList",
+		method: "POST",
+		data: data
+	})
+}
 
 export default api
