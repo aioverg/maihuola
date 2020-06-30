@@ -1,12 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" right-icon="help" @clickRight="navMessage">
-			<block slot="left">
-				<image @click="navBarBack" style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-			    <view style="font-size: 20px; font-weight:bold;">商品详情</view>
-			</block>
-		</uni-nav-bar>
-		
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="商品详情" right-icon="help" @clickRight="navMessage"></uni-nav-bar>
 		<view class="guess-img-box">
 			<image mode="heightFix" class="guess-img" :src="guessDetailData.pic"></image>
 		</view>
@@ -151,10 +145,6 @@
 		onReady(){
 		},
 		methods: {
-			//导航栏返回
-			navBarBack(){
-				uni.navigateBack()
-			},
 			//导航栏帮助弹框
 			navMessage(){
 				this.$refs.navBarHelp.open()

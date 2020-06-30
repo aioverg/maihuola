@@ -10,7 +10,7 @@
 			</view>
 			<view :style="{ color: color,backgroundColor: backgroundColor }" class="uni-navbar__header uni-navbar__content_view">
 				<view class="uni-navbar__header-btns uni-navbar__header-btns-left uni-navbar__content_view">
-					<view @tap="onClickLeft" class="uni-navbar__content_view" v-if="leftIcon.length" style="margin: 0 10px 0 0;">
+					<view @tap="onClickLeft" class="uni-navbar__content_view" v-if="leftIcon.length" style="margin: 2px 5px 0 0;">
 						<uni-icons :color="color" :type="leftIcon" size="24" />
 					</view>
 					<view class="uni-navbar__content_view" v-if="leftText.length">
