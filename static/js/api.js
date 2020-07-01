@@ -1,5 +1,7 @@
 const api = {}
 const basePath = ""
+const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
+//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
 /*const token = uni.getStorage({
     key: 'token',
     success: function (res) {
@@ -10,8 +12,6 @@ const basePath = ""
 	}
 });*/
 const request = function(obj){
-	const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
-	//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
 	let authentication = null
 	uni.getNetworkType({
 		success: function(res){
@@ -34,6 +34,30 @@ const request = function(obj){
 			...obj,
 			url: baseUrl + obj.url,
 			method: obj.method,
+			header: {authentication: authentication}, //用户token
+			success: (res) => {
+				resolve(res)
+			},
+			fail: (res) => {
+				reject(res)
+			}
+		})
+	})
+}
+//文件上传
+const upload = function(obj){
+	let authentication = null
+	if(uni.getStorageSync("userInfo")){
+		let token = uni.getStorageSync("userInfo").access_token
+		let userId = uni.getStorageSync("userInfo").client.id
+		let authen = new Buffer(userId + ':' + token);
+		authentication = authen.toString('base64');
+	}
+	return new Promise((resolve, reject) => {
+		uni.uploadFile({
+			...obj,
+			url: baseUrl + obj.url,
+			name: obj.name,
 			header: {authentication: authentication}, //用户token
 			success: (res) => {
 				resolve(res)
@@ -226,5 +250,20 @@ api.postTaskCheckHistory = (data) => {
 		data: data
 	})
 }
-
+//图片上传接口
+api.postImg = (data) => {
+	return upload({
+		url: "common/upload",
+		name: "image",
+		filePath: data
+	})
+}
+//任务提交接口
+api.postTaskUpload = (data) => {
+	return request({
+		url: "mission/addMissionRecord",
+		method: "POST",
+		data: data
+	})
+}
 export default api

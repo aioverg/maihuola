@@ -4,7 +4,7 @@
 		<view class="task-upload-body">
 			<view class="tub-user">
 				<view class="tub-user-title">请输入用户信息</view>
-				<input class="tub-user-tel" type="number" placeholder="请输入手机号" />
+				<input class="tub-user-tel" v-model="phone" type="number" placeholder="请输入手机号" />
 			</view>
 			<view class="tub-upload">
 				<view class="tub-upload-title">请按示例上传截图</view>
@@ -17,7 +17,7 @@
 					        <image :src="item.exPic"></image>
 					    </view>
 					    <view class="tu-img">
-							<image class="tu-img-add" @click="chooseImg(index)" v-if="!item.uploadPic" :src="item.addPic"></image>
+							<image class="tu-img-add" @click="chooseImg(index)" v-if="!item.uploadPic" src="/static/icon/add-01.png"></image>
 						    <image v-if="item.uploadPic" @click="viewImg(item.uploadPic)" :src="item.uploadPic"></image>
 					    </view>
 					</view>
@@ -28,14 +28,15 @@
 			</view>
 		</view>
 		<uni-popup ref="popup">
-			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload')" :cancelShow="false">
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?id=' + taskId)" :cancelShow="false">
 				<block slot="button">
-					<view @click="redirect('/pages/task/taskDetail?id=' + taskId)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
+					<view @click="redirect('/pages/task/taskDetail?is_end=0&id=' + taskId)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
 						完成
 					</view>
 				</block>
 			</ai-popup-dialog>
 		</uni-popup>
+		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
@@ -44,30 +45,26 @@
 		data() {
 			return {
 				taskId: 0,
+				phone: "",
 				message: [{
 					title: "已提交审核",
 					content: "我们会在2-3个工作日完成审核，请您耐 心等待"
 				}],
 				imgList: [
 					{
-						id: 1,
+						id: 0,
 						exPic: "/static/mock/mock-04.png",
-						addPic: "/static/icon/add-01.png",
-						uploadPic: null
-					},
-					{
-						id: 2,
-						exPic: "/static/mock/mock-04.png",
-						addPic: "/static/icon/add-01.png",
 						uploadPic: null
 					}
 				],
+				uploadImg: [],
 				buttonbg: "ai-button-graybg",
 				submitFlag: false,
 			}
 		},
 		onLoad(res) {
 			this.taskId = res.id
+			this.getTaskDetail(res.id)
 		},
 		methods: {
 			navToBar(url){
@@ -85,11 +82,14 @@
 				    sizeType: ['compressed'],
 				    success: function (res) {
 						_this.imgList[index].uploadPic = res.tempFilePaths[0]
-						if(_this.imgList.some( res => { return res.uploadPic == null})){
+						if(_this.imgList.some( item => { return item.uploadPic == null})){
 						}else{
 							_this.buttonbg = "ai-button-redbg"
 							_this.submitFlag = true
 						}
+						_this.$api.postImg(res.tempFilePaths[0]).then(ress => {
+							_this.uploadImg[index] = JSON.parse(ress.data).data.info
+						})
 				    }
 				});
 			},
@@ -98,8 +98,39 @@
 				this.buttonbg = "ai-button-graybg"
 				this.submitFlag = false
 			},
+			getTaskDetail(id){
+				this.$api.postTaskDetail({
+					id: id
+				}).then( res => {
+					this.imgList[0].exPic = res.data.data.pic_case
+					for(let i =1; i<=5; i++){
+						if(res.data.data["pic_case" + i].length !== 0){
+							this.imgList.push({
+								id: i,
+								exPic: res.data.data["pic_case" + i],
+								uploadPic: null
+							})
+						}
+					}
+				})
+			},
 			submit(){
-				this.$refs.popup.open()
+				if(this.phone.length != 11){
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '手机号码错误'])
+					return
+				}
+				this.$api.postTaskUpload({
+					user_id: this.$store.state.userInfo.id,
+					mission_id: this.taskId,
+					pic: this.uploadImg,
+					mobile: this.phone
+				}).then(res => {
+					if(res.data.code == 0){
+						this.$refs.popup.open()
+					}else{
+						this.$aiGlobal.aiPopupMessage.apply(this,['err', '提交失败'])
+					}
+				})
 			},
 			navTo(url){
 				this.$aiRouter.navTo(url)

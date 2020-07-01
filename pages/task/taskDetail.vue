@@ -98,7 +98,6 @@
 					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
 					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
 					this.taskContent = res.data.data
-					console.log(this.taskContent)
 				})
 			},
 			//保存推广码到本地相册
@@ -128,7 +127,7 @@
 <style lang="scss">
 	.task-detail-body {
 		width: 750rpx;
-		padding: 15px 30rpx 50px;
+		padding: 10px 30rpx 50px;
 	}
 	/*任务标题及时间*/
 	.task-title {
@@ -277,6 +276,7 @@
 		min-height: 300px;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
+		padding: 15px;
 	}
 
 </style>

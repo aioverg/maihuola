@@ -24,27 +24,7 @@
 			return {
 				taskId: 0,
 				taskTitle: null,
-				dataList: [
-					{
-						title: "支付宝扫码领福利",
-						status: "待审核",
-						time: "2020-04-09 11:29:28",
-						tel: "178****6789"
-					},
-					{
-						title: "支付宝扫码领福利",
-						status: "未通过",
-						describe: "（刷单现象）",
-						time: "2020-04-09 11:29:28",
-						tel: "178****6789"
-					},
-					{
-						title: "支付宝扫码领福利",
-						status: "审核通过",
-						time: "2020-04-09 11:29:28",
-						tel: "178****6789"
-					}
-				]
+				dataList: []
 			}
 		},
 		onLoad(res) {
@@ -114,7 +94,7 @@
 		.tcb-item-two {
 			display: flex;
 			justify-content: space-between;
-			margin: 5px 0 0 0;
+			margin: 3px 0 0 0;
 			font-size: 12px;
 			color: #999999;
 		}
