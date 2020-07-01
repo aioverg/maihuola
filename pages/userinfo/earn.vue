@@ -23,11 +23,13 @@
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
+						<!--
 						<view class="ec-thr-sale">
 							<view class="ec-ts-sum">34560.78</view>
 							<view class="ec-ts-text">上月预估收益（元）</view>
 						</view>
-						<view class="ec-thr-oder">
+						-->
+						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
 							<view class="ec-ts-sum">264</view>
 							<view class="ec-ts-text">上月结算收益（元）</view>
 						</view>
@@ -71,11 +73,13 @@
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
+						<!--
 						<view class="ec-thr-sale">
 							<view class="ec-ts-sum">34560.78</view>
 							<view class="ec-ts-text">上月预估收益（元）</view>
 						</view>
-						<view class="ec-thr-oder">
+						-->
+						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
 							<view class="ec-ts-sum">264</view>
 							<view class="ec-ts-text">上月结算收益（元）</view>
 						</view>

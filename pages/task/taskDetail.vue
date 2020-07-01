@@ -2,10 +2,10 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情" @clickRight="navTo('/pages/task/taskUpload')">
 			<block slot="right">
-				<view style="font-size: 15px;">上传截图</view>
+				<view style="font-size: 15px;" v-if="taskStatus == '0'">上传截图</view>
 			</block>
 		</uni-nav-bar>
-		<hint-box v-if="checkHint" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
+		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
 		<view class="task-detail-body">
 			<view class="task-title">
 				<view class="tt-title">{{taskContent.title}}</view>
@@ -33,14 +33,16 @@
 			</view>
 			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?id=' + taskId + '&tasktitle=' + taskContent.title)">审核记录</view>
 			<view class="task-past" v-if="taskStatus == '1'">活动已结束</view>
+			<!--
 			<view class="qr-bt" v-if="qrCodeBt" @click="getqrCode">获取推广码</view>
+			-->
 			<view class="qr-content" v-if="qrCode">
 				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
 				<!--
 				<view class="qr-one">支付宝拉新二维码</view>
 				<view class="qr-two">打开支付宝 扫一扫</view>
 				-->
-				<view class="qr-save" @click="saveQr()">保存图片</view>
+				<view class="qr-save" @click="saveQr()">保存推广码</view>
 			</view>
 			<view class="task-content">
 				<jyf-parser :html="taskContent.rule"></jyf-parser>
@@ -65,7 +67,7 @@
 				taskContent: {},
 				checkHint: true, //有提交数量不为零时显示
 				qrCodeBt: true, //是否显示获取推广码按钮
-				qrCode: false, //是否显示推广码
+				qrCode: true, //是否显示推广码
 			}
 		},
 		onLoad(res) {
@@ -81,10 +83,11 @@
 			navTo(url){
 				this.$aiRouter.navTo(url)
 			},
+			/*
 			//显示推广码
 			getqrCode(){
 				this.qrCode = true
-			},
+			},*/
 			//获取任务信息
 			getTaskDetail(id){
 				this.$api.postTaskDetail({

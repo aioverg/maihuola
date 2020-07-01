@@ -3,10 +3,10 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" :leftText="navBarTitle"></uni-nav-bar>
 		<view class="bind-alipay">
 		<view class="phone-name">
-			<ai-input title="真实姓名" placeholder="请输入真实姓名" @getInput="getUserName" ></ai-input>
+			<ai-input title="真实姓名" :placeholder="oldName" @getInput="getUserName" ></ai-input>
 		</view>
 		<view class="phone-num">
-			<ai-input title="支付宝账户" placeholder="请输入支付宝账户" @getInput="getAlipayAccount" ></ai-input>
+			<ai-input title="支付宝账户" :placeholder="oldAccount" @getInput="getAlipayAccount" ></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="bindAlipay"></ai-button>
@@ -29,11 +29,16 @@
 				navBarTitle: null,
 				alipayAccount: "",
 				userName: "",
+				oldAccount: "请输入真实姓名",
+				oldName: "请输入支付宝账户",
 				navigateFlag: false
 			}
 		},
 		onLoad(res) {
 			this.navBarTitle = res.navbartitle
+			if(res.navbartitle == "修改绑定支付宝"){
+				this.getAlipay()
+			}
 		},
 		methods: {
 			getAlipayAccount(value){
@@ -41,6 +46,14 @@
 			},
 			getUserName(value){
 				this.userName = value.replace(/\s*/g,"")
+			},
+			getAlipay(){
+				this.$api.getAuthInfo({
+					code: "alipay"
+				}).then(res => {
+					this.oldAccount = res.data.data.account
+					this.oldName = res.data.data.real_name
+				})
 			},
 			bindAlipay(){
 				//发送给数据库的接口

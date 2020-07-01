@@ -16,7 +16,7 @@
 				<ai-title-list :title="item.title"></ai-title-list>
 				<view class="tb-item-head">
 					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
-					<view class="tb-ih-forms" v-if="item.is_end">查看报表</view>
+					<view class="tb-ih-forms" v-if="item.is_end" @click="navTo('/pages/task/taskDetail?id=' + item.id + '&is_end=' + item.is_end)">查看报表</view>
 				</view>
 			</view>
 		</view>

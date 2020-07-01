@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" :leftClickTag="leftClickTag" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
-		<ai-phone-login :jumpUrl="jumpUrl" :tabId="tabId"></ai-phone-login>
+		<ai-phone-login :jumpUrl="jumpUrl"></ai-phone-login>
 	</view>
 </template>
 

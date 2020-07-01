@@ -372,6 +372,7 @@
 				const _this = this
 				uni.startPullDownRefresh({
 					success: function() {
+						_this.menuFlag = true
 						_this.getCarousel()
 						_this.getGuessSort()
 						_this.goodsList = []

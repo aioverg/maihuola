@@ -25,7 +25,7 @@
 			<image class="apl-wx-icon" mode="widthFix" src="/static/img/img-wx.png"></image>
 			<view class="apl-wx-bt">微信登录</view>
 		</view>
-		<view class="apl-note">
+		<view class="apl-note" :style="{bottom:hintBottom + 'px'}">
 			<ai-login-hint></ai-login-hint>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
@@ -49,13 +49,13 @@
 			}
 		},
 		props: {
-			tabId: {
-				type: String,
-				default: null
-			},
 			jumpUrl: {
 				type: String,
 				default: null
+			},
+			hintBottom: {
+				type: String,
+				default: 50
 			}
 		},
 		methods: {
@@ -225,8 +225,8 @@
 		}
 	}
 	.apl-note {
-		position: absolute;
-		left: 37px;
-		bottom: 50px;
+		position: fixed;
+		width: 750rpx;
+		text-align: center;
 	}
 </style>

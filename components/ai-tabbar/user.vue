@@ -2,7 +2,7 @@
 	<view>
 		<!--登录-->
 		<view v-if="!loginState" class="loginmm" style="padding: 80px 0 0 0;">
-			<ai-phone-login jumpUrl="/pages/index/index?tabId=2"></ai-phone-login>
+			<ai-phone-login hintBottom="80" jumpUrl="/pages/index/index?tabId=2"></ai-phone-login>
 		</view>
 		
 		<!--我的-->
@@ -52,9 +52,7 @@
 					<view class="balance">
 						<view class="title">账户余额（元）：</view>
 						<view class="num">{{blance}}</view>
-						<view class="cash" @click="withdraw">
-							提现
-						</view>
+						<view class="cash" @click="withdraw">提现</view>
 					</view>
 					<view class="money-hint">每月25号可提现上月结算收益</view>
 				</view>
@@ -86,7 +84,6 @@
 					-->
 				</view>
 			</view>
-
 
 			<view class="list-card">
 				<view class="message">
@@ -373,19 +370,17 @@
 				padding: 0 30rpx;
 
 				.title {
-					display: inline-block;
-					width: 125px;
+					min-width: 120px;
 					font-size: 15px;
 					color: rgba(255, 255, 255, 0.8);
 				}
 
 				.num {
-					display: inline-block;
+					flex-grow: 1;
 					overflow-x: hidden;
-					width: 125px;
+					min-width: 100px;
 					margin: 0 10px 0 0;
 					text-overflow: ellipsis;
-					text-align: left;
 					font-size: 20px;
 					font-weight: bold;
 					color: rgba(255, 255, 255, 0.8);
@@ -456,7 +451,6 @@
 					font-size: 12px;
 					text-align: center;
 				}
-
 			}
 		}
 	}

@@ -31,11 +31,10 @@
 				try {
 					// 获取本地存储中launchFlag标识
 				    const value = uni.getStorageSync('launchFlag');
-					console.log(22  ,value)
 				    if (value) {
 						// launchFlag=true直接跳转到首页
-						uni.switchTab({
-							url: '/pages/indexs/indexs'
+						uni.redirectTo({
+							url: '/pages/index/index'
 						});
 				    } else {
 						// launchFlag!=true显示引导页
@@ -53,8 +52,8 @@
 					this.guidePages = true
 				}
 				return;
-				uni.switchTab({
-				    url: '/pages/indexs/indexs'
+				uni.redirectTo({
+				    url: '/pages/index/index'
 				});
 			}
 		}
