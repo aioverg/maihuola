@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情" @clickRight="navTo('/pages/task/taskUpload')">
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情">
 			<block slot="right">
-				<view style="font-size: 15px;" v-if="taskStatus == '0'">上传截图</view>
+				<view style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?id=' + taskId)" v-if="taskStatus == '0'">上传截图</view>
 			</block>
 		</uni-nav-bar>
 		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
@@ -42,7 +42,7 @@
 				<view class="qr-one">支付宝拉新二维码</view>
 				<view class="qr-two">打开支付宝 扫一扫</view>
 				-->
-				<view class="qr-save" @click="saveQr()">保存推广码</view>
+				<view class="qr-save" @click="saveQr(taskContent.spread_qrcode)">保存推广码</view>
 			</view>
 			<view class="task-content" v-if="qrContent">
 				<jyf-parser :html="taskContent.rule"></jyf-parser>
@@ -102,10 +102,10 @@
 				})
 			},
 			//保存推广码到本地相册
-			saveQr(){
+			saveQr(url){
 				const _this = this
 				uni.downloadFile({
-				    url: 'http://static.adesk.com/wallpaper?imgid=5880a6b4e7bce7751fc433df&reso=1200x800', 
+				    url: url, 
 				    success: (res) => {
 				        if (res.statusCode === 200) {
 							uni.saveImageToPhotosAlbum({

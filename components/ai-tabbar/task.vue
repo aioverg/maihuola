@@ -105,8 +105,10 @@
 			position: relative;
 
 			.tb-ic-img {
+				
 				width: 650rpx;
 				height: 125px;
+				border-radius: 8px;
 			}
 
 			.tb-ic-shade {

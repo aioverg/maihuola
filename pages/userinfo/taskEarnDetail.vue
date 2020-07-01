@@ -111,8 +111,8 @@
 	}
 	.ted-sel-item-box {
 		width: 630rpx;
-		min-height: 100px;
-		padding: 20px 100rpx 10px 20rpx;
+		min-height: 20px;
+		padding: 5px 100rpx 10px 20rpx;
 		border-radius: 8px;
 		box-shadow: 0px 0px 20px 0px rgba(255,0,71,0.16);
 		position: absolute;

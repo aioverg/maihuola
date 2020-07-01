@@ -118,7 +118,7 @@
 				rankData: [
 					{
 						id: "default",
-						title: "默认",
+						title: "默认排序",
 						key: null,
 						rankType: null
 					},

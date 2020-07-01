@@ -57,7 +57,6 @@
 			align-items: center;
 			line-height: 20px;
 			padding: 15px 0;
-			border-radius: 8px;
 			border-bottom: 1px solid #E5E5E5;
 			font-size: 16px;
 			font-weight: bold;

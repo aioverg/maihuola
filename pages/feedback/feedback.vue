@@ -75,6 +75,9 @@
 			border-radius: 8px;
 		}
 	}
+	.textarea-placeholder {
+		color: #CCCCCC;
+	}
 	.feedback-bt {
 		position: fixed;
 		bottom: 45px;

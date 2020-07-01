@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')" @clickRight="navTo('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')" @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
 		<view class="task-upload-body">
 			<view class="tub-user">
 				<view class="tub-user-title">请输入用户信息</view>
-				<input class="tub-user-tel" placeholder="请输入手机号" />
+				<input class="tub-user-tel" type="number" placeholder="请输入手机号" />
 			</view>
 			<view class="tub-upload">
 				<view class="tub-upload-title">请按示例上传截图</view>
@@ -28,9 +28,9 @@
 			</view>
 		</view>
 		<uni-popup ref="popup">
-			<ai-popup-dialog :message='message' btname="继续提交" @confirm="navTo('/pages/task/taskUpload')" :cancelShow="false">
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload')" :cancelShow="false">
 				<block slot="button">
-					<view @click="navTo('/pages/task/taskDetail')" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
+					<view @click="redirect('/pages/task/taskDetail?id=' + taskId)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
 						完成
 					</view>
 				</block>
@@ -43,6 +43,7 @@
 	export default {
 		data() {
 			return {
+				taskId: 0,
 				message: [{
 					title: "已提交审核",
 					content: "我们会在2-3个工作日完成审核，请您耐 心等待"
@@ -64,6 +65,9 @@
 				buttonbg: "ai-button-graybg",
 				submitFlag: false,
 			}
+		},
+		onLoad(res) {
+			this.taskId = res.id
 		},
 		methods: {
 			navToBar(url){
@@ -99,6 +103,9 @@
 			},
 			navTo(url){
 				this.$aiRouter.navTo(url)
+			},
+			redirect(url){
+				this.$aiRouter.redirect(url)
 			}
 		}
 	}
@@ -157,8 +164,8 @@
 				}
 				image {
 					width: 100%;
-					height: 170px;
-					border-radius: 8px;
+					height: 100%;
+					border-radius: 5px;
 				}
 				.tu-img-add {
 					width: 40px;

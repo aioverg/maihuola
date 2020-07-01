@@ -42,7 +42,7 @@
 		data() {
 			return {
 				tel: null,
-				telColor: "#999999",
+				telColor: "#CCCCCC",
 				wechat: null,
 				wechatColor: "#FF1968",
 				taobao: null,
@@ -86,7 +86,7 @@
 							code: "alipay"
 						}).then(res => {
 							this.alipay = res.data.data.account
-							this.alipayColor = "#999999"
+							this.alipayColor = "#CCCCCC"
 						})
 					}else{
 						this.alipay = "未填写"
