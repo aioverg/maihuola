@@ -44,7 +44,7 @@
 				-->
 				<view class="qr-save" @click="saveQr()">保存推广码</view>
 			</view>
-			<view class="task-content">
+			<view class="task-content" v-if="qrContent">
 				<jyf-parser :html="taskContent.rule"></jyf-parser>
 			</view>
 		</view>
@@ -65,9 +65,9 @@
 				taskId: 0, //任务ID
 				taskStatus: "0", //任务是否过期
 				taskContent: {},
-				checkHint: true, //有提交数量不为零时显示
 				qrCodeBt: true, //是否显示获取推广码按钮
 				qrCode: true, //是否显示推广码
+				qrContent: true
 			}
 		},
 		onLoad(res) {
@@ -75,6 +75,8 @@
 			this.taskStatus = res.is_end
 			if(res.is_end == "1"){
 				this.qrCodeBt = false
+				this.qrCode = false
+				this.qrContent = false
 			}
 			console.log(this.taskStatus)
 			this.getTaskDetail(res.id)

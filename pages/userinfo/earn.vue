@@ -59,7 +59,7 @@
 					</view>
 				</view>
 				<view class="earn-detail">
-					<view class="earn-detail-item" @click="navTo('/pages/userinfo/earnDetail')">
+					<view class="earn-detail-item" @click="navTo('/pages/userinfo/taskEarnDetail')">
 						<ai-list-cell title="赚金结算明细"></ai-list-cell>
 					</view>
 				</view>
@@ -109,7 +109,7 @@
 					</view>
 				</view>
 				<view class="earn-detail">
-					<view class="earn-detail-item" @click="navTo('/pages/userinfo/earnDetail')">
+					<view class="earn-detail-item" @click="navTo('/pages/userinfo/saleEarnDetail')">
 						<ai-list-cell title="卖货结算明细"></ai-list-cell>
 					</view>
 				</view>

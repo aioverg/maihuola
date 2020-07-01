@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" rightText="关闭" @clickRight="navTo('/pages/index/index?tabId=2')" ></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="返回" rightText="关闭" @clickRight="navTo('/pages/index/index?tabId=2')" ></uni-nav-bar>
 		<view class="help-body">
 		<view class="docunemt">
 			<view class="title">

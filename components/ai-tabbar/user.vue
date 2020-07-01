@@ -391,11 +391,11 @@
 					width: 60px;
 					height: 26px;
 					border-radius: 14px;
-					border: 1px solid rgba(255, 255, 255, 0.6);
+					border: 1px solid rgba(255, 255, 255, 0.8);
 					line-height: 24px;
 					text-align: center;
 					font-size: 12px;
-					color: rgba(255, 255, 255, 0.6);
+					color: rgba(255, 255, 255, 0.8);
 					position: relative;
 					top: 10px;
 

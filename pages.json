@@ -147,7 +147,7 @@
             "style" : {}
         }
         ,{
-            "path" : "pages/userinfo/earnDetail",
+            "path" : "pages/userinfo/saleEarnDetail",
             "style" : {}
         }
         ,{
@@ -172,6 +172,10 @@
         }
         ,{
             "path" : "pages/search/orderSearch",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/userinfo/taskEarnDetail",
             "style" : {}
         }
     ],
