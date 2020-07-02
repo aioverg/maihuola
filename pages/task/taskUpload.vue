@@ -95,6 +95,7 @@
 			},
 			cancelImg(index){
 				this.imgList[index].uploadPic = null
+				this.uploadImg[index] = null
 				this.buttonbg = "ai-button-graybg"
 				this.submitFlag = false
 			},
@@ -119,6 +120,15 @@
 					this.$aiGlobal.aiPopupMessage.apply(this,['err', '手机号码错误'])
 					return
 				}
+				if(this.uploadImg.length != this.imgList.length){
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '图片数量不够'])
+					return
+				}
+				if(this.uploadImg.some( item => { return item == null})){
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '图片数量不够'])
+					return
+				}
+				console.log(this.uploadImg, this.imgList.length)
 				this.$api.postTaskUpload({
 					user_id: this.$store.state.userInfo.id,
 					mission_id: this.taskId,

@@ -97,9 +97,9 @@
             },
             "splashscreen" : {
                 "android" : {
-                    "hdpi" : "static/drawable-hdpi/drawable-hdpi/splash.png",
-                    "xhdpi" : "static/drawable-hdpi/drawable-xhdpi/splash.png",
-                    "xxhdpi" : "static/drawable-hdpi/drawable-xxhdpi/splash.png"
+                    "hdpi" : "static/drawable-hdpi/drawable-hdpi/splash.9.png",
+                    "xhdpi" : "static/drawable-hdpi/drawable-xhdpi/splash.9.png",
+                    "xxhdpi" : "static/drawable-hdpi/drawable-xxhdpi/splash.9.png"
                 },
                 "alwaysShowBeforeRender" : true, //白屏时是否开启程序启动界面
                 "waiting" : true, //程序启动界面是否显示等待雪花

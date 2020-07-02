@@ -65,6 +65,7 @@
 		display: flex;
 		flex-direction: row;
 		height: 80upx;
+		margin: 15px 0 0 0;
 		align-items: center;
 		justify-content: center
 	}
