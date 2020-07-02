@@ -62,9 +62,11 @@
 				//初次加载第一个页面的请求数据
 				if (this.selTabId == '0') {
 					_this.$refs.home.pageOnload()
+				} else if (this.selTabId == '1') {
+					_this.$refs.task.pageOnload()
 				} else if (this.selTabId == '2') {
 					_this.$refs.user.pageOnload()
-				}
+				} 
 			})
 		},
 		//滑动到底部时请求操作

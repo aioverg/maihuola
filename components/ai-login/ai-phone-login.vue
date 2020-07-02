@@ -13,7 +13,7 @@
 				<view class="apl-code-input-box">
 					<image class="apl-code-icon" mode="widthFix" src="/static/icon/icon-dialog.png"></image>
 					<input class="apl-code-input" type="number" v-model="code" placeholder="请输入验证码" />
-					<view class="apl-code-button" @click="getCode">{{times}}{{btName}}</view>
+					<view class="apl-code-button" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" @click="getCode">{{times}}{{btName}}</view>
 				</view>
 			</view>
 			<view class="apl-login-button">
@@ -43,9 +43,21 @@
 				phone: null,
 				code: null,
 				btName: "获取验证码",
+				btNameColor: "#CCCCCC",
+				btNameUnderline: "underline",
 				times: null,
 				timeRun: false,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
+			}
+		},
+		watch: {
+			phone(){
+				if(this.phone.length !== 11 || this.phone == null){
+					this.btNameColor = "#CCCCCC"
+				}else{
+					if(this.timeRun){return}
+					this.btNameColor = "#FF716E"
+				}
 			}
 		},
 		props: {
@@ -74,12 +86,16 @@
 							this.timeRun = true
 							this.times = 60
 							this.btName = "s重新发送"
+							this.btNameUnderline = "none"
+							this.btNameColor = "#CCCCCC"
 							let timer = setInterval(()=>{
 							    if(this.times == 1){
 								    clearInterval(timer)
 								    this.timeRun = false
 								    this.times = null
 								    this.btName = "获取验证码"
+									this.btNameUnderline = "underline"
+									this.btNameColor = "#FF716E"
 								    return
 							    }
 							    this.times -= 1
@@ -186,14 +202,13 @@
 		}
 		.apl-code-button {
 			display: inline-block;
-			text-decoration-line: underline;
+			//text-decoration-line: underline;
 			width: 100px;
 			height: 40px;
 			text-align: center;
 			border-radius: 22px;
 			line-height: 40px;
 			font-size: 14px;
-			color: #FF716E;
 		}
 	}
 	.apl-login-button {
