@@ -29,6 +29,7 @@
 <style lang="scss">
 	.ai-null {
 		text-align: center;
+		width: 750rpx;
 	}
 	.ai-null-img {
 		width: 494rpx;

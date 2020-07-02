@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftClickTag="/pages/index/index" leftIcon="arrowleft" leftText="搜索"></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="搜索"></uni-nav-bar>
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/search01.png"></image>

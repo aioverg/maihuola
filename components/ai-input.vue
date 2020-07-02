@@ -4,7 +4,7 @@
 		<view class="ai-input-title">{{title}}</view>
 		<view v-if="content" class="ai-input-content">{{content}}</view>
 		<input class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
-		<view class="ai-input-bt" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
+		<view class="ai-input-bt" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
 	</view>
 </template>
 
@@ -15,7 +15,9 @@
 				btName: "获取验证码",
 				times: null,
 				timeRun: false,
-				inputValue: null
+				inputValue: null,
+				btNameColor: "#f47a73",
+				btNameUnderline: "underline"
 			};
 		},
 		props: {
@@ -55,12 +57,16 @@
 				this.timeRun = true
 				this.times = 60
 				this.btName = "s重新发送"
+				this.btNameColor = "#CCCCCC"
+				this.btNameUnderline = "none"
 				let timer = setInterval(()=>{
 					if(this.times == 1){
 						clearInterval(timer)
 						this.timeRun = false
 						this.times = null
 						this.btName = "获取验证码"
+						this.btNameColor = "#f47a73"
+						this.btNameUnderline = "underline"
 						return
 					}
 					this.times -= 1
@@ -106,7 +112,7 @@
 			display: inline-block;
 			width: 100px;
 			font-size:14px;
-			color: #f47a73;
+			//color: #f47a73;
 			text-decoration: underline;
 		}
 	}

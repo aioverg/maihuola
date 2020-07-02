@@ -15,6 +15,9 @@
 				</view>
 			</view>
 		</view>
+		<view style="position: fixed; top: 30% ;">
+			<ai-null v-if="aiNull" explain="哎呀！暂时还没有记录哦！"></ai-null>
+		</view>
 	</view>
 </template>
 
@@ -24,7 +27,8 @@
 			return {
 				taskId: 0,
 				taskTitle: null,
-				dataList: []
+				dataList: [],
+				aiNull: false
 			}
 		},
 		onLoad(res) {
@@ -53,7 +57,9 @@
 						}
 					}
 					this.dataList = res.data.data.data
-					console.log(this.dataList)
+					if(res.data.data.data.length == 0){
+						this.aiNull = true
+					}
 				})
 			}
 		}

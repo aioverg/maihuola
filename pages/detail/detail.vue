@@ -203,11 +203,11 @@
 	/*商品图片*/
 	.guess-img-box {
 		width: 750rpx;
-		height: 600rpx;
+		height: 750rpx;
 		background: #FFFFFF;
 		.guess-img {
 			width: 750rpx;
-			height: 600rpx;
+			height: 750rpx;
 			display: block;
 			margin: 0 auto;
 		}
