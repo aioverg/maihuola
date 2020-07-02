@@ -107,17 +107,22 @@
 				</view>
 			</view>
 		</view>
+		<uni-popup ref="popupDialog" type="dialog">
+		    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登 录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 		<mix-loading v-show="refresh"></mix-loading>
 	</view>
 </template>
 
 <script>
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	import aiPhoneLogin from '@/components/ai-login/ai-phone-login.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
+			uniPopupDialog,
 			mixLoading,
 			aiListCell,
 			aiPhoneLogin
@@ -177,15 +182,14 @@
 				}
 			},
 			logout() {
-				this.$store.commit("logout")
-				this.$aiRouter.navTo("/pages/index/index")
+				this.$refs.popupDialog.open()
 			},
 			close(done) {
-				// TODO 做一些其他的事情，before-close 为true的情况下，手动执行 done 才会关闭对话框 
 				done()
 			},
 			confirm(done) {
-				apkDownload(this.$store.state.appInfo.appLink)
+				this.$store.commit("logout")
+				this.$emit("changeTabbar", 0)
 				done()
 			},
 

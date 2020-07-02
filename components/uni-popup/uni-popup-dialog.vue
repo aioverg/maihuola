@@ -56,7 +56,7 @@
 			 */
 			type: {
 				type: String,
-				default: 'error'
+				default: 'success'
 			},
 			/**
 			 * 对话框模式 base/input
@@ -167,6 +167,7 @@
 	.uni-dialog-title-text {
 		font-size: 16px;
 		font-weight: 600;
+		color: #333333;
 	}
 
 	.uni-dialog-content {
@@ -180,6 +181,7 @@
 	}
 
 	.uni-dialog-content-text {
+		text-align: center;
 		font-size: 14px;
 		color: #6e6e6e;
 	}

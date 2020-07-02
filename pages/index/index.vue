@@ -10,7 +10,7 @@
 		</view>
 		<!-- 我的 -->
 		<view :style="{'display':selTabId == 2 ?'block':'none'}" style="position: relative;">
-			<user-page ref="user"></user-page>
+			<user-page ref="user" @changeTabbar="changeTabbar"></user-page>
 		</view>
 
 		<!--底部导航栏-->

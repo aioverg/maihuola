@@ -1,14 +1,15 @@
 <template>
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="藏品"></uni-nav-bar>
-		
-		
 		<uni-swipe-action class="collect-guess-box">
 			<uni-swipe-action-item class="collect-guess-item" v-for="(item,index) in collectList" :options="options" :key="item.id" @change="swipeChange"
 			 @click="swipeClick(index)">
 				<ai-gusee-card :data="item"></ai-gusee-card>
 			</uni-swipe-action-item>
 		</uni-swipe-action>
+		<uni-popup ref="popupDialog" type="dialog">
+		    <uni-popup-dialog type="err" title="删除商品" content="确定将该商品从品库中删除吗？"  @close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 		<ai-null v-if="false"></ai-null>
 	</view>
 </template>
@@ -17,14 +18,17 @@
 	import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
 	import uniSwipeActionItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'
 	import aiGuseeCard from '@/components/ai-guess-card.vue'
+	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	export default {
 		components: {
 			uniSwipeAction,
 			uniSwipeActionItem,
-			aiGuseeCard
+			aiGuseeCard,
+			uniPopupDialog,
 		},
 		data() {
 			return {
+				delIndex: 0,
 				options: [
 					{
 					    text: '删除',
@@ -126,20 +130,18 @@
 		},
 		methods: {
 			swipeChange(e) {
-				console.log('返回：', e);
+				//console.log('返回：', e);
 			},
 			swipeClick(index) {
-				uni.showModal({
-					title: '删除商品',
-					content: '确定将该商品从品库中删除吗？',
-					success: (res) => {
-						if (res.confirm) {
-							this.collectList.splice(index, 1)
-						} else if (res.cancel) {
-							console.log('用户点击取消');
-						}
-					}
-				});
+				this.delIndex = index
+				this.$refs.popupDialog.open()
+			},
+			confirm(done){
+				this.collectList.splice(this.delIndex, 1)
+				done()
+			},
+			close(done){
+				done()
 			}
 		}
 	}

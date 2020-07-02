@@ -28,14 +28,12 @@
 
 <script>
 	import aiListCell from '@/components/ai-list-cell'
-	import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import uniPopupMessage from '@/components/uni-popup/uni-popup-message.vue'
 	const Alibcsdk = uni.requireNativePlugin('UZK-Alibcsdk');
 	export default {
 		components: {
 			aiListCell,
-			uniPopUp,
 			uniPopupDialog,
 			uniPopupMessage
 		},
