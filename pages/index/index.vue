@@ -1,6 +1,6 @@
 <template>
 	<view class="content" style="position: relative;">
-		<!-- 发现 -->
+		<!-- 选品 -->
 		<view :style="{'display':selTabId == 0 ?'block':'none'}">
 			<home-page ref="home"></home-page>
 		</view>
@@ -69,6 +69,17 @@
 				} 
 			})
 		},
+		//监听页面的滚动
+		/*onPageScroll(res){
+			if(this.selTabId == '0'){
+				if(res.scrollTop <= 200){
+					this.$refs.home.sortCeil("sort-relative")
+				}else{
+					this.$refs.home.sortCeil("sort-fixed")
+				}
+			}
+			
+		},*/
 		//滑动到底部时请求操作
 		onReachBottom() {
 			if (this.selTabId == 0) {

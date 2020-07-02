@@ -28,7 +28,7 @@
 			</uni-swiper-dot>
 		</view>
 		<!--分类-->
-		<view class="sort-section">
+		<view class="sort-section" :class="sortFixed">
 			<!--分类菜单-->
 			<view class="sort-items">
 				<scroll-view class="typetitleTab" scroll-x="true">
@@ -157,7 +157,9 @@
 				//是否显示下载进度提示条
 				downloadPtogress: false,
 				//是否显示刷新等待图标
-				refresh: false
+				refresh: false,
+				//将分类列表吸顶
+				sortFixed: "sort-relative"
 				
 			};
 		},
@@ -348,6 +350,10 @@
 					this.$refs.popupAiDia.open()
 				}
 			},
+			//将分类列表吸顶
+			sortCeil(value){
+				this.sortFixed = value
+			},
 			//弹窗关闭
 			close(done){
 				done()
@@ -488,12 +494,21 @@
 		}
 	}
 	/*分类*/
+	.sort-relative {
+		position: relative;
+		height: 36px;
+	}
+	.sort-fixed {
+		position: fixed;
+		height: 46px;
+		top: 80px;
+	}
 	.sort-section {
 		width: 100%;
-		height: 36px;
 		display: flex;
 		align-items: center;
 		background: #FFFFFF;
+		z-index: 10;
 		.sort-items {
 			height: 45px;
 			flex-grow: 1;

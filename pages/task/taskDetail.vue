@@ -98,8 +98,6 @@
 					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
 					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
 					this.taskContent = res.data.data
-					console.log(this.taskContent)
-					console.log(res.data.data)
 				})
 			},
 			//保存推广码到本地相册

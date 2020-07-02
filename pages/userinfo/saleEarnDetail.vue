@@ -87,6 +87,7 @@
 				console.log(this.pickerDate)
 			},
 			nowDate(){
+				// #ifdef H5
 				let dateArray = new Date().toLocaleDateString().split('/')
 				if(dateArray[1].length == 1){
 					dateArray[1] = "0" + dateArray[1]
@@ -96,6 +97,12 @@
 				}
 				this.endDate = dateArray.join('-')
 				this.pickerDate = dateArray.join('-')
+				// #endif
+				// #ifdef APP-PLUS
+				let dateArray = new Date().toISOString().slice(0, 10)
+				this.endDate = dateArray
+				this.pickerDate = dateArray
+				// #endif
 			},
 			help(){
 				this.$refs.earnDetailHelp.open()
