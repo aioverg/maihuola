@@ -31,7 +31,9 @@
 				inputValue: null,
 				history: [],
 				delHint: false,
+				routerKind: "navTo",
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				
 			}
 		},
 		watch: {
@@ -46,6 +48,9 @@
 		onLoad(res){
 			if(res){
 				this.inputValue = res.id
+			}
+			if(res.router){
+				this.routerKind = res.router
 			}
 			const _this = this
 			//获取历史搜索的本地缓存
@@ -84,10 +89,18 @@
 			navTo(obj){
 				this.inputValue = obj.replace(/(^\s*)|(\s*$)/g, "")
 				if(this.inputValue.length == 0){return}
-				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
+				if(this.routerKind == "redirect"){
+					this.$aiRouter.redirect('/pages/search/searchResult?id=' + obj)
+				}else{
+					this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
+				}
 			},
 			historyNavTo(obj){
-				this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
+				if(this.routerKind == "redirect"){
+					this.$aiRouter.redirect('/pages/search/searchResult?id=' + obj)
+				}else{
+					this.$aiRouter.navTo('/pages/search/searchResult?id=' + obj)
+				}
 			},
 			delInput(){
 				this.inputValue = null

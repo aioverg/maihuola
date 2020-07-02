@@ -4,7 +4,7 @@
 		<view class="head">
 			<view class="input-box">
 				<image class="input-box-icon" src="/static/icon/search01.png"></image>
-				<input class="input-box-input" v-model="searchInput" @click="redirect('/pages/search/search?id=' + searchInput)" disabled />
+				<input class="input-box-input" v-model="searchInput" @click="redirect('/pages/search/search?id=' + searchInput + '&router=redirect')" disabled />
 			</view>
 		</view>
 		<view class="search-result">
