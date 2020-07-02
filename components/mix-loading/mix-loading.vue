@@ -2,7 +2,7 @@
 	<!-- loading 加载 -->
 	<view class="mix-loading-content">
 		<view class="mix-loading-wrapper">
-			<image class="mix-loading-icon" src="../../static/icon/icon-loading.gif"></image>
+			<image class="mix-loading-icon" src="/static/icon/icon-loading.gif"></image>
 		</view>
 	</view>
 </template>
@@ -33,7 +33,7 @@
 		display:flex;
 		justify-content: center;
 		align-items: center;
-		position: absolute;
+		position: fixed;
 		left: 0;
 		top: 0;
 		width: 100%;

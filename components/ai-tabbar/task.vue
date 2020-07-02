@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view style="padding: 0 0 50px;">
 		<uni-nav-bar fixed="true">
 			<block slot="left">
 				<view style="font-weight:650; font-size: 20px; margin: 0 0 0 9px;">赚金</view>
@@ -20,19 +20,27 @@
 				</view>
 			</view>
 		</view>
+		<!--下拉加载提示-->
+		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
+		<mix-loading v-show="refresh"></mix-loading>
 	</view>
 </template>
 
 <script>
 	import aiTitleList from '@/components/ai-list/ai-title-list.vue'
+	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	export default {
 		components: {
-			aiTitleList
+			aiTitleList,
+			mixLoading
 		},
 		data() {
 			return {
 				login: false,
-				taskList: []
+				taskList: [],
+				//下拉加载提示类型
+				uniLoadMoreStatus: "noMore",
+				refresh: false,
 			}
 		},
 		methods: {
@@ -44,12 +52,13 @@
 				}
 			},
 			getTaskList(){
-				this.$api.postTaskList().then(res => {
+				return this.$api.postTaskList().then(res => {
 					for(let item of res.data.data.data){
 						item.start_time = item.start_time.replace(/-/g, '.')
 						item.end_time = item.end_time.replace(/-/g, '.')
 					}
 					this.taskList = res.data.data.data
+					return true
 				})
 			},
 			//组件加载时运行的函数
@@ -60,8 +69,18 @@
 			},
 			//页面下拉时刷新组件
 			pageRefresh() {
-				this.getTaskList()
-				return
+				const _this = this
+				_this.refresh = true
+				uni.startPullDownRefresh({
+					success: function() {
+						_this.getTaskList().then(res => {
+							if(res){
+								_this.refresh = false
+								uni.stopPullDownRefresh()
+							}
+						})
+					}
+				})
 			},
 		}
 	}
@@ -70,7 +89,7 @@
 <style lang="scss">
 	.task-body {
 		width: 750rpx;
-		padding: 10px 30rpx 20px;
+		padding: 10px 30rpx 0;
 	}
 
 	.tb-item {

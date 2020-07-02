@@ -208,8 +208,10 @@
 				uni.startPullDownRefresh({
 					success: function() {
 						_this.getUserInfo().then(res => {
-							_this.refresh = false
-							uni.stopPullDownRefresh()
+							if(res){
+								_this.refresh = false
+								uni.stopPullDownRefresh()
+							}
 						})
 					}
 				})
