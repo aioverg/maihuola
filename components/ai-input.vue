@@ -2,9 +2,7 @@
 <template>
 	<view class="ai-input-box">
 		<view :style= "{width: titleWidth}" class="ai-input-title">{{title}}</view>
-		<!--
-		<view v-if="content" class="ai-input-content">{{content}}</view>
-		-->
+		<view :style="{width: inputWidth}" v-if="content" class="ai-input-content">{{content}}</view>
 		<input :style="{width: inputWidth}" class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
 		<view class="ai-input-bt" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
 		<image class="ai-input-del" @click="delInput()" v-show="delShow" src="/static/icon/err-01.png"></image>
@@ -37,11 +35,11 @@
 				type: String,
 				default: "text",
 			},
-			/*
+			
 			content: {
 				//type: String,
 				default: null
-			},*/
+			},
 			inputWidth: {
 				type: String,
 				default: "250rpx"
@@ -74,7 +72,11 @@
 		watch:{
 			inputValue(){
 				if(this.del){
-					this.inputValue != null ? this.delShow = true : this.delShow = false
+					if(this.inputValue == ""){
+						this.inputValue.length == 0 ? this.delShow = false : this.delShow = true
+					}else{
+						this.inputValue != null ? this.delShow = true : this.delShow = false
+					}
 				}
 			}
 		},
@@ -127,13 +129,10 @@
 			font-size:15px;
 			color: #333333;
 		}
-		/*
 		.ai-input-content {
-			width: 250rpx;
 			font-size: 14px;
 			color: #999999;
 		}
-		*/
 		.ai-input-input {
 			border: none;
 			display: inline-block;

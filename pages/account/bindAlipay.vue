@@ -3,10 +3,10 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" :leftText="navBarTitle"></uni-nav-bar>
 		<view class="bind-alipay">
 		<view class="phone-name">
-			<ai-input title="真实姓名" :placeholder="oldName" @getInput="getUserName" ></ai-input>
+			<ai-input :del="true" inputWidth="390rpx" title="真实姓名" :placeholder="oldName" @getInput="getUserName" ></ai-input>
 		</view>
 		<view class="phone-num">
-			<ai-input title="支付宝账户" :placeholder="oldAccount" @getInput="getAlipayAccount" ></ai-input>
+			<ai-input :del="true" inputWidth="390rpx" title="支付宝账户" :placeholder="oldAccount" @getInput="getAlipayAccount" ></ai-input>
 		</view>
 		<view class="bt">
 		    <ai-button btname="确定" @eventClick="bindAlipay"></ai-button>
