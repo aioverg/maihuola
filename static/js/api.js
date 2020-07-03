@@ -266,4 +266,12 @@ api.postTaskUpload = (data) => {
 		data: data
 	})
 }
+//赚金收益接口
+api.postTaskEarn = (data) => {
+	return request({
+		url: "earnings/myMissionCash",
+		method: "POST",
+		data: data
+	})
+}
 export default api

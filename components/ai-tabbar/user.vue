@@ -108,7 +108,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupDialog" type="dialog">
-		    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登 录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
+		    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
 		<mix-loading v-show="refresh"></mix-loading>
 	</view>

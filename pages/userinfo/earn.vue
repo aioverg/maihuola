@@ -5,7 +5,7 @@
 			<view class="earn-blance">
 				<image class="earn-blance-bg" src="../../static/icon/bg-earn-01.png"></image>
 				<view class="earn-blance-title">账户余额（元）： </view>
-				<view class="earn-blance-num">24320.28 </view>
+				<view class="earn-blance-num">{{balance}}</view>
 			</view>
 			<!--收益来源分类，卖货、赚金-->
 			<view class="es-kind">
@@ -18,7 +18,7 @@
 				<!--本月预估收益内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">25456.80</view>
+						<view class="ec-one-sum">{{monthEarn.commission}}</view>
 						<view class="ec-one-text">本月预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
@@ -30,7 +30,7 @@
 						</view>
 						-->
 						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
-							<view class="ec-ts-sum">264</view>
+							<view class="ec-ts-sum">{{lmonthEarn.commission}}</view>
 							<view class="ec-ts-text">上月结算收益（元）</view>
 						</view>
 					</view>
@@ -43,17 +43,17 @@
 				<!--今日收益、昨日收益、近七日收益 内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">25456.80</view>
+						<view class="ec-one-sum">{{dayEarn.commission}}</view>
 						<view class="ec-one-text">预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
 						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">345</view>
+							<view class="ec-ts-sum">{{dayEarn.total_num}}</view>
 							<view class="ec-ts-text">提交拉新数量</view>
 						</view>
 						<view class="ec-thr-oder">
-							<view class="ec-ts-sum">264</view>
+							<view class="ec-ts-sum">{{dayEarn.com_num}}</view>
 							<view class="ec-ts-text">过审拉新数量</view>
 						</view>
 					</view>
@@ -126,6 +126,7 @@
 		},
 		data() {
 			return {
+				balance: 0,
 				esKind: [{
 					id: "0",
 					name: "赚金",
@@ -147,16 +148,58 @@
 					name: "近七日"
 				}],
 				elMenu: "0",
-				selEsKind: "earn"
+				selEsKind: "earn",
+				taskEarn: {},
+				monthEarn: {},
+				lmonthEarn: {},
+				dayEarn: {},
 			}
+		},
+		onLoad() {
+			this.getBalance()
+			this.getTaskEarn()
 		},
 		methods: {
 			selKind(item) {
 				this.elKind = item.id
 				this.selEsKind = item.tags
+				this.elMenu = 0
+				if(item.tags == "earn"){
+					this.getTaskEarn()
+					return
+				}
+				if(item.tags == "sale"){
+					console.log(33333)
+					return
+				}
 			},
 			selMenu(id) {
 				this.elMenu = id
+				if(this.selEsKind == "earn"){
+					if(id == 0){this.dayEarn = this.taskEarn.today}
+					if(id == 1){this.dayEarn = this.taskEarn.yestoday}
+					if(id == 2){this.dayEarn = this.taskEarn.week}
+				}
+				if(this.selEsKind == "sale"){
+					if(id == 0){this.dayEarn = this.taskEarn.today}
+					if(id == 1){this.dayEarn = this.taskEarn.yestoday}
+					if(id == 2){this.dayEarn = this.taskEarn.week}
+				}
+			},
+			getBalance(){
+				this.$api.getUserCenter().then(res => {
+					this.balance = res.data.data.balance
+				})
+			},
+			getTaskEarn(){
+				this.$api.postTaskEarn({
+					user_id: this.$store.state.userInfo.id
+				}).then(res => {
+					this.monthEarn = res.data.data.month
+					this.lmonthEarn = res.data.data.lmonth
+					this.dayEarn = res.data.data.today
+					this.taskEarn = res.data.data
+				})
 			},
 			navTo(url) {
 				this.$aiRouter.navTo(url)
