@@ -8,30 +8,32 @@
 		<view class="task-earn-detail">
 			<view class="ted-sel">
 				<view class="ted-sel-box">
-					<view class="ted-sel-title">支付宝扫码领福利</view>
+					<view class="ted-sel-title">{{selTaskTitle}}</view>
 					<image @click="showSelBox()" class="ted-sel-icon" src="/static/icon/rank-01.png"></image>
 				</view>
 				<view class="ted-sel-item-box" v-show="selBox">
-					<view class="ted-sel-item">
-						<uni-icons type="checkmarkempty" color="#FFA570" size="18"></uni-icons>
-						<view class="ted-sel-item-name">全部</view>
-					</view>
-					<view class="ted-sel-item">
-						<uni-icons type="checkmarkempty" color="#FFA570" size="18"></uni-icons>
-						<view class="ted-sel-item-name">支付宝扫码领福利</view>
+					<view class="ted-sel-item" v-for="(item, index) of taskList" :key="index" @click="selTask(index)">
+						<view style="width: 18px; height: 18px;">
+							<uni-icons type="checkmarkempty" v-show="selTaskIndex == index" color="#FFA570" size="18"></uni-icons>
+						</view>
+						<view class="ted-sel-item-name" :class="selTaskIndex == index ? 'ted-sel-item-name-color' : ''">{{item.title}}</view>
 					</view>
 				</view>
 			</view>
-			<view class="ted-item">
+			<view @click="hiddenSelBox()" class="ted-item" v-for="(item, index) in EarnDetailList" :key="index">
 				<view class="ted-item-one">
-					<view class="ted-item-title">支付宝扫码领福利</view>
-					<view class="ted-item-num">¥7.96</view>
+					<view class="ted-item-title">{{item.mission}}</view>
+					<view class="ted-item-num">¥{{item.amount}}</view>
 				</view>
 				<view class="ted-item-two">
-					<view>178****6789</view>
-					<view>2020-04-09 11:29:28</view>
+					<view>{{item.mobile}}</view>
+					<view>{{item.review_time}}</view>
 				</view>
 			</view>
+			<uni-load-more v-if="!aiNoContent" :status="uniLoadMoreStatus"></uni-load-more>
+		</view>
+		<view style="position: fixed; top: 30% ;">
+			<ai-null v-if="aiNoContent" explain="哎呀！暂时还没有记录哦！"></ai-null>
 		</view>
 		<ai-date-picker ref="datePicker" @onCancel="onCancel" @onConfirm="onConfirm" :startDate="startDate" :endDate="endDate" :defaultValue="pickerDate"></ai-date-picker>
 	</view>
@@ -48,11 +50,26 @@
 				startDate: "2020-01-01",
 				endDate: "2020-01-01",
 				pickerDate: "2020-01-01",
-				selBox: false
+				aiNoContent: false,
+				uniLoadMoreStatus: "more",
+				time: 0,
+				selBox: false,
+				taskList: [],
+				selTaskIndex: 0,
+				selTaskId: 0,
+				selTaskTitle: "全部",
+				EarnDetailList: [],
+				page: 1,
+				lastPage: 1
 			}
 		},
 		onLoad() {
 			this.nowDate()
+			this.getTaskList()
+			this.getTaskEarnDetail()
+		},
+		onReachBottom() {
+			this.getTaskEarnDetail()
 		},
 		methods: {
 			datePicker(){
@@ -63,6 +80,11 @@
 			},
 			onConfirm(e){
 				this.pickerDate = e.dateValue;
+				this.page = 1
+				this.lastPage = 1
+				this.EarnDetailList = []
+				this.getTaskEarnDetail(this.selTaskId, e.dateValue)
+				
 				console.log(this.pickerDate)
 			},
 			nowDate(){
@@ -85,6 +107,62 @@
 			},
 			showSelBox(){
 				this.selBox = !this.selBox
+			},
+			hiddenSelBox(){
+				if(this.selBox){
+					this.selBox = !this.selBox
+				}
+			},
+			selTask(index){
+				this.selTaskIndex = index
+				this.selTaskId = this.taskList[index].id
+				this.selBox = !this.selBox
+				this.selTaskTitle = this.taskList[index].title
+				this.page = 1
+				this.lastPage = 1
+				this.EarnDetailList = []
+				this.getTaskEarnDetail(this.taskList[index].id)
+			},
+			getTaskList(){
+				this.$api.postTaskList().then(res => {
+					res.data.data.data.unshift({
+						id: 0,
+						title: "全部"
+					})
+					this.taskList = res.data.data.data
+					
+					console.log(res.data.data.data)
+				})
+			},
+			getTaskEarnDetail(taskId=0, time=0 ){
+				if (this.page > this.lastPage) {
+					this.uniLoadMoreStatus = "noMore"
+					return
+				}
+				this.$api.postTaskEarnDetail({
+					user_id: this.$store.state.userInfo.id,
+					mission_id: taskId,
+					time: time,
+					page: this.page
+				}).then(res => {
+					if (res.data.data.total == 0) {
+						this.aiNoContent = true
+						return
+					} else {
+						this.aiNoContent = false
+					}
+					this.page += 1
+					this.lastPage = res.data.data.last_page
+					if (this.page > this.lastPage) {
+						this.uniLoadMoreStatus = "noMore"
+					} else {
+						this.uniLoadMoreStatus = "more"
+					}
+					for (let item of res.data.data.data) {
+						this.EarnDetailList.push(item)
+					}
+					console.log(res.data.data.data)
+				})
 			}
 		}
 	}
@@ -126,6 +204,7 @@
 		left: -10rpx;
 		top: 10px;
 		background-color: #FFFFFF;
+		z-index: 20;
 		.ted-sel-item {
 			display: flex;
 			align-items: center;
@@ -137,6 +216,9 @@
 				line-height: 31px;
 				margin: 0 0 0 20rpx;
 				border-bottom: 1px dashed #E5E5E5;
+			}
+			.ted-sel-item-name-color {
+				color: #FFA570;
 			}
 		}
 		.ted-sel-item:last-of-type .ted-sel-item-name {

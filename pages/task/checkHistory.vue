@@ -62,9 +62,8 @@
 					this.uniLoadMoreStatus = "noMore"
 					return
 				}
-				let userId = uni.getStorageSync("userInfo").client.id
 				this.$api.postTaskCheckHistory({
-					user_id: userId,
+					user_id: this.$store.state.userInfo.id,
 					mission_id: this.taskId,
 					page: this.page,
 				}).then(res => {

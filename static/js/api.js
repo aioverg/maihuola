@@ -274,4 +274,12 @@ api.postTaskEarn = (data) => {
 		data: data
 	})
 }
+//赚金结算明细
+api.postTaskEarnDetail = (data) => {
+	return request({
+		url: "earnings/myCashDetial",
+		method: "POST",
+		data: data
+	})
+}
 export default api
