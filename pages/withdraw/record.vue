@@ -59,7 +59,7 @@
 					limit: this.limit,
 					uid: this.$store.state.userInfo.id
 				}).then(res => {
-					if(res.data.data.total = 0){
+					if(res.data.data.total == 0){
 						this.listPlaceHolder = true
 						return
 					}else{
@@ -83,7 +83,7 @@
 						if(item.status == 2){
 							item.status = "审核失败"
 						}
-						this.recordData.push(item)	
+						this.recordData.push(item)
 					}
 				})
 			},

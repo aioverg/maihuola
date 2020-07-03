@@ -67,12 +67,16 @@
 				taskContent: {},
 				qrCodeBt: true, //是否显示获取推广码按钮
 				qrCode: true, //是否显示推广码
-				qrContent: true
+				qrContent: true,
+				routerKind: "navTo"
 			}
 		},
 		onLoad(res) {
 			this.taskId = res.id
 			this.taskStatus = res.is_end
+			if(res.router){
+				this.routerKind = res.router
+			}
 			if(res.is_end == "1"){
 				this.qrCodeBt = false
 				this.qrCode = false
@@ -83,7 +87,14 @@
 		},
 		methods: {
 			navTo(url){
-				this.$aiRouter.navTo(url)
+				if(this.routerKind == "navTo"){
+					this.$aiRouter.navTo(url)
+					return
+				}
+				if(this.routerKind == "redirect"){
+					this.$aiRouter.redirect(url)
+					return
+				}
 			},
 			/*
 			//显示推广码

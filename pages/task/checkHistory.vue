@@ -14,9 +14,10 @@
 					<view>{{item.mobile}}</view>
 				</view>
 			</view>
+			<uni-load-more v-if="!aiNoContent" :status="uniLoadMoreStatus"></uni-load-more>
 		</view>
 		<view style="position: fixed; top: 30% ;">
-			<ai-null v-if="aiNull" explain="哎呀！暂时还没有记录哦！"></ai-null>
+			<ai-null v-if="aiNoContent" explain="哎呀！暂时还没有记录哦！"></ai-null>
 		</view>
 	</view>
 </template>
@@ -28,7 +29,11 @@
 				taskId: 0,
 				taskTitle: null,
 				dataList: [],
-				aiNull: false
+				aiNoContent: false,
+				//下拉加载提示类型
+				uniLoadMoreStatus: "more",
+				page: 1,
+				lastPage: 1,
 			}
 		},
 		onLoad(res) {
@@ -36,13 +41,35 @@
 			this.taskTitle = res.tasktitle
 			this.getDataList()
 		},
+		onReachBottom(){
+			this.getDataList()
+		},
 		methods: {
 			getDataList(){
+				if(this.page > this.lastPage){
+					this.uniLoadMoreStatus = "noMore"
+					return
+				}
 				let userId = uni.getStorageSync("userInfo").client.id
 				this.$api.postTaskCheckHistory({
 					user_id: userId,
-					mission_id: this.taskId
+					mission_id: this.taskId,
+					page: this.page,
 				}).then( res => {
+					console.log(res.data.data.total)
+					if(res.data.data.total == 0){
+						this.aiNoContent = true
+						return
+					}else{
+						this.aiNoContent = false
+					}
+					this.page += 1
+					this.lastPage = res.data.data.last_page
+					if(this.page > this.lastPage){
+						this.uniLoadMoreStatus = "noMore"
+					}else{
+						this.uniLoadMoreStatus = "more"
+					}
 					for(let item of res.data.data.data){
 						item.title = this.taskTitle
 						if(item.status == 0){
@@ -55,10 +82,7 @@
 						if(item.status == 2 || item.status == 3){
 							item.status = "待审核"
 						}
-					}
-					this.dataList = res.data.data.data
-					if(res.data.data.data.length == 0){
-						this.aiNull = true
+						this.dataList.push(item)
 					}
 				})
 			}

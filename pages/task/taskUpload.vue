@@ -32,7 +32,7 @@
 			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?id=' + taskId)"
 			 :cancelShow="false">
 				<block slot="button">
-					<view @click="redirect('/pages/task/taskDetail?is_end=0&id=' + taskId)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
+					<view @click="redirect('/pages/task/taskDetail?is_end=0&id=' + taskId + '&router=redirect')" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
 						完成
 					</view>
 				</block>
@@ -149,7 +149,6 @@
 					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '图片数量不够'])
 					return
 				}
-				console.log(this.uploadImg, this.imgList.length)
 				this.$api.postTaskUpload({
 					user_id: this.$store.state.userInfo.id,
 					mission_id: this.taskId,
@@ -159,7 +158,7 @@
 					if (res.data.code == 0) {
 						this.$refs.popup.open()
 					} else {
-						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '提交失败'])
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', res.data.msg])
 					}
 				})
 			},
