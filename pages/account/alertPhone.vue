@@ -70,10 +70,8 @@
 						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
 						return
 					} else {
+						this.$aiRouter.redirect('/pages/index/index?tabId=2')
 						this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
-						uni.switchTab({
-							url: '/pages/tabbar/user'
-						});
 					}
 				})
 			}
@@ -89,11 +87,13 @@
 	}
 
 	.phone-num {
+		width: 690rpx;
 		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
 	}
 
 	.code-num {
+		width: 690rpx;
 		margin: 10px 0 0 0;
 		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;

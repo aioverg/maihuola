@@ -52,12 +52,12 @@
 				pickerDate: "2020-01-01",
 				aiNoContent: false,
 				uniLoadMoreStatus: "more",
-				time: 0,
 				selBox: false,
 				taskList: [],
 				selTaskIndex: 0,
 				selTaskId: 0,
 				selTaskTitle: "全部",
+				selDate: 0,
 				EarnDetailList: [],
 				page: 1,
 				lastPage: 1
@@ -80,10 +80,15 @@
 			},
 			onConfirm(e){
 				this.pickerDate = e.dateValue;
+				if(e.dateValue == "0000-00-00"){
+					this.selDate = 0
+				}else{
+					this.selDate = e.dateValue
+				}
 				this.page = 1
 				this.lastPage = 1
 				this.EarnDetailList = []
-				this.getTaskEarnDetail(this.selTaskId, e.dateValue)
+				this.getTaskEarnDetail(this.selTaskId, this.selDate)
 				
 				console.log(this.pickerDate)
 			},
@@ -121,7 +126,7 @@
 				this.page = 1
 				this.lastPage = 1
 				this.EarnDetailList = []
-				this.getTaskEarnDetail(this.taskList[index].id)
+				this.getTaskEarnDetail(this.taskList[index].id, this.selDate)
 			},
 			getTaskList(){
 				this.$api.postTaskList().then(res => {
@@ -131,7 +136,7 @@
 					})
 					this.taskList = res.data.data.data
 					
-					console.log(res.data.data.data)
+					//console.log(res.data.data.data)
 				})
 			},
 			getTaskEarnDetail(taskId=0, time=0 ){

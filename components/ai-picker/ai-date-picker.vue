@@ -11,13 +11,13 @@
 			<view class="ai-dp-ctt-wrapper">
 				<picker-view :indicator-style="indicatorStyle" :value="selectedValue" @change="wrapperChange">
 					<picker-view-column>
-						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in years" :key="index">{{item}}年</view>
+						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in years" :key="index">{{item == "0000" ? "全部" : item + "年"}}</view>
 					</picker-view-column>
 					<picker-view-column>
-						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in months" :key="index">{{dateFormate(item)}}月</view>
+						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in months" :key="index">{{item == "00" ? "" : dateFormate(item) + "月"}}</view>
 					</picker-view-column>
 					<picker-view-column>
-						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in days" :key="index">{{dateFormate(item)}}日</view>
+						<view class="ai-dp-ctt-wp-item" v-for="(item,index) in days" :key="index">{{item == "00" ? "" : dateFormate(item) + "日"}}</view>
 					</picker-view-column>
 				</picker-view>
 			</view>
@@ -82,9 +82,9 @@
 		},
 		methods: {
 			init(){
-				if(this.propsCheck()){
+				/*if(this.propsCheck()){
 					return;
-				}
+				}*/
 				this.getYears();
 				this.getMonths(this.defaultValue);
 				this.getDays(this.defaultValue);
@@ -166,6 +166,7 @@
 				for(let i=startYear; i<=endYear; i++){
 					newYears.push(i);
 				}
+				newYears.push("0000")
 				this.years = newYears;
 			},
 			/**
@@ -182,6 +183,12 @@
 				let endMonth = Number(endDateArray[1]);
 				
 				let newMonths = [];
+				
+				if(nowDateArray[0] == "0000"){
+					this.months = ["00"]
+					return
+				}
+				
 				if(startYear == Number(nowDateArray[0])){
 					if(endYear == Number(nowDateArray[0])){ // 起始年份,末尾年份一样时
 						for(let i=startMonth; i<=endMonth; i++){
@@ -219,6 +226,11 @@
 				let endDay = Number(endDateArray[2]);
 				let totalDays=new Date(nowDateArray[0],nowDateArray[1],0).getDate();
 				
+				if(nowDateArray[0] == "0000"){
+					this.days = ["00"]
+					return
+				}
+				
 				let newDays = [];
 				if(startYear == Number(nowDateArray[0]) && startMonth == Number(nowDateArray[1])){
 					if(endYear == Number(nowDateArray[0]) && endMonth == Number(nowDateArray[1])){
@@ -243,6 +255,9 @@
 			},
 			
 			dateFormate(val){
+				if(val == "00"){
+					return "00"
+				}
 				if(Number(val) > 9){
 					return val;
 				}
