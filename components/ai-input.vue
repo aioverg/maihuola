@@ -1,10 +1,13 @@
 //输入框组件
 <template>
 	<view class="ai-input-box">
-		<view class="ai-input-title">{{title}}</view>
+		<view :style= "{width: titleWidth}" class="ai-input-title">{{title}}</view>
+		<!--
 		<view v-if="content" class="ai-input-content">{{content}}</view>
-		<input class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
+		-->
+		<input :style="{width: inputWidth}" class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
 		<view class="ai-input-bt" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
+		<image class="ai-input-del" @click="delInput()" v-show="delShow" src="/static/icon/err-01.png"></image>
 	</view>
 </template>
 
@@ -17,7 +20,8 @@
 				timeRun: false,
 				inputValue: null,
 				btNameColor: "#f47a73",
-				btNameUnderline: "underline"
+				btNameUnderline: "underline",
+				delShow: false
 			};
 		},
 		props: {
@@ -25,13 +29,22 @@
 				type: String,
 				default: ''
 			},
+			titleWidth: {
+				type: String,
+				default: "160rpx"
+			},
 			type: {
 				type: String,
 				default: "text",
 			},
+			/*
 			content: {
 				//type: String,
 				default: null
+			},*/
+			inputWidth: {
+				type: String,
+				default: "250rpx"
 			},
 			placeholder: {
 				type: String,
@@ -41,6 +54,10 @@
 				type: String,
 				default: null
 			},
+			btWidth: {
+				type: String,
+				default: "200rpx"
+			},
 			time: {
 				type: String,
 				default: null
@@ -49,8 +66,24 @@
 				type: String,
 				default: null
 			},
+			del: {
+				type: Boolean,
+				default: false
+			}
 		},
+		watch:{
+			inputValue(){
+				if(this.del){
+					this.inputValue != null ? this.delShow = true : this.delShow = false
+				}
+			}
+		},
+
 		methods: {
+			delInput(){
+				this.inputValue = null
+				this.delShow = ! this.delShow
+			},
 			aiCode(){
 				if(this.timeRun){return}
 				this.$emit('postCode');
@@ -91,18 +124,18 @@
 		margin: 0 auto;
 		.ai-input-title {
 			margin: 0 15px;
-			width: 160rpx;
 			font-size:15px;
 			color: #333333;
 		}
+		/*
 		.ai-input-content {
 			width: 250rpx;
 			font-size: 14px;
 			color: #999999;
 		}
+		*/
 		.ai-input-input {
 			border: none;
-			width: 250rpx;
 			display: inline-block;
 			font-size: 14px;
 			margin: 0 10px 0 0;
@@ -110,10 +143,13 @@
 		}
 		.ai-input-bt {
 			display: inline-block;
-			width: 100px;
 			font-size:14px;
 			//color: #f47a73;
 			text-decoration: underline;
+		}
+		.ai-input-del {
+			width: 16px;
+			height: 16px;
 		}
 	}
 </style>

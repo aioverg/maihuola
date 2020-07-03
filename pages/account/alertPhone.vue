@@ -4,7 +4,7 @@
 		<hint-box content="请填写新的手机号并验证完成绑定"></hint-box>
 		<view class="alter-phone-body">
 			<view class="phone-num">
-				<ai-input title="手机号码" type="number" @getInput="getPhone" placeholder="请输入新手机号码"></ai-input>
+				<ai-input :del="true" title="手机号码" type="number" @getInput="getPhone" placeholder="请输入新手机号码"></ai-input>
 			</view>
 			<view class="code-num">
 				<ai-input title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
