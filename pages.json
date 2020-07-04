@@ -49,7 +49,7 @@
 			}
         }
         ,{
-            "path" : "pages/account/oldPhone",
+            "path" : "pages/account/checkPhone",
             "style" : {
 				"navigationBarTitleText": "验证原手机号码"
 			}
@@ -103,7 +103,7 @@
 			}
         }
         ,{
-            "path" : "pages/account/alertPhone",
+            "path" : "pages/account/bindPhone",
             "style" : {
 				"navigationBarTitleText": "修改手机号码"
 			}

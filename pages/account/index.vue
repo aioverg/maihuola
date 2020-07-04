@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="账户安全"></uni-nav-bar>
 	    <view class="account-box">
-		    <view class="box-item-phone" @click="navTo('/pages/account/oldPhone')">
+		    <view class="box-item-phone" @click="navTo('/pages/account/checkPhone')">
 			    <ai-list-cell title="手机号码" :color="telColor" :message="tel"></ai-list-cell>
 		    </view>
 		    <view class="box-sofeitem">

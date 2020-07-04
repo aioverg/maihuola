@@ -6,7 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		systemType: 1, //0-PC;1-IOS;2-Android
-		tabId: 0,
+		//tabId: 0,
 		hasLogin: false,
 		token: null,
 		userInfo: {
