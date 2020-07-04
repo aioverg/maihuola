@@ -5,13 +5,13 @@
 			<uni-swipe-action class="collect-guess-box">
 				<uni-swipe-action-item class="collect-guess-item" v-for="(item,index) in collectList" :options="options" :key="item.id" @change="swipeChange"
 				 @click="swipeClick(index)">
-					<ai-gusee-card :data="item"></ai-gusee-card>
+					<ai-goods-card :data="item"></ai-goods-card>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
 			<uni-popup ref="popupDialog" type="dialog">
 			    <uni-popup-dialog type="err" title="删除商品" content="确定将该商品从品库中删除吗？"  @close="close" @confirm="confirm"></uni-popup-dialog>
 			</uni-popup>
-			<view v-if="!false" style="position: fixed; width: 690rpx; top: 30%;">
+			<view v-if="false" style="position: fixed; width: 690rpx; top: 30%;">
 				<ai-no-content describe="这里好冷清，赶紧去收藏宝贝吧！"></ai-no-content>
 			</view>
 		</view>
@@ -21,13 +21,13 @@
 <script>
 	import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
 	import uniSwipeActionItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'
-	import aiGuseeCard from '@/components/ai-guess-card.vue'
+	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	export default {
 		components: {
 			uniSwipeAction,
 			uniSwipeActionItem,
-			aiGuseeCard,
+			aiGoodsCard,
 			uniPopupDialog,
 		},
 		data() {

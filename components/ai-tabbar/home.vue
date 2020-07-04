@@ -56,7 +56,7 @@
 		<!--商品列表-->
 		<view class="guess-section">
 			<view class="guess-item" v-for="(item, index) in goodsList" :key="index" @click="navToDetail('/pages/detail/detail?goods_id=' + item.id)">
-				<ai-gusee-card :recommend="item.tag" :data="item"></ai-gusee-card>
+				<ai-goods-card :recommend="item.tag" :data="item"></ai-goods-card>
 			</view>
 		</view>
 		<!--登录提示横条-->
@@ -77,7 +77,7 @@
 <script>
 	import uniSwiperDot from '@/components/uni-swiper-dot/uni-swiper-dot.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
-	import aiGuseeCard from '@/components/ai-guess-card.vue'
+	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login/ai-login.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
@@ -86,7 +86,7 @@
 		components: {
 			uniSwiperDot,
 			mixLoading,
-			aiGuseeCard,
+			aiGoodsCard,
 			aiPopupUpdate,
 			aiLogin,
 		},

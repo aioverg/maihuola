@@ -3,7 +3,7 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="商品列表"></uni-nav-bar>
 		<view class="guess-list">
 			<view class="guess-list-item" v-for="(item, index) in goodsList" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
-			    <ai-gusee-card :data="item"></ai-gusee-card>
+			    <ai-goods-card :data="item"></ai-goods-card>
 			</view>
 		</view>
 		<uni-load-more status="noMore"></uni-load-more>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-	import aiGuseeCard from '@/components/ai-guess-card'
+	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
 	export default {
 		components: {
-			aiGuseeCard
+			aiGoodsCard
 		},
 		data() {
 			return {

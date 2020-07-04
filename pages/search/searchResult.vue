@@ -13,7 +13,7 @@
 			</view>
 			<view v-if="searchResult.length !== 0" class="yes-result">
 				<view class="guess-item" v-for="(item, index) in searchResult" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
-					<ai-gusee-card recommend="true" :data="item"></ai-gusee-card>
+					<ai-goods-card :recommend="item.tag" :data="item"></ai-goods-card>
 				</view>
 				<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 			</view>
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-	import aiGuseeCard from "@/components/ai-guess-card"
+	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
 	export default {
 		components: {
-			aiGuseeCard
+			aiGoodsCard
 		},
 		data() {
 			return {
