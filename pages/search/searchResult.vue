@@ -8,8 +8,8 @@
 			</view>
 		</view>
 		<view class="search-result">
-			<view v-if="searchResult.length == 0" class="no-result">
-				<ai-null explain="哎呀！竟然没有匹配的宝贝"></ai-null>
+			<view v-if="searchResult.length == 0" style="width: 690rpx; position: fixed; top: 35%;">
+				<ai-no-content describe="哎呀！竟然没有匹配的宝贝"></ai-no-content>
 			</view>
 			<view v-if="searchResult.length !== 0" class="yes-result">
 				<view class="guess-item" v-for="(item, index) in searchResult" :key="index" @click="navTo('/pages/detail/detail?goods_id=' + item.id)">
@@ -127,9 +127,6 @@
 	.search-result {
 		width: 690rpx;
 		margin: 10px auto 0;
-		.no-result {
-			margin: 100px 0 0 0;
-		}
 		.yes-result {
 			.guess-item {
 				margin: 0 auto 13px;

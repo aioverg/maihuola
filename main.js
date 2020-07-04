@@ -24,10 +24,9 @@ import uniPopUp from '@/components/uni-popup/uni-popup.vue'
 //引入弹窗
 import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
 //引入无内容组件
-import aiNoContent from '@/components/ai-none/ai-no-content.vue'
+import aiNoContent from '@/components/ai-error/ai-no-content.vue'
 //引入按钮
 import aiButton from '@/components/ai-button/ai-button.vue'
-import aiNull from '@/components/ai-error/ai-null.vue'
 
 Vue.component('ai-navbar', aiNavbar)
 Vue.component('ai-popup-message', aiPopupMessage)
@@ -37,7 +36,6 @@ Vue.component('uni-icons', uniIcons)
 Vue.component('uni-popup', uniPopUp)
 Vue.component('ai-popup-dialog', aiPopupDialog)
 Vue.component('ai-no-content', aiNoContent)
-Vue.component('ai-null', aiNull)
 
 
 const msg = (title, duration=1500, mask=false, icon='none')=>{

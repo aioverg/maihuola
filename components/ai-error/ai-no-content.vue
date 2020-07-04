@@ -26,11 +26,12 @@
 
 <style lang="scss">
 	.ai-no-content {
+		width: 100%;
 		text-align: center;
 	}
 	.anc-img {
 		width: 494rpx;
-		margin: 100px auto 0;
+		margin: 0 auto;
 	}
 	.anc-describe {
 		margin: 50px;

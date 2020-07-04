@@ -16,12 +16,13 @@
 				</view>
 				<view class="tcb-item-hidden" v-show="iconType[index] == 'arrowdown'">{{item.remark}}</view>
 			</view>
-
+			
+			<view style="width: 690rpx; position: fixed; top: 30% ;">
+				<ai-no-content v-if="aiNoContent" describe="哎呀！暂时还没有记录哦！"></ai-no-content>
+			</view>
 			<uni-load-more v-if="!aiNoContent" :status="uniLoadMoreStatus"></uni-load-more>
 		</view>
-		<view style="position: fixed; top: 30% ;">
-			<ai-null v-if="aiNoContent" explain="哎呀！暂时还没有记录哦！"></ai-null>
-		</view>
+		
 	</view>
 </template>
 

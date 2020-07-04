@@ -32,8 +32,8 @@
 			</view>
 			<uni-load-more v-if="!aiNoContent" :status="uniLoadMoreStatus"></uni-load-more>
 		</view>
-		<view style="position: fixed; top: 30% ;">
-			<ai-null v-if="aiNoContent" explain="哎呀！暂时还没有记录哦！"></ai-null>
+		<view v-if="aiNoContent" style="width: 750rpx; padding: 10px 30px 0; position: fixed; top: 30% ;">
+			<ai-no-content describe="哎呀！暂时还没有记录哦！"></ai-no-content>
 		</view>
 		<ai-date-picker ref="datePicker" @onCancel="onCancel" @onConfirm="onConfirm" :startDate="startDate" :endDate="endDate" :defaultValue="pickerDate"></ai-date-picker>
 	</view>

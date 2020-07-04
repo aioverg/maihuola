@@ -14,9 +14,9 @@
 				<view class="wb-time">{{item.create_time}}</view>
 			</view>
 			<uni-load-more v-if="!listPlaceHolder" :status="uniLoadMoreStatus"></uni-load-more>
-		</view>
-		<view v-if="listPlaceHolder" class="withdraw-list-item">
-			<ai-no-content describe="哎呀！暂时还没有记录哦！"></ai-no-content>
+			<view v-if="listPlaceHolder" style="position: fixed; top: 30%; width: 690rpx;">
+				<ai-no-content describe="哎呀！暂时还没有记录哦！"></ai-no-content>
+			</view>
 		</view>
 		<ai-date-picker ref="datePicker" @onCancel="onCancel" @onConfirm="onConfirm" :startDate="startDate" :endDate="endDate" :defaultValue="pickerDate"></ai-date-picker>
 	</view>
@@ -118,6 +118,7 @@
 		padding: 30rpx;
 		background: #FFFFFF;
 		margin: 10px auto 0;
+		position: relative;
 		.wb-item {
 			height: 57px;
 			padding: 10px 15px;
