@@ -1,16 +1,9 @@
 <template>
-	<view>
-		<uni-nav-bar fixed="true" left-width="150" right-icon="help">
-			<block slot="left">
-				<image style="width: 10px; height: 17px; margin: 3px 10px 0 10px;" src="../../static/icon/left-arrow01.png"></image>
-			    <view style="font-size: 20px; font-weight:bold;">登录</view>
-			</block>
-		</uni-nav-bar>
-		<view class="img-box">
-			<image class="img" src="/static/img/icon-mhl-01.png"></image>
-		</view>
-		<view>
-			<ai-button @eventClick="login" btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
+	<view class="ai-login-wechat">
+		<image class="alw-img" src="/static/img/maihuola-03.png" mode="widthFix"></image>
+		
+		<view class="alw-bt">
+			<ai-button width="540" shadowWidth="492" @eventClick="login" btname="微信登录" iconSrc="/static/icon/icon-wx.png"></ai-button>
 		</view>
 		<view class="note">
 			<ai-login-hint></ai-login-hint>
@@ -48,19 +41,21 @@
 				  provider: 'weixin',
 				  fail: function(res){console.log("微信登录失败", res)},
 				  success: function (loginRes) {
-				    //console.log("返回信息1",loginRes);
+				    console.log("返回信息1",loginRes);
 				    // 获取用户信息
 				    uni.getUserInfo({
 				      provider: 'weixin',
 				      success: function (infoRes) {
+						  console.log("用户信息", infoRes)
+						/*
 						uni.setStorage({
 							key: "WXAvatarUrl",
 							data: infoRes.userInfo.avatarUrl,
 							success: function(){
 								_this.$store.commit('setWeChat',infoRes.userInfo.avatarUrl)
 							}
-						})
-						_this.$aiRouter.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
+						})*/
+						//_this.$aiRouter.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
 						//console.log("返回信息2",infoRes)
 				        //console.log('用户昵称为：' + infoRes.userInfo.nickName);
 				      }
@@ -76,21 +71,19 @@
 	page {
 		background: #FFFFFF;
 	}
-	.img-box {
+	.ai-login-wechat {
 		width: 750rpx;
+		padding: 100px 30rpx 0;
 		text-align: center;
-		height: 350px;
-		.img {
-			display: inline-block;
-			width: 286rpx;
-			height: 286rpx;
-			margin: 88px auto;
+		.alw-img {
+			width: 560rpx;
+			margin: 0 auto 140px;
 		}
 	}
+
 	.note {
 		position: absolute;
 		left: 75rpx;
 		bottom: 50px;
-		//margin: 0 0 50px 0;
 	}
 </style>

@@ -23,7 +23,8 @@
 		methods: {
 			navToLogin(){
 				uni.navigateTo({
-					url: "/pages/login/loginPhone?jumpUrl=" + this.jumpUrl
+					//url: "/pages/login/loginPhone?jumpUrl=" + this.jumpUrl
+					url: "/pages/login/login"
 				})
 			}
 		}
