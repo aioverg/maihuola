@@ -8,18 +8,7 @@
 		</uni-nav-bar>
 		<view class="earn-detail-body">
 			<view class="detail-item" v-for="(item, index) in detailList" :key="index">
-				<image class="detail-item-img" :src="item.pic"></image>
-				<view class="detail-item-info">
-					<view class="detail-item-title">{{item.title}}</view>
-					<view class="detail-item-one">
-						<view class="oder-num">订单号：{{item.oderNum}}</view>
-						<view class="oder-money">¥{{item.oderMoney}}</view>
-					</view>
-					<view class="detail-item-two">
-						<view class="oder-date">{{item.oderDate}}</view>
-						<view class="oder-status">{{item.oderStatus}}</view>
-					</view>
-				</view>
+				<ai-order-goods-card :data="item"></ai-order-goods-card>
 			</view>
 		</view>
 		<ai-date-picker ref="datePicker" @onCancel="onCancel" @onConfirm="onConfirm" :startDate="startDate" :endDate="endDate" :defaultValue="pickerDate"></ai-date-picker>
@@ -31,8 +20,10 @@
 
 <script>
 	import aiDatePicker from '@/components/ai-picker/ai-date-picker.vue'
+	import aiOrderGoodsCard from '@/components/ai-card/ai-order-goods-card.vue'
 	export default {
 		components: {
+			aiOrderGoodsCard,
 			aiDatePicker
 		},
 		onLoad() {
@@ -54,7 +45,6 @@
 						oderNum: "202020202020220",
 						oderMoney: "7.96",
 						oderDate: "2020-04-09 11:29:28",
-						oderStatus: "已付款"
 					},
 					{
 						pic: "/static/mock/mock-01.png",
@@ -62,7 +52,6 @@
 						oderNum: "202020202020220",
 						oderMoney: "7.96",
 						oderDate: "2020-04-09 11:29:28",
-						oderStatus: "已付款"
 					},
 					{
 						pic: "/static/mock/mock-01.png",
@@ -70,7 +59,6 @@
 						oderNum: "202020202020220",
 						oderMoney: "7.96",
 						oderDate: "2020-04-09 11:29:28",
-						oderStatus: "已付款"
 					}
 				]
 			}
@@ -123,51 +111,8 @@
 		padding: 0 15px 30px;
 	}
 	.detail-item {
-		padding: 8px 15px 8px 8px;
 		margin: 10px 0 0 0;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
-		display: flex;
-		.detail-item-img {
-			width: 73px;
-			height: 73px;
-			margin: 0 10rpx 0 0;
-		}
-		.detail-item-title {
-			width: 480rpx;
-			font-size: 13px;
-			height: 34px;
-			line-height: 17px;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-		.detail-item-one {
-			margin: 3px 0 0 0;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			line-height: 19px;
-			.oder-num {
-				font-size: 11px;
-				color: #999999;
-			}
-			.oder-money {
-				font-size: 15px;
-				color: #FF716E;
-			}
-		}
-		.detail-item-two {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			.oder-date {
-				font-size: 11px;
-				color: #999999;
-			}
-			.oder-status {
-				font-size: 11px;
-				color: #999999;
-			}
-		}
 	}
 </style>

@@ -24,20 +24,12 @@
 				</view>
 			</view>
 			<view class="oder-list">
-				<view class="ol-item" v-for="(item, index) in olList" :key="index">
-					<image class="ol-item-img" :src="item.pic"></image>
-					<view class="ol-item-info">
-						<view class="ol-item-title">{{item.title}}</view>
-						<view class="ol-item-one">
-							<view class="ol-num">订单号：{{item.oderNum}}</view>
-							<view class="ol-money">¥{{item.oderMoney}}</view>
-						</view>
-						<view class="ol-item-two">
-							<view class="ol-date">{{item.oderDate}}</view>
-							<view class="ol-status" :class="item.oderStatus == '已失效' ? 'ol-status-color' : '' ">{{item.oderStatus}}</view>
-						</view>
-					</view>
+				<view class="ol-item" v-for="(item, index) in oderData" :key="index">
+					<ai-order-goods-card :data="item"></ai-order-goods-card>
 				</view>
+			</view>
+			<view style="width: 690rpx; position: fixed; top: 35%;">
+				<ai-no-content v-if="oderData.length == 0" describe="哎呀！暂时还没有订单哦！"></ai-no-content>
 			</view>
 		</view>
 		<uni-popup ref="orderDetailHelp" type="dialog">
@@ -47,7 +39,11 @@
 </template>
 
 <script>
+	import aiOrderGoodsCard from '@/components/ai-card/ai-order-goods-card.vue'
 	export default {
+		components: {
+			aiOrderGoodsCard,
+		},
 		data() {
 			return {
 				selTag: "my",
@@ -84,7 +80,7 @@
 					},
 				],
 				selStatusIndex: 0,
-				olList: [
+				oderData: [
 					{
 						pic: "/static/mock/mock-01.png",
 						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
@@ -127,7 +123,11 @@
 			},
 			//选择订单状态
 			selStatus(id, index){
-				this.selStatusIndex = index
+				if(this.selStatusIndex != index){
+					this.selStatusIndex = index
+					this.oderData = []
+				}
+				console.log(this.selStatusIndex)
 				console.log(id)
 			},
 			help(){
@@ -149,7 +149,7 @@
 <style lang="scss">
 	.oder-body {
 		width: 750rpx;
-		padding: 10px 15px 30px 15px;
+		padding: 10px 30rpx 30px;
 	}
 	/*顶部tabbar*/
 	.nav-sel {
@@ -215,54 +215,9 @@
 	
 	/*订单列表*/
 	.ol-item {
-		padding: 8px 15px 8px 8px;
+		width: 690rpx;
 		margin: 10px 0 0 0;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
-		display: flex;
-		.ol-item-img {
-			width: 73px;
-			height: 73px;
-			margin: 0 10rpx 0 0;
-		}
-		.ol-item-title {
-			width: 480rpx;
-			font-size: 13px;
-			height: 34px;
-			line-height: 17px;
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-		.ol-item-one {
-			margin: 3px 0 0 0;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			line-height: 19px;
-			.ol-num {
-				font-size: 11px;
-				color: #999999;
-			}
-			.ol-money {
-				font-size: 15px;
-				color: #FF716E;
-			}
-		}
-		.ol-item-two {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			.ol-date {
-				font-size: 11px;
-				color: #999999;
-			}
-			.ol-status {
-				font-size: 11px;
-				color: #999999;
-			}
-			.ol-status-color {
-				color: #FF1968;
-			}
-		}
 	}
 </style>
