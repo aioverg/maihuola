@@ -58,7 +58,7 @@
 						</view>
 					</view>
 				</view>
-				<view class="earn-detail">
+				<view class="earn-detail" v-if="earnDetail">
 					<view class="earn-detail-item" @click="navTo('/pages/userinfo/taskEarnDetail')">
 						<ai-list-cell title="赚金结算明细"></ai-list-cell>
 					</view>
@@ -68,7 +68,7 @@
 				<!--本月预估收益内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">25456.80</view>
+						<view class="ec-one-sum">0.00</view>
 						<view class="ec-one-text">本月预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
@@ -80,7 +80,7 @@
 						</view>
 						-->
 						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
-							<view class="ec-ts-sum">264</view>
+							<view class="ec-ts-sum">0.00</view>
 							<view class="ec-ts-text">上月结算收益（元）</view>
 						</view>
 					</view>
@@ -93,17 +93,17 @@
 				<!--今日收益、昨日收益、近七日收益 内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">25456.80</view>
+						<view class="ec-one-sum">0.00</view>
 						<view class="ec-one-text">预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
 						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">34560.78</view>
+							<view class="ec-ts-sum">0.00</view>
 							<view class="ec-ts-text">销售额（元）</view>
 						</view>
 						<view class="ec-thr-oder">
-							<view class="ec-ts-sum">264</view>
+							<view class="ec-ts-sum">0</view>
 							<view class="ec-ts-text">订单数（个）</view>
 						</view>
 					</view>
@@ -153,6 +153,7 @@
 				monthEarn: {},
 				lmonthEarn: {},
 				dayEarn: {},
+				earnDetail: true
 			}
 		},
 		onLoad() {
@@ -192,14 +193,24 @@
 				})
 			},
 			getTaskEarn(){
-				this.$api.postTaskEarn({
-					user_id: this.$store.state.userInfo.id
-				}).then(res => {
-					this.monthEarn = res.data.data.month
-					this.lmonthEarn = res.data.data.lmonth
-					this.dayEarn = res.data.data.today
-					this.taskEarn = res.data.data
-				})
+				if(this.$store.state.userInfo.level == "3" || this.$store.state.userInfo.level == "4" || this.$store.state.userInfo.level == "8"){
+					this.$api.postTaskEarn({
+						user_id: this.$store.state.userInfo.id
+					}).then(res => {
+						this.monthEarn = res.data.data.month
+						this.lmonthEarn = res.data.data.lmonth
+						this.dayEarn = res.data.data.today
+						this.taskEarn = res.data.data
+						this.earnDetail = true
+					})
+				}else{
+					this.monthEarn = 0.00
+					this.lmonthEarn = 0.00
+					this.dayEarn = 0
+					this.taskEarn = 0
+					this.earnDetail = false
+				}
+				
 			},
 			navTo(url) {
 				this.$aiRouter.navTo(url)
