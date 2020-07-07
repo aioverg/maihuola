@@ -23,33 +23,51 @@
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
 		<mix-loading v-show="refresh"></mix-loading>
+		<uni-popup ref="popup">
+			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
 <script>
 	import aiTitleList from '@/components/ai-list/ai-title-list.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
+	import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
 	export default {
 		components: {
 			aiTitleList,
-			mixLoading
+			mixLoading,
+			aiPopupDialog
 		},
 		data() {
 			return {
-				login: false,
 				taskList: [],
 				//下拉加载提示类型
 				uniLoadMoreStatus: "noMore",
 				refresh: false,
+				dialogMessage: [{
+					title: "温馨提醒",
+					content: "很抱歉！您暂不符合活动推广要求，请关注「爱小兔」微信公众号购买相关服务后领取赚金任务"
+				}]
 			}
 		},
 		methods: {
+			close(done){
+				done()
+			},
 			navTo(url) {
-				if(this.login){
-					this.$aiRouter.navTo(url)
-				}else{
+				if(!this.$store.state.hasLogin){
 					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/index/index?tabId=1')
+					return
 				}
+				if(this.$store.state.userInfo.level == "3" || this.$store.state.userInfo.level == "4" || this.$store.state.userInfo.level == "8"){
+					this.$aiRouter.navTo(url)
+					return
+				}
+				this.$refs.popup.open()
+				
+				
+				
 			},
 			getTaskList(){
 				return this.$api.postTaskList().then(res => {
@@ -63,7 +81,6 @@
 			},
 			//组件加载时运行的函数
 			pageOnload() {
-				this.login = this.$store.state.hasLogin
 				this.getTaskList()
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},

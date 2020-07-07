@@ -82,7 +82,6 @@
 				this.qrCode = false
 				this.qrContent = false
 			}
-			console.log(this.taskStatus)
 			this.getTaskDetail(res.id)
 		},
 		methods: {
