@@ -53,7 +53,7 @@
 						<view class="num">{{blance}}</view>
 						<view class="cash" @click="withdraw">提现</view>
 					</view>
-					<view class="money-hint">每月25号可提现上月结算收益</view>
+					<view class="money-hint">每月25号可提现上月订单结算收益</view>
 				</view>
 			</view>
 
