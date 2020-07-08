@@ -116,6 +116,9 @@
 				]
 			}
 		},
+		onShow() {
+			this.oderData = []
+		},
 		methods: {
 			//选择我的订单或团队订单
 			selCategory(name){
