@@ -4,8 +4,7 @@
 		<hint-box content="每月25号可提现上个月内确认收货的订单收益"></hint-box>
 		<view class="tx-box">
 			<view class="tx-account">
-				<text class="title">到账支付宝</text>
-				<text class="name">{{name}}</text>
+				<text class="title">支付宝账户</text>
 				<text class="phone">{{account}}</text>
 			</view>
 			<view class="tx-input">
@@ -67,12 +66,12 @@
 				}else{
 					this.aiButtonBg ="ai-button-graybg"
 				}
-				if(this.sum > 1){
+				if(this.sum > 100){
 					this.inputHint = false
 				}else{
 					this.inputHint = true
 				}
-				if(this.sum > this.total){
+				if(this.sum > Number(this.total)){
 					this.txHint = true
 				}else{
 					this.txHint = false
@@ -173,15 +172,11 @@
 			.title {
 				font-size: 16px;
 			}
-			.name {
+			.phone {
 				display: inline-block;
 				font-size:14px;
 				color: #666666;
-				margin: 0 15px 0 25px;
-			}
-			.phone {
-				font-size:14px;
-				color: #666666;
+				margin: 0 15px;
 			}
 		}
 		.tx-input {
