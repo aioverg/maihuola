@@ -123,7 +123,8 @@
 				if(this.leftClickTag == "back"){
 					uni.navigateBack()
 				}else{
-					this.$aiRouter.navTo(this.leftClickTag)
+					//this.$aiRouter.navTo(this.leftClickTag)
+					this.$aiRouter.redirect(this.leftClickTag)
 				}
 			},
 			onClickRight() {

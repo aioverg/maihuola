@@ -29,10 +29,9 @@
 						<view class="info-box-user-name">{{userName}}</view>
 						<view class="info-box-user-id">{{userId}}</view>
 					</view>
-					<view v-if="false" class="info-user-mark">
-						<image class="info-user-mark-icon" src="/static/icon/icon-mark-01.png"></image>
-					</view>
+					<image :src="userMark" style="height: 20px; margin: 30px 0 0; opacity: 1;" mode="aspectFit"></image>
 				</view>
+			
 				<view class="estimate">
 					<view class="estimate-item-box">
 						<view class="num">{{curEar}}</view>
@@ -88,7 +87,7 @@
 			<view class="list-card">
 				<view class="message">
 					<view class="list-box" @click="navTo('/pages/account/index')" style="padding: 0 30rpx;">
-						<ai-list-cell title="账户安全" dashed="dashed" message="手机号、微信号、淘宝授权"></ai-list-cell>
+						<ai-list-cell title="账户安全" dashed="dashed" message="手机号、淘宝授权"></ai-list-cell>
 					</view>
 					<view class="list-box" @click="navTo('/pages/help/index')">
 						<ai-list-cell title="我要帮助" dashed="dashed"></ai-list-cell>
@@ -132,6 +131,7 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				navTitle: null,
 				portrait: '/static/img/icon-portrait-01.png',
+				userMark: null,
 				userName: null,
 				userId: null,
 				blance: null,
@@ -171,6 +171,16 @@
 					this.userName = res.data.data.username
 					this.userId = "账户ID:" + res.data.data.id
 					this.alipay = res.data.data.alipay
+					if(res.data.data.level == 3){
+						this.userMark = '/static/icon/user-mark-03.png'
+					}else if(res.data.data.level == 4){
+						this.userMark = '/static/icon/user-mark-04.png'
+					}else if(res.data.data.level == 8){
+						this.userMark = '/static/icon/user-mark-08.png'
+					}else{
+						console.log(6666)
+						this.userMark = null
+					}
 					return true
 				})
 			},
@@ -193,9 +203,6 @@
 				done()
 			},
 
-
-
-			
 			//组件加载时运行的函数
 			pageOnload() {
 				this.getUserInfo()
@@ -308,22 +315,6 @@
 
 				.info-box-user-id {
 					font-size: 14px;
-				}
-			}
-
-			.info-user-mark {
-				height: 60px;
-				/*  #ifdef  APP-PLUS  */
-				margin: 0 0 0 120rpx;
-				/*  #endif  */
-				/*  #ifdef  H5  */
-				margin: 0 0 0 60rpx;
-
-				/*  #endif  */
-				.info-user-mark-icon {
-					width: 69px;
-					height: 22px;
-					margin: 30px 0 0 0;
 				}
 			}
 		}

@@ -23,7 +23,10 @@
 			<view @click="hiddenSelBox()" class="ted-item" v-for="(item, index) in EarnDetailList" :key="index">
 				<view class="ted-item-one">
 					<view class="ted-item-title">{{item.mission}}</view>
-					<view class="ted-item-num">¥{{item.amount}}</view>
+					<view class="ted-item-num">
+						<text style="font-size: 11px; color: #FFA570;" v-if="item.type == 2 ? true : false">「分佣」</text>
+						<text>¥{{item.amount}}</text>
+					</view>
 				</view>
 				<view class="ted-item-two">
 					<view>{{item.mobile}}</view>
