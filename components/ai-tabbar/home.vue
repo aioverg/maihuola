@@ -64,7 +64,7 @@
 			<ai-login jumpUrl="/pages/index/index?tabId=0"></ai-login>
 		</view>
 		<!--更新弹窗-->
-		<uni-popup ref="popupAiDia" type="dialog" zIndex="1000">
+		<uni-popup ref="popupAiDia" type="dialog" zIndex="10000">
 		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="updateType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<!--下拉加载提示-->
