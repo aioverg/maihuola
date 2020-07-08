@@ -5,7 +5,9 @@
 			<uni-swipe-action class="collect-guess-box">
 				<uni-swipe-action-item class="collect-guess-item" v-for="(item,index) in collectList" :options="options" :key="item.id" @change="swipeChange"
 				 @click="swipeClick(index)">
-					<ai-goods-card :data="item"></ai-goods-card>
+				    <view @click="goodsDetail(item.item_id)">
+						<ai-goods-collect-card :data="item"></ai-goods-collect-card>
+					</view>
 				</uni-swipe-action-item>
 			</uni-swipe-action>
 			<uni-popup ref="popupDialog" type="dialog">
@@ -14,6 +16,10 @@
 			<view v-if="false" style="position: fixed; width: 690rpx; top: 30%;">
 				<ai-no-content describe="这里好冷清，赶紧去收藏宝贝吧！"></ai-no-content>
 			</view>
+			<uni-load-more v-if="!listPlaceHolder" :status="uniLoadMoreStatus"></uni-load-more>
+			<view v-if="listPlaceHolder" style="position: fixed; top: 30%; width: 690rpx;">
+				<ai-no-content describe="哎呀！暂时还没有记录哦！"></ai-no-content>
+			</view>
 		</view>
 	</view>
 </template>
@@ -21,18 +27,20 @@
 <script>
 	import uniSwipeAction from '@/components/uni-swipe-action/uni-swipe-action.vue'
 	import uniSwipeActionItem from '@/components/uni-swipe-action-item/uni-swipe-action-item.vue'
-	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
+	import aiGoodsCollectCard from '@/components/ai-card/ai-goods-collect-card.vue'
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	export default {
 		components: {
 			uniSwipeAction,
 			uniSwipeActionItem,
-			aiGoodsCard,
+			aiGoodsCollectCard,
 			uniPopupDialog,
 		},
 		data() {
 			return {
 				delIndex: 0,
+				page: 1,
+				lastPage: 1,
 				options: [
 					{
 					    text: '删除',
@@ -41,98 +49,52 @@
 						}
 					}
 				],
-				collectList: [
-					        {
-					            "id": 3394,
-					            "category_id": 13,
-					            "item_url": "http://item.taobao.com/item.htm?id=619114439833",
-					            "click_url": "https://s.click.taobao.com/t?e=m%3D2%26s%3DXQZAIXrc2lFw4vFB6t2Z2ueEDrYVVa64juWlisr3dOdyINtkUhsv0BbJBHc3o%2FSWp5WoWYLOuMhd60bal0d6fluMKyARBT5%2F%2FBVGoT3bu1JOWVWyRDCyNCnMXl5ShjefUyNpxLfgKr0jWpzpm6nEC2LIv53a4Smh1XSA32cb2WH7qszUSx7EBeYCFRFGkLZmIYULNg46oBA%3D&union_lens=lensId%3AOPT%401590730170%400b0151da_197c_1725ee82235_8cf3%4001",
-					            "tpw": "0",
-					            "num_iid": 619114439833,
-					            "title": "可挂式衣柜防潮剂 除湿袋房间除湿剂衣橱吸湿袋防霉防潮拍1发4",
-					            "pic": "https://img.alicdn.com/i1/62624758/O1CN01po5tHa1l1D58XGr8P_!!62624758.jpg",
-					            "price": 14.98,
-					            "promotion_price": 4.98,
-					            "commission_rate": 4,
-					            "commission": "0.00",
-					            "num": 0,
-					            "volume": 0,
-					            "sell_point": "测试专用",
-					            "shop_id": 0,
-					            "seller_uid": 0,
-					            "status": 1,
-					            "sort": 100,
-					            "dateline": 1590732846,
-					            "remark": "",
-					            "script": null,
-					            "label": 0,
-					            "category_tag": "",
-					            "live_script": "",
-					            "tag": "主推",
-					            "is_recommend": 1
-					        },
-					        {
-					            "id": 3392,
-					            "category_id": 8,
-					            "item_url": "11",
-					            "click_url": "12",
-					            "tpw": "0",
-					            "num_iid": 1,
-					            "title": "1232",
-					            "pic": "http://taobaoke.test.aixiaotu.com.cn/Uploads/Picture/2020-05-28/5ecf62717f899.jpg",
-					            "price": 111,
-					            "promotion_price": 11,
-					            "commission_rate": 11,
-					            "commission": "0.00",
-					            "num": 0,
-					            "volume": 0,
-					            "sell_point": "11",
-					            "shop_id": 0,
-					            "seller_uid": 0,
-					            "status": 1,
-					            "sort": 100,
-					            "dateline": 1590716998,
-					            "remark": "11",
-					            "script": null,
-					            "label": 0,
-					            "category_tag": "",
-					            "live_script": "11",
-					            "tag": "主推",
-					            "is_recommend": 0
-					        },
-					        {
-					            "id": 3386,
-					            "category_id": 6,
-					            "item_url": "12",
-					            "click_url": "212",
-					            "tpw": "0",
-					            "num_iid": 21,
-					            "title": "12",
-					            "pic": "http://taobaoke.test.aixiaotu.com.cn/Uploads/Picture/2020-05-28/5ecf62717f899.jpg",
-					            "price": 21,
-					            "promotion_price": 12,
-					            "commission_rate": 12,
-					            "commission": "0.00",
-					            "num": 0,
-					            "volume": 0,
-					            "sell_point": "12",
-					            "shop_id": 0,
-					            "seller_uid": 0,
-					            "status": 1,
-					            "sort": 100,
-					            "dateline": 1590649532,
-					            "remark": "12",
-					            "script": null,
-					            "label": 0,
-					            "category_tag": "",
-					            "live_script": "2",
-					            "tag": "主推",
-					            "is_recommend": 1
-					        }
-				]
+				collectList: [],
+				//下拉加载提示类型
+				listPlaceHolder: true,
+				uniLoadMoreStatus: "more",
 			}
 		},
+		onLoad() {
+			this.getCollectList()
+		},
+		onReachBottom() {
+			this.getCollectList()
+		},
 		methods: {
+			getCollectList(){
+				if(this.page > this.lastPage){
+					this.uniLoadMoreStatus = "noMore"
+					return
+				}
+				
+				this.$api.postGoodsCollectData({
+					user_id: this.$store.state.userInfo.id,
+					page: this.page
+				}).then(res => {
+					if(res.data.data.total == 0){
+						this.listPlaceHolder = true
+						return
+					}else{
+						this.listPlaceHolder = false
+					}
+					this.page += 1
+					this.lastPage = res.data.data.last_page
+					if(this.page > this.lastPage){
+						this.uniLoadMoreStatus = "noMore"
+					}else{
+						this.uniLoadMoreStatus = "more"
+					}
+					for(let item of res.data.data.data){
+						this.collectList.push(item)
+					}
+					console.log(1111, res.data.data)
+				})
+			},
+			goodsDetail(id){
+				console.log(id)
+				this.$aiRouter.navTo("/pages/detail/detail?goods_id=" + id)
+			},
 			swipeChange(e) {
 				//console.log('返回：', e);
 			},
@@ -141,7 +103,12 @@
 				this.$refs.popupDialog.open()
 			},
 			confirm(done){
-				this.collectList.splice(this.delIndex, 1)
+				this.$api.postGoodsUnCollect({
+					user_id: this.$store.state.userInfo.id,
+					item_id: this.collectList[this.delIndex].item_id
+				}).then(res => {
+					this.collectList.splice(this.delIndex, 1)
+				})
 				done()
 			},
 			close(done){

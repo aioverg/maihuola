@@ -13,7 +13,7 @@
 				<view class="input-box">
 					<text class="icon">¥</text>
 					<input placeholder="请输入提现金额" type="number" v-model="sum" class="input" />
-					<text class="note" v-show = "inputHint">（不小于1元）</text>
+					<text class="note" v-show = "inputHint">（不小于100元）</text>
 				</view>
 				<view class="tx-upper">可提现金额 ¥{{total}}</view>
 				<view class="tx-upperbt" @click="allWithdraw">全部提现</view>
@@ -29,6 +29,9 @@
 			<ai-button btname="提交" :buttonbg="aiButtonBg" @eventClick="withdraw" ></ai-button>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
+		<uni-popup ref="popup">
+			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -51,6 +54,10 @@
 				aiButtonBg: "ai-button-graybg",
 				run: true,
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
+				dialogMessage: [{
+					title: "温馨提醒",
+					content: "今日提现次数已达上线，请勿重复提现。"
+				}]
 			}
 		},
 		watch:{
@@ -82,6 +89,9 @@
 			})
 		},
 		methods: {
+			close(done){
+				done()
+			},
 			aiPopupMessage(type, content){
 				if(!this.run){
 					return
@@ -104,16 +114,16 @@
 				if(!this.sum){
 					return
 				}
-				if(0< this.sum && this.sum < 1){
-					this.aiPopupMessage('err', '不能小于1元')
+				if(0< this.sum && this.sum <= 100){
+					this.aiPopupMessage('err', '不能小于100元')
 					return
 				}
 				if(Number(this.sum) > this.total){
 					this.aiPopupMessage('err', '不能大于总金额')
 					return
 				}
-				if(this.sum > 10000){
-					this.aiPopupMessage('err', '每次不能大于1万元')
+				if(this.sum > 5000){
+					this.aiPopupMessage('err', '每次不能大于5000元')
 					return
 				}
 				this.$api.getWithdraw({
@@ -133,6 +143,11 @@
 						setTimeout(() => {
 							this.$aiRouter.navTabBar('/pages/tabbar/user')
 						},2000)
+						return
+					}
+					if(res.data.code == 300){
+						this.$refs.popup.open()
+						return
 					}
 				})
 			},

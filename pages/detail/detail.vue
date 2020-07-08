@@ -49,8 +49,8 @@
 		</view>
 		<view class="copy-box">
 			<view class="collect">
-				<image class="collect-icon" src="/static/icon/start-01.png"></image>
-				<view class="collect-hint">我要收藏</view>
+				<image class="collect-icon" @click="collect()" :src="collectIcon"></image>
+				<view class="collect-hint">{{collectTitle}}</view>
 			</view>
 			<view class="copy-bt">
 				<ai-button btname="复制推广码" width="540" shadow-width="492" @eventClick="copyTKL" ></ai-button>
@@ -101,6 +101,9 @@
 				aiDialogSrc: '/static/icon/icon-taobao.png',
 				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题,
 				taobao: 0,
+				collectStatus: false,
+				collectIcon: "/static/icon/start-01.png",
+				collectTitle: "我要收藏",
 				navHelp: [
 					{
 						title: "如何使用推广码？",
@@ -115,9 +118,16 @@
 			}
 		},
 		onLoad: function(obj){
+			console.log(obj)
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
+				console.log(333,res)
 				this.guessDetailData = res.data.data
+				if(res.data.data.collect){
+					this.collectStatus = true
+					this.collectIcon = "/static/icon/start-03.png",
+					this.collectTitle = "取消收藏"
+				}
 			})
 			this.$api.getAuthInfo({
 				code: "taobao"
@@ -154,6 +164,34 @@
 				uni.setStorageSync("bindTaoBao", "bind")
 				this.$aiRouter.navTo('/pages/account/taobao?page_id=2&page_params=' + this.goodsId)
 				done()
+			},
+			collect(){
+				if(this.collectStatus){
+					this.$api.postGoodsUnCollect({
+						user_id: this.$store.state.userInfo.id,
+						item_id: this.goodsId
+					}).then(res => {
+						console.log("取消收藏", res.data.code)
+						if(res.data.code == 0){
+							this.collectStatus = false
+							this.collectIcon = "/static/icon/start-01.png",
+							this.collectTitle = "我要收藏"
+						}
+					})
+				}else{
+					this.$api.postGoodsCollect({
+						user_id: this.$store.state.userInfo.id,
+						item_id: this.goodsId
+					}).then(res => {
+						if(res.data.code == 0){
+							this.collectStatus = true
+							this.collectIcon = "/static/icon/start-03.png",
+							this.collectTitle = "取消收藏"
+						}
+						console.log("我要收藏", res)
+						
+					})
+				}
 			},
 			//复制推广码
 			copyTKL(){

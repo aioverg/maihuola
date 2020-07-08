@@ -112,6 +112,30 @@ api.getGuessDetail = (goods_id) => {
 		}
 	})
 }
+//获取商品收藏列表
+api.postGoodsCollectData = (data) => {
+	return request({
+		url: "item/myCollect",
+		method: "POST",
+		data: data
+	})
+}
+//商品收藏
+api.postGoodsCollect = (data) => {
+	return request({
+		url: "item/collect",
+		method: "POST",
+		data: data
+	})
+}
+//商品取消收藏
+api.postGoodsUnCollect = (data) => {
+	return request({
+		url: "item/unCollect",
+		method: "POST",
+		data: data
+	})
+}
 //获取淘口令
 api.getTKL = (data) => {
 	return request({
