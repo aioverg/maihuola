@@ -14,9 +14,11 @@
 		},
 		onLaunch: function() {
 			const _this = this
+			/*
 			// #ifdef APP-PLUS
 			getServerNo(this)
 			// #endif
+			*/
 			uni.getStorage({
 			    key: 'userInfo',
 			    success: function (res) {

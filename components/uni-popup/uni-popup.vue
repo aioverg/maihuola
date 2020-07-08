@@ -52,8 +52,8 @@
 				default: true
 			},
 			zIndex: {
-				type: Number,
-				default: 99
+				type: String,
+				default: "99"
 			},
 			//遮罩背景颜色
 			backgroundColor: {

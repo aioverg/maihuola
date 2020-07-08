@@ -64,8 +64,8 @@
 			<ai-login jumpUrl="/pages/index/index?tabId=0"></ai-login>
 		</view>
 		<!--更新弹窗-->
-		<uni-popup ref="popupAiDia" type="dialog">
-		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="true" :before-close="true" @close="close" @confirm="confirm"></ai-popup-update>
+		<uni-popup ref="popupAiDia" type="dialog" zIndex="1000">
+		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="updateType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
@@ -80,8 +80,10 @@
 	import aiGoodsCard from '@/components/ai-card/ai-goods-card.vue'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	import aiLogin from '@/components/ai-login/ai-login.vue'
+	// #ifdef APP-PLUS
 	import {apkDownload} from '@/static/js/appUpdate.js'
-	
+	import {getServerNo} from "@/static/js/appUpdate.js";
+	// #endif
 	export default {
 		components: {
 			uniSwiperDot,
@@ -159,7 +161,9 @@
 				//是否显示刷新等待图标
 				refresh: false,
 				//将分类列表吸顶
-				sortFixed: "sort-relative"
+				sortFixed: "sort-relative",
+				//是否强制更新
+				updateType: true
 				
 			};
 		},
@@ -344,13 +348,6 @@
 				this.hide = false
 				this.getGuess(this.sortIndex)
 			},
-			//更新
-			appUpdate(){
-				if(!this.$store.state.appInfo.update){
-					console.log(22,this.$store.state.appInfo)
-					this.$refs.popupAiDia.open()
-				}
-			},
 			//将分类列表吸顶
 			sortCeil(value){
 				this.sortFixed = value
@@ -370,7 +367,7 @@
 				this.getGuessSort()
 				this.getCarousel()
 				// #ifdef APP-PLUS
-				this.appUpdate()
+				getServerNo(this)
 				// #endif
 				console.log("加载 首页，可以把网络请求放这里")
 			},

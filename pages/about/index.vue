@@ -11,7 +11,7 @@
 				</view>
 			</view>
 			<view class="ab-version" @click="updateApp">
-				<ai-list-cell title="版本号" :message="updateMessage" aimessagecolor="ai-list-cell-message-red"></ai-list-cell>
+				<ai-list-cell title="版本号" :message="updateMessage" :color="updateColor"></ai-list-cell>
 			</view>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
@@ -24,7 +24,9 @@
 <script>
 	import aiListCell from '@/components/ai-list-cell'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
+	// #ifdef APP-PLUS
 	import {apkDownload} from '@/static/js/appUpdate.js'
+	// #endif
 	export default {
 		components: {
 			aiListCell,
@@ -32,14 +34,17 @@
 		},
 		data() {
 			return {
-				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
+				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
+				updateColor: "#cccccc"
 			}
 		},
 		computed: {
 			updateMessage() {
 				if (this.$store.state.appInfo.update) {
+					this.updateColor = "#FF4100"
 					return "更新"
 				} else {
+					this.updateColor = "#cccccc"
 					return this.$store.state.appInfo.localVersion
 				}
 			},
