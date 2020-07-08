@@ -18,7 +18,7 @@
 				<!--本月预估收益内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">{{monthEarn.commission}}</view>
+						<view class="ec-one-sum">{{monthEarn.commission || "0.00"}}</view>
 						<view class="ec-one-text">本月预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
@@ -30,7 +30,7 @@
 						</view>
 						-->
 						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
-							<view class="ec-ts-sum">{{lmonthEarn.commission}}</view>
+							<view class="ec-ts-sum">{{lmonthEarn.commission || "0.00"}}</view>
 							<view class="ec-ts-text">上月结算收益（元）</view>
 						</view>
 					</view>
@@ -43,17 +43,17 @@
 				<!--今日收益、昨日收益、近七日收益 内容-->
 				<view class="earn-content">
 					<view class="ec-one">
-						<view class="ec-one-sum">{{dayEarn.commission}}</view>
+						<view class="ec-one-sum">{{dayEarn.commission || "0.00"}}</view>
 						<view class="ec-one-text">预估收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
 						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">{{dayEarn.total_num}}</view>
+							<view class="ec-ts-sum">{{dayEarn.total_num || "0"}}</view>
 							<view class="ec-ts-text">提交拉新数量</view>
 						</view>
 						<view class="ec-thr-oder">
-							<view class="ec-ts-sum">{{dayEarn.com_num}}</view>
+							<view class="ec-ts-sum">{{dayEarn.com_num || "0"}}</view>
 							<view class="ec-ts-text">过审拉新数量</view>
 						</view>
 					</view>
@@ -176,14 +176,14 @@
 			selMenu(id) {
 				this.elMenu = id
 				if(this.selEsKind == "earn"){
-					if(id == 0){this.dayEarn = this.taskEarn.today}
-					if(id == 1){this.dayEarn = this.taskEarn.yestoday}
-					if(id == 2){this.dayEarn = this.taskEarn.week}
+					if(id == 0){this.dayEarn = this.taskEarn.today || {}}
+					if(id == 1){this.dayEarn = this.taskEarn.yestoday || {}}
+					if(id == 2){this.dayEarn = this.taskEarn.week || {}}
 				}
 				if(this.selEsKind == "sale"){
-					if(id == 0){this.dayEarn = this.taskEarn.today}
-					if(id == 1){this.dayEarn = this.taskEarn.yestoday}
-					if(id == 2){this.dayEarn = this.taskEarn.week}
+					if(id == 0){this.dayEarn = this.taskEarn.today || {}}
+					if(id == 1){this.dayEarn = this.taskEarn.yestoday || {}}
+					if(id == 2){this.dayEarn = this.taskEarn.week || {}}
 				}
 			},
 			getBalance(){
