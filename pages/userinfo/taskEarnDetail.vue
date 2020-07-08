@@ -92,8 +92,6 @@
 				this.lastPage = 1
 				this.EarnDetailList = []
 				this.getTaskEarnDetail(this.selTaskId, this.selDate)
-				
-				console.log(this.pickerDate)
 			},
 			nowDate(){
 				// #ifdef H5
@@ -169,7 +167,6 @@
 					for (let item of res.data.data.data) {
 						this.EarnDetailList.push(item)
 					}
-					console.log(res.data.data.data)
 				})
 			}
 		}

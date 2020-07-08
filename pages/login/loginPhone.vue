@@ -27,7 +27,6 @@
 		onLoad(res) {
 			this.leftClickTag = res.leftClickTag
 			this.jumpUrl = res.jumpUrl
-			console.log(res)
 		},
 		methods: {
 		}

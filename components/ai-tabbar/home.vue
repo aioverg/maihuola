@@ -347,6 +347,7 @@
 			//更新
 			appUpdate(){
 				if(!this.$store.state.appInfo.update){
+					console.log(22,this.$store.state.appInfo)
 					this.$refs.popupAiDia.open()
 				}
 			},

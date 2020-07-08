@@ -46,7 +46,7 @@
 						key: 'launchFlag', 
 						data: true, 
 						success: function () {
-							console.log('error时存储launchFlag');
+							//console.log('error时存储launchFlag');
 						} 
 					}); 
 					this.guidePages = true

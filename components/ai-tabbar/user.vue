@@ -161,7 +161,7 @@
 				this.$aiRouter.navTo(url)
 			},
 			login() {
-				console.log(微信登录)
+				//console.log(微信登录)
 			},
 			getUserInfo() {
 				return this.$api.getUserCenter().then(res => {
@@ -178,7 +178,6 @@
 					}else if(res.data.data.level == 8){
 						this.userMark = '/static/icon/user-mark-08.png'
 					}else{
-						console.log(6666)
 						this.userMark = null
 					}
 					return true

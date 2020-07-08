@@ -170,7 +170,6 @@
 					return
 				}
 				if(item.tags == "sale"){
-					console.log(33333)
 					return
 				}
 			},

@@ -12,6 +12,7 @@ export function getServerNo(_this) {
 					app_type: 1,
 				}
 			}).then(res => {
+				console.log(inf.version, res[1].data)
 				if(inf.version !== res[1].data.server_version){
 					res[1].data.update = true
 					res[1].data.local_version = inf.version

@@ -26,7 +26,6 @@
 			confirm(res){
 				let inputValue = res.replace(/(^\s*)|(\s*$)/g, "")
 				if(inputValue.length == 0){return}
-				console.log("请求数据")
 			}
 		}
 	}

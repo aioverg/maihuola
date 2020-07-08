@@ -67,7 +67,7 @@
 			},
 			hintBottom: {
 				type: String,
-				default: 50
+				default: "50"
 			}
 		},
 		methods: {

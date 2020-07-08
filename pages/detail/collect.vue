@@ -88,11 +88,9 @@
 					for(let item of res.data.data.data){
 						this.collectList.push(item)
 					}
-					console.log(1111, res.data.data)
 				})
 			},
 			goodsDetail(id){
-				console.log(id)
 				this.$aiRouter.navTo("/pages/detail/detail?goods_id=" + id)
 			},
 			swipeChange(e) {

@@ -65,7 +65,6 @@
 				this.$aiRouter.navTo(obj)
 			},
 			backPage(){
-				console.log(666666)
 				uni.navigateBack()
 			},
 			getSearch(){

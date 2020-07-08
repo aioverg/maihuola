@@ -121,7 +121,6 @@
 			console.log(obj)
 			this.goodsId = obj.goods_id
 			this.$api.getGuessDetail(obj.goods_id).then( res => {
-				console.log(333,res)
 				this.guessDetailData = res.data.data
 				if(res.data.data.collect){
 					this.collectStatus = true
@@ -171,7 +170,7 @@
 						user_id: this.$store.state.userInfo.id,
 						item_id: this.goodsId
 					}).then(res => {
-						console.log("取消收藏", res.data.code)
+						//console.log("取消收藏")
 						if(res.data.code == 0){
 							this.collectStatus = false
 							this.collectIcon = "/static/icon/start-01.png",
@@ -188,7 +187,7 @@
 							this.collectIcon = "/static/icon/start-03.png",
 							this.collectTitle = "取消收藏"
 						}
-						console.log("我要收藏", res)
+						//console.log("我要收藏")
 						
 					})
 				}

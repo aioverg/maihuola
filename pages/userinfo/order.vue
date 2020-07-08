@@ -130,8 +130,6 @@
 					this.selStatusIndex = index
 					this.oderData = []
 				}
-				console.log(this.selStatusIndex)
-				console.log(id)
 			},
 			help(){
 				this.$refs.orderDetailHelp.open()

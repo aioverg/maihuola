@@ -91,11 +91,10 @@
 				this.$refs.datePicker.show()
 			},
 			onCancel(e){
-				console.log(e);
+				//console.log(e);
 			},
 			onConfirm(e){
 				this.pickerDate = e.dateValue;
-				console.log(this.pickerDate)
 			},
 			nowDate(){
 				let dateArray = new Date().toLocaleDateString().split('/')
