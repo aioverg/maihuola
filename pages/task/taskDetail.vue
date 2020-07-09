@@ -5,7 +5,7 @@
 				<view style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?id=' + taskId)" v-if="taskStatus == '0'">上传截图</view>
 			</block>
 		</uni-nav-bar>
-		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 3个工作日完成审核，请您耐心等待.."></hint-box>
+		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 6个工作日完成审核，请您耐心等待..."></hint-box>
 		<view class="task-detail-body">
 			<view class="task-title">
 				<view class="tt-title">{{taskContent.title}}</view>
