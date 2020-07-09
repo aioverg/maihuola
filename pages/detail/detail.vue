@@ -9,20 +9,17 @@
 			<view class="guess-price-info-one">
 				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/icon-zbprice-01.png"></image>
 				<view class="guess-zbprice">
-					<text>¥</text>
-					<text>{{guessDetailData.promotion_price}}</text>
+					<text>¥{{guessDetailData.promotion_price}}</text>
 				</view>
 				<view class="guess-ckprice">
 					<text>参考收益：</text>
-					<text>¥</text>
-					<text>{{guessDetailData.commission}}</text>
+					<text>¥{{guessDetailData.commission}}</text>
 				</view>
 			</view>
 			<view class="guess-price-info-two">
 				<view class="guess-scprice">
 					<text>市场价：</text>
-					<text>¥</text>
-					<text>{{guessDetailData.price}}</text>
+					<text>¥{{guessDetailData.price}}</text>
 				</view>
 				<view class="guess-rate">
 					<text>佣金比例：</text>
@@ -120,35 +117,48 @@
 		onLoad: function(obj){
 			console.log(obj)
 			this.goodsId = obj.goods_id
-			this.$api.getGuessDetail(obj.goods_id).then( res => {
-				this.guessDetailData = res.data.data
-				if(res.data.data.collect){
-					this.collectStatus = true
-					this.collectIcon = "/static/icon/start-03.png",
-					this.collectTitle = "取消收藏"
-				}
-			})
-			this.$api.getAuthInfo({
-				code: "taobao"
-			}).then( res => {
-				this.taobao = res.data.data.status
-			})
-			if(obj.tb_auth == "fail"){
-				this.aiDialogSrc = '/static/img/taobao-err.png'
-				this.popupDialogTitle = "授权失败"
-				this.popupDialogContent = "将无法通过分享商品获得收益"
-				this.$refs.popupAiDialog.open()
-			}
-		},
-		onShow() {
-			let bindTabBao = uni.getStorageSync('bindTaoBao')
-			if(bindTabBao == 'bind'){
+			if(this.hasLogin){
+				this.$api.getGuessDetail({
+					goods_id: obj.goods_id,
+					user_id: this.$store.state.userInfo.id
+				}).then( res => {
+					this.guessDetailData = res.data.data
+					if(res.data.data.collect){
+						this.collectStatus = true
+						this.collectIcon = "/static/icon/start-03.png",
+						this.collectTitle = "取消收藏"
+					}
+				})
 				this.$api.getAuthInfo({
 					code: "taobao"
 				}).then( res => {
 					this.taobao = res.data.data.status
-					uni.removeStorageSync('bindTaoBao')
 				})
+				if(obj.tb_auth == "fail"){
+					this.aiDialogSrc = '/static/img/taobao-err.png'
+					this.popupDialogTitle = "授权失败"
+					this.popupDialogContent = "将无法通过分享商品获得收益"
+					this.$refs.popupAiDialog.open()
+				}
+			}else{
+				this.$api.getGuessDetail({
+					goods_id: obj.goods_id
+				}).then( res => {
+					this.guessDetailData = res.data.data
+				})
+			}
+		},
+		onShow() {
+			if(this.hasLogin){
+				let bindTabBao = uni.getStorageSync('bindTaoBao')
+				if(bindTabBao == 'bind'){
+					this.$api.getAuthInfo({
+						code: "taobao"
+					}).then( res => {
+						this.taobao = res.data.data.status
+						uni.removeStorageSync('bindTaoBao')
+					})
+				}
 			}
 		},
 		onReady(){
@@ -165,6 +175,9 @@
 				done()
 			},
 			collect(){
+				if(!this.hasLogin){
+					return
+				}
 				if(this.collectStatus){
 					this.$api.postGoodsUnCollect({
 						user_id: this.$store.state.userInfo.id,

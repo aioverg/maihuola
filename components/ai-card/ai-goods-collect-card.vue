@@ -13,7 +13,7 @@
 					<view class="sc-price">市场价：￥{{data.item.price}}</view>
 				</view>
 				<view class="rate">
-					<view class="ck-earn">参考收益：￥{{data.item.commission}}</view>
+					<view class="ck-earn">收益：￥{{data.item.commission}}</view>
 					<view class="yj-rate">佣金比例：{{data.item.commission_rate}}%</view>
 				</view>
 			</view>

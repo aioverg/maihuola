@@ -103,13 +103,11 @@ api.getSearchGuess = (data) => {
 }
 
 //获取商品详情
-api.getGuessDetail = (goods_id) => {
+api.getGuessDetail = (data) => {
 	return request({
 		url: "item/goodsinfo",
 		method: "GET",
-		data: {
-			goods_id: goods_id
-		}
+		data: data
 	})
 }
 //获取商品收藏列表

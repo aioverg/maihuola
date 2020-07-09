@@ -13,7 +13,7 @@
 					<view class="sc-price">市场价：￥{{data.price}}</view>
 				</view>
 				<view class="rate">
-					<view class="ck-earn">参考收益：￥{{data.commission}}</view>
+					<view class="ck-earn">收益：￥{{data.commission}}</view>
 					<view class="yj-rate">佣金比例：{{data.commission_rate}}%</view>
 				</view>
 			</view>
@@ -77,7 +77,7 @@
 			height: 55rpx;
 			margin: 28rpx 0 0 0;
 			.zb-price {
-				font-size:13px;
+				font-size: 13px;
 				color: #ff3333;
 			}
 			.sc-price {
