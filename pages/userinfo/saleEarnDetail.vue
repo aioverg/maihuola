@@ -11,10 +11,14 @@
 				<ai-order-goods-card :data="item"></ai-order-goods-card>
 			</view>
 		</view>
+		<view style="width: 750rpx; padding: 10px 30rpx 0; position: fixed; top: 30% ;">
+			<ai-no-content describe="哎呀！暂时还没有记录哦！"></ai-no-content>
+		</view>
 		<ai-date-picker ref="datePicker" @onCancel="onCancel" @onConfirm="onConfirm" :startDate="startDate" :endDate="endDate" :defaultValue="pickerDate"></ai-date-picker>
 		<uni-popup ref="earnDetailHelp" type="dialog">
 			<ai-popup-dialog :cancelShow="false" btname="我知道了" :message="HelpMessage" @confirm="close"></ai-popup-dialog>
 		</uni-popup>
+		
 	</view>
 </template>
 
@@ -39,6 +43,7 @@
 					content: "该订单是指当月确认收货的订单，如没有发起维权，次月可结算到余额，25号提现"
 				}],
 				detailList: [
+					/*
 					{
 						pic: "/static/mock/mock-01.png",
 						title: "虎标冻干柠檬片70g*2组合 柠檬泡茶柠檬泡水喝的花茶…",
@@ -60,6 +65,7 @@
 						oderMoney: "7.96",
 						oderDate: "2020-04-09 11:29:28",
 					}
+					*/
 				]
 			}
 		},

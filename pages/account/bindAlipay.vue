@@ -29,8 +29,8 @@
 				navBarTitle: null,
 				alipayAccount: "",
 				userName: "",
-				oldAccount: "请输入真实姓名",
-				oldName: "请输入支付宝账户",
+				oldName: "请输入真实姓名",
+				oldAccount: "请输入支付宝账户",
 				navigateFlag: false
 			}
 		},

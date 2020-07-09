@@ -176,6 +176,7 @@
 			},
 			collect(){
 				if(!this.hasLogin){
+					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/detail/detail?goods_id=' + this.goodsId)
 					return
 				}
 				if(this.collectStatus){
