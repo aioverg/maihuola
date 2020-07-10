@@ -1,2 +1,4 @@
-unpackage/*
-unpackage/!res/
+unpackage/debug/
+unpackage/dist/
+unpackage/release/
+unpackage/resources/
