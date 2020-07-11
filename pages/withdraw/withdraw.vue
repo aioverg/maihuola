@@ -114,11 +114,11 @@
 				if(!this.sum){
 					return
 				}
-				if(0< this.sum && this.sum <= 100){
+				if(this.sum && this.sum <= 100){
 					this.aiPopupMessage('err', '不能小于100元')
 					return
 				}
-				if(Number(this.sum) > this.total){
+				if(this.sum > this.total){
 					this.aiPopupMessage('err', '不能大于总金额')
 					return
 				}
