@@ -32,7 +32,12 @@
 			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?id=' + taskId)"
 			 :cancelShow="false">
 				<block slot="button">
+					<!--
 					<view @click="redirect('/pages/task/taskDetail?is_end=0&id=' + taskId + '&router=redirect')" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
+						完成
+					</view>
+					-->
+					<view @click="navToback(1)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
 						完成
 					</view>
 				</block>
@@ -167,6 +172,10 @@
 			},
 			redirect(url) {
 				this.$aiRouter.redirect(url)
+			},
+			navToback(delta) {
+				console.log(66666)
+				this.$aiRouter.navToBack(delta)
 			}
 		}
 	}

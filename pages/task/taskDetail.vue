@@ -68,10 +68,12 @@
 				qrCodeBt: true, //是否显示获取推广码按钮
 				qrCode: true, //是否显示推广码
 				qrContent: true,
-				routerKind: "navTo"
+				routerKind: "navTo",
+				showFlag: true
 			}
 		},
 		onLoad(res) {
+			this.showFlag = false
 			this.taskId = res.id
 			this.taskStatus = res.is_end
 			if(res.router){
@@ -83,6 +85,11 @@
 				this.qrContent = false
 			}
 			this.getTaskDetail(res.id)
+		},
+		onShow() {
+			if(this.showFlag){
+				this.getTaskDetail(this.taskId)
+			}
 		},
 		methods: {
 			navTo(url){
@@ -108,6 +115,7 @@
 					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
 					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
 					this.taskContent = res.data.data
+					this.showFlag = true
 				})
 			},
 			//保存推广码到本地相册

@@ -54,6 +54,8 @@ aiRouter.navTabBar = function(url){
 		this.navigatorFlag = false
 	}, 200)
 }
+
+//关闭当前页面跳转到指定页面
 aiRouter.redirect = function(url){
 	if(this.navigatorFlag){ return }
 	this.navigatorFlag = true
@@ -75,7 +77,26 @@ aiRouter.redirect = function(url){
 	}, 200)
 }
 
-
-
+//关闭当前页面返回上一级或多级页面
+aiRouter.navToBack = function(delta){
+	if(this.navigatorFlag){ return }
+	this.navigatorFlag = true
+	uni.getNetworkType({
+		success: function(res){
+			if(res.networkType == "none" /*|| res.networkType == "unknown"*/){
+				uni.redirectTo({
+					url: path + '/pages/error/408'
+				})
+			}else{
+				uni.navigateBack({
+				    delta: delta
+				})
+			}
+		}
+	})
+	setTimeout(() => {
+		this.navigatorFlag = false
+	}, 200)
+}
 
 export default aiRouter
