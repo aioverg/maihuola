@@ -1,7 +1,7 @@
 const api = {}
 const basePath = ""
-//const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
-const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
+const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
+//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
 /*const token = uni.getStorage({
     key: 'token',
     success: function (res) {
@@ -23,9 +23,16 @@ const request = function(obj){
 			}
 		}
 	})
-	if(uni.getStorageSync("userInfo")){
-		let token = uni.getStorageSync("userInfo").access_token
-		let userId = uni.getStorageSync("userInfo").client.id
+	
+	// if(uni.getStorageSync("userInfo")){
+	// 	let token = uni.getStorageSync("userInfo").access_token
+	// 	let userId = uni.getStorageSync("userInfo").client.id
+	// 	let authen = new Buffer(userId + ':' + token);
+	// 	authentication = authen.toString('base64');
+	// }
+	if(uni.getStorageSync("token")){
+		let token = uni.getStorageSync("token")
+		let userId = uni.getStorageSync("userInfo").id
 		let authen = new Buffer(userId + ':' + token);
 		authentication = authen.toString('base64');
 	}
@@ -47,9 +54,15 @@ const request = function(obj){
 //文件上传
 const upload = function(obj){
 	let authentication = null
-	if(uni.getStorageSync("userInfo")){
-		let token = uni.getStorageSync("userInfo").access_token
-		let userId = uni.getStorageSync("userInfo").client.id
+	// if(uni.getStorageSync("userInfo")){
+	// 	let token = uni.getStorageSync("userInfo").access_token
+	// 	let userId = uni.getStorageSync("userInfo").client.id
+	// 	let authen = new Buffer(userId + ':' + token);
+	// 	authentication = authen.toString('base64');
+	// }
+	if(uni.getStorageSync("token")){
+		let token = uni.getStorageSync("token")
+		let userId = uni.getStorageSync("userInfo").id
 		let authen = new Buffer(userId + ':' + token);
 		authentication = authen.toString('base64');
 	}

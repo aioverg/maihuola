@@ -30,7 +30,6 @@
 		},
 		methods: {
 			navTo(url){
-				this.$store.commit("setTabId", 2)
 				this.$aiRouter.navTo(url)
 			},
 			navTabBar(url){

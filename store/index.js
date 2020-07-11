@@ -6,13 +6,11 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		systemType: 1, //0-PC;1-IOS;2-Android
-		//tabId: 0,
 		hasLogin: false,
 		token: null,
 		userInfo: {
 			id: null,
 			level: null,
-			token: null,
 			tel: null,
 			realName: null,
 			taobao: null,
@@ -33,7 +31,8 @@ const store = new Vuex.Store({
 	},
 	mutations: {
 		login(state, data){
-			state.hasLogin = true;
+			state.hasLogin = true
+			state.token = data
 			uni.setStorageSync('token', data)
 		},
 		setTabId(state, data){
@@ -41,21 +40,8 @@ const store = new Vuex.Store({
 		},
 		setUserInfo(state, data){
 			state.hasLogin = true;
-			state.userInfo.id = data.client.id
-			state.userInfo.token = data.access_token
-			state.userInfo.level = data.client.level
-			state.userInfo.tel = data.client.mobile
-			state.userInfo.realName = data.client.real_name || null
-			state.userInfo.taobao = data.client.taobao || null
-			state.userInfo.wechat = data.client.wechat || null
-			state.userInfo.alipay = data.client.alipay || null
-			state.userInfo.wechatName = null
-			state.userInfo.WXAvatarUrl = null
-
-			uni.setStorageSync('userInfo', data)
-		},
-		setUserInfoES(state, data){
 			state.userInfo.id = data.id
+			// state.userInfo.token = data.access_token
 			state.userInfo.level = data.level
 			state.userInfo.tel = data.mobile
 			state.userInfo.realName = data.real_name || null
@@ -64,19 +50,20 @@ const store = new Vuex.Store({
 			state.userInfo.alipay = data.alipay || null
 			state.userInfo.wechatName = null
 			state.userInfo.WXAvatarUrl = null
+			uni.setStorageSync('userInfo', data)
 		},
 		logout(state) {
-			state.hasLogin = false;
+			state.hasLogin = false
+			state.token = null
 			state.userInfo.id = null
-			state.userInfo.token = null
+			// state.userInfo.token = null
 			state.userInfo.tel = null
 			state.userInfo.realName = null
 			state.userInfo.taobao = null
 			state.userInfo.wechat = null
 			state.userInfo.alipay = null
-			uni.removeStorage({
-                key: 'userInfo'
-            })
+			uni.removeStorageSync('userInfo')
+			uni.removeStorageSync('token')
 		},
 		setTaoBao(state, status){
 			state.userInfo.taobao = status

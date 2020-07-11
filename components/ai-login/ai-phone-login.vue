@@ -126,7 +126,8 @@
 					code: this.code
 				}).then( res => {
 					if(res.data.code == 0){
-						this.$store.commit("setUserInfo", res.data.data)
+						this.$store.commit("setUserInfo", res.data.data.client)
+						this.$store.commit("login", res.data.data.access_token)
 						uni.redirectTo({
 							url: this.jumpUrl
 						});
