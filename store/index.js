@@ -49,10 +49,21 @@ const store = new Vuex.Store({
 			state.userInfo.taobao = data.client.taobao || null
 			state.userInfo.wechat = data.client.wechat || null
 			state.userInfo.alipay = data.client.alipay || null
-			state.userInfo.wechatName = null,
-			state.userInfo.WXAvatarUrl = null,
+			state.userInfo.wechatName = null
+			state.userInfo.WXAvatarUrl = null
 
 			uni.setStorageSync('userInfo', data)
+		},
+		setUserInfoES(state, data){
+			state.userInfo.id = data.id
+			state.userInfo.level = data.level
+			state.userInfo.tel = data.mobile
+			state.userInfo.realName = data.real_name || null
+			state.userInfo.taobao = data.taobao || null
+			state.userInfo.wechat = data.wechat || null
+			state.userInfo.alipay = data.alipay || null
+			state.userInfo.wechatName = null
+			state.userInfo.WXAvatarUrl = null
 		},
 		logout(state) {
 			state.hasLogin = false;

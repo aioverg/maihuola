@@ -180,6 +180,7 @@
 					}else{
 						this.userMark = null
 					}
+					this.$store.commit("setUserInfoES", res.data.data)
 					return true
 				})
 			},
