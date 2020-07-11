@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="结算明细">
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="提现记录">
 			<block slot="right">
 				<image @click="datePicker" src="/static/icon/calendar-01.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
 			</block>

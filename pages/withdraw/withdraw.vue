@@ -23,7 +23,8 @@
 		</view>
 		<view class="tx-bt">
 			<view class="tx-hint" >
-				<text v-if="txHint">*提现金额不能超过余额</text>
+				<text v-show="!txHint && sum">*提现将扣除3.69%服务费</text>
+				<text v-show="txHint">*提现金额不能超过余额</text>
 			</view>
 			<ai-button btname="提交" :buttonbg="aiButtonBg" @eventClick="withdraw" ></ai-button>
 		</view>
@@ -140,7 +141,7 @@
 							isClick:false
 						})
 						setTimeout(() => {
-							this.$aiRouter.navTabBar('/pages/tabbar/user')
+							this.$aiRouter.navTo('/pages/index/index?tabId=2')
 						},2000)
 						return
 					}
