@@ -67,7 +67,7 @@
 				}else{
 					this.aiButtonBg ="ai-button-graybg"
 				}
-				if(this.sum > 100){
+				if(this.sum >= 100){
 					this.inputHint = false
 				}else{
 					this.inputHint = true
