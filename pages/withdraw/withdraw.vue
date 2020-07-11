@@ -23,7 +23,7 @@
 		</view>
 		<view class="tx-bt">
 			<view class="tx-hint" >
-				<text v-show="!txHint && sum">*提现将扣除3.69%服务费</text>
+				<text v-show="!txHint && sum">*提现将扣除3.69%服务费，金额以实际到账为准</text>
 				<text v-show="txHint">*提现金额不能超过余额</text>
 			</view>
 			<ai-button btname="提交" :buttonbg="aiButtonBg" @eventClick="withdraw" ></ai-button>
