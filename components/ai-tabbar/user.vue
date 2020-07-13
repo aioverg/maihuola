@@ -29,7 +29,7 @@
 						<view class="info-box-user-name">{{userInfo.username}}</view>
 						<view class="info-box-user-id">账户ID:{{userInfo.id}}</view>
 					</view>
-					<image :src="userMark" style="height: 20px; margin: 30px 0 0; opacity: 1;" mode="aspectFit"></image>
+					<image :src="userMark" style="height: 20px; margin: 32px 0 0; opacity: 1; padding: 0 20px 0 0;" mode="aspectFit"></image>
 				</view>
 			
 				<view class="estimate">

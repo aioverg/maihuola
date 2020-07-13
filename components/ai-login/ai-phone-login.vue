@@ -191,7 +191,7 @@
 			align-items: center;
 			border-bottom: 1px solid rgba(204,204,204,1);
 			.apl-code-icon {
-				width: 20px;
+				width: 22px;
 				display: inline-block;
 			}
 			.apl-code-input {

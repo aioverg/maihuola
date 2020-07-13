@@ -1,11 +1,20 @@
 <template>
 	<view class="help">
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" ></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" >
+			<block slot="right">
+				<view style="width: 150rpx; padding: 0 10px 0 0; text-align: right;">
+				    <image @click="headset()" src="/static/img/headset-01.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				</view>
+			</block>
+		</uni-nav-bar>
 		<view class="help-list">
 			<view class="hl-item" v-for="(item, index) in helpList" :key="item.id" @click="navTo(item.url+item.id)">
 				<ai-list-cell :title="item.title" :dashed="item.dashed"></ai-list-cell>
 			</view>
 		</view>
+		<uni-popup ref="popup">
+			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
+		</uni-popup>
 	</view>
 </template>
 
@@ -43,6 +52,10 @@
 						dashed: null
 					}
 				],
+				dialogMessage: [{
+						title: "联系客服",
+						content: "您好！请您联系微信客服：aixiaotu007，客服的工作时间是09:30～18:00，谢谢您的配合！"
+				}],
 				navigateFlag: false //解决快速点击跳转，页面跳转多次问题
 			}
 		},
@@ -50,6 +63,13 @@
 			navTo(url){
 				this.$aiRouter.navTo(url)
 			},
+			headset(){
+				this.$refs.popup.open()
+			},
+			close(done){
+				done()
+			}
+			
 		}
 	}
 </script>

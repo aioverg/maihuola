@@ -100,7 +100,7 @@
 				taobao: 0,
 				collectStatus: false,
 				collectIcon: "/static/icon/start-01.png",
-				collectTitle: "我要收藏",
+				collectTitle: "收藏",
 				navHelp: [
 					{
 						title: "如何使用推广码？",
@@ -126,7 +126,7 @@
 					if(res.data.data.collect){
 						this.collectStatus = true
 						this.collectIcon = "/static/icon/start-03.png",
-						this.collectTitle = "取消收藏"
+						this.collectTitle = "已收藏"
 					}
 				})
 				this.$api.getAuthInfo({
@@ -184,11 +184,11 @@
 						user_id: this.$store.state.userInfo.id,
 						item_id: this.goodsId
 					}).then(res => {
-						//console.log("取消收藏")
+						//console.log("已收藏")
 						if(res.data.code == 0){
 							this.collectStatus = false
 							this.collectIcon = "/static/icon/start-01.png",
-							this.collectTitle = "我要收藏"
+							this.collectTitle = "收藏"
 						}
 					})
 				}else{
@@ -199,9 +199,9 @@
 						if(res.data.code == 0){
 							this.collectStatus = true
 							this.collectIcon = "/static/icon/start-03.png",
-							this.collectTitle = "取消收藏"
+							this.collectTitle = "已收藏"
 						}
-						//console.log("我要收藏")
+						//console.log("收藏")
 						
 					})
 				}
