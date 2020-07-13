@@ -26,23 +26,26 @@
 						<image class="portrait" :src="portrait"></image>
 					</view>
 					<view class="info-box">
-						<view class="info-box-user-name">{{userName}}</view>
-						<view class="info-box-user-id">{{userId}}</view>
+						<view class="info-box-user-name">{{userInfo.username}}</view>
+						<view class="info-box-user-id">账户ID:{{userInfo.id}}</view>
 					</view>
 					<image :src="userMark" style="height: 20px; margin: 30px 0 0; opacity: 1;" mode="aspectFit"></image>
 				</view>
 			
 				<view class="estimate">
 					<view class="estimate-item-box">
-						<view class="num">{{curEar}}</view>
+						<view class="num">{{userInfo.today_commission}}</view>
+						<!-- <view class="num">{{curEar}}</view> -->
 						<view class="title">今日预估（元）</view>
 					</view>
 					<view class="estimate-item-box">
-						<view class="num">{{prevEar}}</view>
+						<view class="num">{{userInfo.yestoday_commission}}</view>
+						<!-- <view class="num">{{prevEar}}</view> -->
 						<view class="title">昨日预估（元）</view>
 					</view>
 					<view class="estimate-item-box">
-						<view class="num">{{prevEar}}</view>
+						<view class="num">{{userInfo.cur_month_commission}}</view>
+						<!-- <view class="num">{{prevEar}}</view> -->
 						<view class="title">本月预估（元）</view>
 					</view>
 				</view>
@@ -50,7 +53,8 @@
 					<image class="card-bg" src="/static/icon/bg-user-02.png"></image>
 					<view class="balance">
 						<view class="title">账户余额（元）：</view>
-						<view class="num">{{blance}}</view>
+						<view class="num">{{userInfo.balance}}</view>
+						<!-- <view class="num">{{blance}}</view> -->
 						<view class="cash" @click="withdraw">提现</view>
 					</view>
 					<view class="money-hint">每月25号可提现上月订单结算收益</view>
@@ -132,15 +136,8 @@
 				navTitle: null,
 				portrait: '/static/img/icon-portrait-01.png',
 				userMark: null,
-				userName: null,
-				userId: null,
-				blance: null,
-				curEar: "null",
-				prevEar: "null",
-				noLogin: false,
-				yesLogin: false,
-				alipay: false,
 				refresh: false,
+				userInfo: {}
 			}
 		},
 		computed: {
@@ -165,12 +162,7 @@
 			},
 			getUserInfo() {
 				return this.$api.getUserCenter().then(res => {
-					this.blance = res.data.data.balance
-					this.curEar = res.data.data.cur_month_commission
-					this.prevEar = res.data.data.prev_month_commission
-					this.userName = res.data.data.username
-					this.userId = "账户ID:" + res.data.data.id
-					this.alipay = res.data.data.alipay
+					this.userInfo = res.data.data
 					if(res.data.data.level == 3){
 						this.userMark = '/static/icon/user-mark-03.png'
 					}else if(res.data.data.level == 4){
@@ -185,8 +177,8 @@
 				})
 			},
 			withdraw() {
-				if (this.alipay) {
-					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.blance)
+				if (this.userInfo.alipay) {
+					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.userInfo.balance)
 				} else {
 					this.$aiRouter.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')
 				}

@@ -5,7 +5,7 @@
 		<view class="task-upload-body">
 			<view class="tub-user">
 				<view class="tub-user-title">请输入用户信息</view>
-				<input class="tub-user-tel" v-model="phone" type="number" placeholder="请输入手机号" />
+				<input class="tub-user-tel" v-model="phone" type="number" placeholder="请输入对方手机号" />
 			</view>
 			<view class="tub-upload">
 				<view class="tub-upload-title">请按示例上传截图</view>
@@ -69,7 +69,7 @@
 		},
 		watch: {
 			phone() {
-				if (this.phone.length !== 11 || this.imgList.some(item => {
+				if (this.phone.length !== 11 || this.imgList.every(item => {
 						return item.uploadPic == null
 					})) {
 					this.buttonbg = "ai-button-graybg"
@@ -102,7 +102,7 @@
 							_this.uploadImg[index] = JSON.parse(ress.data).data.info
 						})
 						//改变按钮颜色
-						if (_this.imgList.some(item => {
+						if (_this.imgList.every(item => {
 								return item.uploadPic == null
 							})) {
 							_this.buttonbg = "ai-button-graybg"
@@ -119,8 +119,14 @@
 			},
 			cancelImg(index) {
 				this.imgList[index].uploadPic = null
-				this.uploadImg[index] = null
-				this.buttonbg = "ai-button-graybg"
+				this.uploadImg[index] = ""
+				if (this.imgList.every(item => {
+						return item.uploadPic == null
+					})) {
+					this.buttonbg = "ai-button-graybg"
+				}else{
+					this.buttonbg = "ai-button-redbg"
+				}
 				this.submitFlag = false
 			},
 			getTaskDetail(id) {
@@ -144,14 +150,14 @@
 					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码错误'])
 					return
 				}
-				if (this.uploadImg.length != this.imgList.length) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '图片数量不够'])
+				if (this.uploadImg.length == 0) {
+					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
 					return
 				}
-				if (this.uploadImg.some(item => {
-						return item == null
+				if (this.uploadImg.every(item => {
+						return item == ""
 					})) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '图片数量不够'])
+					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
 					return
 				}
 				this.$api.postTaskUpload({
