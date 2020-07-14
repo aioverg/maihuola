@@ -377,6 +377,7 @@
 		margin: 0 0 46px;
 		.collect {
 			height: 43px;
+			width: 45px;
 			margin: 0 0 10px 0;
 			display: inline-block;
 			text-align: center;

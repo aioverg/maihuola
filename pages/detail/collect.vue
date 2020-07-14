@@ -127,7 +127,7 @@
 	.collect-guess-box {
 		width: 690rpx;
 		.collect-guess-item {
-			margin: 10px 0;
+			margin: 0 0 10px 0;
 			box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 			border-radius: 8px;
 		}
