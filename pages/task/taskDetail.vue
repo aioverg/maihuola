@@ -53,12 +53,14 @@
 </template>
 
 <script>
-	import hintBox from '@/components/hint-box';
-	import jyfParser from "@/components/jyf-parser/jyf-parser";
+	import hintBox from '@/components/hint-box'
+	import jyfParser from "@/components/jyf-parser/jyf-parser"
+	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	export default {
 		components: {
 			hintBox,
-			jyfParser
+			jyfParser,
+			mixLoading
 		},
 		data() {
 			return {
@@ -69,7 +71,7 @@
 				qrCode: true, //是否显示推广码
 				qrContent: true,
 				routerKind: "navTo",
-				showFlag: true
+				showFlag: true,
 			}
 		},
 		onLoad(res) {
@@ -91,6 +93,21 @@
 				this.getTaskDetail(this.taskId)
 			}
 		},
+		//滑动到底部时请求操作
+		onPullDownRefresh() {
+			const _this = this
+			console.log(6666)
+			uni.startPullDownRefresh({
+				success: function() {
+					_this.getTaskDetail(_this.taskId).then(res => {
+						if(!res){
+							console.log(7777)
+							uni.stopPullDownRefresh()
+						}
+					})
+				}
+			})
+		},
 		methods: {
 			navTo(url){
 				if(this.routerKind == "navTo"){
@@ -109,13 +126,14 @@
 			},*/
 			//获取任务信息
 			getTaskDetail(id){
-				this.$api.postTaskDetail({
+				return this.$api.postTaskDetail({
 					id: id
 				}).then( res => {
 					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
 					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
 					this.taskContent = res.data.data
 					this.showFlag = true
+					return true
 				})
 			},
 			//保存推广码到本地相册

@@ -65,7 +65,7 @@
 		</view>
 		<!--更新弹窗-->
 		<uni-popup ref="popupAiDia" type="dialog" zIndex="10000">
-		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="!updateType" @close="close" @confirm="confirm"></ai-popup-update>
+		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
@@ -162,8 +162,6 @@
 				refresh: false,
 				//将分类列表吸顶
 				sortFixed: "sort-relative",
-				//是否强制更新
-				updateType: true
 				
 			};
 		},

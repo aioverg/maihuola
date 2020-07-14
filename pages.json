@@ -156,7 +156,17 @@
         }
         ,{
             "path" : "pages/task/taskDetail",
-            "style" : {}
+            "style" : {
+				"app-plus":{
+				    "pullToRefresh": {
+				        "support": true,
+				        "style": "circle",
+						"height": "50px",
+						"range": "100px",
+						"offset": "0px"
+				    }
+				}
+			}
         }
         ,{
             "path" : "pages/task/taskRule",
@@ -176,7 +186,7 @@
         }
         ,{
             "path" : "pages/userinfo/taskEarnDetail",
-            "style" : {}
+            "style": {}
         }
     ],
 	"globalStyle": {
