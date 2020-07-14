@@ -100,7 +100,7 @@
 		background: #FFFFFF;
 	}
 	.head {
-		margin: 10px 15px 25px;
+		margin: 10px 15px 10px;
 		display: flex;
 		.input-box {
 			display: flex;
