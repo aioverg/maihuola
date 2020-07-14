@@ -2,7 +2,7 @@
 	<view class="help">
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="帮助" >
 			<block slot="right">
-				<image @click="headset()" src="/static/img/headset-01.png" style="width: 20px; margin: 0 10px 0 0;" mode="widthFix"></image>
+				<image @click="headset()" src="/static/img/headset-01.png" style="width: 20px; margin: 0 5px 0 0;" mode="widthFix"></image>
 			</block>
 		</uni-nav-bar>
 		<view class="help-list">

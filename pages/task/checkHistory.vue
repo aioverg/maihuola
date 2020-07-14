@@ -14,7 +14,7 @@
 						<view>{{item.mobile}}</view>
 					</view>
 				</view>
-				<view class="tcb-item-hidden" v-show="iconType[index] == 'arrowdown'">{{item.remark}}</view>
+				<view class="tcb-item-hidden" v-show="iconType[index] == 'arrowup'">{{item.remark}}</view>
 			</view>
 			
 			<view style="width: 690rpx; position: fixed; top: 30% ;">
@@ -93,7 +93,7 @@
 							item.status = "待审核"
 						}
 						this.dataList.push(item)
-						this.iconType.push("arrowup")
+						this.iconType.push("arrowdown")
 					}
 				})
 			}
