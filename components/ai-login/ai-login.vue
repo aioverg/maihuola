@@ -3,7 +3,7 @@
 	<view class="ai-login-box">
 		<image class="ai-login-box-logo" mode="widthFix" src="/static/img/maihuola.png"></image>
 		<view class="ai-login-box-title">登录即可赚取佣金</view>
-		<view class="ai-login-box-bt" @click="navToLogin()">登录</view>
+		<view class="ai-login-box-bt" @click="navTo()">登录</view>
 	</view>
 </template>
 
@@ -11,7 +11,7 @@
 	export default {
 		data() {
 			return {
-				
+				navigateFlag: false ,//解决快速点击跳转，页面跳转多次问题
 			};
 		},
 		props: {
@@ -21,11 +21,8 @@
 			}
 		},
 		methods: {
-			navToLogin(){
-				uni.navigateTo({
-					url: "/pages/login/loginPhone?jumpUrl=" + this.jumpUrl
-					//url: "/pages/login/login"
-				})
+			navTo(){
+				this.$aiRouter.navTo("/pages/login/login")
 			}
 		}
 	}

@@ -72,7 +72,7 @@
 					if (res.statusCode !== 200) {
 						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '验证码错误'])
 					} else {
-						this.$aiRouter.redirect('/pages/account/bindPhone')
+						this.$aiRouter.redirect('/pages/account/bindPhone?type=alert')
 					}
 				})
 			}

@@ -72,6 +72,7 @@
 				qrContent: true,
 				routerKind: "navTo",
 				showFlag: true,
+				downRefreshFlag: true,
 			}
 		},
 		onLoad(res) {
@@ -96,16 +97,17 @@
 		//滑动到底部时请求操作
 		onPullDownRefresh() {
 			const _this = this
-			console.log(6666)
+			if(!_this.downRefreshFlag){return}
+			_this.downRefreshFlag = false
 			uni.startPullDownRefresh({
 				success: function() {
 					_this.getTaskDetail(_this.taskId).then(res => {
-						if(!res){
-							console.log(7777)
+						if(res){
+							_this.downRefreshFlag = true
 							uni.stopPullDownRefresh()
 						}
 					})
-				}
+				},
 			})
 		},
 		methods: {

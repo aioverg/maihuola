@@ -13,9 +13,10 @@
 					"background": "#0000ff",
 				    "pullToRefresh": {
 				        "support": true,
-				        "color": "#fffff",
 				        "style": "circle",
-						"offset": "-300px"
+				    	"height": "50px",
+				    	"range": "100px",
+				    	"offset": "0px"
 				    }
 				}
 			}
@@ -129,8 +130,7 @@
         ,{
             "path" : "pages/login/loginPhone",
             "style" : {}
-        }
-        ,{
+        },{
             "path" : "pages/withdraw/record",
             "style" : {}
         }
@@ -187,6 +187,14 @@
         ,{
             "path" : "pages/userinfo/taskEarnDetail",
             "style": {}
+        }
+        ,{
+            "path" : "pages/account/bindId",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/login/loginInput",
+            "style" : {}
         }
     ],
 	"globalStyle": {

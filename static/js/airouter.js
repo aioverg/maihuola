@@ -13,7 +13,9 @@ const throttle = function (fn, obj, interval){
 
 //判断网络状态跳转非tabBar页面，navigatorFlag用于解决手机端点击多次多次跳转的问题
 aiRouter.navTo = function(url){
+	console.log(url)
 	if(this.navigatorFlag){ return }
+	console.log(6666, url)
 	this.navigatorFlag = true
 	uni.getNetworkType({
 		success: function(res){

@@ -6,7 +6,7 @@
 			    <ai-list-cell title="手机号码" :color="telColor" :message="tel"></ai-list-cell>
 		    </view>
 		    <view class="box-sofeitem">
-			    <view class="box-item" @click="bindWx()" v-if="false">
+			    <view class="box-item" @click="bindWx()">
 				    <ai-list-cell title="微信绑定" :color="wechatColor" :message="wechat" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindTB()">
@@ -16,6 +16,14 @@
 				    <ai-list-cell title="支付宝账户" :color="alipayColor" :message="alipay"></ai-list-cell>
 			    </view>
 		    </view>
+			<view class="box-sofeitem">
+			    <view class="box-item" @click="bindDouyin()">
+				    <ai-list-cell title="快手ID" :color="wechatColor" :message="douyin" dashed="dashed"></ai-list-cell>
+			    </view>
+			    <view class="box-item" @click="bindKs()">
+				    <ai-list-cell title="抖音ID" :color="wechatColor" :message="ks"></ai-list-cell>
+			    </view>
+			</view>
 			<uni-popup ref="popupDialog" type="dialog">
 			    <uni-popup-dialog type="input" :title="popupDialogTitle" :content="popupDialogContent" message="成功消息" :duration="2000" :before-close="true" @close="close" @confirm="confirm"></uni-popup-dialog>
 			</uni-popup>
@@ -47,6 +55,8 @@
 				taobaoColor: "#FF1968",
 				alipay: null,
 				alipayColor: "#FF1968",
+				douyin: "未绑定",
+				ks: "未绑定",
 				popupDialogTitle: null,
 				popupDialogContent: null,
 				popupMessages: null,
@@ -148,6 +158,20 @@
 					this.navTo('/pages/account/bindAlipay?navbartitle=修改绑定支付宝')
 				}
 			},
+			bindDouyin(){
+				if(this.douyin == "未绑定"){
+					this.$aiRouter.navTo("/pages/account/bindId?kind=douyin&type=bind")
+				}else{
+					this.$aiRouter.navTo("/pages/account/bindId?kind=douyin&type=alert")
+				}
+			},
+			bindKs(){
+				if(this.douyin == "未绑定"){
+					this.$aiRouter.navTo("/pages/account/bindId?kind=ks&type=bind")
+				}else{
+					this.$aiRouter.navTo("/pages/account/bindId?kind=ks&type=alert")
+				}
+			},
 			close(done){
 				done()
 			},
@@ -202,6 +226,7 @@
 	}
 	.box-sofeitem {
 		padding: 0 15px;
+		margin: 0 0 10px;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
 		.box-item {

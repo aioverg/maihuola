@@ -69,6 +69,15 @@ const upload = function(obj){
 	})
 }
 
+//微信登录
+api.loginWechat = (data) => {
+	console.log(99999)
+	return request({
+		url: "user/loginbywechat",
+		method: "POST",
+		data: data
+	})
+}
 //获取首页商品分类
 api.getGuessSort = () => { 
 	return request({

@@ -1,9 +1,12 @@
 //输入框组件
 <template>
 	<view class="ai-input-box">
-		<view :style= "{width: titleWidth}" class="ai-input-title">{{title}}</view>
+		<view :style= "{width: titleWidth}" class="ai-input-title">
+		    <text>{{title}}</text>
+			<text class="ai-input-title-mark" v-if="mark">*</text>
+		</view>
 		<view :style="{width: inputWidth}" v-if="content" class="ai-input-content">{{content}}</view>
-		<input :style="{width: inputWidth}" class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :placeholder="placeholder"/>
+		<input :style="{width: inputWidth}" class="ai-input-input" v-if="placeholder" :type="type" v-model="inputValue" @input="getInput" @confirm="getInput" :disabled="disabled" :placeholder="placeholder"/>
 		<view class="ai-input-bt" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" v-if="bt" @click="aiCode">{{times}}{{btName}}</view>
 		<image class="ai-input-del" @click="delInput()" v-show="delShow" src="/static/icon/err-01.png"></image>
 	</view>
@@ -27,6 +30,10 @@
 				type: String,
 				default: ''
 			},
+			mark: {
+				type: Boolean,
+				default: false
+			},
 			titleWidth: {
 				type: String,
 				default: "160rpx"
@@ -39,6 +46,10 @@
 			content: {
 				//type: String,
 				default: null
+			},
+			disabled: {
+				type: Boolean,
+				default: false
 			},
 			inputWidth: {
 				type: String,
@@ -128,6 +139,12 @@
 			margin: 0 15px;
 			font-size:15px;
 			color: #333333;
+			.ai-input-title-mark {
+				display: inline-block;
+				position: relative;
+				top: -5px;
+				left: 2px;
+			}
 		}
 		.ai-input-content {
 			font-size: 14px;

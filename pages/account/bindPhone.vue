@@ -1,16 +1,16 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="修改手机号码"></uni-nav-bar>
-		<hint-box content="请填写新的手机号并验证完成绑定"></hint-box>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" :leftText="tabBarTitle"></uni-nav-bar>
+		<hint-box :content="hintContent"></hint-box>
 		<view class="alter-phone-body">
 			<view class="phone-num">
-				<ai-input inputWidth="390rpx" :del="true" title="手机号码" type="number" @getInput="getPhone" placeholder="请输入新手机号码"></ai-input>
+				<ai-input inputWidth="390rpx" :del="true" title="手机号码" type="number" @getInput="getPhone" :placeholder="phonePlaceHolder"></ai-input>
 			</view>
 			<view class="code-num">
 				<ai-input inputWidth="280rpx" title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 			</view>
 			<view class="bt">
-				<ai-button btname="确定" @eventClick="alertPhone"></ai-button>
+				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="alertPhone"></ai-button>
 			</view>
 		</view>
 		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
@@ -28,8 +28,42 @@
 		data() {
 			return {
 				phone: null,
-				code: null
+				code: null,
+				aiButtonBg: "ai-button-graybg",
+				tabBarTitle: "修改手机号码",
+				phonePlaceHolder: "请输入新手机号码",
+				hintContent: "请填写新的手机号并验证完成绑定"
 			}
+		},
+		watch: {
+			phone(){
+				if(this.phone.length == 11 && this.code.length == 6){
+					this.aiButtonBg = "ai-button-redbg"
+				}else{
+					this.aiButtonBg = "ai-button-graybg"
+				}
+			},
+			code(){
+				if(this.phone.length == 11 && this.code.length == 6){
+					this.aiButtonBg = "ai-button-redbg"
+				}else{
+					this.aiButtonBg = "ai-button-graybg"
+				}
+			}
+		},
+		onLoad(res) {
+			if(res.type == "alert"){
+				this.tabBarTitle = "修改手机号码"
+				this.phonePlaceHolder = "请输入新手机号码"
+				this.hintContent = "请填写新的手机号并验证完成绑定"
+				return
+			}
+			if(res.type == "bind"){
+				this.tabBarTitle = "绑定手机号码"
+				this.phonePlaceHolder = "为了您的账户安全需要绑定手机号"
+				this.hintContent = "请输入手机号码"
+			}
+			
 		},
 		methods: {
 			getPhone(res) {

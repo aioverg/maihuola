@@ -1,7 +1,7 @@
 <template>
 	<view class="ai-phone-login">
 		<view class="apl-img-box">
-			<image class="apl-img" src="/static/img/maihuola-01.png"></image>
+			<image class="apl-img" src="/static/icon/maihuola-01.png" mode="widthFix"></image>
 		</view>
 		<view>
 			<view class="apl-phone-box">
@@ -20,10 +20,10 @@
 				<ai-button width="540" shadowWidth="482" btname="登录" @eventClick="login"></ai-button>
 			</view>
 		</view>
-		<view class="apl-huo">或</view>
-		<view class="apl-wx-box" @click="navTo('/pages/login/login')">
-			<image class="apl-wx-icon" mode="widthFix" src="/static/img/img-wx.png"></image>
-			<view class="apl-wx-bt">微信登录</view>
+		<view class="apl-other">
+			<text class="apl-other-one">或</text>
+			<image class="apl-other-two" mode="widthFix" @click="navTo('/pages/login/login')" src="/static/icon/wechat-01.png"></image>
+			<text class="apl-other-thr" @click="navTo('/pages/login/login')">微信登录</text>
 		</view>
 		<view class="apl-note" :style="{bottom:hintBottom + 'px'}">
 			<ai-login-hint></ai-login-hint>
@@ -153,9 +153,8 @@
 		text-align: center;
 		.apl-img {
 			display: inline-block;
-			width: 143px;
-			height: 143px;
-			margin: 38px auto 40px;
+			width: 224px;
+			margin: 70px auto 65px;
 		}
 	}
 	.apl-phone-box {
@@ -167,11 +166,12 @@
 		border-bottom: 1px solid rgba(204,204,204,1);
 		.apl-phone-icon {
 			width: 20px;
+			margin: 0 0 0 8px;
 			display: inline-block;
 		}
 		.apl-phone-area {
 			display: inline-block;
-			margin: 0 0 0 35px;
+			margin: 0 0 0 31px;
 		}
 		.apl-phone-input {
 			display: inline-block;
@@ -193,6 +193,7 @@
 			.apl-code-icon {
 				width: 22px;
 				display: inline-block;
+				margin: 0 0 0 8px;
 			}
 			.apl-code-input {
 				display: inline-block;
@@ -214,31 +215,25 @@
 	.apl-login-button {
 		margin: 50px 0 0 0;
 	}
-	.apl-huo {
-		visibility:hidden;
-		width: 100%;
-		text-align: center;
-		font-size: 13px;
-		color: rgba(204,204,204,1);
-		height: 28px;
-		margin: 26px 0 15px 0;
-	}
-	.apl-wx-box {
-		visibility:hidden;
+	.apl-other {
+		margin: 21px 0 0 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		.apl-wx-icon {
-			display: inline-block;
-			width: 35px;
-		}
-		.apl-wx-bt {
-			display: inline-block;
+		.apl-other-one {
 			font-size: 13px;
-			color: rgba(244,122,115,1);
-			margin: 0 0 0 5px;
+			color: #CCCCCC;
+		}
+		.apl-other-two {
+			width: 35px;
+			margin: 0 5px 0 10px;
+		}
+		.apl-other-thr {
+			font-size: 13px;
+			color: #FFA570;
 		}
 	}
+
 	.apl-note {
 		position: fixed;
 		width: 750rpx;

@@ -10,7 +10,7 @@
 			<!--顶部-->
 			<uni-nav-bar fixed="true" backgroundImg="/static/icon/navbar-bg-01.png">
 				<block slot="right">
-					<view v-show="false" class="message-box" style="width: 20px; position: relative;">
+					<view v-if="false" class="message-box" style="width: 20px; position: relative;">
 						<image style="width: 20px;" mode="widthFix" src="/static/icon/message01.png"></image>
 						<text class="message-hint"></text>
 					</view>
@@ -113,7 +113,7 @@
 		<uni-popup ref="popupDialog" type="dialog">
 		    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
 		</uni-popup>
-		<mix-loading v-show="refresh"></mix-loading>
+		<!-- <mix-loading v-show="refresh"></mix-loading> -->
 	</view>
 </template>
 
@@ -136,7 +136,8 @@
 				navTitle: null,
 				portrait: '/static/img/icon-portrait-01.png',
 				userMark: null,
-				refresh: false,
+				// refresh: false,
+				downRefreshFlag: true,
 				userInfo: {}
 			}
 		},
@@ -203,12 +204,15 @@
 			//页面下拉时刷新组件
 			pageRefresh() {
 				const _this = this
-				_this.refresh = true
+				// _this.refresh = true
+				if(!_this.downRefreshFlag){return}
+				_this.downRefreshFlag = false
 				uni.startPullDownRefresh({
 					success: function() {
 						_this.getUserInfo().then(res => {
 							if(res){
-								_this.refresh = false
+								// _this.refresh = false
+								_this.downRefreshFlag = true
 								uni.stopPullDownRefresh()
 							}
 						})
