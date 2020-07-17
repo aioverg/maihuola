@@ -19,7 +19,7 @@
 				btName: "获取验证码",
 				times: null,
 				timeRun: false,
-				inputValue: null,
+				inputValue: "",
 				btNameColor: "#f47a73",
 				btNameUnderline: "underline",
 				delShow: false
@@ -94,8 +94,9 @@
 
 		methods: {
 			delInput(){
-				this.inputValue = null
+				this.inputValue = ""
 				this.delShow = ! this.delShow
+				this.$emit('getInput', this.inputValue);
 			},
 			aiCode(){
 				if(this.timeRun){return}

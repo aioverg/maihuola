@@ -4,10 +4,10 @@
 		<hint-box :content="hintContent"></hint-box>
 		<view class="alter-phone-body">
 			<view class="phone-num">
-				<ai-input inputWidth="390rpx" :del="true" title="手机号码" type="number" @getInput="getPhone" :placeholder="phonePlaceHolder"></ai-input>
+				<ai-input inputWidth="390rpx" titleWidth="130rpx" :del="true" title="手机号码" type="number" @getInput="getPhone" :placeholder="phonePlaceHolder"></ai-input>
 			</view>
 			<view class="code-num">
-				<ai-input inputWidth="280rpx" title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
+				<ai-input inputWidth="300rpx" titleWidth="130rpx" title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 			</view>
 			<view class="bt">
 				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="alertPhone"></ai-button>
@@ -27,8 +27,8 @@
 		},
 		data() {
 			return {
-				phone: null,
-				code: null,
+				phone: "",
+				code: "",
 				aiButtonBg: "ai-button-graybg",
 				tabBarTitle: "修改手机号码",
 				phonePlaceHolder: "请输入新手机号码",
