@@ -101,4 +101,25 @@ aiRouter.navToBack = function(delta){
 	}, 200)
 }
 
+//关闭所有页面跳转到指定页面
+aiRouter.launch = function(url){
+	if(this.navigatorFlag){ return }
+	this.navigatorFlag = true
+	uni.getNetworkType({
+		success: function(res){
+			if(res.networkType == "none" /*|| res.networkType == "unknown"*/){
+				uni.redirectTo({
+					url: path + '/pages/error/408'
+				})
+			}else{
+				uni.reLaunch({
+				    url: url
+				})
+			}
+		}
+	})
+	setTimeout(() => {
+		this.navigatorFlag = false
+	}, 200)
+}
 export default aiRouter

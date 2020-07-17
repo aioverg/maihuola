@@ -4,16 +4,16 @@
 		<hint-box :content="hintContent"></hint-box>
 		<view class="alter-phone-body">
 			<view class="phone-num">
-				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="快手ID" @getInput="getDouyin" placeholder="请输入ID（必填）" :mark="true"></ai-input>
+				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="快手ID" @getInput="getKs" placeholder="请输入ID（必填）" :mark="true"></ai-input>
 			</view>
 			<view class="phone-num">
-				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="抖音ID" @getInput="getKs" placeholder="请输入ID（选填）"></ai-input>
+				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="抖音ID" @getInput="getDouyin" placeholder="请输入ID（选填）"></ai-input>
 			</view>
 			<view class="bt">
 				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="bindId()"></ai-button>
 			</view>
 		</view>
-		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
+		<!-- <ai-popup-message ref="aiPopupMessage"></ai-popup-message> -->
 	</view>
 </template>
 
@@ -34,15 +34,8 @@
 			}
 		},
 		watch: {
-			douyin(){
-				if(this.douyin.length != 0 && this.ks.length != 0){
-					this.aiButtonBg = "ai-button-redbg"
-				}else{
-					this.aiButtonBg = "ai-button-graybg"
-				}
-			},
 			ks(){
-				if(this.douyin.length != 0 && this.ks.length != 0){
+				if(this.ks.length != 0){
 					this.aiButtonBg = "ai-button-redbg"
 				}else{
 					this.aiButtonBg = "ai-button-graybg"
@@ -60,6 +53,15 @@
 				this.ks = res
 			},
 			bindId() {
+				if(this.ks.length == 0){
+					return
+				}
+				this.$api.postPlatId({
+					kuaishou_id: this.ks,
+					douyin_id: this.douyin
+				}).then(res => {
+					console.log(res)
+				})
 				/*
 				if (this.phone % 1 !== 0 || this.phone.length !== 11) {
 					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码错误'])

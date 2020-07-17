@@ -65,11 +65,21 @@
 									nickname: infoRes.userInfo.nickName,
 									avatarUrl: infoRes.userInfo.avatarUrl
 								}).then(res => {
+									console.log("微信登录返回", res.data)
 									if (res.data.msg == 202) {
 										//微信公众号没有微信记录，跳转手机登录
 										_this.$aiRouter.navTo("/pages/login/loginPhone?unionid=" + infoRes.userInfo.unionId + "&openid=" + infoRes.userInfo.openId + "&nickname=" + infoRes.userInfo.nickName + "&avatarUrl=" + infoRes.userInfo.avatarUrl + "&jumpUrl=" + this.jumpUrl)
-									} else {
-										console.log("微信登录返回", res.data)
+										return
+									}
+									if(res.data.msg == "success") {
+										//微信公众号有记录，查看是否绑定抖音Id
+										if(res.data.data.client.kuaishou_id.length == 0){
+											_this.$store.commit("setUserInfo", res.data.data)
+											_this.$aiRouter.navTo("/pages/login/loginInput?&jumpUrl=" + this.jumpUrl)
+										}else{
+											_this.$aiRouter.launch(_this.jumpUrl)//此时信息完整，跳转到登录入口页
+										}
+										
 									}
 
 								})

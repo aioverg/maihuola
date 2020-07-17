@@ -312,4 +312,12 @@ api.postTaskEarnDetail = (data) => {
 		data: data
 	})
 }
+//绑定快手Id
+api.postPlatId = (data) => {
+	return request({
+		url: "user/changeKuaishou",
+		method: "POST",
+		data: data
+	})
+}
 export default api
