@@ -4,11 +4,10 @@
 		<hint-box :content="hintContent"></hint-box>
 		<view class="alter-phone-body">
 			<view class="phone-num">
-				<ai-input inputWidth="390rpx" titleWidth="120rpx" :del="true" title="快手ID" @getInput="getDouyin" placeholder="请输入ID（必填）" :mark="true">
-				</ai-input>
+				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="快手ID" @getInput="getDouyin" placeholder="请输入ID（必填）" :mark="true"></ai-input>
 			</view>
 			<view class="phone-num">
-				<ai-input inputWidth="390rpx" titleWidth="120rpx" :del="true" title="抖音ID" @getInput="getKs" placeholder="请输入ID（选填）"></ai-input>
+				<ai-input inputWidth="430rpx" titleWidth="120rpx" :del="true" title="抖音ID" @getInput="getKs" placeholder="请输入ID（选填）"></ai-input>
 			</view>
 			<view class="bt">
 				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="bindId()"></ai-button>

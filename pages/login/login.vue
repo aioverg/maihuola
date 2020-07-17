@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<view>
-			<ai-login-wechat></ai-login-wechat>
+			<ai-login-wechat :jumpUrl="jumpUrl"></ai-login-wechat>
 		</view>
 	</view>
 </template>
@@ -18,9 +18,12 @@
 			aiLoginWechat
 		},
 		data() {
-			return {}
+			return {
+				jumpUrl: ""
+			}
 		},
 		onLoad(res) {
+			this.jumpUrl = res.jumpUrl
 		},
 		methods: {
 		}

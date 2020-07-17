@@ -22,7 +22,7 @@
 		},
 		methods: {
 			navTo(){
-				this.$aiRouter.navTo("/pages/login/login")
+				this.$aiRouter.navTo("/pages/login/login?jumpUrl=" + this.jumpUrl)
 			}
 		}
 	}

@@ -68,7 +68,24 @@
 			hintBottom: {
 				type: String,
 				default: "50"
+			},
+			unionid: {
+				type: String,
+				default: ""
+			},
+			openid: {
+				type: String,
+				default: ""
+			},
+			nickname: {
+				type: String,
+				default: ""
+			},
+			avatarUrl: {
+				type: String,
+				default: ""
 			}
+			
 		},
 		methods: {
 			getCode(){
@@ -120,11 +137,18 @@
 					})
 					return
 				}*/
+				console.log(111,this.unionId)
 				this.$api.getChecktPhoneCode({
 					terminal: this.$store.state.systemType,
 					phone: this.phone,
-					code: this.code
+					code: this.code,
+					terminal: 1,
+					unionid: this.unionid,
+					openid: this.openid,
+					nickname: this.nickname,
+					avatarUrl: this.avatarUrl
 				}).then( res => {
+					console.log(res)
 					if(res.data.code == 0){
 						this.$store.commit("setUserInfo", res.data.data)
 						uni.redirectTo({

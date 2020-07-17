@@ -71,7 +71,6 @@ const upload = function(obj){
 
 //微信登录
 api.loginWechat = (data) => {
-	console.log(99999)
 	return request({
 		url: "user/loginbywechat",
 		method: "POST",

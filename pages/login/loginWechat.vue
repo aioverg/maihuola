@@ -30,12 +30,6 @@
 				pageParms: null,
 			}
 		},
-		props: {
-			jumpUrl: {
-				type: String,
-				default: ""
-			}
-		},
 		onLoad(res) {
 			this.pageId = res.page_id
 			this.pageParms = res.page_prams
@@ -57,7 +51,9 @@
 						uni.getUserInfo({
 							provider: 'weixin',
 							success: function(infoRes) {
-								//console.log("用户信息", infoRes)
+								console.log("用户信息", infoRes)
+								//_this.$api.getGuessSort().then(res => {console.log(7777, res)})
+
 								_this.$api.loginWechat({
 									terminal: 1,
 									unionid: infoRes.userInfo.unionId,
@@ -66,8 +62,7 @@
 									avatarUrl: infoRes.userInfo.avatarUrl
 								}).then(res => {
 									if (res.data.msg == 202) {
-										//微信公众号没有微信记录，跳转手机登录
-										_this.$aiRouter.navTo("/pages/login/loginPhone?unionid=" + infoRes.userInfo.unionId + "&openid=" + infoRes.userInfo.openId + "&nickname=" + infoRes.userInfo.nickName + "&avatarUrl=" + infoRes.userInfo.avatarUrl + "&jumpUrl=" + this.jumpUrl)
+										_this.$aiRouter.navTo("/pages/login/loginPhone")
 									} else {
 										console.log("微信登录返回", res.data)
 									}
