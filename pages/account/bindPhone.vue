@@ -10,7 +10,7 @@
 				<ai-input inputWidth="300rpx" titleWidth="130rpx" title="验证码" type="number" @getInput="getCode" @postCode="postCode" placeholder="请输入验证码" bt="true"></ai-input>
 			</view>
 			<view class="bt">
-				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="alertPhone"></ai-button>
+				<ai-button :btname="btName" :buttonbg="aiButtonBg" @eventClick="alertPhone"></ai-button>
 			</view>
 		</view>
 		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
@@ -32,7 +32,9 @@
 				aiButtonBg: "ai-button-graybg",
 				tabBarTitle: "修改手机号码",
 				phonePlaceHolder: "请输入新手机号码",
-				hintContent: "请填写新的手机号并验证完成绑定"
+				hintContent: "请填写新的手机号并验证完成绑定",
+				btName: "确定",
+				jumpUrl: ""
 			}
 		},
 		watch: {
@@ -60,8 +62,14 @@
 			}
 			if(res.type == "bind"){
 				this.tabBarTitle = "绑定手机号码"
-				this.phonePlaceHolder = "为了您的账户安全需要绑定手机号"
-				this.hintContent = "请输入手机号码"
+				this.phonePlaceHolder = "请输入手机号码"
+				this.hintContent = "为了您的账户安全需要绑定手机号码"
+			}
+			if(res.btname == "next"){
+				this.btName = "下一步"
+			}
+			if(res.jumpUrl){
+				this.jumpUrl = res.jumpUrl
 			}
 			
 		},
@@ -96,20 +104,36 @@
 					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '验证码错误'])
 					return
 				}
-				this.$api.getAlertPhone({
-					phone: this.phone,
-					code: this.code
-				}).then(res => {
-					if (res.data.code == 500) {
-						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
-						return
-					} else {
-						this.$aiRouter.redirect('/pages/index/index?tabId=2')
-						this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
+				if(res.type == "bind"){
+					if(res.btname == "next"){
+						this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
+					}else{
+						if(this.jumpUrl == "back"){
+							this.$store.commit("setUserInfoES", res.data.data)
+							this.$aiRouter.navToBack(2)
+						}else{
+							this.$store.commit("setUserInfoES", res.data.data)
+							this.$aiRouter.launch(this.jumpUrl)
+						}
 					}
-				})
+					return
+				}
+				if(res.type == "alert"){
+					this.$api.getAlertPhone({
+						phone: this.phone,
+						code: this.code
+					}).then(res => {
+						if (res.data.code == 500) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
+							return
+						} else {
+							this.$aiRouter.redirect('/pages/index/index?tabId=2')
+							this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
+						}
+					})
+					return
+				}
 			}
-
 		}
 	}
 </script>

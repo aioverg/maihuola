@@ -76,30 +76,33 @@
 										return
 									}
 									if(res.data.msg == "success") {
+										this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
+										//微信公众有记录，查看是否绑定手机
+										if(res.data.data.client.mobile == ""){
+											if(res.data.data.client.kuaishou_id == ""){
+												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=next&jumpUrl=" + this.jumpUrl)
+											}else{
+												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=''&jumpUrl=" + this.jumpUrl)
+											}
+											return
+										}
 										//微信公众号有记录，查看是否绑定快手Id
-										if(res.data.data.client.kuaishou_id.length == 0){
-											_this.$store.commit("setUserInfo", res.data.data)
-											_this.$aiRouter.navTo("/pages/login/loginInput?&jumpUrl=" + this.jumpUrl)
-										}else{
-											_this.$aiRouter.launch(_this.jumpUrl)//此时信息完整，跳转到登录入口页
+										if(res.data.data.client.kuaishou_id == ""){
+											_this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
+											return
+										}
+										_this.$store.commit("setUserInfo", res.data.data)
+										if(_this.jumpUrl == "back"){//当入口页面不是主页面时跳回
+											_this.$aiRouter.navToBack(1)
+										}else{//当入口页是主页面时关闭所有页面重新跳转
+											_this.$aiRouter.launch(_this.jumpUrl)
 										}
 									}
 								})
-								/*
-								uni.setStorage({
-									key: "WXAvatarUrl",
-									data: infoRes.userInfo.avatarUrl,
-									success: function(){
-										_this.$store.commit('setWeChat',infoRes.userInfo.avatarUrl)
-									}
-								})*/
-								//_this.$aiRouter.navTo('/pages/login/loginPhone?'+_this.pageParmKey+'='+_this.pageParmValue)
-								//console.log("返回信息2",infoRes)
-								//console.log('用户昵称为：' + infoRes.userInfo.nickName);
 							}
-						});
+						})
 					}
-				});
+				})
 			}
 		}
 	}

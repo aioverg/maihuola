@@ -176,7 +176,7 @@
 			},
 			collect(){
 				if(!this.hasLogin){
-					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/detail/detail?goods_id=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/login/login?jumpUrl=/pages/detail/detail?goods_id=' + this.goodsId)
 					return
 				}
 				if(this.collectStatus){
@@ -209,7 +209,7 @@
 			//复制推广码
 			copyTKL(){
 				if(!this.hasLogin){
-					this.$aiRouter.navTo('/pages/login/login?jumpUrl=/pages/detail/detail?goods_id=' + this.goodsId)
+					this.$aiRouter.navTo('/pages/login/login?jumpUrl=back')
 					return
 				}
 				if(!this.taobao){

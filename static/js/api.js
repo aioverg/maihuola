@@ -23,9 +23,9 @@ const request = function(obj){
 			}
 		}
 	})
-	if(uni.getStorageSync("userInfo")){
-		let token = uni.getStorageSync("userInfo").access_token
-		let userId = uni.getStorageSync("userInfo").client.id
+	if(uni.getStorageSync("token")){
+		let token = uni.getStorageSync("token").token
+		let userId = uni.getStorageSync("token").id
 		let authen = new Buffer(userId + ':' + token);
 		authentication = authen.toString('base64');
 	}

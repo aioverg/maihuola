@@ -128,16 +128,6 @@
 					this.$aiGlobal.aiPopupMessage.apply(this,['err', '手机号码错误'])
 					return
 				}
-				/*if(this.code & 1 !==0 || this.code.length !== 6){
-					this.$refs.aiPopupMessage.open({
-						type:'err',
-						content:'验证码错误',
-						timeout:2000,
-						isClick:false
-					})
-					return
-				}*/
-				console.log(111,this.unionId)
 				this.$api.getChecktPhoneCode({
 					terminal: this.$store.state.systemType,
 					phone: this.phone,
@@ -148,15 +138,18 @@
 					nickname: this.nickname,
 					avatarUrl: this.avatarUrl
 				}).then( res => {
-					console.log(res)
 					if(res.data.code == 0){
-						this.$store.commit("setUserInfo", res.data.data)
-						if(res.data.data.client.kuaishou_id.length = 0){
+						this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
+						console.log(4444, res.data.data.client)
+						if(res.data.data.client.kuaishou_id == ""){
 							this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
 						}else{
-							uni.redirectTo({
-								url: this.jumpUrl
-							});
+							this.$store.commit("setUserInfo", res.data.data)
+							if(this.jumpUrl == "back"){//当入口页面不是主页面时跳回
+								this.$aiRouter.navToBack(2)
+							}else{//当入口页是主页面时关闭所有页面重新跳转
+								this.$aiRouter.launch(this.jumpUrl)
+							}
 						}
 						return
 					}

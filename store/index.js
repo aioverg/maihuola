@@ -36,6 +36,9 @@ const store = new Vuex.Store({
 	mutations: {
 		login(state, data){
 			state.hasLogin = true;
+		},
+		setToken(state, data){
+			state.token = data.token
 			uni.setStorageSync('token', data)
 		},
 		setTabId(state, data){
@@ -59,6 +62,7 @@ const store = new Vuex.Store({
 			uni.setStorageSync('userInfo', data)
 		},
 		setUserInfoES(state, data){
+			state.hasLogin = true;
 			state.userInfo.id = data.id
 			state.userInfo.level = data.level
 			state.userInfo.tel = data.mobile
@@ -68,6 +72,8 @@ const store = new Vuex.Store({
 			state.userInfo.alipay = data.alipay || null
 			state.userInfo.wechatName = null
 			state.userInfo.WXAvatarUrl = null
+			state.kuaishou = data.client.kuaishou_id || ""
+			state.douyin = data.client.douyin_id || ""
 		},
 		logout(state) {
 			state.hasLogin = false;
