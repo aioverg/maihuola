@@ -2,7 +2,7 @@
 	<view>
 		<!--登录-->
 		<view v-if="!loginState" class="loginmm" style="padding: 80px 0 0 0;">
-			<ai-phone-login hintBottom="80" jumpUrl="/pages/index/index?tabId=2"></ai-phone-login>
+			<ai-login-wechat noteBottom="60px" jumpUrl="/pages/index/index?tabId=2"></ai-login-wechat>
 		</view>
 		
 		<!--我的-->
@@ -121,14 +121,14 @@
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
-	import aiPhoneLogin from '@/components/ai-login/ai-phone-login.vue'
+	import aiLoginWechat from '@/components/ai-login/ai-login-wechat.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
 			uniPopupDialog,
 			mixLoading,
 			aiListCell,
-			aiPhoneLogin
+			aiLoginWechat
 		},
 		data() {
 			return {

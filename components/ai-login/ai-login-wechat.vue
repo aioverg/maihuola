@@ -7,9 +7,9 @@
 		<view class="alw-other">
 			<text class="alw-other-one">或</text>
 			<image class="alw-other-two" @click="navTo('/pages/login/loginPhone')" src="/static/icon/phone-01.png" mode="widthFix"></image>
-			<text class="alw-other-thr" @click="navTo('/pages/login/loginPhone')">手机登录</text>
+			<text class="alw-other-thr" @click="navTo('/pages/login/loginPhone?jumpUrl=' + jumpUrl)">手机登录</text>
 		</view>
-		<view class="note">
+		<view class="note" :style="{bottom: noteBottom}">
 			<ai-login-hint></ai-login-hint>
 		</view>
 	</view>
@@ -34,6 +34,10 @@
 			jumpUrl: {
 				type: String,
 				default: ""
+			},
+			noteBottom: {
+				type: String,
+				default: "50px"
 			}
 		},
 		onLoad(res) {
@@ -72,16 +76,14 @@
 										return
 									}
 									if(res.data.msg == "success") {
-										//微信公众号有记录，查看是否绑定抖音Id
+										//微信公众号有记录，查看是否绑定快手Id
 										if(res.data.data.client.kuaishou_id.length == 0){
 											_this.$store.commit("setUserInfo", res.data.data)
 											_this.$aiRouter.navTo("/pages/login/loginInput?&jumpUrl=" + this.jumpUrl)
 										}else{
 											_this.$aiRouter.launch(_this.jumpUrl)//此时信息完整，跳转到登录入口页
 										}
-										
 									}
-
 								})
 								/*
 								uni.setStorage({
@@ -143,8 +145,7 @@
 	}
 
 	.note {
-		position: absolute;
+		position: fixed;
 		left: 75rpx;
-		bottom: 50px;
 	}
 </style>

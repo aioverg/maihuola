@@ -50,16 +50,6 @@
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 			}
 		},
-		watch: {
-			phone(){
-				if(this.phone.length !== 11 || this.phone == null){
-					this.btNameColor = "#CCCCCC"
-				}else{
-					if(this.timeRun){return}
-					this.btNameColor = "#FF716E"
-				}
-			}
-		},
 		props: {
 			jumpUrl: {
 				type: String,
@@ -86,6 +76,16 @@
 				default: ""
 			}
 			
+		},
+		watch: {
+			phone(){
+				if(this.phone.length !== 11 || this.phone == null){
+					this.btNameColor = "#CCCCCC"
+				}else{
+					if(this.timeRun){return}
+					this.btNameColor = "#FF716E"
+				}
+			}
 		},
 		methods: {
 			getCode(){
@@ -151,12 +151,21 @@
 					console.log(res)
 					if(res.data.code == 0){
 						this.$store.commit("setUserInfo", res.data.data)
-						uni.redirectTo({
-							url: this.jumpUrl
-						});
-					}else{
-						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
+						if(res.data.data.client.kuaishou_id.length = 0){
+							this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
+						}else{
+							uni.redirectTo({
+								url: this.jumpUrl
+							});
+						}
+						return
 					}
+					if(res.data.code == 500){
+						this.$aiGlobal.aiPopupMessage.apply(this,['err', '验证码错误'])
+						return
+					}
+					this.$aiGlobal.aiPopupMessage.apply(this,['err', '登录失败'])
+					
 				})
 				return
 			}

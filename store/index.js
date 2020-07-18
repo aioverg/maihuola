@@ -20,6 +20,8 @@ const store = new Vuex.Store({
 			alipay: null,
 			wechatName: null,
 			WXAvatarUrl: null,
+			kuaishou: "",
+			douyin: ""
 		},
 		appInfo: {
 			localVersion: null,
@@ -51,6 +53,8 @@ const store = new Vuex.Store({
 			state.userInfo.alipay = data.client.alipay || null
 			state.userInfo.wechatName = null
 			state.userInfo.WXAvatarUrl = null
+			state.kuaishou = data.client.kuaishou_id || ""
+			state.douyin = data.client.douyin_id || ""
 
 			uni.setStorageSync('userInfo', data)
 		},
