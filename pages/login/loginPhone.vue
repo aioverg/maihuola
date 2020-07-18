@@ -29,6 +29,7 @@
 			}
 		},
 		onLoad(res) {
+			console.log(res)
 			this.leftClickTag = res.leftClickTag || "back"
 			this.jumpUrl = res.jumpUrl || ""
 			this.unionid = res.unionid || ""

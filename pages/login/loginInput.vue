@@ -62,6 +62,7 @@
 					kuaishou_id: this.ks,
 					douyin_id: this.douyin
 				}).then(res => {
+					console.log("绑定ID返回", res)
 					if(res.data.code == 0){
 						if (this.jumpUrl == "back") { //当入口页面不是主页面时跳回
 							this.$api.getUserCenter().then(res => {

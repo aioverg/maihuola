@@ -40,10 +40,6 @@
 				default: "50px"
 			}
 		},
-		onLoad(res) {
-			this.pageId = res.page_id
-			this.pageParms = res.page_prams
-		},
 		methods: {
 			navTo(obj) {
 				this.$aiRouter.navTo(obj)
@@ -72,23 +68,23 @@
 									console.log("微信登录返回", res.data)
 									if (res.data.msg == 202) {
 										//微信公众号没有微信记录，跳转手机登录
-										_this.$aiRouter.navTo("/pages/login/loginPhone?unionid=" + infoRes.userInfo.unionId + "&openid=" + infoRes.userInfo.openId + "&nickname=" + infoRes.userInfo.nickName + "&avatarUrl=" + infoRes.userInfo.avatarUrl + "&jumpUrl=" + this.jumpUrl)
+										_this.$aiRouter.navTo("/pages/login/loginPhone?unionid=" + infoRes.userInfo.unionId + "&openid=" + infoRes.userInfo.openId + "&nickname=" + infoRes.userInfo.nickName + "&avatarUrl=" + infoRes.userInfo.avatarUrl + "&jumpUrl=" + _this.jumpUrl)
 										return
 									}
 									if(res.data.msg == "success") {
-										this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
+										_this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
 										//微信公众有记录，查看是否绑定手机
 										if(res.data.data.client.mobile == ""){
 											if(res.data.data.client.kuaishou_id == ""){
-												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=next&jumpUrl=" + this.jumpUrl)
+												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=next&jumpUrl=" + _this.jumpUrl)
 											}else{
-												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=''&jumpUrl=" + this.jumpUrl)
+												_this.$aiRouter.navTo("/pages/account/bindPhone?type=bind&btname=''&jumpUrl=" + _this.jumpUrl)
 											}
 											return
 										}
 										//微信公众号有记录，查看是否绑定快手Id
 										if(res.data.data.client.kuaishou_id == ""){
-											_this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
+											_this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + _this.jumpUrl)
 											return
 										}
 										_this.$store.commit("setUserInfo", res.data.data)

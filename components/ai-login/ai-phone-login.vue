@@ -138,12 +138,14 @@
 					nickname: this.nickname,
 					avatarUrl: this.avatarUrl
 				}).then( res => {
+					console.log("手机登录返回",this.jumpUrl, res)
 					if(res.data.code == 0){
 						this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
 						if(res.data.data.client.kuaishou_id == ""){
 							this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
 						}else{
 							this.$store.commit("setUserInfo", res.data.data)
+							console.log("手机登录JUMPURL", this.jumpUrl)
 							if(this.jumpUrl == "back"){//当入口页面不是主页面时跳回
 								this.$aiRouter.navToBack(2)
 							}else{//当入口页是主页面时关闭所有页面重新跳转

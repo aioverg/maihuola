@@ -24,6 +24,7 @@
 		},
 		onLoad(res) {
 			this.jumpUrl = res.jumpUrl
+			console.log("微信登录页面", res)
 		},
 		methods: {
 		}
