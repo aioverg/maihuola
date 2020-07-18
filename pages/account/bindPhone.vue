@@ -34,7 +34,9 @@
 				phonePlaceHolder: "请输入新手机号码",
 				hintContent: "请填写新的手机号并验证完成绑定",
 				btName: "确定",
-				jumpUrl: ""
+				btTag: "",
+				jumpUrl: "",
+				type: "alert"
 			}
 		},
 		watch: {
@@ -55,18 +57,21 @@
 		},
 		onLoad(res) {
 			if(res.type == "alert"){
+				this.type = res.type
 				this.tabBarTitle = "修改手机号码"
 				this.phonePlaceHolder = "请输入新手机号码"
 				this.hintContent = "请填写新的手机号并验证完成绑定"
 				return
 			}
 			if(res.type == "bind"){
+				this.type = res.type
 				this.tabBarTitle = "绑定手机号码"
 				this.phonePlaceHolder = "请输入手机号码"
 				this.hintContent = "为了您的账户安全需要绑定手机号码"
 			}
 			if(res.btname == "next"){
 				this.btName = "下一步"
+				this.btTag = res.btname
 			}
 			if(res.jumpUrl){
 				this.jumpUrl = res.jumpUrl
@@ -105,7 +110,7 @@
 					return
 				}
 				
-				if(res.type == "bind"){
+				if(this.type == "bind"){
 					this.$api.getAlertPhone({
 						phone: this.phone,
 						code: this.code
@@ -113,7 +118,7 @@
 						if (res.data.code == 500) {
 							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
 						} else {
-							if(res.btname == "next"){
+							if(this.btTag == "next"){
 								this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
 							}else{
 								if(this.jumpUrl == "back"){
@@ -132,7 +137,7 @@
 					})
 					return
 				}
-				if(res.type == "alert"){
+				if(this.type == "alert"){
 					this.$api.getAlertPhone({
 						phone: this.phone,
 						code: this.code
