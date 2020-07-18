@@ -14,7 +14,7 @@
 				<ai-button btname="确定" :buttonbg="aiButtonBg" @eventClick="bindId()"></ai-button>
 			</view>
 		</view>
-		<!-- <ai-popup-message ref="aiPopupMessage"></ai-popup-message> -->
+		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
 	</view>
 </template>
 
@@ -55,28 +55,32 @@
 				this.ks = res
 			},
 			bindId() {
-				if (this.jumpUrl == "back") { //当入口页面不是主页面时跳回
-					this.$api.getUserCenter().then(res => {
-						this.$store.commit("setUserInfoES", res.data.data)
-						this.$aiRouter.navToBack(3)
-					})
-				} else { //当入口页是主页面时关闭所有页面重新跳转
-					this.$api.getUserCenter().then(res => {
-						this.$store.commit("setUserInfoES", res.data.data)
-						this.$aiRouter.launch(this.jumpUrl)
-					})
+				if(this.ks.length == 0){
+					return
 				}
-
-
-				// if(this.ks.length == 0){
-				// 	return
-				// }
-				// this.$api.postPlatId({
-				// 	kuaishou_id: this.ks,
-				// 	douyin_id: this.douyin
-				// }).then(res => {
-				// 	console.log(res)
-				// })
+				this.$api.postPlatId({
+					kuaishou_id: this.ks,
+					douyin_id: this.douyin
+				}).then(res => {
+					if(res.data.code == 0){
+						if (this.jumpUrl == "back") { //当入口页面不是主页面时跳回
+							this.$api.getUserCenter().then(res => {
+								this.$store.commit("setUserInfoES", res.data.data)
+								this.$aiRouter.navToBack(3)
+							})
+						} else { //当入口页是主页面时关闭所有页面重新跳转
+							this.$api.getUserCenter().then(res => {
+								this.$store.commit("setUserInfoES", res.data.data)
+								this.$aiRouter.launch(this.jumpUrl)
+							})
+						}
+					}else{
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '绑定失败'])
+					}
+					
+				})
+				
+				
 			}
 
 		}

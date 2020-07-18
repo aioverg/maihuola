@@ -72,8 +72,8 @@ const store = new Vuex.Store({
 			state.userInfo.alipay = data.alipay || null
 			state.userInfo.wechatName = null
 			state.userInfo.WXAvatarUrl = null
-			state.kuaishou = data.client.kuaishou_id || ""
-			state.douyin = data.client.douyin_id || ""
+			state.kuaishou = data.kuaishou_id || ""
+			state.douyin = data.douyin_id || ""
 		},
 		logout(state) {
 			state.hasLogin = false;
@@ -87,6 +87,9 @@ const store = new Vuex.Store({
 			uni.removeStorage({
                 key: 'userInfo'
             })
+			uni.removeStorage({
+			    key: 'token'
+			})
 		},
 		setTaoBao(state, status){
 			state.userInfo.taobao = status

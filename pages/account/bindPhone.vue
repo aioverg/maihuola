@@ -104,18 +104,32 @@
 					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '验证码错误'])
 					return
 				}
+				
 				if(res.type == "bind"){
-					if(res.btname == "next"){
-						this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
-					}else{
-						if(this.jumpUrl == "back"){
-							this.$store.commit("setUserInfoES", res.data.data)
-							this.$aiRouter.navToBack(2)
-						}else{
-							this.$store.commit("setUserInfoES", res.data.data)
-							this.$aiRouter.launch(this.jumpUrl)
+					this.$api.getAlertPhone({
+						phone: this.phone,
+						code: this.code
+					}).then(res => {
+						if (res.data.code == 500) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
+						} else {
+							if(res.btname == "next"){
+								this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
+							}else{
+								if(this.jumpUrl == "back"){
+									this.$api.getUserCenter().then(res => {
+										this.$store.commit("setUserInfoES", res.data.data)
+										this.$aiRouter.navToBack(2)
+									})
+								}else{
+									this.$api.getUserCenter().then(res => {
+										this.$store.commit("setUserInfoES", res.data.data)
+										this.$aiRouter.launch(this.jumpUrl)
+									})
+								}
+							}
 						}
-					}
+					})
 					return
 				}
 				if(res.type == "alert"){

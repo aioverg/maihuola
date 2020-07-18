@@ -143,6 +143,7 @@
 		},
 		computed: {
 			loginState() {
+				console.log(77777,this.$store.state.hasLogin)
 				if (this.$store.state.hasLogin) {
 					this.navTitle = "我的"
 				} else {
@@ -162,6 +163,9 @@
 				//console.log(微信登录)
 			},
 			getUserInfo() {
+				if(!uni.getStorageSync("token")){
+					return
+				}
 				return this.$api.getUserCenter().then(res => {
 					this.userInfo = res.data.data
 					if(res.data.data.level == 3){

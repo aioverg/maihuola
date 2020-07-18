@@ -22,8 +22,8 @@
 		</view>
 		<view class="apl-other">
 			<text class="apl-other-one">或</text>
-			<image class="apl-other-two" mode="widthFix" @click="navTo('/pages/login/login')" src="/static/icon/wechat-01.png"></image>
-			<text class="apl-other-thr" @click="navTo('/pages/login/login')">微信登录</text>
+			<image class="apl-other-two" mode="widthFix" @click="navToBack()" src="/static/icon/wechat-01.png"></image>
+			<text class="apl-other-thr" @click="navToBack()">微信登录</text>
 		</view>
 		<view class="apl-note" :style="{bottom:hintBottom + 'px'}">
 			<ai-login-hint></ai-login-hint>
@@ -140,7 +140,6 @@
 				}).then( res => {
 					if(res.data.code == 0){
 						this.$store.commit("setToken", {token: res.data.data.access_token, id: res.data.data.client.id})
-						console.log(4444, res.data.data.client)
 						if(res.data.data.client.kuaishou_id == ""){
 							this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
 						}else{
@@ -166,6 +165,9 @@
 			navTo(obj){
 				this.$aiRouter.navTo(obj)
 			},
+			navToBack(){
+				this.$aiRouter.navToBack()
+			}
 		}
 	}
 </script>
