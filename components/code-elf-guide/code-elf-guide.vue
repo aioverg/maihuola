@@ -47,7 +47,7 @@
 						data: true,
 				});
 				uni.reLaunch({
-					url: "/pages/login/loginPhone?leftClickTag=/pages/index/index?tabId=0&jumpUrl=/pages/index/index?tabId=0"
+					url: "/pages/login/login?leftClickTag=/pages/index/index?tabId=0&jumpUrl=/pages/index/index?tabId=0"
 				})
 			},
 			navTo(url){

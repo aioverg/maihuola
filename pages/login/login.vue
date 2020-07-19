@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
+		<uni-nav-bar fixed="true" :leftClickTag="leftClickTag" leftIcon="arrowleft" leftText="登录"></uni-nav-bar>
 		<view>
 			<ai-login-wechat :jumpUrl="jumpUrl"></ai-login-wechat>
 		</view>
@@ -19,10 +19,12 @@
 		},
 		data() {
 			return {
-				jumpUrl: ""
+				jumpUrl: "",
+				leftClickTag: "back"
 			}
 		},
 		onLoad(res) {
+			this.leftClickTag = res.leftClickTag || "back"
 			this.jumpUrl = res.jumpUrl
 			console.log("微信登录页面", res)
 		},
