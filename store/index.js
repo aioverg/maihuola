@@ -74,6 +74,8 @@ const store = new Vuex.Store({
 			state.userInfo.WXAvatarUrl = null
 			state.kuaishou = data.kuaishou_id || ""
 			state.douyin = data.douyin_id || ""
+			
+			uni.setStorageSync('userInfo', data)
 		},
 		logout(state) {
 			state.hasLogin = false;

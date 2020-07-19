@@ -87,7 +87,7 @@
 											_this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + _this.jumpUrl)
 											return
 										}
-										_this.$store.commit("setUserInfo", res.data.data)
+										_this.$store.commit("setUserInfoES", res.data.data.client)
 										if(_this.jumpUrl == "back"){//当入口页面不是主页面时跳回
 											_this.$aiRouter.navToBack(1)
 										}else{//当入口页是主页面时关闭所有页面重新跳转

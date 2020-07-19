@@ -22,7 +22,7 @@
 			uni.getStorage({
 			    key: 'userInfo',
 			    success: function (res) {
-					_this.$store.commit("setUserInfo", res.data)
+					_this.$store.commit("setUserInfoES", res.data)
 			    }
 			})
 			uni.getStorage({

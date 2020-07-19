@@ -144,7 +144,7 @@
 						if(res.data.data.client.kuaishou_id == ""){
 							this.$aiRouter.navTo("/pages/login/loginInput?jumpUrl=" + this.jumpUrl)
 						}else{
-							this.$store.commit("setUserInfo", res.data.data)
+							this.$store.commit("setUserInfoES", res.data.data.client)
 							console.log("手机登录JUMPURL", this.jumpUrl)
 							if(this.jumpUrl == "back"){//当入口页面不是主页面时跳回
 								this.$aiRouter.navToBack(2)
