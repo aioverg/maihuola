@@ -1,17 +1,20 @@
 <template>
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图"
-		 @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
+		 @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭">
+		</uni-nav-bar>
+		<hint-box v-if="type=='union'" content="为了您的账户安全，请填写您的真实信息"></hint-box>
+		
 		<view class="task-upload-body">
 			<view class="tub-input" v-if="type=='task'">
 				<ai-input titleWidth="180rpx" type="number" title="填写用户信息" @getInput="getPhone" placeholder="请输入对方手机号"></ai-input>
 			</view>
 			<view v-if="type=='union'">
 				<view class="tub-input">
-					<ai-input titleWidth="220rpx" title="填写用户姓名" placeholder="请输入真实姓名"></ai-input>
+					<ai-input titleWidth="220rpx" title="填写用户姓名" @getInput="getName" placeholder="请输入真实姓名"></ai-input>
 				</view>
 				<view class="tub-input">
-					<ai-input titleWidth="220rpx" title="填写支付宝账号" placeholder="请输入支付宝账号"></ai-input>
+					<ai-input titleWidth="220rpx" title="填写支付宝账号" @getInput="getAlipay" placeholder="请输入支付宝账号"></ai-input>
 				</view>
 			</view>
 			
@@ -36,19 +39,18 @@
 				<ai-button :buttonbg="buttonbg" @eventClick="submit()" btname="提交审核"></ai-button>
 			</view>
 		</view>
-		<uni-popup ref="popup">
+		<uni-popup ref="popupTask">
 			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=task&id=' + taskId)"
 			 :cancelShow="false">
 				<block slot="button">
-					<!--
-					<view @click="redirect('/pages/task/taskDetail?is_end=0&id=' + taskId + '&router=redirect')" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
-						完成
-					</view>
-					-->
 					<view @click="navToback(1)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
 						完成
 					</view>
 				</block>
+			</ai-popup-dialog>
+		</uni-popup>
+		<uni-popup ref="popupUnion">
+			<ai-popup-dialog :message='message' btname="完成" @confirm="navToback(1)" :cancelShow="false">
 			</ai-popup-dialog>
 		</uni-popup>
 		<ai-popup-message ref="aiPopupMessage"></ai-popup-message>
@@ -57,9 +59,11 @@
 
 <script>
 	import aiInput from "@/components/ai-input.vue"
+	import hintBox from '@/components/hint-box'
 	export default {
 		components: {
-			aiInput
+			aiInput,
+			hintBox
 		},
 		data() {
 			return {
@@ -70,7 +74,7 @@
 				type: "task",
 				message: [{
 					title: "已提交审核",
-					content: "我们会在2-3个工作日完成审核，请您耐 心等待"
+					content: "我们会在2-3个工作日完成审核，请您耐心等待"
 				}],
 				imgList: [{
 					id: 0,
@@ -84,12 +88,36 @@
 		},
 		watch: {
 			phone() {
-				if (this.phone.length !== 11 || this.imgList.every(item => {
-						return item.uploadPic == null
-					})) {
-					this.buttonbg = "ai-button-graybg"
-				} else {
-					this.buttonbg = "ai-button-redbg"
+				if(this.type == "task"){
+					if (this.phone.length !== 11 || this.imgList.every(item => {
+							return item.uploadPic == null
+						})) {
+						this.buttonbg = "ai-button-graybg"
+					} else {
+						this.buttonbg = "ai-button-redbg"
+					}
+				}
+			},
+			name(){
+				if(this.type == "union"){
+					if (this.name.length == 0 || this.alipay.length == 0 || this.imgList.every(item => {
+							return item.uploadPic == null
+						})) {
+						this.buttonbg = "ai-button-graybg"
+					} else {
+						this.buttonbg = "ai-button-redbg"
+					}
+				}
+			},
+			alipay(){
+				if(this.type == "union"){
+					if (this.name.length == 0 || this.alipay.length == 0 || this.imgList.every(item => {
+							return item.uploadPic == null
+						})) {
+						this.buttonbg = "ai-button-graybg"
+					} else {
+						this.buttonbg = "ai-button-redbg"
+					}
 				}
 			}
 		},
@@ -127,16 +155,32 @@
 							_this.uploadImg[index] = JSON.parse(ress.data).data.info
 						})
 						//改变按钮颜色
-						if (_this.imgList.every(item => {
-								return item.uploadPic == null
-							})) {
-							_this.buttonbg = "ai-button-graybg"
-						} else {
-							if (_this.phone.length == 11) {
-								_this.buttonbg = "ai-button-redbg"
-								_this.submitFlag = true
-							} else {
+						if(_this.type == "task"){
+							if (_this.imgList.every(item => {
+									return item.uploadPic == null
+								})) {
 								_this.buttonbg = "ai-button-graybg"
+							} else {
+								if (_this.phone.length == 11) {
+									_this.buttonbg = "ai-button-redbg"
+									_this.submitFlag = true
+								} else {
+									_this.buttonbg = "ai-button-graybg"
+								}
+							}
+						}
+						if(_this.type == "union"){
+							if (_this.imgList.every(item => {
+									return item.uploadPic == null
+								})) {
+								_this.buttonbg = "ai-button-graybg"
+							} else {
+								if (_this.name.length != 0 && _this.name.length != 0) {
+									_this.buttonbg = "ai-button-redbg"
+									_this.submitFlag = true
+								} else {
+									_this.buttonbg = "ai-button-graybg"
+								}
 							}
 						}
 					}
@@ -171,32 +215,39 @@
 				})
 			},
 			submit() {
-				if (this.phone.length != 11) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码错误'])
-					return
-				}
-				if (this.uploadImg.length == 0) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
-					return
-				}
-				if (this.uploadImg.every(item => {
-						return item == ""
-					})) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
-					return
-				}
-				this.$api.postTaskUpload({
-					user_id: this.$store.state.userInfo.id,
-					mission_id: this.taskId,
-					pic: this.uploadImg,
-					mobile: this.phone
-				}).then(res => {
-					if (res.data.code == 0) {
-						this.$refs.popup.open()
-					} else {
-						this.$aiGlobal.aiPopupMessage.apply(this, ['err', res.data.msg])
+				if(this.type == "task"){
+					if (this.phone.length != 11) {
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码错误'])
+						return
 					}
-				})
+					if (this.uploadImg.length == 0) {
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+						return
+					}
+					if (this.uploadImg.every(item => {
+							return item == ""
+						})) {
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+						return
+					}
+					this.$api.postTaskUpload({
+						user_id: this.$store.state.userInfo.id,
+						mission_id: this.taskId,
+						pic: this.uploadImg,
+						mobile: this.phone
+					}).then(res => {
+						if (res.data.code == 0) {
+							this.$refs.popupTask.open()
+						} else {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', res.data.msg])
+						}
+					})
+					return
+				}
+				if(this.type == "union"){
+					this.$refs.popupUnion.open()
+				}
+				
 			},
 			navTo(url) {
 				this.$aiRouter.navTo(url)

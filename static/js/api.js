@@ -47,11 +47,11 @@ const request = function(obj){
 //文件上传
 const upload = function(obj){
 	let authentication = null
-	if(uni.getStorageSync("userInfo")){
-		let token = uni.getStorageSync("userInfo").access_token
-		let userId = uni.getStorageSync("userInfo").client.id
-		let authen = new Buffer(userId + ':' + token);
-		authentication = authen.toString('base64');
+	if(uni.getStorageSync("token")){
+		let token = uni.getStorageSync("token").token
+		let userId = uni.getStorageSync("token").id
+		let authen = new Buffer(userId + ':' + token)
+		authentication = authen.toString('base64')
 	}
 	return new Promise((resolve, reject) => {
 		uni.uploadFile({

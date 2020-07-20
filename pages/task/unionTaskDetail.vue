@@ -18,6 +18,15 @@
 					<view class="tc-num">{{taskContent.commission}}</view>
 					<view class="tc-status">待审核</view>
 				</view>
+				<view class="task-cash-two">失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因</view>
+			</view>
+			<view class="qr-content">
+				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
+				<!--
+				<view class="qr-one">支付宝拉新二维码</view>
+				<view class="qr-two">打开支付宝 扫一扫</view>
+				-->
+				<view class="qr-save" @click="saveQr(taskContent.spread_qrcode)">保存推广码</view>
 			</view>
 			<view class="task-rule">
 				<view class="task-rule-title">规则标题规则标题</view>
@@ -49,7 +58,8 @@
 					start_time: "0000.00.00",
 					end_time: "0000.00.00",
 					commission: "0",
-					rule: "555555"
+					rule: "555555",
+					spread_qrcode: "/static/mock/mock-03.png"
 					
 				},
 				routerKind: "navTo",
@@ -109,6 +119,26 @@
 					this.showFlag = true
 					return true
 				})
+			},
+			//保存推广码到本地相册
+			saveQr(url){
+				const _this = this
+				uni.downloadFile({
+				    url: url, 
+				    success: (res) => {
+				        if (res.statusCode === 200) {
+							uni.saveImageToPhotosAlbum({
+							    filePath: res.tempFilePath,
+							    success: function () {
+							        _this.$aiGlobal.aiPopupMessage.apply(_this,['success', '保存成功'])
+							    },
+								fail: function(){
+									_this.$aiGlobal.aiPopupMessage.apply(_this,['err', '保存失败'])
+								}
+							});
+				        }
+				    }
+				});
 			}
 		}
 	}
@@ -143,15 +173,15 @@
 	/*结算金额*/
 	.task-cash {
 		position: relative;
-		padding: 0 20rpx;
 		margin: 0 0 10px;
-		border-radius: 8px;
-		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		width: 690rpx;
 		.task-cash-one {
 			display: flex;
 			align-items: center;
 			height: 49px;
 			padding: 0 24rpx;
+			border-radius: 8px;
+			box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 			.tc-title {
 				font-size: 13px;
 			}
@@ -166,7 +196,52 @@
 				color: #FFA570;
 			}
 		}
+		.task-cash-two {
+			width: 650rpx;
+			font-size: 12px;
+			color: #999999;
+			margin: 0 auto;
+			padding: 5px 30rpx;
+			box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+			border-radius: 8px;
+		}
 	}
+	/*推广码内容*/
+	.qr-content {
+		width: 690rpx;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		border-radius: 8px;
+		padding: 15px 15px 40px;
+		margin: 0 0 10px 0;
+		.qr-img {
+			width: 630rpx;
+		}
+		/*.qr-one {
+			font-size: 20px;
+			font-weight: bold;
+			color: #FFA570;
+			text-align: center;
+			margin: 25px 0 8px;
+		}
+		.qr-two {
+			font-size: 14px;
+			color: #999999;
+			text-align: center;
+			margin: 0 0 30px;
+		}*/
+		.qr-save {
+			width: 250px;
+			height: 45px;
+			line-height: 45px;
+			margin: 25px auto 0;
+			border-radius: 23px;
+			border: 1px solid #FFA570;
+			font-size: 16px;
+			color: #FFA570;
+			text-align: center;
+		}
+	}
+	
 	/*任务内容*/
 	.task-rule {
 		width: 690rpx;
