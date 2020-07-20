@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="提现"></uni-nav-bar>
-		<hint-box content="每月25号可提现上个月内确认收货的订单收益"></hint-box>
+		<hint-box content="每周一00:00～周四23:59可申请提现，次日到账"></hint-box>
 		<view class="tx-box">
 			<view class="tx-account">
 				<text class="title">支付宝账户</text>
@@ -12,7 +12,7 @@
 				<view class="input-box">
 					<text class="icon">¥</text>
 					<input placeholder="请输入提现金额" type="number" v-model="sum" class="input" />
-					<text class="note" v-show = "inputHint">（不小于100元）</text>
+					<text class="note" v-show = "inputHint">（不小于1元）</text>
 				</view>
 				<view class="tx-upper">可提现金额 ¥{{total}}</view>
 				<view class="tx-upperbt" @click="allWithdraw">全部提现</view>
@@ -67,7 +67,7 @@
 				}else{
 					this.aiButtonBg ="ai-button-graybg"
 				}
-				if(this.sum >= 100){
+				if(this.sum >= 1){
 					this.inputHint = false
 				}else{
 					this.inputHint = true
@@ -111,11 +111,16 @@
 				this.sum = Number(this.total)
 			},
 			withdraw(){
+				let nowDay = new Date().getDay()
+				if(nowDay<1 || nowDay>4){
+					this.aiPopupMessage('err', '不能提现')
+					return
+				}
 				if(!this.sum){
 					return
 				}
-				if(this.sum && this.sum < 100){
-					this.aiPopupMessage('err', '不能小于100元')
+				if(this.sum && this.sum < 1){
+					this.aiPopupMessage('err', '不能小于1元')
 					return
 				}
 				if(this.sum > this.total){

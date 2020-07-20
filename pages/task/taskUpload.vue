@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图" @clickLeft="navTo('/pages/task/taskDetail')"
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图"
 		 @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
 		<view class="task-upload-body">
 			<view class="tub-user">
@@ -180,7 +180,6 @@
 				this.$aiRouter.redirect(url)
 			},
 			navToback(delta) {
-				console.log(66666)
 				this.$aiRouter.navToBack(delta)
 			}
 		}

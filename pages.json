@@ -200,6 +200,10 @@
             "path" : "pages/login/loginWechat",
             "style" : {}
         }
+        ,{
+            "path" : "pages/task/unionTaskDetail",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
