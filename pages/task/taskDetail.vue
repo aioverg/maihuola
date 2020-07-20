@@ -12,26 +12,32 @@
 				<view class="tt-time">（{{taskContent.start_time}}-{{taskContent.end_time}}）</view>
 			</view>
 			<view class="task-hint">请阅读知悉活动规则后进行推广</view>
-			<view class="task-cash">
-				<image class="tc-bg" src="/static/icon/bg-earn-01.png"></image>
-			    <view class="tc-title">当前实际结算（元）：</view>
-				<view class="tc-num">{{taskContent.commission}}</view>
+			<view class="task-cash-box">
+				<view class="task-cash">
+					<view>
+						<view class="task-cash-num">{{taskContent.commission}}</view>
+						<view class="task-cash-des">累计收益（元）</view>
+					</view>
+					<view>
+						<view class="task-cash-num">{{taskContent.predict}}</view>
+						<view class="task-cash-des">预估收益（元）</view>
+					</view>
+				</view>
+				<view class="task-upload">
+					<view class="task-upload-com">
+						<text class="task-upload-des">过审数量（个）：</text>
+						<text class="task-upload-num">{{taskContent.com_num}}</text>
+					</view>
+					<view>
+						<text class="task-upload-des">提交数量（个）：</text>
+						<text class="task-upload-num">{{taskContent.total_num}}</text>
+					</view>
+				</view>
 			</view>
-			<view class="task-detail">
-				<view>
-					<view class="td-titme">预估收益（元）</view>
-					<view class="td-num">{{taskContent.predict}}</view>
-				</view>
-				<view>
-					<view class="td-titme">提交数量</view>
-					<view class="td-num td-num-center">{{taskContent.total_num}}</view>
-				</view>
-				<view>
-					<view class="td-titme">过审数量</view>
-					<view class="td-num td-num-center">{{taskContent.com_num}}</view>
-				</view>
+			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?id=' + taskId + '&tasktitle=' + taskContent.title)">
+				<view class="tch-des">查看审核记录</view>
+				<image class="tch-icon" mode="widthFix" src="/static/icon/icon-right-arrow-01.png"></image>
 			</view>
-			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?id=' + taskId + '&tasktitle=' + taskContent.title)">审核记录</view>
 			<view class="task-past" v-if="taskStatus == '1'">活动已结束</view>
 			<!--
 			<view class="qr-bt" v-if="qrCodeBt" @click="getqrCode">获取推广码</view>
@@ -188,66 +194,62 @@
 		font-size: 12px;
 		color: #666666;
 	}
-	/*结算金额*/
-	.task-cash {
-		position: relative;
-		display: flex;
-		height: 49px;
-		align-items: center;
-		padding: 0 0 0 30rpx;
-		.tc-bg {
-			position: absolute;
-			width: 750rpx;
-			height: 99px;
-			left: -30rpx;
-			top: -25px;
-		}
-		.tc-title {
-			position: relative;
-			z-index: 10;
-			font-size: 12px;
-			color: #FFFFFF;
-			opacity: 0.8;
-		}
-		.tc-num {
-			position: relative;
-			z-index: 10;
-			font-size: 27px;
-			color: #FFFFFF;
-			opacity: 0.9;
-			font-weight: bold;
-		}
-		
-	}
-	/*预估收益*/
-	.task-detail {
-		width: 690rpx;
-		height: 80px;
-		margin: 10px 0 15px 0;
-		padding: 18px 64rpx;
-		display: flex;
-		justify-content: space-between;
+	/*结算金额和过审数量*/
+	.task-cash-box {
+		height: 110px;
+		padding: 15px 15rpx 10px;
+		border-radius: 8px;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
-		.td-titme {
-			font-size: 12px;
+		.task-cash {
+			display: flex;
+			border-bottom: 1px dashed #E5E5E5;
+			padding: 0 0 13px 20rpx;
+			.task-cash-num {
+				width: 330rpx;
+				font-size: 20px;
+				color: #FF716E;
+				font-weight: bold;
+			}
+			.task-cash-des {
+				font-size: 13px;
+				color: #666666;
+			}
 		}
-		.td-num {
-			font-size: 20px;
-			color: #FFA570;
-			font-weight: bold;
-		}
-		.td-num-center {
-			text-align: center;
+		.task-upload {
+			display: flex;
+			align-items: center;
+			padding: 4px 0 0 20rpx;
+			.task-upload-com {
+				width: 330rpx;
+			}
+			.task-upload-des {
+				font-size: 12px;
+				color: #999999;
+			}
+			.task-upload-num {
+				font-size: 13px;
+				color: #FFA570;
+			}
+			
 		}
 	}
 	/*审核记录*/
 	.task-check-history {
-		height: 50px;
-		padding: 0 0 30px;
-		font-size: 14px;
-		color: #999999;
-		text-decoration-line: underline;
-		text-align: right;
+		height: 40px;
+		border-radius: 8px;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		padding: 0 30rpx 0 70rpx;
+		margin: 10px 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.tch-des {
+			font-size: 13px;
+			color: #666666;
+		}
+		.tch-icon {
+			width: 6px;
+		}
 	}
 	/*活动已结束提示*/
 	.task-past {
