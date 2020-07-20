@@ -3,10 +3,18 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图"
 		 @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭"></uni-nav-bar>
 		<view class="task-upload-body">
-			<view class="tub-user">
-				<view class="tub-user-title">请输入用户信息</view>
-				<input class="tub-user-tel" v-model="phone" type="number" placeholder="请输入对方手机号" />
+			<view class="tub-input" v-if="type=='task'">
+				<ai-input titleWidth="180rpx" type="number" title="填写用户信息" @getInput="getPhone" placeholder="请输入对方手机号"></ai-input>
 			</view>
+			<view v-if="type=='union'">
+				<view class="tub-input">
+					<ai-input titleWidth="220rpx" title="填写用户姓名" placeholder="请输入真实姓名"></ai-input>
+				</view>
+				<view class="tub-input">
+					<ai-input titleWidth="220rpx" title="填写支付宝账号" placeholder="请输入支付宝账号"></ai-input>
+				</view>
+			</view>
+			
 			<view class="tub-upload">
 				<view class="tub-upload-title">请按示例上传截图</view>
 				<view class="tub-upload-box">
@@ -29,7 +37,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popup">
-			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?id=' + taskId)"
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=task&id=' + taskId)"
 			 :cancelShow="false">
 				<block slot="button">
 					<!--
@@ -48,11 +56,18 @@
 </template>
 
 <script>
+	import aiInput from "@/components/ai-input.vue"
 	export default {
+		components: {
+			aiInput
+		},
 		data() {
 			return {
 				taskId: 0,
 				phone: "",
+				name: "",
+				alipay: "",
+				type: "task",
 				message: [{
 					title: "已提交审核",
 					content: "我们会在2-3个工作日完成审核，请您耐 心等待"
@@ -79,12 +94,22 @@
 			}
 		},
 		onLoad(res) {
+			this.type = res.type
 			this.taskId = res.id
 			this.getTaskDetail(res.id)
 		},
 		methods: {
 			navToBar(url) {
 				this.$aiRouter.navTabBar(url)
+			},
+			getPhone(res){
+				this.phone = res
+			},
+			getName(res){
+				this.name = res
+			},
+			getAlipay(res){
+				this.alipay = res
 			},
 			viewImg(pic) {
 				uni.previewImage({
@@ -191,19 +216,11 @@
 		width: 750rpx;
 		padding: 10px 30rpx 43px;
 	}
-
-	.tub-user {
+	.tub-input {
 		height: 45px;
-		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
-		padding: 0 15px;
-		display: flex;
-		align-items: center;
-
-		.tub-user-title {
-			font-size: 15px;
-			margin: 0 15px 0 0;
-		}
+		margin: 10px 0 0 0;
 	}
 
 	.tub-upload {

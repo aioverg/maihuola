@@ -98,7 +98,7 @@ const store = new Vuex.Store({
 			uni.getStorage({
 				key: 'userInfo',
 				success: function(res){
-					res.data.client.taobao = status
+					res.data.taobao = status
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})
@@ -108,7 +108,7 @@ const store = new Vuex.Store({
 			uni.getStorage({
 				key: 'userInfo',
 				success: function(res){
-					res.data.client.alipay = status
+					res.data.alipay = status
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})
@@ -119,8 +119,8 @@ const store = new Vuex.Store({
 			uni.getStorage({
 				key: 'userInfo',
 				success: function(res){
-					res.data.client.wechat = 1
-					res.data.client.WXAvatarUrl = data || null
+					res.data.wechat = 1
+					res.data.WXAvatarUrl = data || null
 					uni.setStorageSync('userInfo', res.data)
 				}
 			})

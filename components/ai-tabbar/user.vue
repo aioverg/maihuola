@@ -143,17 +143,16 @@
 		},
 		computed: {
 			loginState() {
-				console.log(77777,this.$store.state.hasLogin)
 				if (this.$store.state.hasLogin) {
 					this.navTitle = "我的"
 				} else {
 					this.navTitle = "手机登录"
 				}
 				return this.$store.state.hasLogin
+			},
+			alipayStatus(){
+				return this.$store.state.userInfo.alipay
 			}
-		},
-		onShow() {
-			this.getUserInfo()
 		},
 		methods: {
 			navTo(url) {
@@ -182,7 +181,7 @@
 				})
 			},
 			withdraw() {
-				if (this.userInfo.alipay) {
+				if (this.alipayStatus) {
 					this.$aiRouter.navTo('/pages/withdraw/withdraw?total=' + this.userInfo.balance)
 				} else {
 					this.$aiRouter.navTo('/pages/account/bindAlipay?navbartitle=绑定支付宝')

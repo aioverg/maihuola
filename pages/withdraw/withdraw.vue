@@ -12,7 +12,7 @@
 				<view class="input-box">
 					<text class="icon">¥</text>
 					<input placeholder="请输入提现金额" type="number" v-model="sum" class="input" />
-					<text class="note" v-show = "inputHint">（不小于1元）</text>
+					<text class="note" v-show = "inputHint">（不小于10元）</text>
 				</view>
 				<view class="tx-upper">可提现金额 ¥{{total}}</view>
 				<view class="tx-upperbt" @click="allWithdraw">全部提现</view>
@@ -67,7 +67,7 @@
 				}else{
 					this.aiButtonBg ="ai-button-graybg"
 				}
-				if(this.sum >= 1){
+				if(this.sum >= 10){
 					this.inputHint = false
 				}else{
 					this.inputHint = true
@@ -119,8 +119,8 @@
 				if(!this.sum){
 					return
 				}
-				if(this.sum && this.sum < 1){
-					this.aiPopupMessage('err', '不能小于1元')
+				if(this.sum && this.sum < 10){
+					this.aiPopupMessage('err', '不能小于10元')
 					return
 				}
 				if(this.sum > this.total){

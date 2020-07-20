@@ -18,7 +18,7 @@
 			<!--公会任务列表-->
 			<view v-show="taskKindId==0">
 				<view class="tb-item" v-for="(item, index) in unionTask" :key="index">
-					<view class="tb-item-content" @click="navTo('/pages/task/taskDetail?id=' + item.id + '&is_end=' + item.is_end)">
+					<view class="tb-item-content" @click="navTo('/pages/task/unionTaskDetail?id=' + item.id + '&is_end=' + item.is_end)">
 						<view class="tb-ic-shade" v-if="item.is_end">
 							<view class="tb-ic-lock">
 								<image src="/static/icon/lock-01.png" style="width: 15px; margin: 0 5px 0 0;" mode="widthFix"></image>

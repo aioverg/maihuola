@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情">
 			<block slot="right">
-				<view style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?id=' + taskId)">上传截图</view>
+				<view style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?type=union&id=' + taskId)">上传截图</view>
 			</block>
 		</uni-nav-bar>
 		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 6个工作日完成审核，请您耐心等待..."></hint-box>
@@ -58,18 +58,18 @@
 			}
 		},
 		onLoad(res) {
-			this.showFlag = false
-			this.taskId = res.id
-			this.taskStatus = res.is_end
-			if(res.router){
-				this.routerKind = res.router
-			}
-			this.getTaskDetail(res.id)
+			// this.showFlag = false
+			// this.taskId = res.id
+			// this.taskStatus = res.is_end
+			// if(res.router){
+			// 	this.routerKind = res.router
+			// }
+			// this.getTaskDetail(res.id)
 		},
 		onShow() {
-			if(this.showFlag){
+			/*if(this.showFlag){
 				this.getTaskDetail(this.taskId)
-			}
+			}*/
 		},
 		//滑动到底部时请求操作
 		onPullDownRefresh() {
