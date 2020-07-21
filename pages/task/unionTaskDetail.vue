@@ -17,7 +17,7 @@
 					<view class="tc-title">赏金收益（元）：</view>
 					<view class="tc-num">{{taskContent.amount}}</view>
 					<view v-if="taskContent.is_single" class="tc-status" :style="{color: statusColor}">{{taskContent.record_status}}</view>
-					<image v-if="!taskContent.is_single" src="/static/icon/icon-right-arrow-01.png" style="width:6px;" mode="widthFix"></image>
+					<image v-if="!taskContent.is_single" @click="navToCheckHistory" src="/static/icon/icon-right-arrow-01.png" style="width:6px;" mode="widthFix"></image>
 				</view>
 				<view class="task-cash-two" v-if="taskContent.record_status == '未通过'">失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因</view>
 			</view>
@@ -51,13 +51,13 @@
 				parent: "yes",
 				taskStatus: "0", //任务是否过期
 				taskContent: {
-					title: "加入公会赚赏金",
+					/*title: "加入公会赚赏金",
 					start_time: "0000.00.00",
 					end_time: "0000.00.00",
 					commission: "0",
 					rule: "555555",
 					spread_qrcode: "/static/mock/mock-03.png"
-					
+					*/
 				},
 				routerKind: "navTo",
 				showFlag: true,
@@ -105,6 +105,9 @@
 					return
 				}
 			},
+			navToCheckHistory(url){
+				this.$aiRouter.navTo("/pages/task/checkHistory?type=3&id=" + this.taskId + '&tasktitle=' + this.taskContent.title)
+			},
 			//获取任务信息
 			getTaskDetail(id){
 				return this.$api.postTaskDetail({
@@ -124,7 +127,7 @@
 						this.statusColor = "#FFA570"
 					}
 					if(res.data.data.is_single == 1){
-						if(res.data.data.record_status == -1 || res.data.data.record_status){
+						if(res.data.data.record_status == -1 || res.data.data.record_status == 0){
 							this.taskUploadFlag = false
 						}
 					}

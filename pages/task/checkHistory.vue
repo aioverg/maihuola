@@ -11,7 +11,8 @@
 					</view>
 					<view class="tcb-item-two">
 						<view>{{item.time}}</view>
-						<view>{{item.mobile}}</view>
+						<view v-if="item.mobile">{{item.mobile}}</view>
+						<view v-if="item.amount" :class="item.status == '审核通过' ? 'tcb-io-status-pass-num' : (item.status == '未通过') ? 'tcb-io-status-fail-num' : 'tcb-io-status-load-num' ">¥{{item.amount}}</view>
 					</view>
 				</view>
 				<view class="tcb-item-hidden" v-show="iconType[index] == 'arrowup'">{{item.remark}}</view>
@@ -38,12 +39,14 @@
 				uniLoadMoreStatus: "more",
 				page: 1,
 				lastPage: 1,
+				type: "",
 				iconType: []
 			}
 		},
 		onLoad(res) {
 			this.taskId = res.id
 			this.taskTitle = res.tasktitle
+			this.type = res.type
 			this.getDataList()
 		},
 		onReachBottom() {
@@ -63,39 +66,78 @@
 					this.uniLoadMoreStatus = "noMore"
 					return
 				}
-				this.$api.postTaskCheckHistory({
-					user_id: this.$store.state.userInfo.id,
-					mission_id: this.taskId,
-					page: this.page,
-				}).then(res => {
-					if (res.data.data.total == 0) {
-						this.aiNoContent = true
-						return
-					} else {
-						this.aiNoContent = false
-					}
-					this.page += 1
-					this.lastPage = res.data.data.last_page
-					if (this.page > this.lastPage) {
-						this.uniLoadMoreStatus = "noMore"
-					} else {
-						this.uniLoadMoreStatus = "more"
-					}
-					for (let item of res.data.data.data) {
-						item.title = this.taskTitle
-						if (item.status == 0) {
-							item.status = "未通过"
+				if(this.type == 1){
+					this.$api.postTaskCheckHistory({
+						user_id: this.$store.state.userInfo.id,
+						mission_id: this.taskId,
+						page: this.page,
+					}).then(res => {
+						if (res.data.data.total == 0) {
+							this.aiNoContent = true
+							return
+						} else {
+							this.aiNoContent = false
 						}
-						if (item.status == 1) {
-							item.status = "审核通过"
+						this.page += 1
+						this.lastPage = res.data.data.last_page
+						if (this.page > this.lastPage) {
+							this.uniLoadMoreStatus = "noMore"
+						} else {
+							this.uniLoadMoreStatus = "more"
 						}
-						if (item.status == 2 || item.status == 3) {
-							item.status = "待审核"
+						for (let item of res.data.data.data) {
+							item.title = this.taskTitle
+							if (item.status == 0) {
+								item.status = "未通过"
+							}
+							if (item.status == 1) {
+								item.status = "审核通过"
+							}
+							if (item.status == 2 || item.status == 3) {
+								item.status = "待审核"
+							}
+							this.dataList.push(item)
+							this.iconType.push("arrowdown")
 						}
-						this.dataList.push(item)
-						this.iconType.push("arrowdown")
-					}
-				})
+					})
+				}
+				if(this.type == 3){
+					this.$api.postTaskCheckHistory({
+						user_id: this.$store.state.userInfo.id,
+						mission_id: this.taskId,
+						page: this.page,
+						type: 3,
+					}).then(res => {
+						if (res.data.data.total == 0) {
+							this.aiNoContent = true
+							return
+						} else {
+							this.aiNoContent = false
+						}
+						this.page += 1
+						this.lastPage = res.data.data.last_page
+						if (this.page > this.lastPage) {
+							this.uniLoadMoreStatus = "noMore"
+						} else {
+							this.uniLoadMoreStatus = "more"
+						}
+						for (let item of res.data.data.data) {
+							item.title = this.taskTitle
+							if (item.status == 0) {
+								item.status = "未通过"
+							}
+							if (item.status == 1) {
+								item.status = "审核通过"
+							}
+							if (item.status == 2 || item.status == 3) {
+								item.status = "待审核"
+							}
+							this.dataList.push(item)
+							this.iconType.push("arrowdown")
+						}
+					})
+				}
+				
 			}
 		}
 	}
@@ -150,6 +192,17 @@
 				margin: 3px 0 0 0;
 				font-size: 12px;
 				color: #999999;
+				.tcb-io-status-pass-num {
+					color: #FF716E;
+				}
+							
+				.tcb-io-status-fail-num {
+					color: #999999;
+				}
+							
+				.tcb-io-status-load-num {
+					color: #FF716E;
+				}
 			}
 		}
 		.tcb-item-hidden {

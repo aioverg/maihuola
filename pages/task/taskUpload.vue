@@ -40,7 +40,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupTask">
-			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=task&id=' + taskId + '&parent=' + parent)"
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=' + type + '&id=' + taskId + '&parent=' + parent)"
 			 :cancelShow="false">
 				<block slot="button">
 					<view @click="navToback(1)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
@@ -178,12 +178,17 @@
 								})) {
 								_this.buttonbg = "ai-button-graybg"
 							} else {
-								if (_this.name.length != 0 && _this.name.length != 0) {
+								if(_this.parent == "no"){
+									if (_this.name.length != 0 && _this.name.length != 0) {
+										_this.buttonbg = "ai-button-redbg"
+										_this.submitFlag = true
+									} else {
+										_this.buttonbg = "ai-button-graybg"
+									}
+								}else{
 									_this.buttonbg = "ai-button-redbg"
-									_this.submitFlag = true
-								} else {
-									_this.buttonbg = "ai-button-graybg"
 								}
+								
 							}
 						}
 					}

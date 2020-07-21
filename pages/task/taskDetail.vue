@@ -34,7 +34,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?id=' + taskId + '&tasktitle=' + taskContent.title)">
+			<view class="task-check-history" @click="navTo('/pages/task/checkHistory?type=1&id=' + taskId + '&tasktitle=' + taskContent.title)">
 				<view class="tch-des">查看审核记录</view>
 				<image class="tch-icon" mode="widthFix" src="/static/icon/icon-right-arrow-01.png"></image>
 			</view>

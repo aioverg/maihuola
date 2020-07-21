@@ -20,7 +20,7 @@
 				<view class="task-status-title">火热进行中</view>
 			</view>
 			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
-				<view class="tb-item-content" @click="navTo('id=' + item.id + '&is_end=' + item.is_end)">
+				<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
 					<view class="tb-ic-shade" v-if="item.is_lock">
 						<view class="tb-ic-lock">
 							<image src="/static/icon/lock-01.png" style="width: 15px; margin: 0 5px 0 0;" mode="widthFix"></image>
@@ -32,7 +32,7 @@
 				<ai-title-list :title="item.title"></ai-title-list>
 				<view class="tb-item-head">
 					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
-					<view class="tb-ih-forms" v-if="item.is_end" @click="navTo('id=' + item.id + '&is_end=' + item.is_end)">查看报表</view>
+					<view class="tb-ih-forms" v-if="item.is_end" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">查看报表</view>
 				</view>
 			</view>
 			<view class="task-status task-status-past" v-if="pastTaskList.length != 0">
@@ -98,20 +98,23 @@
 					this.getTaskList()
 				}
 			},
-			navTo(paras) {
-				console.log(paras)
+			navToDetail(paras) {
+				console.log(paras, this.taskKind)
 				if (!this.$store.state.hasLogin) {
 					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/index/index?tabId=1')
 					return
 				}
 				if (this.$store.state.userInfo.level == "3" || this.$store.state.userInfo.level == "4" || this.$store.state.userInfo.level == "8") {
 					if(this.taskKind == "union"){
-						this.$aiRouter.navTo("/pages/task/unionTaskDetail?" + paras)
+						if(paras.lock == 0){
+							this.$aiRouter.navTo("/pages/task/unionTaskDetail?" + paras.jumpara)
+						}else{
+							return
+						}
 					}
 					if(this.taskKind == "newcomer"){
-						this.$aiRouter.navTo("/pages/task/taskDetail?" + paras)
+						this.$aiRouter.navTo("/pages/task/taskDetail?" + paras.jumpara)
 					}
-					
 					return
 				}
 				this.$refs.popup.open()
