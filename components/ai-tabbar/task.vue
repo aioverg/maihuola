@@ -21,10 +21,10 @@
 			</view>
 			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
 				<view class="tb-item-content" @click="navTo('id=' + item.id + '&is_end=' + item.is_end)">
-					<view class="tb-ic-shade" v-if="item.is_end">
+					<view class="tb-ic-shade" v-if="item.is_lock">
 						<view class="tb-ic-lock">
 							<image src="/static/icon/lock-01.png" style="width: 15px; margin: 0 5px 0 0;" mode="widthFix"></image>
-							<text>加入工会解锁</text>
+							<text>完成{{item.parent}}解锁</text>
 						</view>
 					</view>
 					<image class="tb-ic-img" :src="item.pic"></image>
@@ -35,7 +35,7 @@
 					<view class="tb-ih-forms" v-if="item.is_end" @click="navTo('id=' + item.id + '&is_end=' + item.is_end)">查看报表</view>
 				</view>
 			</view>
-			<view class="task-status task-status-past">
+			<view class="task-status task-status-past" v-if="pastTaskList.length != 0">
 				<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 				<view class="task-status-title">往期活动</view>
 			</view>
@@ -71,6 +71,7 @@
 					end_time: "0000.00.00"
 				}],
 				taskList: [],
+				pastTaskList: [],
 				//下拉加载提示类型
 				uniLoadMoreStatus: "noMore",
 				refresh: false,
@@ -91,7 +92,7 @@
 				this.taskKind = tag
 				this.taskList = []
 				if (tag == "union") {
-					this.taskList = this.unionTask
+					this.getUnionList()
 				}
 				if (tag == "newcomer") {
 					this.getTaskList()
@@ -128,10 +129,23 @@
 					return true
 				})
 			},
+			getUnionList(){
+				return this.$api.postTaskList({
+					type: 2
+				}).then(res => {
+					for (let item of res.data.data.data){
+						item.start_time = item.start_time.replace(/-/g, '.')
+						item.end_time = item.end_time.replace(/-/g, '.')
+						this.taskList.push(item)
+					}
+					return true
+				})
+			},
 			//组件加载时运行的函数
 			pageOnload() {
 				this.taskKind = "union"
-				this.taskList = this.unionTask
+				//this.taskList = this.unionTask
+				this.getUnionList()
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件
@@ -238,7 +252,6 @@
 			position: relative;
 
 			.tb-ic-img {
-
 				width: 650rpx;
 				height: 125px;
 				border-radius: 8px;
@@ -247,8 +260,7 @@
 			.tb-ic-shade {
 				position: absolute;
 				z-index: 10;
-				background-color: #F8F8F8;
-				opacity: 0.6;
+				background-color: rgba(255,215,215,0.6);
 				width: 650rpx;
 				height: 125px;
 				padding: 45px 0rpx;
@@ -258,14 +270,14 @@
 					display: flex;
 					align-items: center;
 					justify-content: center;
-					width: 280rpx;
+					width: 340rpx;
 					height: 35px;
 					font-size: 15px;
 					border-radius: 20px;
 					margin: 0 auto;
-					background-color: #000000;
-					opacity: 0.5;
-					color: rgba(255, 255, 255, 1);
+					background-color: #F47A73;
+					color: #FFFFFF;
+					opacity: 0.8;
 				}
 
 				.tb-ic-shade-describe {
@@ -278,7 +290,6 @@
 					border-radius: 20px;
 					text-align: center;
 					background-color: #000000;
-					opacity: 0.5;
 					color: rgba(255, 255, 255, 1);
 				}
 			}

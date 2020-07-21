@@ -9,7 +9,7 @@
 			<view class="tub-input" v-if="type=='task'">
 				<ai-input titleWidth="180rpx" type="number" title="填写用户信息" @getInput="getPhone" placeholder="请输入对方手机号"></ai-input>
 			</view>
-			<view v-if="type=='union'">
+			<view v-if="type=='union' && parent == 'no'">
 				<view class="tub-input">
 					<ai-input titleWidth="220rpx" title="填写用户姓名" @getInput="getName" placeholder="请输入真实姓名"></ai-input>
 				</view>
@@ -40,7 +40,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupTask">
-			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=task&id=' + taskId)"
+			<ai-popup-dialog :message='message' btname="继续提交" @confirm="redirect('/pages/task/taskUpload?type=task&id=' + taskId + '&parent=' + parent)"
 			 :cancelShow="false">
 				<block slot="button">
 					<view @click="navToback(1)" style="width: 165px; height: 40px; text-align: center; margin: 15px auto 0; font-size: 15px; border: 1px solid rgba(255,165,112,1); border-radius: 23px; color: #FFA570; line-height: 40px;">
@@ -67,7 +67,9 @@
 		},
 		data() {
 			return {
+				parent: '',
 				taskId: 0,
+				repeat: 0,
 				phone: "",
 				name: "",
 				alipay: "",
@@ -99,7 +101,7 @@
 				}
 			},
 			name(){
-				if(this.type == "union"){
+				if(this.type == "union" && this.parent== 'no'){
 					if (this.name.length == 0 || this.alipay.length == 0 || this.imgList.every(item => {
 							return item.uploadPic == null
 						})) {
@@ -110,7 +112,7 @@
 				}
 			},
 			alipay(){
-				if(this.type == "union"){
+				if(this.type == "union" && this.parent== 'no'){
 					if (this.name.length == 0 || this.alipay.length == 0 || this.imgList.every(item => {
 							return item.uploadPic == null
 						})) {
@@ -124,6 +126,7 @@
 		onLoad(res) {
 			this.type = res.type
 			this.taskId = res.id
+			this.parent = res.parent
 			this.getTaskDetail(res.id)
 		},
 		methods: {
@@ -202,6 +205,7 @@
 				this.$api.postTaskDetail({
 					id: id
 				}).then(res => {
+					this.repeat = res.data.data.is_single
 					this.imgList[0].exPic = res.data.data.pic_case
 					for (let i = 1; i <= 5; i++) {
 						if (res.data.data["pic_case" + i].length !== 0) {
@@ -234,7 +238,9 @@
 						user_id: this.$store.state.userInfo.id,
 						mission_id: this.taskId,
 						pic: this.uploadImg,
-						mobile: this.phone
+						mobile: this.phone,
+						real_name: this.name,
+						alipay: this.alipay
 					}).then(res => {
 						if (res.data.code == 0) {
 							this.$refs.popupTask.open()
@@ -245,7 +251,79 @@
 					return
 				}
 				if(this.type == "union"){
-					this.$refs.popupUnion.open()
+					if(this.parent == 'no'){
+						if(this.name.length == 0){
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '请填写用户名'])
+							return
+						}
+						if(this.alipay.length == 0){
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '请填写支付宝账号'])
+							return
+						}
+						console.log(this.uploadImg)
+						if (this.uploadImg.length == 0) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+							return
+						}
+						if (this.uploadImg.every(item => {
+								return item == ""
+							})) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+							return
+						}
+						this.$api.postTaskUpload({
+							user_id: this.$store.state.userInfo.id,
+							mission_id: this.taskId,
+							pic: this.uploadImg,
+							mobile: this.phone,
+							real_name: this.name,
+							alipay: this.alipay
+						}).then(res => {
+							if (res.data.code == 0) {
+								if(this.repeat){
+									this.$refs.popupUnion.open()
+								}else{
+									this.$refs.popupTask.open()
+								}
+							} else {
+								this.$aiGlobal.aiPopupMessage.apply(this, ['err', res.data.msg])
+							}
+						})
+						return
+						
+					}
+					if(this.parent == 'yes'){
+						if (this.uploadImg.length == 0) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+							return
+						}
+						if (this.uploadImg.every(item => {
+								return item == ""
+							})) {
+							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
+							return
+						}
+						this.$api.postTaskUpload({
+							user_id: this.$store.state.userInfo.id,
+							mission_id: this.taskId,
+							pic: this.uploadImg,
+							mobile: this.phone,
+							real_name: this.name,
+							alipay: this.alipay
+						}).then(res => {
+							if (res.data.code == 0) {
+								if(this.repeat){
+									this.$refs.popupUnion.open()
+								}else{
+									this.$refs.popupTask.open()
+								}
+							} else {
+								this.$aiGlobal.aiPopupMessage.apply(this, ['err', res.data.msg])
+							}
+						})
+						return
+					}
+					
 				}
 				
 			},

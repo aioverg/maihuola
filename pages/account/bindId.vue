@@ -21,7 +21,9 @@
 		},
 		data() {
 			return {
-				platId: null,
+				platId: "",
+				platKind: "",
+				type: "",
 				aiButtonBg: "ai-button-graybg",
 				inputTitle: "快手ID",
 				tabBarTitle: "修改快手ID",
@@ -38,6 +40,9 @@
 			}
 		},
 		onLoad(res) {
+			this.platKind = res.kind
+			this.type = res.type
+			console.log(res)
 			if(res.kind == "douyin"){
 				if(res.type == "bind"){
 					this.inputTitle = "抖音ID"
@@ -46,7 +51,7 @@
 				}else{
 					this.inputTitle = "抖音ID"
 					this.tabBarTitle = "修改抖音ID"
-					this.placeHolder = res.type
+					this.placeHolder = res.id
 				}
 			}
 			if(res.kind == "ks"){
@@ -57,7 +62,7 @@
 				}else{
 					this.inputTitle = "快手ID"
 					this.tabBarTitle = "修改快手ID"
-					this.placeHolder = res.type
+					this.placeHolder = res.id
 				}
 			}
 			
@@ -67,28 +72,58 @@
 				this.platId = res
 			},
 			alertPlatId() {
-				/*
-				if (this.phone % 1 !== 0 || this.phone.length !== 11) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码错误'])
-					return
-				}
-				if (this.code % 1 !== 0 || this.code.length !== 6) {
-					this.$aiGlobal.aiPopupMessage.apply(this, ['err', '验证码错误'])
-					return
-				}
-				this.$api.getAlertPhone({
-					phone: this.phone,
-					code: this.code
-				}).then(res => {
-					if (res.data.code == 500) {
-						this.$aiGlobal.aiPopupMessage.apply(this, ['err', '手机号码已被注册'])
+				if(this.platKind == "ks"){
+					if(this.platId.length == 0){
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', 'ID不能为空'])
 						return
-					} else {
-						this.$aiRouter.redirect('/pages/index/index?tabId=2')
-						this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
 					}
-				})
-				*/
+					this.$api.postPlatId({
+						kuaishou_id: this.platId
+					}).then(res => {
+						if(res.data.code == 0){
+							if(this.type == "bind"){
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '绑定成功'])
+							}else{
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
+							}
+							this.$aiRouter.navToBack()
+						}else{
+							if(this.type == "bind"){
+								this.$aiGlobal.aiPopupMessage.apply(this, ['err', '绑定失败'])
+							}else{
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改失败'])
+							}
+						}
+					})
+					return
+				}
+				
+				
+				if(this.platKind == "douyin"){
+					if(this.platId.length == 0){
+						this.$aiGlobal.aiPopupMessage.apply(this, ['err', 'ID不能为空'])
+						return
+					}
+					this.$api.postPlatId({
+						douyin_id: this.platId
+					}).then(res => {
+						if(res.data.code == 0){
+							if(this.type == "bind"){
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '绑定成功'])
+							}else{
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改成功'])
+							}
+							this.$aiRouter.navToBack()
+						}else{
+							if(this.type == "bind"){
+								this.$aiGlobal.aiPopupMessage.apply(this, ['err', '绑定失败'])
+							}else{
+								this.$aiGlobal.aiPopupMessage.apply(this, ['success', '修改失败'])
+							}
+						}
+					})
+					return
+				}
 			}
 
 		}

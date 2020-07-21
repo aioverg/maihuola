@@ -2,7 +2,7 @@
 	<view>
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="活动详情">
 			<block slot="right">
-				<view style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?type=union&id=' + taskId)">上传截图</view>
+				<view v-if="taskUploadFlag" style="font-size: 15px;" @click="navTo('/pages/task/taskUpload?type=union&id=' + taskId + '&parent=' + parent)">上传截图</view>
 			</block>
 		</uni-nav-bar>
 		<hint-box v-if="taskStatus == '0'" content="我们会在2 - 6个工作日完成审核，请您耐心等待..."></hint-box>
@@ -15,24 +15,18 @@
 			<view class="task-cash">
 				<view class="task-cash-one">
 					<view class="tc-title">赏金收益（元）：</view>
-					<view class="tc-num">{{taskContent.commission}}</view>
-					<view class="tc-status">待审核</view>
+					<view class="tc-num">{{taskContent.amount}}</view>
+					<view v-if="taskContent.is_single" class="tc-status" :style="{color: statusColor}">{{taskContent.record_status}}</view>
+					<image v-if="!taskContent.is_single" src="/static/icon/icon-right-arrow-01.png" style="width:6px;" mode="widthFix"></image>
 				</view>
-				<view class="task-cash-two">失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因</view>
+				<view class="task-cash-two" v-if="taskContent.record_status == '未通过'">失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因</view>
 			</view>
 			<view class="qr-content">
 				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
-				<!--
-				<view class="qr-one">支付宝拉新二维码</view>
-				<view class="qr-two">打开支付宝 扫一扫</view>
-				-->
 				<view class="qr-save" @click="saveQr(taskContent.spread_qrcode)">保存推广码</view>
 			</view>
 			<view class="task-rule">
-				<view class="task-rule-title">规则标题规则标题</view>
-				<view class="task-rule-content">
-					<jyf-parser :html="taskContent.rule"></jyf-parser>
-				</view>
+				<jyf-parser :html="taskContent.rule"></jyf-parser>
 			</view>
 		</view>
 		<ai-popup-message ref="aiPopupMessage" :isdistance="true"></ai-popup-message>
@@ -51,7 +45,10 @@
 		},
 		data() {
 			return {
+				taskUploadFlag: true,
+				statusColor: "#666666" ,//审核状态字体颜色
 				taskId: 0, //任务ID
+				parent: "yes",
 				taskStatus: "0", //任务是否过期
 				taskContent: {
 					title: "加入公会赚赏金",
@@ -68,20 +65,20 @@
 			}
 		},
 		onLoad(res) {
-			// this.showFlag = false
-			// this.taskId = res.id
-			// this.taskStatus = res.is_end
-			// if(res.router){
-			// 	this.routerKind = res.router
-			// }
-			// this.getTaskDetail(res.id)
+			this.showFlag = false
+			this.taskId = res.id
+			this.taskStatus = res.is_end
+			if(res.router){
+				this.routerKind = res.router
+			}
+			this.getTaskDetail(res.id)
 		},
 		onShow() {
-			/*if(this.showFlag){
+			if(this.showFlag){
 				this.getTaskDetail(this.taskId)
-			}*/
+			}
 		},
-		//滑动到底部时请求操作
+		//上划刷新
 		onPullDownRefresh() {
 			const _this = this
 			if(!_this.downRefreshFlag){return}
@@ -115,6 +112,27 @@
 				}).then( res => {
 					res.data.data.start_time = res.data.data.start_time.replace(/-/g, '.')
 					res.data.data.end_time = res.data.data.end_time.replace(/-/g, '.')
+					if(res.data.data.record_status == -1){
+						res.data.data.record_status = ""
+					}else if(res.data.data.record_status == 0){
+						res.data.data.record_status = "未通过"
+					}else if(res.data.data.record_status == 1){
+						res.data.data.record_status = "审核通过"
+						this.statusColor = "#FF716E"
+					}else{
+						res.data.data.record_status = "待审核"
+						this.statusColor = "#FFA570"
+					}
+					if(res.data.data.is_single == 1){
+						if(res.data.data.record_status == -1 || res.data.data.record_status){
+							this.taskUploadFlag = false
+						}
+					}
+					if(res.data.data.parent_id == 0){
+						this.parent = "no"
+					}else{
+						this.parent = "yes"
+					}
 					this.taskContent = res.data.data
 					this.showFlag = true
 					return true
@@ -216,19 +234,6 @@
 		.qr-img {
 			width: 630rpx;
 		}
-		/*.qr-one {
-			font-size: 20px;
-			font-weight: bold;
-			color: #FFA570;
-			text-align: center;
-			margin: 25px 0 8px;
-		}
-		.qr-two {
-			font-size: 14px;
-			color: #999999;
-			text-align: center;
-			margin: 0 0 30px;
-		}*/
 		.qr-save {
 			width: 250px;
 			height: 45px;
@@ -248,17 +253,7 @@
 		min-height: 300px;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
 		border-radius: 8px;
-		padding: 15px 5px 15px 15px;
-		.task-rule-title {
-			font-size: 16px;
-			font-weight: bold;
-			padding: 0 0 10px 0;
-			margin: 0 0 10px 0;
-			border-bottom: 1px solid #E5E5E5;
-		}
-		.task-rule-content {
-			padding: 0 10px 0 0;
-		}
+		padding: 15px 15px 15px 15px;
 	}
 
 </style>
