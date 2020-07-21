@@ -6,9 +6,9 @@
 			    <ai-list-cell title="手机号码" :color="telColor" :message="tel"></ai-list-cell>
 		    </view>
 		    <view class="box-sofeitem">
-			    <view class="box-item" @click="bindWx()">
+			    <!-- <view class="box-item" @click="bindWx()">
 				    <ai-list-cell title="微信绑定" :color="wechatColor" :message="wechat" dashed="dashed"></ai-list-cell>
-			    </view>
+			    </view> -->
 			    <view class="box-item" @click="bindTB()">
 				    <ai-list-cell title="淘宝授权" :color="taobaoColor" :message="taobao" dashed="dashed"></ai-list-cell>
 			    </view>

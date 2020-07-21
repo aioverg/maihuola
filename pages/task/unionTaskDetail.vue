@@ -19,11 +19,11 @@
 					<view v-if="taskContent.is_single" class="tc-status" :style="{color: statusColor}">{{taskContent.record_status}}</view>
 					<image v-if="!taskContent.is_single" @click="navToCheckHistory" src="/static/icon/icon-right-arrow-01.png" style="width:6px;" mode="widthFix"></image>
 				</view>
-				<view class="task-cash-two" v-if="taskContent.record_status == '未通过'">失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因失败原因</view>
+				<view class="task-cash-two" v-if="taskContent.record_status == '未通过'">{{taskContent.fail_remark}}</view>
 			</view>
-			<view class="qr-content">
+			<view class="qr-content" v-if="taskContent.spread_qrcode">
 				<image class="qr-img" :src="taskContent.spread_qrcode" mode="widthFix"></image>
-				<view class="qr-save" @click="saveQr(taskContent.spread_qrcode)">保存推广码</view>
+				<view class="qr-save" @click="saveQr(taskContent.spread_qrcode)">保存图片</view>
 			</view>
 			<view class="task-rule">
 				<jyf-parser :html="taskContent.rule"></jyf-parser>
@@ -49,6 +49,7 @@
 				statusColor: "#666666" ,//审核状态字体颜色
 				taskId: 0, //任务ID
 				parent: "yes",
+				isEnd: false,
 				taskStatus: "0", //任务是否过期
 				taskContent: {
 					/*title: "加入公会赚赏金",
@@ -67,7 +68,9 @@
 		onLoad(res) {
 			this.showFlag = false
 			this.taskId = res.id
-			this.taskStatus = res.is_end
+			if(res.is_end == 1){
+				this.isEnd = true
+			}
 			if(res.router){
 				this.routerKind = res.router
 			}
@@ -126,16 +129,23 @@
 						res.data.data.record_status = "待审核"
 						this.statusColor = "#FFA570"
 					}
-					if(res.data.data.is_single == 1){
-						if(res.data.data.record_status == -1 || res.data.data.record_status == 0){
-							this.taskUploadFlag = false
+					if(this.isEnd){
+						this.taskUploadFlag = false
+					}else{
+						if(res.data.data.is_single == 1){
+							if(res.data.data.record_status == '' || res.data.data.record_status == "未通过"){
+								this.taskUploadFlag = true
+							}else{
+								this.taskUploadFlag = false
+							}
+						}
+						if(res.data.data.parent_id == 0){
+							this.parent = "no"
+						}else{
+							this.parent = "yes"
 						}
 					}
-					if(res.data.data.parent_id == 0){
-						this.parent = "no"
-					}else{
-						this.parent = "yes"
-					}
+					
 					this.taskContent = res.data.data
 					this.showFlag = true
 					return true
@@ -240,7 +250,7 @@
 		.qr-save {
 			width: 250px;
 			height: 45px;
-			line-height: 45px;
+			line-height: 43px;
 			margin: 25px auto 0;
 			border-radius: 23px;
 			border: 1px solid #FFA570;

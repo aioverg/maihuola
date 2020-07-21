@@ -32,17 +32,28 @@
 				<ai-title-list :title="item.title"></ai-title-list>
 				<view class="tb-item-head">
 					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
-					<view class="tb-ih-forms" v-if="item.is_end" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">查看报表</view>
 				</view>
 			</view>
 			<view class="task-status task-status-past" v-if="pastTaskList.length != 0">
 				<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 				<view class="task-status-title">往期活动</view>
 			</view>
+			<view v-if="pastTaskList.length != 0" class="tb-item" v-for="(item, index) in pastTaskList" :key="index">
+				<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
+					<view class="tb-ic-shade">
+						<view class="tb-ic-lock-past">活动已结束</view>
+					</view>
+					<image class="tb-ic-img" :src="item.pic"></image>
+				</view>
+				<ai-title-list :title="item.title"></ai-title-list>
+				<view class="tb-item-head">
+					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
+				</view>
+			</view>
 		</view>
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
-		<mix-loading v-show="refresh"></mix-loading>
+		
 		<uni-popup ref="popup">
 			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
 		</uni-popup>
@@ -74,7 +85,6 @@
 				pastTaskList: [],
 				//下拉加载提示类型
 				uniLoadMoreStatus: "noMore",
-				refresh: false,
 				dialogMessage: [{
 					title: "温馨提醒",
 					content: "很抱歉！您暂不符合活动推广要求，请关注「爱小兔」微信公众号购买相关服务后领取赚金任务"
@@ -91,6 +101,7 @@
 				}
 				this.taskKind = tag
 				this.taskList = []
+				this.pastTaskList = []
 				if (tag == "union") {
 					this.getUnionList()
 				}
@@ -104,15 +115,16 @@
 					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/index/index?tabId=1')
 					return
 				}
-				if (this.$store.state.userInfo.level == "3" || this.$store.state.userInfo.level == "4" || this.$store.state.userInfo.level == "8") {
-					if(this.taskKind == "union"){
-						if(paras.lock == 0){
+				if (this.$store.state.userInfo.level == "3" || this.$store.state.userInfo.level == "4" || this.$store.state.userInfo
+					.level == "8") {
+					if (this.taskKind == "union") {
+						if (paras.lock == 0) {
 							this.$aiRouter.navTo("/pages/task/unionTaskDetail?" + paras.jumpara)
-						}else{
+						} else {
 							return
 						}
 					}
-					if(this.taskKind == "newcomer"){
+					if (this.taskKind == "newcomer") {
 						this.$aiRouter.navTo("/pages/task/taskDetail?" + paras.jumpara)
 					}
 					return
@@ -127,19 +139,27 @@
 					for (let item of res.data.data.data) {
 						item.start_time = item.start_time.replace(/-/g, '.')
 						item.end_time = item.end_time.replace(/-/g, '.')
-						this.taskList.push(item)
+						if (item.is_end == 0) {
+							this.taskList.push(item)
+						} else {
+							this.pastTaskList.push(item)
+						}
 					}
 					return true
 				})
 			},
-			getUnionList(){
+			getUnionList() {
 				return this.$api.postTaskList({
 					type: 2
 				}).then(res => {
-					for (let item of res.data.data.data){
+					for (let item of res.data.data.data) {
 						item.start_time = item.start_time.replace(/-/g, '.')
 						item.end_time = item.end_time.replace(/-/g, '.')
-						this.taskList.push(item)
+						if (item.is_end == 0) {
+							this.taskList.push(item)
+						} else {
+							this.pastTaskList.push(item)
+						}
 					}
 					return true
 				})
@@ -148,23 +168,34 @@
 			pageOnload() {
 				this.taskKind = "union"
 				//this.taskList = this.unionTask
+				this.taskList = []
+				this.pastTaskList = []
 				this.getUnionList()
 				console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件
 			pageRefresh() {
 				const _this = this
-				_this.refresh = true
 				if (_this.taskKind == "union") {
-
+					_this.taskList = []
+					_this.pastTaskList = []
+					uni.startPullDownRefresh({
+						success: function() {
+							_this.getUnionList().then(res => {
+								if (res) {
+									uni.stopPullDownRefresh()
+								}
+							})
+						}
+					})
 				}
 				if (_this.taskKind == "newcomer") {
 					_this.taskList = []
+					_this.pastTaskList = []
 					uni.startPullDownRefresh({
 						success: function() {
 							_this.getTaskList().then(res => {
 								if (res) {
-									_this.refresh = false
 									uni.stopPullDownRefresh()
 								}
 							})
@@ -240,15 +271,6 @@
 			color: #999999;
 		}
 
-		.tb-ih-forms {
-			position: absolute;
-			top: -10px;
-			right: 0;
-			font-size: 14px;
-			color: #FF716E;
-			text-decoration-line: underline;
-		}
-
 		.tb-item-content {
 
 			border-radius: 8px;
@@ -263,10 +285,25 @@
 			.tb-ic-shade {
 				position: absolute;
 				z-index: 10;
-				background-color: rgba(255,215,215,0.6);
+				background-color: rgba(255, 215, 215, 0.6);
 				width: 650rpx;
 				height: 125px;
 				padding: 45px 0rpx;
+
+				.tb-ic-lock-past {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 340rpx;
+					height: 35px;
+					font-size: 15px;
+					border-radius: 20px;
+					margin: 0 auto;
+					background-color: #F47A73;
+					color: #FFFFFF;
+					opacity: 0.8;
+				}
 
 				.tb-ic-lock {
 					position: relative;
@@ -280,7 +317,6 @@
 					margin: 0 auto;
 					background-color: #F47A73;
 					color: #FFFFFF;
-					opacity: 0.8;
 				}
 
 				.tb-ic-shade-describe {

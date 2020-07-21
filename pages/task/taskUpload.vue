@@ -3,7 +3,7 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="上传截图"
 		 @clickRight="redirect('/pages/index/index?tabId=1')" rightText="关闭">
 		</uni-nav-bar>
-		<hint-box v-if="type=='union'" content="为了您的账户安全，请填写您的真实信息"></hint-box>
+		<hint-box v-if="type=='union' && parent=='no'" content="为了您的账户安全，请填写您的真实信息"></hint-box>
 		
 		<view class="task-upload-body">
 			<view class="tub-input" v-if="type=='task'">
@@ -126,6 +126,7 @@
 		onLoad(res) {
 			this.type = res.type
 			this.taskId = res.id
+			console.log(res)
 			this.parent = res.parent
 			this.getTaskDetail(res.id)
 		},
@@ -348,7 +349,7 @@
 <style lang="scss">
 	.task-upload-body {
 		width: 750rpx;
-		padding: 10px 30rpx 43px;
+		padding: 0 30rpx 43px;
 	}
 	.tub-input {
 		height: 45px;

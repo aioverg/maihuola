@@ -145,6 +145,7 @@
 				position: relative;
 				top: -5px;
 				left: 2px;
+				color: #FF1968;
 			}
 		}
 		.ai-input-content {

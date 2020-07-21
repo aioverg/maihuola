@@ -1,7 +1,7 @@
 const api = {}
 const basePath = ""
-const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
-//const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
+//const baseUrl = "http://api.taobaoke.test.aixiaotu.com.cn/api/v1."
+const baseUrl = "http://api.taobaoke.aixiaotu.com.cn/api/v1."
 /*const token = uni.getStorage({
     key: 'token',
     success: function (res) {

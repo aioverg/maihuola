@@ -203,7 +203,7 @@
 		.task-cash {
 			display: flex;
 			border-bottom: 1px dashed #E5E5E5;
-			padding: 0 0 13px 20rpx;
+			padding: 0 0 13px 55rpx;
 			.task-cash-num {
 				width: 330rpx;
 				font-size: 20px;
@@ -218,7 +218,7 @@
 		.task-upload {
 			display: flex;
 			align-items: center;
-			padding: 4px 0 0 20rpx;
+			padding: 4px 0 0 55rpx;
 			.task-upload-com {
 				width: 330rpx;
 			}
@@ -301,7 +301,7 @@
 		.qr-save {
 			width: 250px;
 			height: 45px;
-			line-height: 45px;
+			line-height: 43px;
 			margin: 25px auto 0;
 			border-radius: 23px;
 			border: 1px solid #FFA570;

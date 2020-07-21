@@ -11,8 +11,8 @@
 					</view>
 					<view class="tcb-item-two">
 						<view>{{item.time}}</view>
-						<view v-if="item.mobile">{{item.mobile}}</view>
-						<view v-if="item.amount" :class="item.status == '审核通过' ? 'tcb-io-status-pass-num' : (item.status == '未通过') ? 'tcb-io-status-fail-num' : 'tcb-io-status-load-num' ">¥{{item.amount}}</view>
+						<view v-if="type == 1">{{item.mobile}}</view>
+						<view v-if="type == 3" :class="item.status == '审核通过' ? 'tcb-io-status-pass-num' : (item.status == '未通过') ? 'tcb-io-status-fail-num' : 'tcb-io-status-load-num' ">¥{{item.amount}}</view>
 					</view>
 				</view>
 				<view class="tcb-item-hidden" v-show="iconType[index] == 'arrowup'">{{item.remark}}</view>
@@ -160,6 +160,8 @@
 			border-radius: 8px;
 			box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 			.tcb-item-one {
+				height: 17px;
+				line-height: 17px;
 				display: flex;
 				justify-content: space-between;
 			
@@ -187,6 +189,8 @@
 			}
 			
 			.tcb-item-two {
+				height: 17px;
+				line-height: 17px;
 				display: flex;
 				justify-content: space-between;
 				margin: 3px 0 0 0;
