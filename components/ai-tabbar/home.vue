@@ -65,7 +65,7 @@
 		</view>
 		<!--更新弹窗-->
 		<uni-popup ref="popupAiDia" type="dialog" zIndex="10000">
-		    <ai-popup-update :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
+		    <ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
@@ -162,6 +162,8 @@
 				refresh: false,
 				//将分类列表吸顶
 				sortFixed: "sort-relative",
+				//更新弹窗按钮
+				updateBt: "立即升级"
 				
 			};
 		},
@@ -352,12 +354,13 @@
 			},
 			//弹窗关闭
 			close(done){
+				this.$store.commit("setUpdatePopup", false)
 				done()
 			},
 			//弹窗确认
 			confirm(done){
-				apkDownload(this.updataLink)
-				done()
+				apkDownload(this)
+				//done()
 			},
 			//组件加载时运行的函数
 			pageOnload() {
@@ -365,7 +368,9 @@
 				this.getGuessSort()
 				this.getCarousel()
 				// #ifdef APP-PLUS
-				getServerNo(this)
+				if(this.$store.state.appInfo.updatePopup){
+					getServerNo(this)
+				}
 				// #endif
 				console.log("加载 首页，可以把网络请求放这里")
 			},

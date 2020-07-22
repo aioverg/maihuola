@@ -28,12 +28,13 @@ export function getServerNo(_this) {
 	}
 }
 //下载更新包
-export function apkDownload(url){
-	console.log("开始")
-	plus.downloader.createDownload( url, {}, function ( d, status ) {
+export function apkDownload(_this){
+	_this.updateBt = "正在更新"
+	plus.downloader.createDownload( _this.updataLink, {}, function ( d, status ) {
+		console.log("正在下载",d)
 	    if ( status == 200 ) { // 下载成功  
 	        var path = d.filename;  
-	        console.log("正在下载",d.filename)
+			_this.updateBt = "立即升级"
 			plus.runtime.install(path)
 	    } else {//下载失败  
 	        console.log("下载失败")

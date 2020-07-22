@@ -31,6 +31,7 @@ const store = new Vuex.Store({
 			appLink: null,
 			appVersion: null,
 			appNote: null,
+			updatePopup: true,
 		}
 	},
 	mutations: {
@@ -44,23 +45,23 @@ const store = new Vuex.Store({
 		setTabId(state, data){
 			state.tabId = data
 		},
-		setUserInfo(state, data){
-			state.hasLogin = true;
-			state.userInfo.id = data.client.id
-			state.userInfo.token = data.access_token
-			state.userInfo.level = data.client.level
-			state.userInfo.tel = data.client.mobile
-			state.userInfo.realName = data.client.real_name || null
-			state.userInfo.taobao = data.client.taobao || null
-			state.userInfo.wechat = data.client.wechat || null
-			state.userInfo.alipay = data.client.alipay || null
-			state.userInfo.wechatName = null
-			state.userInfo.WXAvatarUrl = null
-			state.kuaishou = data.client.kuaishou_id || ""
-			state.douyin = data.client.douyin_id || ""
+		// setUserInfo(state, data){
+		// 	state.hasLogin = true;
+		// 	state.userInfo.id = data.client.id
+		// 	state.userInfo.token = data.access_token
+		// 	state.userInfo.level = data.client.level
+		// 	state.userInfo.tel = data.client.mobile
+		// 	state.userInfo.realName = data.client.real_name || null
+		// 	state.userInfo.taobao = data.client.taobao || null
+		// 	state.userInfo.wechat = data.client.wechat || null
+		// 	state.userInfo.alipay = data.client.alipay || null
+		// 	state.userInfo.wechatName = null
+		// 	state.userInfo.WXAvatarUrl = null
+		// 	state.kuaishou = data.client.kuaishou_id || ""
+		// 	state.douyin = data.client.douyin_id || ""
 
-			uni.setStorageSync('userInfo', data)
-		},
+		// 	uni.setStorageSync('userInfo', data)
+		// },
 		setUserInfoES(state, data){
 			state.hasLogin = true;
 			state.userInfo.id = data.id
@@ -145,7 +146,10 @@ const store = new Vuex.Store({
 			}else{
 				state.appInfo.localVersion = data
 			}
-		}
+		},
+		setUpdatePopup(state, status){
+			state.appInfo.updatePopup = status
+		},
 	},
 	actions: {
 	
