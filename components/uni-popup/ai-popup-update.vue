@@ -57,9 +57,10 @@
 				default: true
 			}
 		},
-		data() {},
-		inject: ['popup']
-		,
+		data() {
+			return {}
+		},
+		inject: ['popup'],
 		created() {
 			// 对话框遮罩不可点击
 			this.popup.mkclick = false

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="关于我们" ></uni-nav-bar>
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="关于我们"></uni-nav-bar>
 		<view class="about-body">
 			<view class="help-box">
 				<view class="hb-list" @click="navTo('/pages/about/agreement')">
@@ -15,7 +15,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
-			<ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" popupbg="/static/img/bg-update.png" type="dialog"
+			<ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" popupbg="/static/img/bg-update.png"
 			 :cancel-show="true" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 	</view>
@@ -25,7 +25,9 @@
 	import aiListCell from '@/components/ai-list-cell'
 	import aiPopupUpdate from '@/components/uni-popup/ai-popup-update.vue'
 	// #ifdef APP-PLUS
-	import {apkDownload} from '@/static/js/appUpdate.js'
+	import {
+		apkDownload
+	} from '@/static/js/appUpdate.js'
 	// #endif
 	export default {
 		components: {
@@ -65,7 +67,7 @@
 		},
 		methods: {
 			/*跳转统一接口*/
-			navTo(url){
+			navTo(url) {
 				this.$aiRouter.navTo(url)
 			},
 			updateApp() {
@@ -73,10 +75,10 @@
 					this.$refs.popupAiDia.open()
 				}
 			},
-			confirm(done){
+			confirm(done) {
 				apkDownload(this)
 			},
-			close(done){
+			close(done) {
 				done()
 			}
 		}
@@ -88,23 +90,25 @@
 		width: 750rpx;
 		padding: 10px 30rpx 0;
 	}
+
 	.help-box {
 		width: 690rpx;
-		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
+
 		.hb-list {
 			height: 45px;
-			padding:  0 15px;
+			padding: 0 15px;
 			font-size: 15px;
 		}
 	}
-	
+
 	.ab-version {
 		width: 690rpx;
 		height: 45px;
 		padding: 0 30rpx;
 		margin: 10px 0 0;
-		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
 	}
 </style>
