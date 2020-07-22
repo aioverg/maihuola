@@ -1,12 +1,11 @@
 <template>
 	<view style="padding: 0 0 50px;">
-
-
 		<!--登录-->
 		<view v-if="!loginState" class="loginmm" style="padding: 80px 0 0 0;">
 			<ai-login-wechat noteBottom="60px" jumpUrl="/pages/index/index?tabId=1"></ai-login-wechat>
 		</view>
-
+		
+		<!--赚金页面-->
 		<view v-if="loginState">
 			<uni-nav-bar fixed="true">
 				<block slot="left">
@@ -61,10 +60,10 @@
 			</view>
 			<!--下拉加载提示-->
 			<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
+			<uni-popup ref="popup">
+				<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
+			</uni-popup>
 		</view>
-		<uni-popup ref="popup">
-			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
-		</uni-popup>
 	</view>
 </template>
 
@@ -83,6 +82,7 @@
 		data() {
 			return {
 				taskKind: "union",
+				taskListFlag: true,
 				unionTask: [/*{
 					id: 0,
 					title: "加入公会赚赏金",
@@ -93,6 +93,7 @@
 				}*/],
 				taskList: [],
 				pastTaskList: [],
+				nextPage: true,
 				//下拉加载提示类型
 				uniLoadMoreStatus: "noMore",
 				dialogMessage: [{
@@ -117,6 +118,7 @@
 				this.taskKind = tag
 				this.taskList = []
 				this.pastTaskList = []
+				this.nextPage = true
 				if (tag == "union") {
 					this.getUnionList()
 				}
@@ -125,7 +127,6 @@
 				}
 			},
 			navToDetail(paras) {
-				console.log(paras, this.taskKind)
 				if (!this.$store.state.hasLogin) {
 					this.$aiRouter.navTo('/pages/login/loginPhone?jumpUrl=/pages/index/index?tabId=1')
 					return
@@ -145,11 +146,12 @@
 					return
 				}
 				this.$refs.popup.open()
-
-
-
 			},
 			getTaskList() {
+				if(!this.nextPage){
+					return true
+				}
+				this.uniLoadMoreStatus = "loading"
 				return this.$api.postTaskList().then(res => {
 					for (let item of res.data.data.data) {
 						item.start_time = item.start_time.replace(/-/g, '.')
@@ -160,10 +162,20 @@
 							this.pastTaskList.push(item)
 						}
 					}
+					if(res.data.data.current_page >= res.data.data.last_page){
+						this.uniLoadMoreStatus = "noMore"
+						this.nextPage = false
+					}else{
+						this.uniLoadMoreStatus = "more"
+					}
 					return true
 				})
 			},
 			getUnionList() {
+				if(!this.nextPage){
+					true
+				}
+				this.uniLoadMoreStatus = "loading"
 				return this.$api.postTaskList({
 					type: 2
 				}).then(res => {
@@ -176,24 +188,32 @@
 							this.pastTaskList.push(item)
 						}
 					}
+					if(res.data.data.current_page >= res.data.data.last_page){
+						this.uniLoadMoreStatus = "noMore"
+						this.nextPage = false
+					}else{
+						this.uniLoadMoreStatus = "more"
+					}
 					return true
 				})
 			},
 			//组件加载时运行的函数
 			pageOnload() {
-				this.taskKind = "union"
-				//this.taskList = this.unionTask
-				this.taskList = []
-				this.pastTaskList = []
-				this.getUnionList()
-				console.log("加载 赚金 页面，可以把网络请求放这里")
+				// this.taskKind = "union"
+				// //this.taskList = this.unionTask
+				if(this.taskListFlag){
+					this.getUnionList()
+					this.taskListFlag = false
+				}
+				// console.log("加载 赚金 页面，可以把网络请求放这里")
 			},
 			//页面下拉时刷新组件
 			pageRefresh() {
 				const _this = this
+				_this.nextPage = true
+				_this.taskList = []
+				_this.pastTaskList = []
 				if (_this.taskKind == "union") {
-					_this.taskList = []
-					_this.pastTaskList = []
 					uni.startPullDownRefresh({
 						success: function() {
 							_this.getUnionList().then(res => {
@@ -205,8 +225,6 @@
 					})
 				}
 				if (_this.taskKind == "newcomer") {
-					_this.taskList = []
-					_this.pastTaskList = []
 					uni.startPullDownRefresh({
 						success: function() {
 							_this.getTaskList().then(res => {

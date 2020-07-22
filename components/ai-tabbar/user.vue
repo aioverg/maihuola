@@ -109,45 +109,35 @@
 					</view>
 				</view>
 			</view>
+			<uni-popup ref="popupDialog" type="dialog">
+			    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
+			</uni-popup>
 		</view>
-		<uni-popup ref="popupDialog" type="dialog">
-		    <uni-popup-dialog type="err" title="退出账户" content="退出后不会删除任何历史数据，下次登录依然可以使用本账号"  @close="close" @confirm="confirm"></uni-popup-dialog>
-		</uni-popup>
-		<!-- <mix-loading v-show="refresh"></mix-loading> -->
 	</view>
 </template>
 
 <script>
 	import uniPopupDialog from '@/components/uni-popup/uni-popup-dialog.vue'
-	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiListCell from '@/components/ai-list-cell'
 	import aiLoginWechat from '@/components/ai-login/ai-login-wechat.vue'
 	import {apkDownload} from '@/static/js/appUpdate.js'
 	export default {
 		components: {
 			uniPopupDialog,
-			mixLoading,
 			aiListCell,
 			aiLoginWechat
 		},
 		data() {
 			return {
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
-				navTitle: null,
 				portrait: '/static/img/icon-portrait-01.png',
 				userMark: null,
-				// refresh: false,
 				downRefreshFlag: true,
 				userInfo: {}
 			}
 		},
 		computed: {
 			loginState() {
-				if (this.$store.state.hasLogin) {
-					this.navTitle = "我的"
-				} else {
-					this.navTitle = "手机登录"
-				}
 				return this.$store.state.hasLogin
 			},
 			alipayStatus(){
@@ -207,14 +197,12 @@
 			//页面下拉时刷新组件
 			pageRefresh() {
 				const _this = this
-				// _this.refresh = true
 				if(!_this.downRefreshFlag){return}
 				_this.downRefreshFlag = false
 				uni.startPullDownRefresh({
 					success: function() {
 						_this.getUserInfo().then(res => {
 							if(res){
-								// _this.refresh = false
 								_this.downRefreshFlag = true
 								uni.stopPullDownRefresh()
 							}
