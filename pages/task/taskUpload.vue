@@ -11,10 +11,10 @@
 			</view>
 			<view v-if="type=='union' && parent == 'no'">
 				<view class="tub-input">
-					<ai-input titleWidth="220rpx" title="填写用户姓名" @getInput="getName" placeholder="请输入真实姓名"></ai-input>
+					<ai-input titleWidth="220rpx" inputWidth="380rpx" title="填写用户姓名" @getInput="getName" placeholder="请输入真实姓名"></ai-input>
 				</view>
 				<view class="tub-input">
-					<ai-input titleWidth="220rpx" title="填写支付宝账号" @getInput="getAlipay" placeholder="请输入支付宝账号"></ai-input>
+					<ai-input titleWidth="220rpx" inputWidth="380rpx" title="填写支付宝账号" @getInput="getAlipay" placeholder="请输入支付宝账号"></ai-input>
 				</view>
 			</view>
 			
@@ -126,7 +126,6 @@
 		onLoad(res) {
 			this.type = res.type
 			this.taskId = res.id
-			console.log(res)
 			this.parent = res.parent
 			this.getTaskDetail(res.id)
 		},
@@ -266,7 +265,6 @@
 							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '请填写支付宝账号'])
 							return
 						}
-						console.log(this.uploadImg)
 						if (this.uploadImg.length == 0) {
 							this.$aiGlobal.aiPopupMessage.apply(this, ['err', '至少上传一张截图'])
 							return

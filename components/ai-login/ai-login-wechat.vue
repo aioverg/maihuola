@@ -45,7 +45,6 @@
 				this.$aiRouter.navTo(obj)
 			},
 			login() {
-				console.log("微信登录")
 				const _this = this
 				uni.login({
 					provider: 'weixin',
@@ -65,7 +64,6 @@
 									nickname: infoRes.userInfo.nickName,
 									avatarUrl: infoRes.userInfo.avatarUrl
 								}).then(res => {
-									console.log("微信登录返回", res.data)
 									if (res.data.msg == 202) {
 										//微信公众号没有微信记录，跳转手机登录
 										_this.$aiRouter.navTo("/pages/login/loginPhone?unionid=" + infoRes.userInfo.unionId + "&openid=" + infoRes.userInfo.openId + "&nickname=" + infoRes.userInfo.nickName + "&avatarUrl=" + infoRes.userInfo.avatarUrl + "&jumpUrl=" + _this.jumpUrl)

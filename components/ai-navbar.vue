@@ -440,7 +440,6 @@
 					}
 					
 				}else{
-					console.log(6666)
 					this.$emit('click-left')
 				}
 		    },

@@ -26,7 +26,6 @@
 		onLoad(res) {
 			this.leftClickTag = res.leftClickTag || "back"
 			this.jumpUrl = res.jumpUrl
-			console.log("微信登录页面", res)
 		},
 		methods: {
 		}

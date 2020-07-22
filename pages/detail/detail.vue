@@ -220,7 +220,6 @@
 					return
 				}
 				this.$api.getTKL(this.goodsId).then(res => {
-					console.log(res)
 					if(res.data.code == 0){
 						uni.setClipboardData({
 							data: res.data.data.info,

@@ -1,59 +1,67 @@
 <template>
 	<view style="padding: 0 0 50px;">
-		<uni-nav-bar fixed="true">
-			<block slot="left">
-				<view style="margin: 0 0 0 5px; position: relative;" :class="taskKind == 'union' ? 'bar-title-sel' : 'bar-title'"
-				 @click="selTaskKind('union')">
-					<text style="display: inline-block">公会</text>
-					<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
-				</view>
-				<view style="margin: 0 0 0 20px; position: relative;" :class="taskKind == 'newcomer' ? 'bar-title-sel' : 'bar-title'"
-				 @click="selTaskKind('newcomer')">
-					<text style="display: inline-block">拉新</text>
-					<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
-				</view>
-			</block>
-		</uni-nav-bar>
-		<view class="task-body">
-			<view class="task-status task-status-having">
-				<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
-				<view class="task-status-title">火热进行中</view>
-			</view>
-			<view class="tb-item" v-for="(item, index) in taskList" :key="index">
-				<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
-					<view class="tb-ic-shade" v-if="item.is_lock">
-						<view class="tb-ic-lock">
-							<image class="tb-ic-lock-icon" src="/static/icon/lock-01.png" mode="widthFix"></image>
-							<text>完成{{item.parent}}解锁</text>
-						</view>
-					</view>
-					<image class="tb-ic-img" :src="item.pic"></image>
-				</view>
-				<ai-title-list :title="item.title"></ai-title-list>
-				<view class="tb-item-head">
-					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
-				</view>
-			</view>
-			<view class="task-status task-status-past" v-if="pastTaskList.length != 0">
-				<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
-				<view class="task-status-title">往期活动</view>
-			</view>
-			<view v-if="pastTaskList.length != 0" class="tb-item" v-for="(item, index) in pastTaskList" :key="index">
-				<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
-					<view class="tb-ic-shade">
-						<view class="tb-ic-lock-past">活动已结束</view>
-					</view>
-					<image class="tb-ic-img" :src="item.pic"></image>
-				</view>
-				<ai-title-list :title="item.title"></ai-title-list>
-				<view class="tb-item-head">
-					<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
-				</view>
-			</view>
+
+
+		<!--登录-->
+		<view v-if="!loginState" class="loginmm" style="padding: 80px 0 0 0;">
+			<ai-login-wechat noteBottom="60px" jumpUrl="/pages/index/index?tabId=1"></ai-login-wechat>
 		</view>
-		<!--下拉加载提示-->
-		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
-		
+
+		<view v-if="loginState">
+			<uni-nav-bar fixed="true">
+				<block slot="left">
+					<view style="margin: 0 0 0 5px; position: relative;" :class="taskKind == 'union' ? 'bar-title-sel' : 'bar-title'"
+					 @click="selTaskKind('union')">
+						<text style="display: inline-block">公会</text>
+						<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
+					</view>
+					<view style="margin: 0 0 0 20px; position: relative;" :class="taskKind == 'newcomer' ? 'bar-title-sel' : 'bar-title'"
+					 @click="selTaskKind('newcomer')">
+						<text style="display: inline-block">拉新</text>
+						<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
+					</view>
+				</block>
+			</uni-nav-bar>
+			<view class="task-body">
+				<view class="task-status task-status-having">
+					<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
+					<view class="task-status-title">火热进行中</view>
+				</view>
+				<view class="tb-item" v-for="(item, index) in taskList" :key="index">
+					<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
+						<view class="tb-ic-shade" v-if="item.is_lock">
+							<view class="tb-ic-lock">
+								<image class="tb-ic-lock-icon" src="/static/icon/lock-01.png" mode="widthFix"></image>
+								<text>完成{{item.parent}}解锁</text>
+							</view>
+						</view>
+						<image class="tb-ic-img" :src="item.pic"></image>
+					</view>
+					<ai-title-list :title="item.title"></ai-title-list>
+					<view class="tb-item-head">
+						<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
+					</view>
+				</view>
+				<view class="task-status task-status-past" v-if="pastTaskList.length != 0">
+					<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
+					<view class="task-status-title">往期活动</view>
+				</view>
+				<view v-if="pastTaskList.length != 0" class="tb-item" v-for="(item, index) in pastTaskList" :key="index">
+					<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
+						<view class="tb-ic-shade">
+							<view class="tb-ic-lock-past">活动已结束</view>
+						</view>
+						<image class="tb-ic-img" :src="item.pic"></image>
+					</view>
+					<ai-title-list :title="item.title"></ai-title-list>
+					<view class="tb-item-head">
+						<view class="tb-ih-time">{{item.start_time}}-{{item.end_time}}</view>
+					</view>
+				</view>
+			</view>
+			<!--下拉加载提示-->
+			<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
+		</view>
 		<uni-popup ref="popup">
 			<ai-popup-dialog :message="dialogMessage" btname="我知道了" @confirm="close" :cancelShow="false"></ai-popup-dialog>
 		</uni-popup>
@@ -64,23 +72,25 @@
 	import aiTitleList from '@/components/ai-list/ai-title-list.vue'
 	import mixLoading from '@/components/mix-loading/mix-loading.vue'
 	import aiPopupDialog from '@/components/ai-popup/ai-popup-dialog.vue'
+	import aiLoginWechat from '@/components/ai-login/ai-login-wechat.vue'
 	export default {
 		components: {
 			aiTitleList,
 			mixLoading,
-			aiPopupDialog
+			aiPopupDialog,
+			aiLoginWechat
 		},
 		data() {
 			return {
 				taskKind: "union",
-				unionTask: [{
+				unionTask: [/*{
 					id: 0,
 					title: "加入公会赚赏金",
 					is_end: true,
 					pic: '/static/mock/mock-02.png',
 					start_time: "0000.00.00",
 					end_time: "0000.00.00"
-				}],
+				}*/],
 				taskList: [],
 				pastTaskList: [],
 				//下拉加载提示类型
@@ -90,6 +100,11 @@
 					content: "很抱歉！您暂不符合活动推广要求，请关注「爱小兔」微信公众号购买相关服务后领取赚金任务"
 				}]
 			}
+		},
+		computed:{
+			loginState() {
+				return this.$store.state.hasLogin
+			},
 		},
 		methods: {
 			close(done) {
@@ -318,6 +333,7 @@
 					border-radius: 20px;
 					background-color: #F47A73;
 					color: #FFFFFF;
+
 					.tb-ic-lock-icon {
 						width: 15px;
 						margin: 0 5px 0 0;
