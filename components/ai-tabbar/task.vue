@@ -23,7 +23,7 @@
 				<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
 					<view class="tb-ic-shade" v-if="item.is_lock">
 						<view class="tb-ic-lock">
-							<image src="/static/icon/lock-01.png" style="width: 15px; margin: 0 5px 0 0;" mode="widthFix"></image>
+							<image class="tb-ic-lock-icon" src="/static/icon/lock-01.png" mode="widthFix"></image>
 							<text>完成{{item.parent}}解锁</text>
 						</view>
 					</view>
@@ -288,6 +288,7 @@
 				background-color: rgba(255, 215, 215, 0.6);
 				width: 650rpx;
 				height: 125px;
+				text-align: center;
 				padding: 45px 0rpx;
 
 				.tb-ic-lock-past {
@@ -307,16 +308,22 @@
 
 				.tb-ic-lock {
 					position: relative;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					width: 340rpx;
+					display: inline-block;
+					padding: 0 35rpx;
+					min-width: 340rpx;
+					max-width: 500rpx;
 					height: 35px;
+					line-height: 35px;
 					font-size: 15px;
 					border-radius: 20px;
-					margin: 0 auto;
 					background-color: #F47A73;
 					color: #FFFFFF;
+					.tb-ic-lock-icon {
+						width: 15px;
+						margin: 0 5px 0 0;
+						position: relative;
+						top: 3px;
+					}
 				}
 
 				.tb-ic-shade-describe {

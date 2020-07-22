@@ -2,8 +2,8 @@
     "name" : "卖货啦",
     "appid" : "__UNI__B7D5213",
     "description" : "",
-    "versionName" : "v1.3",
-    "versionCode" : 13,
+    "versionName" : "v1.4",
+    "versionCode" : 14,
     "transformPx" : false,
     "app-plus" : {
         /* 5+App特有相关 */
@@ -14,7 +14,9 @@
             "autoclose" : true,
             "delay" : 0
         },
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {}
+        },
         /* 模块配置 */
         "distribute" : {
             /* 应用发布信息 */
@@ -35,6 +37,7 @@
                     "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
                     "<uses-permission android:name=\"android.permission.INSTALL_PACKAGES\"/>",
                     "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
                     "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
                     "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
                     "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",

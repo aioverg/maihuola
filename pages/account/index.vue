@@ -18,10 +18,10 @@
 		    </view>
 			<view class="box-sofeitem">
 			    <view class="box-item" @click="bindKs()">
-				    <ai-list-cell title="快手ID" :color="douyinColor" :message="ks" dashed="dashed"></ai-list-cell>
+				    <ai-list-cell title="快手ID" :color="ksColor" :message="ks" dashed="dashed"></ai-list-cell>
 			    </view>
 			    <view class="box-item" @click="bindDouyin()">
-				    <ai-list-cell title="抖音ID" :color="ksColor" :message="douyin"></ai-list-cell>
+				    <ai-list-cell title="抖音ID" :color="douyinColor" :message="douyin"></ai-list-cell>
 			    </view>
 			</view>
 			<uni-popup ref="popupDialog" type="dialog">
@@ -95,14 +95,14 @@
 						this.douyin = res.data.data.douyin_id
 						this.douyinColor = "#CCCCCC"
 					}else{
-						this.douyin = "未绑定"
+						this.douyin = "未填写"
 						this.douyinColor = "#FF1968"
 					}
 					if(res.data.data.kuaishou_id){
 						this.ks = res.data.data.kuaishou_id
 						this.ksColor = "#CCCCCC"
 					}else{
-						this.ks = "未绑定"
+						this.ks = "未填写"
 						this.ksColor = "#FF1968"
 					}
 					if(res.data.data.alipay){
