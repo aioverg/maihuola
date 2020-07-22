@@ -40,8 +40,8 @@
 		},
 		data() {
 			return {
-				phone: null,
-				code: null,
+				phone: "",
+				code: "",
 				btName: "获取验证码",
 				btNameColor: "#CCCCCC",
 				btNameUnderline: "underline",
@@ -90,12 +90,16 @@
 		methods: {
 			getCode(){
 				if(this.phone % 1 == 0 && this.phone.length == 11){
+					if(this.times){
+						this.$aiGlobal.aiPopupMessage.apply(this,['err', '获取验证码过于频繁'])
+						return
+					}
 					this.$api.getPhoneCode({
 						phone: this.phone
 					}).then( res => {
 						if(res.data.code !== 0){
-							this.$aiGlobal.aiPopupMessage.apply(this,['err', '获取验证码过于频繁'])
-							return
+							this.$aiGlobal.aiPopupMessage.apply(this,['err', '获取验证码失败'])
+						 	return
 						}
 						if(res.data.code == 0){
 							if(this.timeRun){return}
