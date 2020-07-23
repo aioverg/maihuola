@@ -20,7 +20,7 @@
 		<view class="banner-box">
 			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
 				<swiper class="banner-carousel" @change="change" autoplay="true" circular="true" next-margin="60rpx">
-					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item.link_goods_id, item.id)">
+					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item)">
 						<image :src="item.pic" class="banner-image" :class="current == index ? 'banner-img-show' : 'banner-img-hidden'" />
 						<view class="banner-shadow"></view>
 					</swiper-item>
@@ -65,7 +65,7 @@
 		</view>
 		<!--更新弹窗-->
 		<uni-popup ref="popupAiDia" type="dialog" zIndex="10000">
-		    <ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" :progress="downloadPtogress"  popupbg="/static/img/bg-update.png" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
+		    <ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" :prgShow="prgShow" :prg="prg" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 		<!--下拉加载提示-->
 		<uni-load-more :status="uniLoadMoreStatus"></uni-load-more>
@@ -156,8 +156,10 @@
 				hide: false,
 				//下拉加载提示类型
 				uniLoadMoreStatus: "more",
-				//是否显示下载进度提示条
-				downloadPtogress: false,
+				//是否显示下载进度
+				prgShow: false,
+				//下载进度
+				prg: 0,
 				//是否显示刷新等待图标
 				refresh: false,
 				//将分类列表吸顶
@@ -197,11 +199,26 @@
 				})
 			},
 			//轮播图跳转
-			navToCarousel(typeId, id){
-				if(typeId.indexOf(",") == -1){
-					this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + typeId)
-				}else{
-					this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + id)
+			navToCarousel(item){
+				if(item.link_type == 1){//商品页面
+					if(item.link_goods_id.indexOf(",") == -1){//商品详情
+						this.$aiRouter.navTo('/pages/detail/detail?goods_id=' + item.link_goods_id)
+					}else{//商品列表
+						this.$aiRouter.navTo('/pages/detail/guessList?goods_id=' + item.id)
+					}
+					return
+				}
+				if(item.link_type == 2){//tab页面
+					this.$aiRouter.navTo(item.link_url)
+					return
+				}
+				if(item.link_type == 3){//app内其他页面
+					this.$aiRouter.navTo(item.link_url)
+					return
+				}
+				if(item.link_type == 4){//外部H5页面
+					this.$aiRouter.navTo(item.link_url)
+					return
 				}
 			},
 			//获取分类菜单

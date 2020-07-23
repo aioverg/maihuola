@@ -15,8 +15,7 @@
 			</view>
 		</view>
 		<uni-popup ref="popupAiDia" type="dialog">
-			<ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" popupbg="/static/img/bg-update.png"
-			 :cancel-show="true" @close="close" @confirm="confirm"></ai-popup-update>
+			<ai-popup-update :updateBt="updateBt" :version="updateVersion" :content="updateContent" :prgShow="prgShow" :prg="prg" type="dialog" :cancel-show="!updataType" @close="close" @confirm="confirm"></ai-popup-update>
 		</uni-popup>
 	</view>
 </template>
@@ -38,6 +37,10 @@
 			return {
 				navigateFlag: false, //解决快速点击跳转，页面跳转多次问题
 				updateColor: "#cccccc",
+				//是否显示下载进度
+				prgShow: false,
+				//下载进度
+				prg: 0,
 				//更新弹窗按钮
 				updateBt: "立即升级"
 			}

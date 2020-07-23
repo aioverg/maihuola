@@ -1,6 +1,6 @@
 <template>
 	<view class="ai-popup-dialog">
-		<image mode="widthFix" class="ai-popup-bg" :src="popupbg"></image>
+		<image mode="widthFix" class="ai-popup-bg" src="/static/img/bg-update.png"></image>
 		<view class="ai-popup-dialog-content-box">
 			<view class="ai-popup-title">
 				<view class="ai-popup-title-one">发现新版本</view>
@@ -11,11 +11,8 @@
 					{{content}}
 				</view>
 			</view>
-			<view class="ai-popup-progress">
-				<view v-if="progress">
-					下载进度：
-					<text>444</text>
-				</view>
+			<view class="ai-popup-progress" v-show="prgShow">
+				下载进度：<text>{{prg}}%</text>
 			</view>
 			<view class="ai-popup-ok-button-fox" @click="onOk">
 				<text class="ai-popup-ok">{{updateBt}}</text>
@@ -31,10 +28,6 @@
 	export default {
 		name: "uniPopupDialog",
 		props: {
-			popupbg: {
-				type: String,
-				default: "/static/img/icon-bg-popup-01.png"
-			},
 			version: {
 				type: String,
 				default: null,
@@ -47,9 +40,13 @@
 				type: String,
 				default: "立即升级"
 			},
-			progress: {
+			prgShow:{
 				type: Boolean,
 				default: false
+			},
+			prg: {//下载进度
+				type: Number,
+				default: 0
 			},
 			//是否显示取消按钮
 			cancelShow: {
@@ -91,38 +88,31 @@
 		border-radius: 15px;
 		position: relative;
 	}
-
 	.ai-popup-bg {
 		width: 275px;
 		position: absolute;
 	}
-
 	.ai-popup-dialog-content-box {
 		position: relative;
 		padding: 20px 25px 0;
 		z-index: 10;
 	}
-
 	.ai-popup-title {
 		height: 100px;
 	}
-
 	.ai-popup-title-one {
 		font-size: 20px;
 		font-weight: 600;
 		color: rgba(255, 255, 255, 1);
 	}
-
 	.ai-popup-title-two {
 		font-size: 13px;
 		color: rgba(255, 255, 255, 1);
 	}
-
 	.ai-popup-content {
-		height: 60px;
+		min-height: 105px;
 		overflow-y: hidden;
 	}
-
 	.ai-popup-content-item {
 		font-size: 12px;
 		height: 15px;
@@ -130,19 +120,19 @@
 		color: rgba(102, 102, 102, 1);
 		margin: 0 0 5px 0;
 	}
-
 	.ai-popup-progress {
-		margin: 10px 0 0 0;
+		position: absolute;
 		height: 15px;
 		font-size: 12px;
 		text-align: center;
+		bottom: 90px;
+		width: 225px;
 		color: rgba(102, 102, 102, 1);
 	}
-
 	.ai-popup-ok-button-fox {
 		width: 165px;
 		height: 40px;
-		margin: 20px auto 0;
+		margin: 10px auto 10px;
 		background: rgba(244, 122, 115, 1);
 		border-radius: 22px;
 		text-align: center;
@@ -150,13 +140,11 @@
 		font-size: 15px;
 		color: rgba(255, 255, 255, 1);
 	}
-
 	.ai-popup-cancel {
 		text-align: center;
 		position: relative;
-		top: 55px;
+		top: 35px;
 	}
-
 	.ai-popup-cancel-icon {
 		width: 25px;
 	}

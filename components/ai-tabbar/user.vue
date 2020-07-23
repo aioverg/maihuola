@@ -382,6 +382,7 @@
 					color: rgba(255, 255, 255, 0.8);
 					position: relative;
 					top: 10px;
+					z-index: 10;
 
 				}
 			}
