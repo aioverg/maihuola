@@ -113,7 +113,7 @@
 			withdraw(){
 				let nowDay = new Date().getDay()
 				if(nowDay<1 || nowDay>4){
-					this.aiPopupMessage('err', '不能提现')
+					this.aiPopupMessage('err', '不在提现时间内')
 					return
 				}
 				if(!this.sum){

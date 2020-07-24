@@ -67,7 +67,11 @@
 			 * 点击确认按钮
 			 */
 			onOk() {
-				this.$emit('confirm')
+				if(this.updateBt == "立即升级"){
+					this.$emit('confirm')
+					return
+				}
+				
 			},
 			/**
 			 * 点击取消按钮
