@@ -246,7 +246,7 @@
 			}
 			.ted-item-num {
 				font-size: 15px;
-				color: #FF716E;
+				color: #FF5350;
 			}
 		}
 		.ted-item-two {

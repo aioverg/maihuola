@@ -216,10 +216,11 @@
 
 	.uni-dialog-button-text {
 		font-size: 14px;
+		color: #999999;
 	}
 
 	.uni-button-color {
-		color: $uni-color-primary;
+		color: #333333;
 	}
 
 	.uni-dialog-input {

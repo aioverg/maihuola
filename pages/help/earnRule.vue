@@ -4,7 +4,7 @@
 		<view class="rule-body">
 			<view class="explain-item-box">
 				<view class="item-title">
-					<view class="long-string"></view>
+					<image class="" style="width: 3px;" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 					<view class="title-text">收益说明</view>
 				</view>
 				<view class="item-content">
@@ -13,7 +13,7 @@
 			</view>
 			<view class="explain-item-box">
 				<view class="item-title">
-					<view class="long-string"></view>
+					<image class="" style="width: 3px;" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 					<view class="title-text">关于收益</view>
 				</view>
 				<view class="item-content">
@@ -24,7 +24,7 @@
 			</view>
 			<view class="explain-item-box">
 				<view class="item-title">
-					<view class="long-string"></view>
+					<image class="" style="width: 3px;" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 					<view class="title-text">名词释义</view>
 				</view>
 				<view class="item-content">

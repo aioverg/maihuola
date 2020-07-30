@@ -57,7 +57,7 @@
 			}
 			.oder-money {
 				font-size: 15px;
-				color: #FF716E;
+				color: #FF5350;
 			}
 			.oder-no-status {
 				position: relative;

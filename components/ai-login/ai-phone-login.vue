@@ -6,14 +6,13 @@
 		<view>
 			<view class="apl-phone-box">
 				<image class="apl-phone-icon" mode="widthFix" src="/static/icon/icon-phone.png"></image>
-				<view class="apl-phone-area">+86</view>
-				<input class="apl-phone-input" type="number" v-model="phone" placeholder="请输入手机号码" />
+				<input class="apl-phone-input" type="number" v-model="phone" placeholder="请输入手机号" />
 			</view>
 			<view class="apl-code-box">
 				<view class="apl-code-input-box">
-					<image class="apl-code-icon" mode="widthFix" src="/static/icon/icon-dialog.png"></image>
+					<image class="apl-code-icon" mode="widthFix" src="/static/icon/message-01.png"></image>
 					<input class="apl-code-input" type="number" v-model="code" placeholder="请输入验证码" />
-					<view class="apl-code-button" :style="{color: btNameColor, textDecorationLine: btNameUnderline}" @click="getCode">{{times}}{{btName}}</view>
+					<view class="apl-code-button" :style="{color: btNameColor}" @click="getCode">{{times}}{{btName}}</view>
 				</view>
 			</view>
 			<view class="apl-login-button">
@@ -83,7 +82,7 @@
 					this.btNameColor = "#CCCCCC"
 				}else{
 					if(this.timeRun){return}
-					this.btNameColor = "#FF716E"
+					this.btNameColor = "#FF5350"
 				}
 			}
 		},
@@ -108,7 +107,7 @@
 							this.times = 60
 							this.btName = "s重新发送"
 							this.btNameUnderline = "none"
-							this.btNameColor = "#CCCCCC"
+							this.btNameColor = "#999999"
 							let timer = setInterval(()=>{
 							    if(this.times == 1){
 								    clearInterval(timer)
@@ -186,13 +185,13 @@
 		.apl-img {
 			display: inline-block;
 			width: 224px;
-			margin: 70px auto 65px;
+			margin: 70px auto 60px;
 		}
 	}
 	.apl-phone-box {
 		display: flex;
 		align-items: center;
-		height: 40px;
+		height: 50px;
 		width: 650rpx;
 		margin: 0 auto;
 		border-bottom: 1px solid rgba(204,204,204,1);
@@ -201,13 +200,9 @@
 			margin: 0 0 0 8px;
 			display: inline-block;
 		}
-		.apl-phone-area {
-			display: inline-block;
-			margin: 0 0 0 31px;
-		}
 		.apl-phone-input {
 			display: inline-block;
-			margin: 0 0 0 13px;
+			margin: 0 0 0 35px;
 			font-size: 17px;
 		}
 	}
@@ -219,7 +214,7 @@
 		margin: 22px auto 0;
 		.apl-code-input-box {
 			display: flex;
-			height: 40px;
+			height: 50px;
 			align-items: center;
 			border-bottom: 1px solid rgba(204,204,204,1);
 			.apl-code-icon {

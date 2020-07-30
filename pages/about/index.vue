@@ -48,7 +48,7 @@
 		computed: {
 			updateMessage() {
 				if (this.$store.state.appInfo.update) {
-					this.updateColor = "#FF4100"
+					this.updateColor = "#FF5350"
 					return "更新"
 				} else {
 					this.updateColor = "#cccccc"

@@ -12,12 +12,16 @@
 					<view style="margin: 0 0 0 5px; position: relative;" :class="taskKind == 'union' ? 'bar-title-sel' : 'bar-title'"
 					 @click="selTaskKind('union')">
 						<text style="display: inline-block">公会</text>
-						<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
+						<view v-show="taskKind =='union'" style="position: absolute; display: inline-block; left: 0; bottom: -7px;">
+							<image style="width: 20px;" src="/static/icon/across-ling-01.png" mode="widthFix"></image>
+						</view>
 					</view>
 					<view style="margin: 0 0 0 20px; position: relative;" :class="taskKind == 'newcomer' ? 'bar-title-sel' : 'bar-title'"
 					 @click="selTaskKind('newcomer')">
 						<text style="display: inline-block">拉新</text>
-						<text class="under-line" style="display: inline-block; position: absolute; left: 0; bottom: -4px; width: 20px;"></text>
+						<view v-show="taskKind =='newcomer'" style="position: absolute; display: inline-block; left: 0; bottom: -7px;">
+							<image style="width: 20px;" src="/static/icon/across-ling-01.png" mode="widthFix"></image>
+						</view>
 					</view>
 				</block>
 			</uni-nav-bar>
@@ -250,11 +254,7 @@
 	.bar-title-sel {
 		font-size: 20px;
 		font-weight: bold;
-		color: #FF716E;
-
-		.under-line {
-			border-bottom: 2px solid #FF716E;
-		}
+		color: #FF5350;
 	}
 
 
@@ -349,7 +349,7 @@
 					line-height: 35px;
 					font-size: 15px;
 					border-radius: 20px;
-					background-color: #F47A73;
+					background-color: #FF5350;
 					color: #FFFFFF;
 
 					.tb-ic-lock-icon {

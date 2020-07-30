@@ -68,7 +68,7 @@
 		text-align: center;
 		font-size: 15px;
 		color: #FFFFFF;
-		background: #F47A73;
+		background: #FF5350;
 		border-radius:45px;
 	}
 </style>

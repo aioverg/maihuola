@@ -52,12 +52,12 @@
 
 <style lang="scss">
 	.ai-button-redbg {
-		background:linear-gradient(135deg,rgba(255,113,110,1) 0%,rgba(255,184,110,1) 100%);
+		background:linear-gradient(135deg,rgba(255,83,80,1) 0%,rgba(255,184,110,1) 100%);
 		.ai-bt-shadow {
 			height: 41px;
 			position: absolute;
 			top: 10px;
-			background:linear-gradient(135deg,rgba(255,113,110,1) 0%,rgba(255,184,110,1) 100%);
+			background:linear-gradient(135deg,rgba(255,83,80,1) 0%,rgba(255,184,110,1) 100%);
 			filter:blur(10px);
 			border-radius:22px;
 		}

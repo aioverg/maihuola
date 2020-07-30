@@ -3,7 +3,7 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="我的收益" right-icon="help" @clickRight="navTo('/pages/help/earnRule')"></uni-nav-bar>
 		<view class="earn-page-body">
 			<view class="earn-blance">
-				<image class="earn-blance-bg" src="../../static/icon/bg-earn-01.png"></image>
+				<image class="earn-blance-bg" src="/static/icon/bg-earn-01.png"></image>
 				<view class="earn-blance-title">账户余额（元）： </view>
 				<view class="earn-blance-num">{{balance}}</view>
 			</view>
@@ -283,10 +283,10 @@
 		.es-sel-item {
 			font-size: 20px;
 			font-weight: bold;
-			color: #FF716E;
+			color: #FF5350;
 
 			.es-sel-underline {
-				background-color: #FF716E;
+				background-color: #FF5350;
 			}
 		}
 	}
@@ -306,7 +306,7 @@
 			.ec-one-sum {
 				font-size: 20px;
 				font-weight: bold;
-				color: #FF716E;
+				color: #FF5350;
 			}
 
 			.ec-one-text {

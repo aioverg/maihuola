@@ -155,7 +155,7 @@
 	}
 
 	.tab-bar-sel-name {
-		color: #FF716E;
+		color: #FF5350;
 	}
 
 	.tab-bar-one {

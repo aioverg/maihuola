@@ -144,12 +144,13 @@
 		width: 165px;
 		height: 40px;
 		margin: 32px auto 0;
-		background: rgba(244,122,115,1);
+		background: #FF5350;
 		border-radius: 22px;
 		text-align: center;
 		line-height: 40px;
 		font-size: 15px;
-		color: rgba(255,255,255,1);
+		color: #FFFFFF;
+		opacity: 0.95;
 	}
 	.ai-popup-cancel {
 		text-align: center;

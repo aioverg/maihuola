@@ -78,7 +78,7 @@
 			margin: 28rpx 0 0 0;
 			.zb-price {
 				font-size: 13px;
-				color: #ff3333;
+				color: #FF5350;
 			}
 			.sc-price {
 				font-size:11px;
@@ -86,7 +86,7 @@
 			}
 			.ck-earn {
 				font-size:13px;
-				color: #ff3333;
+				color: #FF5350;
 			}
 			.yj-rate {
 				font-size:11px;

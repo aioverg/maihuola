@@ -124,7 +124,7 @@
 						res.data.data.record_status = "未通过"
 					}else if(res.data.data.record_status == 1){
 						res.data.data.record_status = "审核通过"
-						this.statusColor = "#FF716E"
+						this.statusColor = "#FF5350"
 					}else{
 						res.data.data.record_status = "待审核"
 						this.statusColor = "#FFA570"
@@ -219,7 +219,7 @@
 			.tc-num {
 				flex-grow: 1;
 				font-size: 20px;
-				color: #FF716E;
+				color: #FF5350;
 				font-weight: bold;
 			}
 			.tc-status {

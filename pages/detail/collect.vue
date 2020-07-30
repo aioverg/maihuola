@@ -45,7 +45,7 @@
 					{
 					    text: '删除',
 						style: {
-							backgroundColor: '#FF716E'
+							backgroundColor: 'rgba(255,83,80,0.95)'
 						}
 					}
 				],

@@ -9,7 +9,8 @@
 			<view class="guess-price-info-one">
 				<image class="guess-zbprice-icon" mode="widthFix" src="../../static/icon/icon-zbprice-01.png"></image>
 				<view class="guess-zbprice">
-					<text>¥{{guessDetailData.promotion_price}}</text>
+					<text style="font-size: 23px;">¥</text>
+					<text>{{guessDetailData.promotion_price}}</text>
 				</view>
 				<view class="guess-ckprice">
 					<text>参考收益：</text>
@@ -290,14 +291,14 @@
 				flex-grow: 1;
 				font-size: 30px;
 				font-weight: bold;
-				color: #FF716E;
+				color: #FF5350;
 			}
 			.guess-ckprice {
 				display: inline-block;
 				text-align: end;
 				flex-grow: 1;
 				font-size: 15px;
-				color: #FF716E;
+				color: #FF5350;
 			}
 		}
 		.guess-price-info-two {

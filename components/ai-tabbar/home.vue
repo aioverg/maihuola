@@ -35,7 +35,9 @@
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
 					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
 							<text>{{item.title}}</text>
-							<view class="sort-underline"></view>
+							<view v-show="sortIndex == index" style="position: absolute; display: inline-block; left: 0; bottom: -7px;">
+								<image style="width: 20px;" src="/static/icon/across-ling-01.png" mode="widthFix"></image>
+							</view>
 					    </view>
 					</view>
 				</scroll-view>
@@ -107,7 +109,7 @@
 					height: 5,
 					backgroundColor: "rgba(244,122,115,0.49)",
 					border: "none",
-					selectedBackgroundColor: "#F47A73",
+					selectedBackgroundColor: "#FF5350",
 					selectedBorder: "none"
 				},
 				//轮播图数据列表
@@ -547,24 +549,11 @@
 						line-height: 45px;
 						text-align: center;
 						font-size: 16px;
-						.sort-underline {
-							position: absolute;
-							display: none;
-							left: 0px;
-							height: 2px;
-							bottom: 3px;
-							width: 1.2em;
-							border-radius: 3px;
-							background-color: #F47A73;
-						}
 					}
 					.red {
-						color: #F47A73;
+						color: #FF5350;
 						font-size: 20px;
 						font-weight: bold;
-						.sort-underline {
-							display: inline-block;
-						}
 					}
 				}
 				.sort-item-box:last-child .sort-item-line {
@@ -611,7 +600,7 @@
 						margin: 8px 0 0 0;
 					}
 					.blue {
-						color: #F47A73;
+						color: #FF5350;
 					}
 				}
 			}

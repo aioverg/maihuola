@@ -176,7 +176,7 @@
 				}
 			
 				.tcb-io-status-pass {
-					color: #FF716E;
+					color: #FF5350;
 				}
 			
 				.tcb-io-status-fail {
@@ -197,7 +197,7 @@
 				font-size: 12px;
 				color: #999999;
 				.tcb-io-status-pass-num {
-					color: #FF716E;
+					color: #FF5350;
 				}
 							
 				.tcb-io-status-fail-num {

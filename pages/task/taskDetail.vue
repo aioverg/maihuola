@@ -207,7 +207,7 @@
 			.task-cash-num {
 				width: 330rpx;
 				font-size: 20px;
-				color: #FF716E;
+				color: #FF5350;
 				font-weight: bold;
 			}
 			.task-cash-des {

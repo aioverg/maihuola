@@ -137,7 +137,7 @@
 		width: 165px;
 		height: 40px;
 		margin: 10px auto 10px;
-		background: rgba(244, 122, 115, 1);
+		background: rgba(255, 83, 80, 0.9);
 		border-radius: 22px;
 		text-align: center;
 		line-height: 40px;
