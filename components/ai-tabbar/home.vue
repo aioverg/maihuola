@@ -19,7 +19,7 @@
 		<!-- 轮播图 -->
 		<view class="banner-box">
 			<uni-swiper-dot :info="carouselList" :current="current" mode="round" :dots-styles="dotsStyles">
-				<swiper class="banner-carousel" @change="change" autoplay="true" circular="true" next-margin="60rpx">
+				<swiper class="banner-carousel" @change="change" autoplay="true" circular="true">
 					<swiper-item v-for="(item, index) in carouselList" :key="index" class="banner-item" @click="navToCarousel(item)">
 						<image :src="item.pic" class="banner-image" :class="current == index ? 'banner-img-show' : 'banner-img-hidden'" />
 						<view class="banner-shadow"></view>
@@ -486,16 +486,16 @@
 			height: 180px;
 			margin: 0 10rpx 0 0;
 			.banner-item {
-				width: 670rpx;
+				width: 690rpx;
 				.banner-image {
-					width: 660rpx;
+					width: 690rpx;
 					height: 160px;
 					border-radius: 15px;
 					display: block;
 					z-index: 1;
 				}
 				.banner-shadow {
-					width: 610rpx;
+					width: 640rpx;
 					height: 35px;
 					filter:blur(10px);
 					background-color: #FF716E;

@@ -26,11 +26,11 @@
 				</block>
 			</uni-nav-bar>
 			<view class="task-body">
-				<view class="task-status task-status-having">
+				<view class="task-status task-status-having" v-if="taskList.length != 0">
 					<image class="task-status-icon" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 					<view class="task-status-title">火热进行中</view>
 				</view>
-				<view class="tb-item" v-for="(item, index) in taskList" :key="index">
+				<view class="tb-item" v-for="(item, index) in taskList" :key="index" v-if="taskList.length != 0">
 					<view class="tb-item-content" @click="navToDetail({jumpara:'id=' + item.id + '&is_end=' + item.is_end, lock: item.is_lock})">
 						<view class="tb-ic-shade" v-if="item.is_lock">
 							<view class="tb-ic-lock">
