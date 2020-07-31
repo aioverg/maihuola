@@ -79,12 +79,10 @@
 						<image class="project-item-icon" src="/static/icon/text-01.png"></image>
 						<view class="project-item-name">订单</view>
 					</view>
-					<!--下一版本内容
 					<view class="project-item">
 						<image class="project-item-icon" src="/static/icon/people-01.png"></image>
 						<view class="project-item-name">团队</view>
 					</view>
-					-->
 				</view>
 			</view>
 
@@ -414,7 +412,7 @@
 			position: relative;
 			top: 45px;
 			width: 750rpx;
-			padding: 0 100rpx;
+			padding: 0 62rpx;
 			display: flex;
 			justify-content: space-between;
 

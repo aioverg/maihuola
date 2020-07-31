@@ -204,6 +204,10 @@
             "path" : "pages/task/unionTaskDetail",
             "style" : {}
         }
+        ,{
+            "path" : "pages/userinfo/group",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",
