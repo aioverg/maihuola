@@ -208,6 +208,14 @@
             "path" : "pages/userinfo/group",
             "style" : {}
         }
+        ,{
+            "path" : "pages/userinfo/groupEarnRank",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/userinfo/groupOther",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationStyle": "custom",

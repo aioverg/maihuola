@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="我的团队" rightText="收益排行" @clickRight="navTo('/pages/userinfo/groupEarnRank')">
+		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="他的团队" rightText="关闭" @clickRight="navBack(1)">
 		</uni-nav-bar>
 		<view class="group-body">
 			<view class="group-search">
@@ -10,7 +10,7 @@
 				<image style="width: 3px;" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 				<view class="gb-title">团队成员（24人）</view>
 			</view>
-			<ai-group-member-card @clickEvent="groupOther"></ai-group-member-card>
+			<ai-group-member-card :rightArrow="false"></ai-group-member-card>
 		</view>
 	</view>
 </template>
@@ -35,8 +35,8 @@
 			navTo(url){
 				this.$aiRouter.navTo(url)
 			},
-			groupOther(){
-				this.$aiRouter.navTo("/pages/userinfo/groupOther")
+			navBack(delta){
+				this.$aiRouter.navToBack(delta)
 			}
 		}
 	}
