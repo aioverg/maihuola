@@ -67,10 +67,6 @@
 					<image class="project-bg" src="/static/icon/bg-user-03.png" mode="widthFix"></image>
 				</view>
 				<view class="project-box">
-					<view class="project-item" @click="navTo('/pages/detail/collect')">
-						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
-						<view class="project-item-name">藏品</view>
-					</view>
 					<view class="project-item" @click="navTo('/pages/userinfo/earn')">
 						<image class="project-item-icon" src="/static/icon/coin-01.png"></image>
 						<view class="project-item-name">收益</view>
@@ -79,7 +75,11 @@
 						<image class="project-item-icon" src="/static/icon/text-01.png"></image>
 						<view class="project-item-name">订单</view>
 					</view>
-					<view class="project-item">
+					<view class="project-item" @click="navTo('/pages/detail/collect')">
+						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
+						<view class="project-item-name">藏品</view>
+					</view>
+					<view class="project-item" @click="navTo('/pages/userinfo/group')">
 						<image class="project-item-icon" src="/static/icon/people-01.png"></image>
 						<view class="project-item-name">团队</view>
 					</view>

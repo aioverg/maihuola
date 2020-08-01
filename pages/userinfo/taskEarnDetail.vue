@@ -21,10 +21,11 @@
 				</view>
 			</view>
 			<view @click="hiddenSelBox()" class="ted-item" v-for="(item, index) in EarnDetailList" :key="index">
+				<image v-if="item.type == 2 ? true : false" src="/static/icon/tag-01.png" style="width: 45px; position: absolute; left: 0; top: 0;" mode="widthFix"></image>
 				<view class="ted-item-one">
 					<view class="ted-item-title">{{item.mission}}</view>
 					<view class="ted-item-num">
-						<text style="font-size: 11px; color: #FFA570;" v-if="item.type == 2 ? true : false">「分佣」</text>
+						<!-- <text style="font-size: 11px; color: #FFA570;" v-if="item.type == 2 ? true : false">「分佣」</text> -->
 						<text>¥{{item.amount}}</text>
 					</view>
 				</view>
@@ -233,10 +234,11 @@
 	.ted-item {
 		width: 690rpx;
 		height: 57px;
-		padding: 10px 30rpx;
+		padding: 10px 50rpx;
 		margin: 10px 0 0 0;
 		border-radius: 8px;
 		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		position: relative;
 		.ted-item-one {
 			display: flex;
 			justify-content: space-between;

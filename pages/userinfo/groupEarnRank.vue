@@ -10,15 +10,20 @@
 				<image style="width: 3px;" src="/static/icon/cylinder-01.png" mode="widthFix"></image>
 				<view class="gb-title">团队收益排行</view>
 			</view>
-			<view class="ger-item">
+			<view class="ger-item" v-for="(item, index) in data">
 				<image style="width: 50px;" mode="widthFix" src="../../static/img/icon-portrait-01.png"></image>
 				<view class="ger-two">
-					<view class="ger-two-title">MHL微信昵称</view>
-					<view class="ger-two-tag">经纪人</view>
+					<view class="ger-two-title">{{item.name}}</view>
+					<view class="ger-two-tag">
+						<view>{{item.tag}}</view>
+						<image v-if="index == 0" style="width: 32px; margin: 0 0 0 5px;" mode="widthFix" src="/static/icon/cup-01.png"></image>
+						<image v-if="index == 1" style="width: 32px; margin: 0 0 0 5px;" mode="widthFix" src="/static/icon/cup-02.png"></image>
+						<image v-if="index == 2" style="width: 32px; margin: 0 0 0 5px;" mode="widthFix" src="/static/icon/cup-03.png"></image>
+					</view>
 				</view>
 				<view class="ger-thr">
 					<view class="ger-thr-title">总收益（元）</view>
-					<view class="ger-thr-num">42860.64</view>
+					<view class="ger-thr-num">{{item.num}}</view>
 				</view>
 			</view>
 		</view>
@@ -33,7 +38,28 @@
 		},
 		data() {
 			return {
-				
+				data: [
+					{
+					    name: "MHL微信昵称",
+					    tag: "经纪人",
+					    num: "42860.64"
+				    },
+					{
+					    name: "MHL微信昵",
+					    tag: "经纪人",
+					    num: "42860.64"
+					},
+					{
+					    name: "MHL微信",
+					    tag: "经纪人",
+					    num: "42860.64"
+					},
+					{
+					    name: "MHL微",
+					    tag: "经纪人",
+					    num: "42860.64"
+					},
+				]
 			}
 		},
 		methods: {
@@ -80,23 +106,26 @@
 			padding: 0 0 0 20rpx;
 			font-size: 13px;
 			.ger-two-title {
-				height: 20px;
-				line-height: 20px;
+				height: 22px;
+				line-height: 22px;
 
 			}
 			.ger-two-tag {
-				height: 20px;
-				line-height: 20px;
+				display: flex;
+				height: 22px;
+				line-height: 22px;
 			}
 		}
 		.ger-thr {
 			.ger-thr-title {
 				font-size: 13px;
-				height: 20px;
-				line-height: 20px;
+				height: 22px;
+				line-height: 22px;
 			}
 			.ger-thr-num {
 				font-size: 16px;
+				height: 22px;
+				line-height: 22px;
 				color: #FF5350;
 			}
 		}
