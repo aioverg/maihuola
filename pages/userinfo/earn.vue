@@ -3,114 +3,61 @@
 		<uni-nav-bar fixed="true" leftIcon="arrowleft" leftText="我的收益" right-icon="help" @clickRight="navTo('/pages/help/earnRule')"></uni-nav-bar>
 		<view class="earn-page-body">
 			<view class="earn-blance">
-				<image class="earn-blance-bg" src="/static/icon/bg-earn-01.png"></image>
-				<view class="earn-blance-title">账户余额（元）： </view>
-				<view class="earn-blance-num">{{balance}}</view>
+				<image class="earn-blance-bg" src="/static/icon/bg-earn-01.png" mode="widthFix"></image>
+				<view>
+					<view class="earn-blance-num">99999</view>
+					<view class="earn-blance-title">总收益（元）</view>
+				</view>
+				<view>
+					<view class="earn-blance-num">{{balance}}</view>
+					<view class="earn-blance-title">账户余额（元）</view>
+				</view>
 			</view>
 			<!--收益来源分类，卖货、赚金-->
 			<view class="es-kind">
 				<view class="es-kind-item" v-for="(item, index) in esKind" @click="selKind(item)" :key="index" :class="item.id == elKind ? 'es-sel-item' : '' ">
 					<view>{{item.name}}</view>
-					<view class="es-ki-underline es-sel-underline"></view>
+					<image v-show="item.id == elKind" src="/static/icon/across-ling-01.png" style="width: 20px; position: absolute; bottom: 4px;" mode="widthFix"></image>
 				</view>
 			</view>
-			<view v-show="selEsKind == 'earn'">
+			<view>
 				<!--本月预估收益内容-->
-				<view class="earn-content">
+				<view class="earn-month">
 					<view class="ec-one">
-						<view class="ec-one-sum">{{monthEarn.commission || "0.00"}}</view>
-						<view class="ec-one-text">本月预估收益（元）</view>
+						<view class="ec-sum">{{monthEarn.commission || "0.00"}}</view>
+						<view class="ec-text">本月结算收益（元）</view>
 					</view>
 					<view class="ec-two"></view>
 					<view class="ec-thr">
-						<!--
-						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">34560.78</view>
-							<view class="ec-ts-text">上月预估收益（元）</view>
-						</view>
-						-->
-						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
-							<view class="ec-ts-sum">{{lmonthEarn.commission || "0.00"}}</view>
-							<view class="ec-ts-text">上月结算收益（元）</view>
-						</view>
+						<view class="ec-sum">{{lmonthEarn.commission || "0.00"}}</view>
+						<view class="ec-text">上月预估收益（元）</view>
 					</view>
 				</view>
-				<!--今日收益、昨日收益、近七日收益 菜单-->
-				<view class="day-earn">
-					<view class="de-item" v-for="(item, index) in dayMenu" @click="selMenu(item.id)" :class="item.id == elMenu ? 'de-sel-item' : '' "
-					 :key="item.id">{{item.name}}</view>
-				</view>
-				<!--今日收益、昨日收益、近七日收益 内容-->
-				<view class="earn-content">
-					<view class="ec-one">
-						<view class="ec-one-sum">{{dayEarn.commission || "0.00"}}</view>
-						<view class="ec-one-text">预估收益（元）</view>
+				<!--今日收益、昨日收益、近七日收益-->
+				<view class="earn-day">
+					<view class="earn-day-menu">
+						<view class="earn-day-menu-item" v-for="(item, index) in dayMenu" @click="selMenu(item.id)" :class="item.id == elMenu ? 'de-sel-item' : '' "
+						 :key="item.id">{{item.name}}
+						</view>
 					</view>
-					<view class="ec-two"></view>
-					<view class="ec-thr">
-						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">{{dayEarn.total_num || "0"}}</view>
-							<view class="ec-ts-text">提交拉新数量</view>
-						</view>
-						<view class="ec-thr-oder">
-							<view class="ec-ts-sum">{{dayEarn.com_num || "0"}}</view>
-							<view class="ec-ts-text">过审拉新数量</view>
-						</view>
+					<view class="earn-day-content">
+					<view class="edc-item">
+						<view class="edc-item-sum">{{dayEarn.commission || "0.00"}}</view>
+						<view class="edc-item-text">{{dayItemOne}}</view>
+					</view>
+					<view class="edc-item">
+						<view class="edc-item-sum">{{dayEarn.total_num || "0"}}</view>
+						<view class="edc-item-text">{{dayItemTwo}}</view>
+					</view>
+					<view class="edc-item">
+						<view class="edc-item-sum">{{dayEarn.com_num || "0"}}</view>
+						<view class="edc-item-text">{{dayItemThr}}</view>
+					</view>
 					</view>
 				</view>
 				<view class="earn-detail" v-if="earnDetail">
 					<view class="earn-detail-item" @click="navTo('/pages/userinfo/taskEarnDetail')">
 						<ai-list-cell title="赚金结算明细"></ai-list-cell>
-					</view>
-				</view>
-			</view>
-			<view v-show="selEsKind == 'sale'">
-				<!--本月预估收益内容-->
-				<view class="earn-content">
-					<view class="ec-one">
-						<view class="ec-one-sum">0.00</view>
-						<view class="ec-one-text">本月预估收益（元）</view>
-					</view>
-					<view class="ec-two"></view>
-					<view class="ec-thr">
-						<!--
-						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">34560.78</view>
-							<view class="ec-ts-text">上月预估收益（元）</view>
-						</view>
-						-->
-						<view class="ec-thr-oder" style="margin: 29px 0 0 0;">
-							<view class="ec-ts-sum">0.00</view>
-							<view class="ec-ts-text">上月结算收益（元）</view>
-						</view>
-					</view>
-				</view>
-				<!--今日收益、昨日收益、近七日收益 菜单-->
-				<view class="day-earn">
-					<view class="de-item" v-for="(item, index) in dayMenu" @click="selMenu(item.id)" :class="item.id == elMenu ? 'de-sel-item' : '' "
-					 :key="item.id">{{item.name}}</view>
-				</view>
-				<!--今日收益、昨日收益、近七日收益 内容-->
-				<view class="earn-content">
-					<view class="ec-one">
-						<view class="ec-one-sum">0.00</view>
-						<view class="ec-one-text">预估收益（元）</view>
-					</view>
-					<view class="ec-two"></view>
-					<view class="ec-thr">
-						<view class="ec-thr-sale">
-							<view class="ec-ts-sum">0.00</view>
-							<view class="ec-ts-text">销售额（元）</view>
-						</view>
-						<view class="ec-thr-oder">
-							<view class="ec-ts-sum">0</view>
-							<view class="ec-ts-text">订单数（个）</view>
-						</view>
-					</view>
-				</view>
-				<view class="earn-detail">
-					<view class="earn-detail-item" @click="navTo('/pages/userinfo/saleEarnDetail')">
-						<ai-list-cell title="卖货结算明细"></ai-list-cell>
 					</view>
 				</view>
 			</view>
@@ -139,14 +86,20 @@
 				elKind: "0",
 				dayMenu: [{
 					id: "0",
-					name: "今日"
+					name: "今日",
+					pic: '/static/icon/across-ling-01.png'
 				}, {
 					id: "1",
-					name: "昨日"
+					name: "昨日",
+					pic: '/static/icon/across-ling-01.png'
 				}, {
 					id: "2",
-					name: "近七日"
+					name: "近七日",
+					pic: '/static/icon/across-ling-01.png'
 				}],
+				dayItemOne: "预估收益（元）",
+				dayItemTwo: "提交数量（个）",
+				dayItemThr: "过审数量（个）",
 				elMenu: "0",
 				selEsKind: "earn",
 				taskEarn: {},
@@ -166,10 +119,16 @@
 				this.selEsKind = item.tags
 				this.elMenu = 0
 				if(item.tags == "earn"){
+					this.dayItemOne = "销售额（元）"
+					this.dayItemTwo = "预估收益（元）"
+					this.dayItemThr = "订单数（个）"
 					this.getTaskEarn()
 					return
 				}
 				if(item.tags == "sale"){
+					this.dayItemOne = "预估收益（元）"
+					this.dayItemTwo = "提交数量（个）"
+					this.dayItemThr = "过审数量（个）"
 					return
 				}
 			},
@@ -227,12 +186,13 @@
 	/*账户余额*/
 	.earn-blance {
 		width: 690rpx;
-		height: 49px;
+		height: 100px;
 		position: relative;
 		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
 		display: flex;
 		align-items: center;
+		justify-content: space-around;
 
 		.earn-blance-bg {
 			position: absolute;
@@ -240,21 +200,17 @@
 			left: -30rpx;
 			height: 99px;
 		}
-
+		
 		.earn-blance-title {
 			position: relative;
-			display: inline-block;
-			width: 100px;
-			margin: 0 0 0 35rpx;
-			font-size: 12px;
+			font-size: 13px;
 			color: rgba(255, 255, 255, 0.8);
 		}
 
 		.earn-blance-num {
 			position: relative;
-			display: inline-block;
-			font-weight: 700;
-			font-size: 26px;
+			font-weight: bold;
+			font-size: 23px;
 			color: rgba(255, 255, 255, 0.9);
 		}
 	}
@@ -262,7 +218,7 @@
 	/*收益分类，卖货，赚金*/
 	.es-kind {
 		display: flex;
-		margin: 15px 0 0 0;
+		margin: 15px 0 10px 0;
 		align-items: baseline;
 
 		.es-kind-item {
@@ -272,93 +228,83 @@
 			font-size: 15px;
 		}
 
-		.es-ki-underline {
-			width: 20px;
-			height: 2px;
-			border-radius: 10%;
-			position: absolute;
-			bottom: 0;
-		}
-
 		.es-sel-item {
 			font-size: 20px;
 			font-weight: bold;
 			color: #FF5350;
-
-			.es-sel-underline {
-				background-color: #FF5350;
-			}
 		}
 	}
 
 	/*月收益*/
-	.earn-content {
+	.earn-month {
 		box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.06);
 		border-radius: 8px;
 		display: flex;
-		height: 130px;
-		padding: 17px 0 15px 50rpx;
-
+		height: 88px;
+		padding: 20px 0 18px 50rpx;
+		
 		.ec-one {
-			margin: 29px 0 0 0;
 			width: 270rpx;
-
-			.ec-one-sum {
-				font-size: 20px;
-				font-weight: bold;
-				color: #FF5350;
-			}
-
-			.ec-one-text {
-				font-size: 12px;
-				color: #666666;
-			}
+			margin: 5px 0 0 0;
 		}
-
+		
 		.ec-two {
 			width: 67rpx;
 			border-left: 1px solid #E5E5E5;
 			height: 50px;
-			margin: 25px 0 0 0;
 		}
-
-		.ec-thr-oder {
-			margin: 10px 0 0 0;
+		
+		.ec-thr {
+			margin: 5px 0 0 0;
 		}
-
-		.ec-ts-sum {
-			font-size: 20px;
+		
+		.ec-sum {
+			font-size: 18px;
 			font-weight: bold;
 			color: #FFA570;
 		}
-
-		.ec-ts-text {
+		
+		.ec-text {
 			font-size: 12px;
 			color: #666666;
 		}
+		
 	}
-
-	/*日收益菜单*/
-	.day-earn {
-		display: flex;
-		padding: 0 20rpx;
-		margin: 25px 0 15px 0;
-		justify-content: space-between;
-
-		.de-item {
-			width: 200rpx;
-			height: 35px;
-			line-height: 33px;
-			border: 1px solid #FFA570;
-			border-radius: 19px;
-			text-align: center;
-			color: #FFA570;
+	
+	/*日收益*/
+	.earn-day {
+		height: 138px;
+		border-radius: 8px;
+		box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.06);
+		background: #FFFFFF;
+		padding: 15px 15px 25px;
+		margin: 10px 0 0 0;
+		.earn-day-menu {
+			display: flex;
+			padding: 0 0 10px;
 			font-size: 15px;
+			border-bottom: 1px dashed #E5E5E5;
+			.earn-day-menu-item {
+				margin: 0 60rpx 0 0;
+			}
+			.de-sel-item {
+				font-weight: bold;
+				color: #FF5350;
+			}
 		}
-
-		.de-sel-item {
-			background-color: #FFA570;
-			color: #FFFFFF;
+		.earn-day-content {
+			padding: 25px 5px 0 10px;
+			display: flex;
+			justify-content: space-between;
+			.edc-item-sum {
+				font-size: 18px;
+				color: #FFA570;
+				font-weight: bold;
+			}
+			.edc-item-text {
+				font-size: 12px;
+				color: #666666;
+			}
 		}
 	}
 
