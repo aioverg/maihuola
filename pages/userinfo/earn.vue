@@ -5,7 +5,7 @@
 			<view class="earn-blance">
 				<image class="earn-blance-bg" src="/static/icon/bg-earn-01.png" mode="widthFix"></image>
 				<view>
-					<view class="earn-blance-num">99999</view>
+					<view class="earn-blance-num">{{total}}</view>
 					<view class="earn-blance-title">总收益（元）</view>
 				</view>
 				<view>
@@ -55,7 +55,7 @@
 					</view>
 					</view>
 				</view>
-				<view class="earn-detail" v-if="earnDetail">
+				<view class="earn-detail">
 					<view class="earn-detail-item" @click="earnDetailNavTo()">
 						<ai-list-cell :title="earnDetailTitle"></ai-list-cell>
 					</view>
@@ -74,6 +74,7 @@
 		data() {
 			return {
 				balance: 0,
+				total: 0,
 				esKind: [
 				    {
 					    id: "0",
@@ -108,8 +109,7 @@
 				taskEarn: {},
 				monthEarn: {},
 				lmonthEarn: {},
-				dayEarn: {},
-				earnDetail: true
+				dayEarn: {}
 			}
 		},
 		onLoad() {
@@ -122,17 +122,17 @@
 				this.selEsKind = item.tags
 				this.elMenu = 0
 				if(item.tags == "earn"){
-					this.dayItemOne = "销售额（元）"
-					this.dayItemTwo = "预估收益（元）"
-					this.dayItemThr = "订单数（个）"
+					this.dayItemOne = "预估收益（元）"
+					this.dayItemTwo = "提交数量（个）"
+					this.dayItemThr = "过审数量（个）"
 					this.earnDetailTitle = "赚金结算明细"
 					this.getTaskEarn()
 					return
 				}
 				if(item.tags == "sale"){
-					this.dayItemOne = "预估收益（元）"
-					this.dayItemTwo = "提交数量（个）"
-					this.dayItemThr = "过审数量（个）"
+					this.dayItemOne = "销售额（元）"
+					this.dayItemTwo = "预估收益（元）"
+					this.dayItemThr = "订单数（个）"
 					this.earnDetailTitle = "卖货结算明细"
 					return
 				}
@@ -160,18 +160,17 @@
 					this.$api.postTaskEarn({
 						user_id: this.$store.state.userInfo.id
 					}).then(res => {
+						this.total = res.data.data.total
 						this.monthEarn = res.data.data.month
 						this.lmonthEarn = res.data.data.lmonth
 						this.dayEarn = res.data.data.today
 						this.taskEarn = res.data.data
-						this.earnDetail = true
 					})
 				}else{
 					this.monthEarn = 0.00
 					this.lmonthEarn = 0.00
 					this.dayEarn = 0
 					this.taskEarn = 0
-					this.earnDetail = false
 				}
 				
 			},

@@ -79,7 +79,7 @@
 						<image class="project-item-icon" src="/static/icon/start-02.png"></image>
 						<view class="project-item-name">藏品</view>
 					</view>
-					<view class="project-item" @click="navTo('/pages/userinfo/group')">
+					<view v-if="false" class="project-item" @click="navTo('/pages/userinfo/group')">
 						<image class="project-item-icon" src="/static/icon/people-01.png"></image>
 						<view class="project-item-name">团队</view>
 					</view>
@@ -412,7 +412,7 @@
 			position: relative;
 			top: 45px;
 			width: 750rpx;
-			padding: 0 62rpx;
+			padding: 0 100rpx;
 			display: flex;
 			justify-content: space-between;
 
