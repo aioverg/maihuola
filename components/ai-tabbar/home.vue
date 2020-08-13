@@ -35,9 +35,9 @@
 					<view class="sort-item-box" v-for="(item, index) in sortList" :key="index" @click="getGuess(/*item.ids,*/ index)">
 					    <view class="sort-item" :class="sortIndex == index ? 'red' : ''">
 							<text>{{item.title}}</text>
-							<view v-show="sortIndex == index" style="position: absolute; display: inline-block; left: 0; bottom: -7px;">
+							<!-- <view v-show="sortIndex == index" style="position: absolute; display: inline-block; left: 0; bottom: -7px;">
 								<image style="width: 20px;" src="/static/icon/across-ling-01.png" mode="widthFix"></image>
-							</view>
+							</view> -->
 					    </view>
 					</view>
 				</scroll-view>

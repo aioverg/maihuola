@@ -17,7 +17,7 @@
 			<view class="es-kind">
 				<view class="es-kind-item" v-for="(item, index) in esKind" @click="selKind(item)" :key="index" :class="item.id == elKind ? 'es-sel-item' : '' ">
 					<view>{{item.name}}</view>
-					<image v-show="item.id == elKind" src="/static/icon/across-ling-01.png" style="width: 20px; position: absolute; bottom: 4px;" mode="widthFix"></image>
+					<!-- <image class="es-kind-item-img" v-show="item.id == elKind" src="/static/icon/across-ling-01.png" mode="widthFix"></image> -->
 				</view>
 			</view>
 			<view>
@@ -56,8 +56,8 @@
 					</view>
 				</view>
 				<view class="earn-detail" v-if="earnDetail">
-					<view class="earn-detail-item" @click="navTo('/pages/userinfo/taskEarnDetail')">
-						<ai-list-cell title="赚金结算明细"></ai-list-cell>
+					<view class="earn-detail-item" @click="earnDetailNavTo()">
+						<ai-list-cell :title="earnDetailTitle"></ai-list-cell>
 					</view>
 				</view>
 			</view>
@@ -74,15 +74,17 @@
 		data() {
 			return {
 				balance: 0,
-				esKind: [{
-					id: "0",
-					name: "赚金",
-					tags: "earn"
-				}, {
-					id: "1",
-					name: "卖货",
-					tags: "sale"
-				}],
+				esKind: [
+				    {
+					    id: "0",
+					    name: "赚金",
+					    tags: "earn"
+				    }, {
+					    id: "1",
+					    name: "卖货",
+					    tags: "sale"
+				    }
+				],
 				elKind: "0",
 				dayMenu: [{
 					id: "0",
@@ -100,6 +102,7 @@
 				dayItemOne: "预估收益（元）",
 				dayItemTwo: "提交数量（个）",
 				dayItemThr: "过审数量（个）",
+				earnDetailTitle: "赚金结算明细",
 				elMenu: "0",
 				selEsKind: "earn",
 				taskEarn: {},
@@ -122,6 +125,7 @@
 					this.dayItemOne = "销售额（元）"
 					this.dayItemTwo = "预估收益（元）"
 					this.dayItemThr = "订单数（个）"
+					this.earnDetailTitle = "赚金结算明细"
 					this.getTaskEarn()
 					return
 				}
@@ -129,6 +133,7 @@
 					this.dayItemOne = "预估收益（元）"
 					this.dayItemTwo = "提交数量（个）"
 					this.dayItemThr = "过审数量（个）"
+					this.earnDetailTitle = "卖货结算明细"
 					return
 				}
 			},
@@ -169,6 +174,17 @@
 					this.earnDetail = false
 				}
 				
+			},
+			earnDetailNavTo(){
+				console.log(this.selEsKind)
+				if(this.selEsKind == "earn"){
+					this.$aiRouter.navTo('/pages/userinfo/taskEarnDetail')
+					return
+				}
+				if(this.selEsKind == "sale"){
+					this.$aiRouter.navTo('/pages/userinfo/saleEarnDetail')
+					return
+				}
 			},
 			navTo(url) {
 				this.$aiRouter.navTo(url)
@@ -226,6 +242,11 @@
 			height: 34px;
 			position: relative;
 			font-size: 15px;
+			.es-kind-item-img {
+				width: 20px;
+				position: absolute;
+				bottom: 4px;
+			}
 		}
 
 		.es-sel-item {
